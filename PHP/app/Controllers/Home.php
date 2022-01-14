@@ -8,4 +8,10 @@ class Home extends BaseController
     {
         return view('welcome_message');
     }
+
+    function processo()
+        {
+            $id = $_GET['process'];
+            echo "Importando processo: ".$id;
+        }
 }
