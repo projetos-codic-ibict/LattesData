@@ -14,9 +14,8 @@ class Home extends BaseController
     function processo()
         {
             $id = $_GET['process'];
-            echo "Importando processo: ".$id;
-            $Dataverse = new \App\Models\Dataverse\Dataverse();
-            $Dataverse->test();
-            //$Dataverse->getDataverses();
+            $LattesData = new \App\Models\Lattes\LattesData();
+            $sx = $LattesData->process($id);
+            return $sx;
         }
 }
