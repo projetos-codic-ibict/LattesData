@@ -23,8 +23,6 @@ class Home extends BaseController
             $INCts = new \App\Models\Lattes\INCTs();
 
             $id = $INCts->padroniza_processo($id);
-            echo $id;
-            exit;
 
             $sx = '';
             $sx .= view('header/head');

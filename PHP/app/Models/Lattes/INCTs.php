@@ -63,7 +63,6 @@ class INCTs extends Model
             //padronizado: 20085737102
             if (strpos($p,'/') > 0)
                 {
-                    echo $p.'<br>';
                     $p = substr($p,strpos($p,'/')+1,4).
                          substr($p,0,6).
                          substr($p,strlen($p)-1,1);
