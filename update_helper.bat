@@ -24,3 +24,7 @@ copy ..\Brapci3.0\app\Models\Io\*.php php\app\Models\Io\*.*
 echo "Dataverse"
 mkdir php\app\Models\Dataverse
 copy ..\Brapci3.0\app\Models\Dataverse\*.php php\app\Models\Dataverse\*.* 
+
+echo "Lattes"
+mkdir php\app\Models\Lattes
+copy ..\Brapci3.0\app\Models\Lattes\*.php php\app\Models\Lattes\*.* 
