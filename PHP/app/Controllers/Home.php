@@ -11,24 +11,6 @@ class Home extends BaseController
         $sx = '';
         $sx .= view('header/head');
         $sx .= view('header/navbar');
-        $sx .= view('welcome_message');
-        $sx .= view('header/footer');
-        return $sx;
-    }
-
-    function about()
-    {
-        $sx = '';
-        $sx .= view('header/head');
-        $sx .= view('header/navbar');
-        //$sx .= view('welcome_message');
-        $sx .= view('header/footer');
-        return $sx;
-    }
-
-    function processo()
-    {
-        $txt = '';
         if (isset($_GET['process'])) {
             $id = $_GET['process'];
             $LattesData = new \App\Models\Lattes\LattesData();
@@ -40,14 +22,18 @@ class Home extends BaseController
             } else {
                 $txt = '<div class="container"><div class="col-12">' . $LattesData->process($did) . '</div></div>';
             }
-        }
+        }        
+        $sx .= view('header/footer');
+        return $sx;
+    }
 
+    function about()
+    {
         $sx = '';
         $sx .= view('header/head');
         $sx .= view('header/navbar');
-        $sx .= $txt;
+        //$sx .= view('welcome_message');
         $sx .= view('header/footer');
-
         return $sx;
     }
 }
