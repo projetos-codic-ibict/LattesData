@@ -20,6 +20,12 @@ class Home extends BaseController
         {
             $id = $_GET['process'];
             $LattesData = new \App\Models\Lattes\LattesData();
+            $INCts = new \App\Models\Lattes\INCTs();
+
+            $id = $INCts->padroniza_processo($id);
+            echo $id;
+            exit;
+
             $sx = '';
             $sx .= view('header/head');
             $sx .= view('header/navbar');
