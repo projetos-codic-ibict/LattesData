@@ -1,2 +1,82 @@
 <?php
-require("../../../Brapci3.0/app/Models/Dataverse/API.php");
+
+namespace App\Models\Dataverse;
+
+use CodeIgniter\Model;
+
+class API extends Model
+{
+	protected $DBGroup              = 'default';
+	protected $table                = 'apis';
+	protected $primaryKey           = 'id';
+	protected $useAutoIncrement     = true;
+	protected $insertID             = 0;
+	protected $returnType           = 'array';
+	protected $useSoftDeletes       = false;
+	protected $protectFields        = true;
+	protected $allowedFields        = [];
+
+	// Dates
+	protected $useTimestamps        = false;
+	protected $dateFormat           = 'datetime';
+	protected $createdField         = 'created_at';
+	protected $updatedField         = 'updated_at';
+	protected $deletedField         = 'deleted_at';
+
+	// Validation
+	protected $validationRules      = [];
+	protected $validationMessages   = [];
+	protected $skipValidation       = false;
+	protected $cleanValidationRules = true;
+
+	// Callbacks
+	protected $allowCallbacks       = true;
+	protected $beforeInsert         = [];
+	protected $afterInsert          = [];
+	protected $beforeUpdate         = [];
+	protected $afterUpdate          = [];
+	protected $beforeFind           = [];
+	protected $afterFind            = [];
+	protected $beforeDelete         = [];
+	protected $afterDelete          = [];
+
+	function curlExec($dt)
+	{
+		$rsp = array();
+		$rsp['msg'] = '';
+
+		if ((!isset($dt['url'])) or (!isset($dt['api'])) or (!isset($dt['apikey']))) {
+			$sx = "Error: Missing URL, API or API Key";
+			$rsp['msg'] = $sx;
+		} else {
+			$url = $dt['url'] . $dt['api'];
+			$apiKey = $dt['apikey'];
+
+			/* Comando */
+			$cmd = 'curl ';
+			/* APIKEY */
+			if (isset($dt['AUTH'])) {
+				$cmd .= '-H X-Dataverse-key:' . $apiKey . ' ';
+			}
+
+			/* POST */
+			if (isset($dt['POST'])) {
+				$cmd .= '-X POST ' . $url . ' ';
+			}
+
+			/* POST */
+			if (isset($dt['FILE'])) {
+				if (!file_exists($dt['FILE'])) {
+					$rsp['msg'] .= bsmessage('File not found - ' . $dt['FILE'], 3);
+				}
+				//		$cmd .= '-H "Content-Type: application/json" ';
+				$cmd .= '--upload-file ' . realpath($dt['FILE']) . ' ';
+			}
+
+			$rsp['msg'] .= '<pre>' . $cmd . '</pre>';
+			$txt = shell_exec($cmd);
+			$rsp['json'] = $txt;
+		}
+		return $rsp;
+	}
+}

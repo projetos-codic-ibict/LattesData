@@ -43,3 +43,14 @@ function brtos($dt)
         $dt = substr($dt,4,4).substr($dt,2,2).substr($dt,0,2);
         return $dt;
     }
+
+function df($N,$pre='',$pos='')
+    {
+        if (defined($N) == true)
+            {
+                $var = constant($N);
+                $var = $pre.$var.$pos;
+                return $var;
+            }
+        return '';
+    }

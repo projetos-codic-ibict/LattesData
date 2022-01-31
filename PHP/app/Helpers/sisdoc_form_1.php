@@ -74,7 +74,6 @@ function form($th)
             } else {
                 $sx .= bsmessage('$th->path_back não foi informado! - ' . $th->table, 3);
             }
-
             return ($sx);
         }
     }
@@ -90,6 +89,7 @@ function form($th)
     /* Formulario */
 
     for ($r = 0; $r < count($fl); $r++) {
+
         $fld = $fl[$r];
         $typ = $tp[$r];
         $vlr = '';
@@ -286,7 +286,7 @@ function form_fields($typ, $fld, $vlr, $th = array())
 
             $sx .= $td . ($fld) . $tdc;
             $sx .= $td;
-            print_r($q);
+
             $sql = 'select * from ' . $q[3];
             if (isset($q[4])) {
                 $sql .= ' where ' . $q[4];
@@ -295,11 +295,13 @@ function form_fields($typ, $fld, $vlr, $th = array())
             $query = $th->query($sql);
             $query = $query->getResult();
 
-            $sg = '<select id="' . $fld . '" name="' . $fld . '" value="' . $vlr . '" class="form-control">' . cr();
+            $sg = '<select id="' . $fld . '" name="' . $fld . '" class="form-control">' . cr();
             $sg .= '<option value=""></option>'.cr();
             for ($r = 0; $r < count($query); $r++) {
                 $ql = (array)$query[$r];
                 $sel = '';
+
+                if ($vlr == $ql[$fld1]) { $sel = 'selected'; }
                 $sg .= '<option value="' . $ql[$fld1] . '" ' . $sel . '>' . $ql[$fld2] . '</option>' . cr();
             }
             $sg .= '</select>' . cr();

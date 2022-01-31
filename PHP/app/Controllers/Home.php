@@ -2,8 +2,8 @@
 
 namespace App\Controllers;
 
-helper(['boostrap', 'url', 'graphs', 'sisdoc_forms', 'form', 'nbr','sessions']);
-define("URL",'http://lattesdata/');
+helper(['boostrap', 'url', 'graphs', 'sisdoc_forms', 'form', 'nbr', 'sessions']);
+define("URL", 'http://lattesdata/');
 class Home extends BaseController
 {
     public function index()
@@ -17,18 +17,27 @@ class Home extends BaseController
     }
 
     function processo()
-        {
+    {
+        $txt = '';
+        if (isset($_GET['process'])) {
             $id = $_GET['process'];
             $LattesData = new \App\Models\Lattes\LattesData();
-            $INCts = new \App\Models\Lattes\INCTs();
 
-            $id = $INCts->padroniza_processo($id);
+            $did = $LattesData->padroniza_processo($id);
 
-            $sx = '';
-            $sx .= view('header/head');
-            $sx .= view('header/navbar');
-            $sx .= '<div class="container"><div class="col-12">'.$LattesData->process($id).'</div></div>';
-            $sx .= view('header/footer');
-            return $sx;
+            if ($did[1] != 0) {
+                $txt = view('welcome_message');
+            } else {
+                $txt = '<div class="container"><div class="col-12">' . $LattesData->process($did) . '</div></div>';
+            }
         }
+
+        $sx = '';
+        $sx .= view('header/head');
+        $sx .= view('header/navbar');
+        $sx .= $txt;
+        $sx .= view('header/footer');
+
+        return $sx;
+    }
 }

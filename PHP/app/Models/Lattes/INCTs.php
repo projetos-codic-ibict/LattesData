@@ -57,27 +57,6 @@ class INCTs extends Model
                 }
             return $msg;
         }
-    function padroniza_processo($p='')
-        {
-            ///ex: CNPq processo 573710/2008-2
-            //padronizado: 20085737102
-            if (strpos($p,'/') > 0)
-                {
-                    $p = substr($p,strpos($p,'/')+1,4).
-                         substr($p,0,6).
-                         substr($p,strlen($p)-1,1);
-                }
-
-            /* Valida anos */
-            $year = round(substr($p,0,4));
-            $p = sonumero($p);
-            $erro = 0;
-            if (($year < 1980) and ($year > date("Y")))
-                {
-                    $erro = 1;
-                }
-            return $p;
-        }
 
     function chamadas()
         {
