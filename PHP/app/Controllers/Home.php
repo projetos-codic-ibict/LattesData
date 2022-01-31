@@ -16,6 +16,16 @@ class Home extends BaseController
         return $sx;
     }
 
+    function about()
+    {
+        $sx = '';
+        $sx .= view('header/head');
+        $sx .= view('header/navbar');
+        //$sx .= view('welcome_message');
+        $sx .= view('header/footer');
+        return $sx;
+    }
+
     function processo()
     {
         $txt = '';
