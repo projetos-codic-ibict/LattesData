@@ -13,31 +13,14 @@
 #--------------------------------------------------------------------
 # ENVIRONMENT
 #--------------------------------------------------------------------
+
 # CI_ENVIRONMENT = production
-CI_ENVIRONMENT = development
-
-#--------------------------------------------------------------------
-# SSL CURL
-#--------------------------------------------------------------------
-#CURL_SSL = /etc/ssl/certs/cacert.pem
-CURL_SSL = false
-
-#--------------------------------------------------------------------
-# DATAVERSE
-#--------------------------------------------------------------------
-DATAVERSE_URL = 'http://200.130.0.214/';
-DATAVERSE_APIKEY = 'asdasdasd-asds-asda-adas-adasdasdasdas';
-
-#--------------------------------------------------------------------
-# LATTES DATA
-#--------------------------------------------------------------------
-token_lattes = asdfasdf-asdf--asdf-asdfgasdfg
 
 #--------------------------------------------------------------------
 # APP
 #--------------------------------------------------------------------
-app.baseURL = 'http://200.130.0.214/lattes/'
 
+# app.baseURL = ''
 # app.forceGlobalSecureRequests = false
 
 # app.sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler'
@@ -54,13 +37,12 @@ app.baseURL = 'http://200.130.0.214/lattes/'
 # DATABASE
 #--------------------------------------------------------------------
 
-#database.default.hostname = localhost
-#database.default.database = dvndb
-#database.default.username = dvnapp
-#database.default.password = <SECRET>
-#database.default.DBDriver = Postgre
-#database.default.DBPrefix =
-
+# database.default.hostname = localhost
+# database.default.database = ci4
+# database.default.username = root
+# database.default.password = root
+# database.default.DBDriver = MySQLi
+# database.default.DBPrefix =
 
 # database.tests.hostname = localhost
 # database.tests.database = ci4

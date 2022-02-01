@@ -50,12 +50,11 @@ class LattesData extends Model
 
 		/********************************************************* CURL */
 		$client = \Config\Services::curlrequest();
-		$ssl = getenv('CURL_SSL');
 		$response = $client->request('GET', $url, [
 			'headers' => [
 				'auth-token' => $token
 			], 
-			'verify' => $ssl,
+			'verify' => false,
 			'timeout' => 10,
 			'http_errors' => false
 		]);
@@ -72,10 +71,13 @@ class LattesData extends Model
 		return $file;
 	}
 
-	function cachedAPI($id)
+	function cachedAPI($dt='')
 	{
+		
 		dircheck('.tmp');
 		dircheck('.tmp/LattesData');
+		$id = $dt[0];
+		
 		$file = '.tmp/LattesData/' . $id . '.json';
 		if (!file_exists($file)) {
 			$file = '../../Datasets/processos_pq1a/' . $id . '.json';
@@ -101,9 +103,83 @@ class LattesData extends Model
 		return $file;
 	}
 
-	function Process($id = '20113023806')
+	function dv($p='')
+		{
+			$nr = substr($p,4,6);
+			$ye = substr($p,0,4);
+			$dv = substr($p,10,1);
+
+			/***************************************************************************
+			 * Ex: 309985/2013-7
+			 * nr   | 3 | 0 | 9 | 9 | 8 | 5 | 2 | 0 | 1 | 3 |
+			 * mult | 9 | 8 | 7 | 6 | 5 | 4 | 0 | 0 | 3 | 2 |
+			 * soma |27 | 0 |63 |54 |40 |20 | 0 | 0 | 3 | 6 | => Soma: 213
+			 * 
+			 * DV = $soma % 11 => 4
+			 * DV = 11 - $soma - 11 (7)
+			 * Se DV = 10 ou DV == 1 => DV = 0
+			 ***************************************************************************/
+
+			$m = array(9,8,7,6,5,4,0,0,3,2);
+
+			/**************** Campos inválidos */
+			if (strlen($p) != 11) {
+				echo '<br>ERRO:'.$p;
+				return false;
+			} 
+
+			/*************** Prepara Número */
+			$pp = $nr.$ye;
+			$sum = 0;
+			for ($r=0;$r < strlen($pp);$r++)
+				{
+					$sum += round($pp[$r]) * $m[$r];
+				}
+			$DV = $sum % 11;
+			$DV = 11 - $DV;
+			if ($DV > 9) {
+				$DV = 0;
+			}
+			if ($dv == $DV)
+				{
+					return true;
+				} else {
+					return false;
+				}
+		}
+
+    function padroniza_processo($p='')
+        {
+            ///ex: CNPq processo 573710/2008-2
+			//174760/2008-2
+            //padronizado: 20085737102
+			$dig = array(9,8,7,6,5,4,0,0,3,2);
+            if (strpos($p,'/') > 0)
+                {
+                    $p = substr($p,strpos($p,'/')+1,4).
+                         substr($p,0,6).
+                         substr($p,strlen($p)-1,1);
+                }
+
+            /* Valida anos */
+            $year = round(substr($p,0,4));
+            $p = sonumero($p);
+            $erro = 0;
+            if (($year < 1980) and ($year > date("Y")))
+                {
+                    $erro = 1;
+                }
+			if (!$this->dv($p))
+				{
+					$erro = 2;
+				}
+            return array($p,$erro);
+        }	
+
+	function Process($dt = array('20113023806',0))
 	{
 		$sx = '';
+		$id = $dt[0];
 		$file = $this->cachedAPI($id);
 		/************************************ GET API CNPq */
 		if ($file == '') 
