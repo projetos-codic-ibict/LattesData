@@ -51,7 +51,7 @@ class Users extends Model
             /* \c codic                         */
             /* select * from authenticateduser; */
 
-            echo "Create User"
+            echo "Create User";
 
             $us = array();
             $us['affiliation'] = 'UFRGS';

@@ -1,5 +1,6 @@
 <?php
-$process = get('process')
+$process = get('process');
+if (!isset($erro)) { $erro = ''; }
 ?>
 <div class="container-fluid bgc">
 	<div class="row">
@@ -23,6 +24,7 @@ $process = get('process')
 				<p>Informando o número do processo, este sistemas busca inserir automáticamente os metadados do processo da Plataforma Carlos Chagas para o Dataverse.</p>
 				<p>Criando os Dataverses e Datasets referente aos projetos. Para importação, informe o número do processo da bolsa do CNPq.</p>
 				<pre><code><form method="get" > Processo: <input type="text" name="process" value="<?php echo $process; ?>"> <input type="submit" value="Importar"> Ex: 174760/2008-2</form></code></pre>
+				<p style="color:red;"><b><?php echo $erro;?></b></p>
 				<p>Etapas a serem realizadas</p>
 				<ul>
 					<li>Importação via API da Carlos Chagas</li>

@@ -18,14 +18,22 @@ class Home extends BaseController
 
             if ($did[1] != 0) {
                 $data = array();
-                $data['erro'] = $did[1];
-                $txt = h('ERRO',1);
-                $txt .= view('welcome_message',$data);
+                switch($did[1])
+                    {
+                        case 2:
+                            $erro = 'Identificador do processo incorreto, use 000000/0000-0';
+                            break;
+                        case 1:
+                            $erro = 'Erro desconhecido';
+                            break;
+                    }
+                $data['erro'] = $erro;
+                $txt = view('welcome_message',$data);
             } else {
                 $txt = '<div class="container"><div class="col-12">' . $LattesData->process($did) . '</div></div>';
             }
         } else {
-            $txt = 'Empty'.view('welcome_message');
+            $txt = view('welcome_message');
         }
         $sx .= $txt;
         $sx .= view('header/footer');
