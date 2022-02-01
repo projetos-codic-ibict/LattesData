@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
-helper(['boostrap', 'url', 'graphs', 'sisdoc_forms', 'form', 'nbr', 'sessions']);
+helper(['boostrap', 'url', 'graphs', 
+        'sisdoc_forms', 'form', 'nbr', 'sessions',
+        'database']);
 define("URL", getenv('app.baseURL'));
 class Home extends BaseController
 {
