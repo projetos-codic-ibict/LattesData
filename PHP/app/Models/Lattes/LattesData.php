@@ -180,6 +180,11 @@ class LattesData extends Model
 	function Process($dt = array('20113023806',0))
 	{
 		$sx = '';
+		$DataverseUser = new \App\Models\Dataverse\Users();
+		$DataverseUser->createUser();
+		return "OK";
+		exit;
+
 		$id = $dt[0];
 		$file = $this->cachedAPI($id);
 		/************************************ GET API CNPq */
