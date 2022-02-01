@@ -51,6 +51,9 @@ class Users extends Model
             /* \c codic                         */
             /* select * from authenticateduser; */
 
+            /* CREATE USER lattesdata SUPERUSER INHERIT CREATEDB CREATEROLE;
+            /* ALTER USER lattesdata PASSWORD 'senha';
+
             echo "Create User";
 
             $us = array();
