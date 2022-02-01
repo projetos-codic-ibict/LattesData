@@ -24,7 +24,7 @@ class Home extends BaseController
                 $txt = '<div class="container"><div class="col-12">' . $LattesData->process($did) . '</div></div>';
             }
         } else {
-            $txt = view('welcome_message');
+            $txt = 'Empty'.view('welcome_message');
         }
         $sx .= $txt;
         $sx .= view('header/footer');
