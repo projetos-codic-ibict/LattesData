@@ -14,7 +14,6 @@ class Home extends BaseController
         if (isset($_GET['process'])) {
             $id = $_GET['process'];
             $LattesData = new \App\Models\Lattes\LattesData();
-
             $did = $LattesData->padroniza_processo($id);
 
             if ($did[1] != 0) {
@@ -22,7 +21,10 @@ class Home extends BaseController
             } else {
                 $txt = '<div class="container"><div class="col-12">' . $LattesData->process($did) . '</div></div>';
             }
-        }        
+        } else {
+            $txt = view('welcome_message');
+        }
+        $sx .= $txt;
         $sx .= view('header/footer');
         return $sx;
     }
