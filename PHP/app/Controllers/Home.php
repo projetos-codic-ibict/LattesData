@@ -17,7 +17,9 @@ class Home extends BaseController
             $did = $LattesData->padroniza_processo($id);
 
             if ($did[1] != 0) {
-                $txt = view('welcome_message');
+                $data = 'ERRO';
+                $txt = h('ERRO',1);
+                $txt .= view('welcome_message',$data);
             } else {
                 $txt = '<div class="container"><div class="col-12">' . $LattesData->process($did) . '</div></div>';
             }

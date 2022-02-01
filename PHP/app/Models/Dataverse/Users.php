@@ -48,6 +48,11 @@ class Users extends Model
 
     function createUser()
         {
+            /* \c codic                         */
+            /* select * from authenticateduser; */
+
+            echo "Create User"
+
             $us = array();
             $us['affiliation'] = 'UFRGS';
             $us['createdtime'] = date("Y-m-d H:i:s");
