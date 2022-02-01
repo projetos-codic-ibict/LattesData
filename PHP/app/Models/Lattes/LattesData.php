@@ -50,11 +50,12 @@ class LattesData extends Model
 
 		/********************************************************* CURL */
 		$client = \Config\Services::curlrequest();
+		$ssl = getenv("SSL_CURL");
 		$response = $client->request('GET', $url, [
 			'headers' => [
 				'auth-token' => $token
 			], 
-			'verify' => false,
+			'verify' => $ssl,
 			'timeout' => 10,
 			'http_errors' => false
 		]);
