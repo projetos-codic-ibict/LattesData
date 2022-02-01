@@ -52,7 +52,7 @@ class Users extends Model
             /* select * from authenticateduser; */
 
             /* CREATE USER lattesdata SUPERUSER INHERIT CREATEDB CREATEROLE;
-            /* ALTER USER lattesdata PASSWORD 'senha';
+            /* ALTER USER lattesdata PASSWORD 'senha'; */
 
             echo "Create User";
 
