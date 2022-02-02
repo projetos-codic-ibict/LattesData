@@ -181,9 +181,6 @@ class LattesData extends Model
 	{
 		$sx = '';
 		$DataverseUser = new \App\Models\Dataverse\Users();
-		$DataverseUser->createUser();
-		return "OK";
-		exit;
 
 		$id = $dt[0];
 		$file = $this->cachedAPI($id);
@@ -206,6 +203,8 @@ class LattesData extends Model
 			$MOD = (array)$dt['modalidade'];
 			$MOD = (string)$MOD['codigo'];
 		}
+
+		$DataverseUser->createUser();
 
 		switch ($MOD) {
 			case 'PQ':
