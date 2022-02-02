@@ -315,7 +315,26 @@ class LattesData extends Model
 		}
 		$dv['url'] = $_ENV['DATAVERSE_URL'];
 		$dv['apikey'] = $_ENV['DATAVERSE_APIKEY'];
-		$dv['api'] = 'api/dataverses/produtividadePQ1A/datasets';
+		$dv['api'] = 'api/dataverses/pq2014/datasets';
+
+		echo '<pre>';
+		print_r($dt);
+
+		/* Davaserve */
+		$processo = $dt['numeroProcesso'];
+		echo '==='.$processo;
+		$modalidade_ano = substr($processo,7,4);
+		$modalidade = (array)$dt['modalidade'];
+		$modadidade_cod = $modalidade['codigo'];
+		$modalidade_nome = $modalidade['nome'];
+		$dv_name = 'Chamada '.$modalidade_nome.' - '.$modadidade_cod.' - '.$modalidade_ano;
+		$dv_id = strtolower($modadidade_cod.$modalidade_ano);
+		echo h($dv_name);
+		echo h($dv_id);
+
+		echo '<pre>';
+		print_r($dt);
+		exit;
 
 		return $dv;
 

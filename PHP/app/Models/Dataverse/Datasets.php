@@ -57,7 +57,15 @@ class Datasets extends Model
 			$dd['FILE'] = $file;
 	
 			$rst = $DataverseAPI->curlExec($dd);
+
+			print_r($rst);
+			exit;
 			$rsp = json_decode($rst['json'],true);
+
+			echo '<pre>';
+			print_r($rsp);
+			echo '</pre>';
+			exit;
 			
 			$sta = $rsp['status'];
 			switch($sta)
@@ -78,8 +86,10 @@ class Datasets extends Model
 					case 'ERROR':
 						$sx = '<pre style="color: red;">'; 
 						$sx .= $rsp['message'];	
-						$sx .= '<br>Dataverse Name: <b>'.$dd['alias'].'</b>';
-						$sx .= '<br><a href="'.$this->url.'dataverse/'.$dd['alias'].'" target="_blank">'.$url.'/'.$dd['alias'].'</a>';
+						echo '<pre>';
+						print_r($dd);
+						//$sx .= '<br>Dataverse Name: <b>'.$dd['alias'].'</b>';
+						//$sx .= '<br><a href="'.$this->url.'dataverse/'.$dd['alias'].'" target="_blank">'.$url.'/'.$dd['alias'].'</a>';
 						$sx .= '</pre>';
 						break;
 				}
