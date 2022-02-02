@@ -1,9 +1,12 @@
 <!-- HEADER: MENU + HEROE SECTION -->
+<?php
+$PATH = getenv("app.baseURL");
+?>
 <header>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <img src="http://lattesdata/img/logo_cnpq.png" alt="" height="30" class="p-1">
-            <img src="http://lattesdata/img/logo_ibict.png" alt="" height="30" class="p-1">
+            <img src="<?php echo $PATH;?>img/logo_cnpq.png" alt="" height="60" class="p-1">
+            <img src="<?php echo $PATH;?>img/logo_ibict.png" alt="" height="60" class="p-1">
             <a class="navbar-brand" href="http://200.130.0.214/"></a>            
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>                
