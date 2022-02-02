@@ -71,6 +71,6 @@ class Users extends Model
             $us['superuser'] = false;
             $us['useridentifier'] = 'renefgjr';
 
-            $this->insert($us);
+            //$this->insert($us);
         }
 }
