@@ -44,21 +44,22 @@ class LattesData extends Model
 	function API_getFileCnpq($id)
 	{
 		/* https://codeigniter4.github.io/userguide/libraries/curlrequest.html#config-for-curlrequest */
-		$token = getenv("token_lattes");		
+
+		$token = getenv("token_lattes");	
+		$url = getenv("url_lattes");	
 		if ($token == '') { echo "Variável <b>token_lattes</b> não definida no .env"; exit;}
-		$url = "https://cnpqapi-fomento.cnpq.br/v1/lattesdata/processos/" . $id;
+		if ($url == '') { echo "Variável <b>url_lattes</b> não definida no .env"; exit;}
+		$url .= $id;
 
 		/********************************************************* CURL */
 		$client = \Config\Services::curlrequest();
 		$ssl = getenv("CURL_SSL");
-		$sslkey = getenv("CURL_SSL_KEY");
 		
 		$response = $client->request('GET', $url, [
 			'headers' => [
 				'auth-token' => $token
 			], 
 			'verify' => $ssl,
-			'ssl_key' => $sslkey,
 			'timeout' => 10,
 			'http_errors' => false
 		]);
@@ -207,16 +208,25 @@ class LattesData extends Model
 			$MOD = (string)$MOD['codigo'];
 		}
 
-		$DataverseUser->createUser();
+		$user = $DataverseUser->createUser($dt);
 
 		switch ($MOD) {
 			case 'PQ':
 				$Dataset = new \App\Models\Dataverse\Datasets();
-				//$sx .= $this->modPQ($dt,$id);
 				$dd = $this->modPQ($dt, $id);
 
 				/* ETAPAS */
+
+				/* VER DATAVERSE I */
+				$dv = array();
+				$dv['']
+				$sx .= $Dataset->CreateDataverse($dv);
+
+				/* VER DATAVERSE II */
+
+				/* VER DATASET */
 				$sx .= $Dataset->CreateDatasets($dd);
+
 				/* ENVIA e-MAIL */
 				$msg = 'Dataset processado ' . $id;
 				$sx .= bsmessage($msg, 1);

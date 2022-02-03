@@ -49,7 +49,7 @@ class Dataverse extends Model
 /**********************************************************************
  * TESTED *************************************************************
  ***********************************************************************/
-	function PQ1()
+	function CreateDataverse($root,$name,$alias,$id,$affiliation,$type)
 		{
 			$dd = array();
 			$dd['name'] = 'Bolsistas Produtividade PQ1A';

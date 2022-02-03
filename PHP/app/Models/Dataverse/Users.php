@@ -46,7 +46,7 @@ class Users extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    function createUser()
+    function createUser($dt)
         {
             /* \c codic                         */
             /* select * from authenticateduser; */
@@ -54,23 +54,64 @@ class Users extends Model
             /* CREATE USER lattesdata SUPERUSER INHERIT CREATEDB CREATEROLE;
             /* ALTER USER lattesdata PASSWORD 'senha'; */
 
-            echo "Create User";
+            $nome = $dt['nomePessoa'];
+            $nomep = nbr_author($nome,1);
+     
+            $firstname = mb_strtolower(substr($nomep,strpos($nomep,',')+1,strlen($nomep)));
+            $lastname = mb_strtolower(substr($nomep,0,strpos($nomep,',')));
+            $firstname = nbr_author($firstname,7);
+            $lastname = nbr_author($lastname,7);
+
+            $email = $dt['emailContato'];
+
+            /***************** AFILIAÇÃO */
+            $aff = (array)$dt['instituicoes'];
+            if (isset($aff[0]))
+                {
+                    $affn = (array)$aff[0];
+                    $sigla = $affn['siglaMacro'];
+                    $inst = $affn['nomeMacro'];
+                } else {
+                    $sigla = '';
+                    $inst = '';
+                }
+            /**************** Identificadores */
+            $aff = (array)$dt['identificadoresPessoa'];
+            $ids = array();
+            for ($r=0;$r < count($aff);$r++)
+                {
+                    $affn = (array)$aff[$r];
+                    $idp_type = $affn['tipo'];
+                    $idp_value = $affn['identificador'];
+                    $ids[$idp_type] = $idp_value;
+                }
 
             $us = array();
-            $us['affiliation'] = 'UFRGS';
+            $us['affiliation'] = $inst;
             $us['createdtime'] = date("Y-m-d H:i:s");
             $us['deactivated'] = false;
             //$us['deactivatedtime'] = '';
-            $us['email'] = 'rene.gabriel@ufrgs.br';
+            $us['email'] = $email;
             //$us['emailconfirmed'] = '';
-            $us['firstname'] = 'Rene Faustino';
+            $us['firstname'] = $firstname;
             //$us['lastapiusetime'] = '';
             $us['lastlogintime'] = date("Y-m-d H:i:s");
-            $us['lastname'] = 'Gabriel Junior';
+            $us['lastname'] = $lastname;
             $us['position'] = 'Professor';
             $us['superuser'] = false;
-            $us['useridentifier'] = 'renefgjr';
+            $us['useridentifier'] = $ids['IDLATTES'];
+            $us['new'] = false;
+            echo '<pre>';
+            print_r($dt);
+            print_r($us);
+            exit;
 
-            //$this->insert($us);
+            $dt = $this->where('email',$us['email'])->findAll();
+            if (count($dt) == 0)
+                {
+                    $this->insert($us);
+                    $us['new'] = true;
+                }
+            return $us;            
         }
 }
