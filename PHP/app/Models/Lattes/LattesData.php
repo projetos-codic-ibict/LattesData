@@ -213,19 +213,30 @@ class LattesData extends Model
 		switch ($MOD) {
 			case 'PQ':
 				$Dataset = new \App\Models\Dataverse\Datasets();
+				$Dataverse = new \App\Models\Dataverse\Dataverse();
 				$dd = $this->modPQ($dt, $id);
 
 				/* ETAPAS */
 
 				/* VER DATAVERSE I */
 				$dv = array();
-				$dv['']
-				$sx .= $Dataset->CreateDataverse($dv);
+				
+				$dd['name'] = 'Beneficiários do CNPq';
+				$dd['alias'] = 'bcnpq';
+				$dd['affiliation'] = 'CNPq';
+				$dd['description'] = 'Datasets do projetos beneficiados com recursos do CNPq';
+				$dd['dataverseContacts'] = array();
+				array_push($dd['dataverseContacts'], array('contactEmail' => 'cnpq@cnpq.br'));
+				array_push($dd['dataverseContacts'], array('contactEmail' => 'lattesdata@cnpq.br'));	
+				$dd['dataverseType'] = 'LABORATORY';
+
+				//$dd['id'] = substr($);
+				$sx .= $Dataverse->CreateDataverse($dd);
 
 				/* VER DATAVERSE II */
 
 				/* VER DATASET */
-				$sx .= $Dataset->CreateDatasets($dd);
+				//$sx .= $Dataset->CreateDatasets($dd);
 
 				/* ENVIA e-MAIL */
 				$msg = 'Dataset processado ' . $id;
@@ -327,12 +338,9 @@ class LattesData extends Model
 		$dv['apikey'] = $_ENV['DATAVERSE_APIKEY'];
 		$dv['api'] = 'api/dataverses/pq2014/datasets';
 
-		echo '<pre>';
-		print_r($dt);
-
 		/* Davaserve */
 		$processo = $dt['numeroProcesso'];
-		echo '==='.$processo;
+
 		$modalidade_ano = substr($processo,7,4);
 		$modalidade = (array)$dt['modalidade'];
 		$modadidade_cod = $modalidade['codigo'];
@@ -341,10 +349,6 @@ class LattesData extends Model
 		$dv_id = strtolower($modadidade_cod.$modalidade_ano);
 		echo h($dv_name);
 		echo h($dv_id);
-
-		echo '<pre>';
-		print_r($dt);
-		exit;
 
 		return $dv;
 

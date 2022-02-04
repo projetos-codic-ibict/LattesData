@@ -49,22 +49,7 @@ class Dataverse extends Model
 /**********************************************************************
  * TESTED *************************************************************
  ***********************************************************************/
-	function CreateDataverse($root,$name,$alias,$id,$affiliation,$type)
-		{
-			$dd = array();
-			$dd['name'] = 'Bolsistas Produtividade PQ1A';
-			$dd['alias'] = 'produtividadePQ1A';
-			$dd['dataverseContacts'] = array();
-			array_push($dd['dataverseContacts'], array('contactEmail' => 'cnpq@cnpq.br'));
-			array_push($dd['dataverseContacts'], array('contactEmail' => 'lattesdata@cnpq.br'));
 	
-			$dd['affiliation'] = 'CNPq';
-			$dd['description'] = 'Projetos dos Bolsistas Produtividade PQ1A';
-			$dd['dataverseType'] = 'LABORATORY';
-			$dd['id'] = '2018';
-			$sx = $this->CreateDataverse($dd);			
-			return $sx;
-		}		
 	function test()
 		{
 			$sx = '';
@@ -134,6 +119,7 @@ class Dataverse extends Model
 		$dd['FILE'] = $file;
 
 		$rsp = $API->curlExec($dd);
+		$rsp = $rsp['json'];
 		$rsp = json_decode($rsp,true);
 		
 		$sta = $rsp['status'];
@@ -142,6 +128,7 @@ class Dataverse extends Model
 				case 'OK':
 					$sx = 'OK';
 				break;
+				
 				case 'ERROR':
 					$sx = '<pre style="color: red;">'; 
 					$sx .= $rsp['message'];	

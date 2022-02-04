@@ -71,6 +71,11 @@ class Users extends Model
                     $affn = (array)$aff[0];
                     $sigla = $affn['siglaMacro'];
                     $inst = $affn['nomeMacro'];
+                    if ($inst == '')
+                        {
+                            $sigla = $affn['sigla'];
+                            $inst = $affn['nome'];
+                        }
                 } else {
                     $sigla = '';
                     $inst = '';
@@ -101,10 +106,6 @@ class Users extends Model
             $us['superuser'] = false;
             $us['useridentifier'] = $ids['IDLATTES'];
             $us['new'] = false;
-            echo '<pre>';
-            print_r($dt);
-            print_r($us);
-            exit;
 
             $dt = $this->where('email',$us['email'])->findAll();
             if (count($dt) == 0)
