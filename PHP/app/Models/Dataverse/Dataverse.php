@@ -102,41 +102,59 @@ class Dataverse extends Model
 		exit;
 		}
 
-	function CreateDataverse($dd='')	
+	function CreateDataverse($PARENT,$name,$alias,$contact,$affiliation,$descript,$type)	
 		{
-		$API = new \App\Models\Dataverse\API();
-		
-		$url = $this->url.'api/dataverses/lattesdata';
-		$id = $dd['id'];
+			$API = new \App\Models\Dataverse\API();
+			$file = '.tmp/dataverse/dataverse-'.$alias.'.json';
+			$url = $this->url;
 
-		$json = json_encode($dd, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-		$id = strzero(1,8);
-		$file = '.tmp/dataverse/dataverse-'.$id.'.json';
-		file_put_contents($file, $json);
+			/* Preparae */
+			if (!is_array($contact)) { $contact = array($contact); }
 
-		$dd['AUTH'] = true;
-		$dd['POST'] = true;
-		$dd['FILE'] = $file;
+			$DV = array();
+			$DV['name'] = $name;
+			$DV['alias'] = $alias;
+			$DV['dataverseContacts'] = $contact;
+			$DV['affiliation'] = $affiliation;
+			$DV['description'] = $descript;
+			$DV['type'] = $type;
+			$json = json_encode($DV, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
-		$rsp = $API->curlExec($dd);
-		$rsp = $rsp['json'];
-		$rsp = json_decode($rsp,true);
-		
-		$sta = $rsp['status'];
-		switch($sta)
-			{
-				case 'OK':
-					$sx = 'OK';
-				break;
-				
-				case 'ERROR':
-					$sx = '<pre style="color: red;">'; 
-					$sx .= $rsp['message'];	
-					$sx .= '<br>Dataverse Name: <b>'.$dd['alias'].'</b>';
-					$sx .= '<br><a href="'.$this->url.'dataverse/'.$dd['alias'].'" target="_blank">'.$url.'/'.$dd['alias'].'</a>';
-					$sx .= '</pre>';
+			file_put_contents($file, $json);
+
+			$dd['AUTH'] = true;
+			$dd['POST'] = true;
+			$dd['FILE'] = $file;
+			$dd['url'] = $url;
+			$dd['api'] = 'api/dataverses/'.$PARENT;
+			$dd['apikey'] = $this->apiKey;
+			$dd['FILE'] = $file;
+
+			$rsp = $API->curlExec($dd);
+			/******************************** Retorno */
+			$msg = (string)$rsp['json'];
+			$msg = (array)json_decode($msg);
+
+			if (!isset($msg['status']))
+				{
+					return lang('Response empty');
+				}
+			$sta = trim((string)$msg['status']);
+			switch($sta)
+				{
+					case 'OK':
+						$sx = 'OK';
 					break;
-			}
-		return $sx;
+					
+					case 'ERROR':
+						$sx = '<pre style="color: red;">'; 
+						$sx .= $msg['message'];	
+						$sx .= '<br>Dataverse Name: <b>'.$alias.'</b>';
+						$sx .= '<br><a href="'.$this->url.'dataverse/'.$PARENT.'" target="_blank">'.$url.'/'.$PARENT.'</a>';
+						$sx .= '</pre>';
+						echo $sx;
+						break;
+				}
+			return $sx;
 		}
 }

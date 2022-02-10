@@ -73,7 +73,8 @@ class API extends Model
 				$cmd .= '--upload-file ' . realpath($dt['FILE']) . ' ';
 			}
 
-			$rsp['msg'] .= '<pre>' . $cmd . '</pre>';
+			$rsp['msg'] .= $cmd;
+
 			$txt = shell_exec($cmd);
 			$rsp['json'] = $txt;
 		}

@@ -1,0 +1,5 @@
+export SERVER_URL=https://cnpqapi-fomento.cnpq.br/v1/lattesdata/processos/
+export QUERY=data
+export TOKEN=150c6a3d-a5aa-440c-871c-ce81453c0a5d
+export PROCESSO=20152003058
+curl $SERVER_URL/api/search?q=$QUERY --header "auth-token: $TOKEN" $SERVER_URL$PROCESSO
