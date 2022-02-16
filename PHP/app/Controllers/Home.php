@@ -42,6 +42,16 @@ class Home extends BaseController
         return $sx;
     }
 
+    function dataverse()
+        {
+            $sx = '';
+            $sx .= view('header/head');
+            $sx .= view('header/navbar');
+            //$sx .= view('dataverse');
+            $sx .= view('header/footer');
+            return($sx);
+        }
+
     function about()
     {
         $sx = '';
