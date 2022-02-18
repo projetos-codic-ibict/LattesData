@@ -91,7 +91,13 @@ function form($th)
     for ($r = 0; $r < count($fl); $r++) {
 
         $fld = $fl[$r];
-        $typ = $tp[$r];
+        if (!isset($tp[$r]))
+            {
+                $typ = 'string:100';
+            } else {
+                $typ = $tp[$r];
+            }
+        
         $vlr = '';
         if (isset($dt[$fld])) {
             $vlr = $dt[$fld];

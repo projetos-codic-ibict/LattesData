@@ -44,17 +44,13 @@ class LattesData extends Model
 	function API_getFileCnpq($id)
 	{
 		/* https://codeigniter4.github.io/userguide/libraries/curlrequest.html#config-for-curlrequest */
-
-		$token = getenv("token_lattes");	
-		$url = getenv("url_lattes");	
+		$token = getenv("token_lattes");		
 		if ($token == '') { echo "Variável <b>token_lattes</b> não definida no .env"; exit;}
-		if ($url == '') { echo "Variável <b>url_lattes</b> não definida no .env"; exit;}
-		$url .= $id;
+		$url = "https://cnpqapi-fomento.cnpq.br/v1/lattesdata/processos/" . $id;
 
 		/********************************************************* CURL */
 		$client = \Config\Services::curlrequest();
-		$ssl = getenv("CURL_SSL");
-		
+		$ssl = getenv('CURL_SSL');
 		$response = $client->request('GET', $url, [
 			'headers' => [
 				'auth-token' => $token
@@ -184,8 +180,6 @@ class LattesData extends Model
 	function Process($dt = array('20113023806',0))
 	{
 		$sx = '';
-		$DataverseUser = new \App\Models\Dataverse\Users();
-
 		$id = $dt[0];
 		$file = $this->cachedAPI($id);
 		/************************************ GET API CNPq */
@@ -208,42 +202,22 @@ class LattesData extends Model
 			$MOD = (string)$MOD['codigo'];
 		}
 
-		$user = $DataverseUser->createUser($dt);
-
 		switch ($MOD) {
 			case 'PQ':
 				$Dataset = new \App\Models\Dataverse\Datasets();
-				$Dataverse = new \App\Models\Dataverse\Dataverse();
+				//$sx .= $this->modPQ($dt,$id);
 				$dd = $this->modPQ($dt, $id);
 
 				/* ETAPAS */
-
-				/* VER DATAVERSE I */
-				$dv = array();
-				
-				$dd['name'] = 'Beneficiários do CNPq';
-				$dd['alias'] = 'bcnpq';
-				$dd['affiliation'] = 'CNPq';
-				$dd['description'] = 'Datasets do projetos beneficiados com recursos do CNPq';
-				$dd['dataverseContacts'] = array();
-				array_push($dd['dataverseContacts'], array('contactEmail' => 'cnpq@cnpq.br'));
-				array_push($dd['dataverseContacts'], array('contactEmail' => 'lattesdata@cnpq.br'));	
-				$dd['dataverseType'] = 'LABORATORY';
-
-				//$dd['id'] = substr($);
-				$sx .= $Dataverse->CreateDataverse($dd);
-
-				/* VER DATAVERSE II */
-
-				/* VER DATASET */
-				//$sx .= $Dataset->CreateDatasets($dd);
-
+				$sx .= $Dataset->CreateDatasets($dd);
 				/* ENVIA e-MAIL */
 				$msg = 'Dataset processado ' . $id;
 				$sx .= bsmessage($msg, 1);
 				break;
 
 			case 'AI':
+				echo "INCT";
+				exit;
 				$sx .= $this->modAI($dt, $id);
 				break;
 
@@ -252,7 +226,7 @@ class LattesData extends Model
 				//$sx .= $this->modAI($dt, $id);
 				break;
 			case 'X':
-				$sx .= h('Erro',1);
+				$sx .= h('Erro Lattes ID',1);
 				$sx .= '<p>'.file_get_contents($file).'</p>';
 				break;
 			default:
@@ -267,164 +241,6 @@ class LattesData extends Model
 		$file = ".tmp/datasets/dataset_" . $process . '.json';
 		return $file;
 	}
-
-	function metadados($dt)
-		{
-			$dv = array();
-			$dt = (array)$dt;
-			$simple = array(
-						'numeroProcesso','dataInicioVigencia','dataTerminoVigencia',
-						'emailContato','nomePessoa','identificadoresPessoa'
-						);
-			$dataverse_field = array(
-				'processo','di','df',
-				'email','nomePessoa','identificadoresPessoa',
-				);
-			for ($r=0;$r < count($simple);$r++)
-				{
-					$value = '';
-					$field = $simple[$r];
-					$field_dv = $dataverse_field[$r];
-					if (isset($field)) { $value = $dt[$simple[$r]]; }
-					if (is_array($value))
-						{
-							$dv[$field_dv] = (array)$value;
-						} else {
-							$dv[$field_dv] = $value;
-						}					
-				}
-
-				/************************************** PROJETO */
-				$proj = (array)$dt['projeto'];
-				$titulo = (string)$proj['titulo'];
-				$titulo = mb_strtolower($titulo);
-				$titulo = nbr_author($titulo, 7);
-				$dv['title'] = $titulo;
-
-				$dv['goal'] = $proj['objetivo'];
-				$txt = $proj['resumo'];
-				$txt = troca($txt,chr(13),'_x_');
-				$txt = troca($txt,chr(10),'_x_');
-				$txt = troca($txt,'_x__x_','_x_');
-				$txt = troca($txt,'_x__x_','_x_');
-				$txt = troca($txt,'_x_',chr(13));
-				$dv['abstract'] = $txt;
-
-				/************************************** CHAMADA */
-				$chamada = (array)$dt['chamada'];
-				$titulo = (string)$chamada['nome'];
-				$dv['chamada'] = $titulo;
-				$sigla =  mb_strtolower(troca($chamada['sigla'],' ','_'));
-				$dv['chamada_sigla'] = $sigla;
-				
-				$dv['chamada_parent'] = (string)$chamada['nomeParent'];
-				$sigla =  mb_strtolower(troca($chamada['siglaParent'],' ','_'));
-				$dv['chamada_sigla_parent'] = $sigla;	
-
-				/************************************** Modalidade */
-				$modalidade = (array)$dt['modalidade'];
-				$dv['modalidade'] = (string)$modalidade['nome'];
-				$dv['modalidade_codigo'] = (string)$modalidade['codigo'];
-
-				/************************************** instituicoes */
-				$instituicoes = array();
-				$inst = (array)$dt['instituicoes'];
-				for ($r=0;$r < count($inst);$r++)
-					{
-						$insts = (array)$inst[$r];
-						$cod = $insts['codigo'];
-						$tipo = $insts['tipo'];
-						$sigla = $insts['sigla'];
-						$nome = $insts['nome'];
-						$siglaMacro = $insts['siglaMacro'];
-						$nomeMacro = $insts['nomeMacro'];
-						array_push($instituicoes,array($cod,$tipo,$sigla,$nome,$siglaMacro,$nomeMacro));
-					}
-				$dv['instituicoes'] = $instituicoes;
-
-
-				/******************************************** KEYWORD***/
-				$kys = array();
-				$key = (string)$dt['palavrasChave'];
-				$key = troca($key, ', ', ';');
-				$key = troca($key, '. ', ';');
-				$key = explode(';', $key);
-				foreach ($key as $word) {
-					$word = mb_strtolower(trim($word));
-					$word = nbr_author($word, 7);
-					array_push($kys, $word);
-				}
-				$dv['keywords'] = $kys;
-
-				return $dv;
-		}
-
-	function modAI($dt, $id)
-	{
-		$sx = '';
-		$Dataverse = new \App\Models\Dataverse\Dataverse();
-		$dv = $this->metadados($dt);
-
-		$dv['datasetVersion'] = array();
-		$dv['datasetVersion']['termsOfUse'] = 'CC0 Waiver';
-		$dv['datasetVersion']['license'] = 'CC0';
-
-		if ((!isset($_ENV['DATAVERSE_URL'])) or (!isset($_ENV['DATAVERSE_APIKEY']))) {
-			echo "ERRO: defina a variavel DATAVERSE_URL e DATAVERSE_APIKEY no .env";
-			exit;
-		}
-
-		/* Davaserve */
-		$processo = $dv['processo'];
-
-		$modalidade_ano = substr($processo,7,4);
-		$modalidade = $dv['modalidade'];
-		$modadidade_cod = $dv['modalidade_codigo'];
-		$modalidade_nome =$dv['modalidade'];
-		$dv_name = 'Chamada '.$modalidade_nome.' - '.$modadidade_cod.' - '.$modalidade_ano;
-		$dv_name = $dv['chamada'];
-
-		$dv_id = strtolower($modadidade_cod.$modalidade_ano);
-		$dv_id = $dv['chamada_sigla'];
-
-		/**************************************************************** ROOT */
-		$PARENT = 'lattesdata';
-		$name = 'Beneficiários CNPq';
-		$alias = 'bcnpq';
-		$contact = array('contactEmail' => 'cnpq@cnpq.br');
-		$affiliation = 'CNPq';
-		$descript ='Beneficiários CNPq';
-		$dataverseType = 'LABORATORY';
-		$sx .= $Dataverse->CreateDataverse($PARENT,$name,$alias,$contact,$affiliation,$descript,$dataverseType);
-		
-		/**************************************************************** CHAMADA */
-		$PARENT = 'bcnpq';
-		$name = $dv_name;
-		$alias = $dv_id;
-		$contact = array(array('contactEmail' => 'cnpq@cnpq.br'));
-		$affiliation = 'CNPq';
-		$descript = $dv_name;
-		$dataverseType = 'LABORATORY';
-		$sx .= $Dataverse->CreateDataverse($PARENT,$name,$alias,$contact,$affiliation,$descript,$dataverseType);
-
-		/**************************************************** Collections */
-		$processo_id = troca($processo,'/','_');
-		$processo_id = substr($processo_id,0,strpos($processo_id,'-'));
-		$processo_id = 'cnpq_'.$processo_id;
-		
-		$PARENT = $dv_id;
-		$name = $dv['title'];
-		$alias = $processo_id;
-		$contact = array(array('contactName' => $dv['nomePessoa'], 'contactEmail' => $dv['email']));
-		$affiliation = 'CNPq';
-		$descript =$dv['abstract'];
-		$dataverseType = 'LABORATORY';
-		$sx .= $Dataverse->CreateDataverse($PARENT,$name,$alias,$contact,$affiliation,$descript,$dataverseType);
-		
-		return $sx;
-	}	
-
-
 	function modPQ($dt, $id)
 	{
 		$projeto = (array)$dt['projeto'];
@@ -492,19 +308,7 @@ class LattesData extends Model
 		}
 		$dv['url'] = $_ENV['DATAVERSE_URL'];
 		$dv['apikey'] = $_ENV['DATAVERSE_APIKEY'];
-		$dv['api'] = 'api/dataverses/pq2014/datasets';
-
-		/* Davaserve */
-		$processo = $dt['numeroProcesso'];
-
-		$modalidade_ano = substr($processo,7,4);
-		$modalidade = (array)$dt['modalidade'];
-		$modadidade_cod = $modalidade['codigo'];
-		$modalidade_nome = $modalidade['nome'];
-		$dv_name = 'Chamada '.$modalidade_nome.' - '.$modadidade_cod.' - '.$modalidade_ano;
-		$dv_id = strtolower($modadidade_cod.$modalidade_ano);
-		echo h($dv_name);
-		echo h($dv_id);
+		$dv['api'] = 'api/dataverses/produtividadePQ1A/datasets';
 
 		return $dv;
 

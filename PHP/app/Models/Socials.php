@@ -186,7 +186,18 @@ class Socials extends Model
 		}
 	}
 
-	function perfil()
+	function perfil($tp='')
+		{
+			$acess = true;
+			if ((isset($_SESSION['check'])) and (isset($_SESSION['acess'])))
+				{
+					$check = $_SESSION['check'];
+					$priv = $_SESSION['acess'];
+				}
+			return $acess;
+		}
+
+	function perfil_show($perfil='')
 	{
 		$rsp = 0;
 		if (isset($_SESSION['id'])) {
