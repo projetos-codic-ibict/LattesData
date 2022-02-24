@@ -97,7 +97,7 @@ class PA_Schema extends Model
             $this->id = $d1;
             $this->path = PATH.'datafieldEd/'.$d1;
             $sx = h(lang('dataverse.datafieldEd'),1);
-            $sx .= $PA_Field->editar($d2,$d3);
+            $sx .= $PA_Field->editar($d1,$d3);
             return $sx;
         }
 

@@ -16,7 +16,7 @@ class PA_Field extends Model
     protected $protectFields    = true;
 
     protected $allowedFields    = [
-        'id_m','m_schema','m_name',
+        'id_m','m_active','m_schema','m_name',
         'm_title','m_description','m_watermark',
         'm_fieldType','m_displayOrder','m_displayFormat',
         'm_advancedSearchField','m_allowControlledVocabulary','m_allowmultiples',
@@ -25,7 +25,7 @@ class PA_Field extends Model
     ];
 
     protected $typeFields    = [
-        'hidden','string:100','string:100',
+        'hidden','sn','sql:id_mt:mt_name:dataverse_tsv_schema','string:100',
         'string:100','string:100','string:100',
         'string:100','[1-100]','string:100',
         'string:100','sn','sn',
@@ -59,13 +59,26 @@ class PA_Field extends Model
 
     function editar($id)
         {
+            $this->path = PATH.'/datafieldEd/'.$id;
             $this->id = $id;
-            $this->path = PATH.'datafieldEd/'.$id;
-            $this->path_back = PATH;
+            $ifr = get('m_schema');
+            if ($ifr > 0)
+                {
+                    $this->path_back = PATH.'/viewid/'.$ifr;
+                } else {                    
+                    $this->path_back = PATH;
+                }
+            
+            
             $sx = form($this);
 
             $sx = bs(bsc($sx,12));
             return $sx;
+        }
+
+    function bt_new_field($id) 
+        {
+            
         }
 
     function viewid($id)
@@ -98,12 +111,19 @@ class PA_Field extends Model
             $linka = '</a>';
             $link = '';
             $linka = '';
+            $stl = '<del>';
+            $stla = '</del>';
+            if ($ln['m_active'] == 1) {
+                $stl = '';
+                $stla = '';
+            }
+
             $sx .= '<tr>';
             $sx .= '<td>' . ($r + 1) . '</td>';
-            $sx .= '<td>' . $link.$ln['m_name'] .$linka. '</td>';
-            $sx .= '<td>' . $ln['m_title'] . '</td>';
-            $sx .= '<td>' . $ln['m_description'] . '</td>';
-            $sx .= '<td>' . $ln['m_watermark'] . '</td>';
+            $sx .= '<td>' . $stl.$link.$ln['m_name'] .$linka. $stla.'</td>';
+            $sx .= '<td>' . $stl.$ln['m_title'] . $stla.'</td>';
+            $sx .= '<td>' . $stl.$ln['m_description'] .$stla. '</td>';
+            $sx .= '<td>' . $stl.$ln['m_watermark'] . $stla.'</td>';
             $sx .= '<td  width="10%">' . $ln['m_fieldType'] . '</td>';
             $sx .= '<td  width="10%">' . $ln['m_displayFormat'] . '</td>';
             $sx .= '<td>' . $this->onoff($ln['m_advancedSearchField']) . '</td>';
