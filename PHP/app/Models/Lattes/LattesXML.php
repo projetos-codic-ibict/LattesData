@@ -92,7 +92,7 @@ class LattesXML extends Model
 			} else {
 				echo '<pre>';
 				print_r($txt);
-				echo "ERRO";
+				echo "ERRO Lattes XML";
 				exit;
 			}
 		}

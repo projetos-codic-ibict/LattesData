@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Dataverse;
+namespace App\Models\Lattes;
 
 use CodeIgniter\Model;
 
-class API extends Model
+class Lattes extends Model
 {
 	protected $DBGroup              = 'default';
-	protected $table                = 'apis';
+	protected $table                = 'lattes';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
@@ -40,44 +40,25 @@ class API extends Model
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
-	function curlExec($dt)
-	{
-		$rsp = array();
-		$rsp['msg'] = '';
-
-		if ((!isset($dt['url'])) or (!isset($dt['api'])) or (!isset($dt['apikey']))) {
-			$sx = "Error: Missing URL, API or API Key";
-			$rsp['msg'] = $sx;
-		} else {
-			$url = $dt['url'] . $dt['api'];
-			$apiKey = $dt['apikey'];
-
-			/* Comando */
-			$cmd = 'curl ';
-			/* APIKEY */
-			if (isset($dt['AUTH'])) {
-				$cmd .= '-H X-Dataverse-key:' . $apiKey . ' ';
+	function link($dt)
+		{
+			$link1 = '';
+			if ($dt['a_lattes'] > 0)
+			{
+				$link = 'http://lattes.cnpq.br/' . trim($dt['a_lattes']);
+				$link1 = '<a href="' . $link . '" target="_new' . $dt['a_lattes'] . '">';
+				$link1 .= '<img src="' . base_url('img/icones/lattes.png') . '" style="height: 50px">';
+				$link1 .= '</a>';
+			} else {
+				//http://brapci3/index.php/res/admin/authority/findid/1
+				if ($dt['a_brapci'] > 0)
+					{
+						$link = PATH.MODULE.'/admin/authority/findid/'.$dt['id_a'];
+						$link1 = '<a href="' . $link . '" target="_new' . $dt['a_lattes'] . '">';
+						$link1 .= 'Busca <img src="' . base_url('img/icones/lattes.png') . '" style="height: 50px">';
+						$link1 .= '</a>';
+					}
 			}
-
-			/* POST */
-			if (isset($dt['POST'])) {
-				$cmd .= '-X POST ' . $url . ' ';
-			}
-
-			/* POST */
-			if (isset($dt['FILE'])) {
-				if (!file_exists($dt['FILE'])) {
-					$rsp['msg'] .= bsmessage('File not found - ' . $dt['FILE'], 3);
-				}
-				//		$cmd .= '-H "Content-Type: application/json" ';
-				$cmd .= '--upload-file ' . realpath($dt['FILE']) . ' ';
-			}
-
-			$rsp['msg'] .= $cmd;
-
-			$txt = shell_exec($cmd);
-			$rsp['json'] = $txt;
+			return $link1;
 		}
-		return $rsp;
-	}
 }

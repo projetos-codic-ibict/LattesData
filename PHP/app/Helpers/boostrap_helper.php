@@ -13,6 +13,9 @@
 function bsicone($type='',$w=16)
     {
 		if ($type == 'config') { $type = 'gear'; }
+		if ($type == 'return') { $type = 'back'; }
+        if ($type == 'import') { $type = 'upload'; }
+
         $sx = '<svg xmlns="http://www.w3.org/2000/svg" width="'.$w.'" height="'.$w.'" fill="currentColor" class="bi" viewBox="0 0 16 16">';
         switch($type)
             {
@@ -21,6 +24,11 @@ function bsicone($type='',$w=16)
                         <path fill-rule="evenodd" d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
                         ';
                 break;
+                /* upload */
+                case 'upload':
+                    $sx .= '<path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5z"/>
+                            <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708l3-3z"/>';
+                    break;                 
                 /* config */
                 case 'trash':
                     $sx .= '<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
@@ -116,6 +124,10 @@ function bsicone($type='',$w=16)
                         ';
                 break;
 
+                case 'back':
+                    $sx .= '<path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"/>';
+                    break;
+
                 case 'del':
                     $sx .='<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>';
                     $sx .= '<path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>';                
@@ -127,6 +139,27 @@ function bsicone($type='',$w=16)
         $sx .= '</svg>';
         return $sx;
     }
+
+function breadcrumbs($its)
+        {
+            $sx ='';
+            $sx .= '<nav aria-label="breadcrumb">'.cr();
+            $sx .= '<ol class="breadcrumb">'.cr();
+            foreach($its as $label=>$link)
+                {
+                    $linkl = '<a href="'.$link.'">';
+                    $linka = '</a>';
+                    if (strlen($link) == 0) 
+                        { 
+                            $linka = ''; 
+                            $linkl = ''; 
+                        }
+                    $sx .= '<li class="breadcrumb-item active" aria-current="page">'.$linkl.lang('brapci.'.$label).$linka.'</li>';
+                }
+            $sx .= ' </ol></nav>';
+            $sx = bs(bsc($sx,12));
+            return $sx;
+        }
 function bssmall($t)
     {
         $sx = '<small>'.$t.'</small>';

@@ -61,6 +61,17 @@ require('sisdoc_drag_drop.php');
         return (str_replace($qc, $qt, $qutf));
     }
 
+    function perfil($tp='')
+    {
+        $acess = true;
+        if ((isset($_SESSION['check'])) and (isset($_SESSION['acess'])))
+            {
+                $check = $_SESSION['check'];
+                $priv = $_SESSION['acess'];
+            }
+        return $acess;
+    }    
+
     function ascii($d)
     {    //$d = strtoupper($d);
         

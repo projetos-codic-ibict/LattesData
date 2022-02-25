@@ -44,17 +44,13 @@ class LattesData extends Model
 	function API_getFileCnpq($id)
 	{
 		/* https://codeigniter4.github.io/userguide/libraries/curlrequest.html#config-for-curlrequest */
-
-		$token = getenv("token_lattes");	
-		$url = getenv("url_lattes");	
+		$token = getenv("token_lattes");		
 		if ($token == '') { echo "Variável <b>token_lattes</b> não definida no .env"; exit;}
-		if ($url == '') { echo "Variável <b>url_lattes</b> não definida no .env"; exit;}
-		$url .= $id;
+		$url = "https://cnpqapi-fomento.cnpq.br/v1/lattesdata/processos/" . $id;
 
 		/********************************************************* CURL */
 		$client = \Config\Services::curlrequest();
-		$ssl = getenv("CURL_SSL");
-		
+		$ssl = getenv('CURL_SSL');
 		$response = $client->request('GET', $url, [
 			'headers' => [
 				'auth-token' => $token
@@ -184,8 +180,6 @@ class LattesData extends Model
 	function Process($dt = array('20113023806',0))
 	{
 		$sx = '';
-		$DataverseUser = new \App\Models\Dataverse\Users();
-
 		$id = $dt[0];
 		$file = $this->cachedAPI($id);
 		/************************************ GET API CNPq */
@@ -208,36 +202,14 @@ class LattesData extends Model
 			$MOD = (string)$MOD['codigo'];
 		}
 
-		$user = $DataverseUser->createUser($dt);
-
 		switch ($MOD) {
 			case 'PQ':
 				$Dataset = new \App\Models\Dataverse\Datasets();
-				$Dataverse = new \App\Models\Dataverse\Dataverse();
+				//$sx .= $this->modPQ($dt,$id);
 				$dd = $this->modPQ($dt, $id);
 
 				/* ETAPAS */
-
-				/* VER DATAVERSE I */
-				$dv = array();
-				
-				$dd['name'] = 'Beneficiários do CNPq';
-				$dd['alias'] = 'bcnpq';
-				$dd['affiliation'] = 'CNPq';
-				$dd['description'] = 'Datasets do projetos beneficiados com recursos do CNPq';
-				$dd['dataverseContacts'] = array();
-				array_push($dd['dataverseContacts'], array('contactEmail' => 'cnpq@cnpq.br'));
-				array_push($dd['dataverseContacts'], array('contactEmail' => 'lattesdata@cnpq.br'));	
-				$dd['dataverseType'] = 'LABORATORY';
-
-				//$dd['id'] = substr($);
-				$sx .= $Dataverse->CreateDataverse($dd);
-
-				/* VER DATAVERSE II */
-
-				/* VER DATASET */
-				//$sx .= $Dataset->CreateDatasets($dd);
-
+				$sx .= $Dataset->CreateDatasets($dd);
 				/* ENVIA e-MAIL */
 				$msg = 'Dataset processado ' . $id;
 				$sx .= bsmessage($msg, 1);
@@ -254,7 +226,7 @@ class LattesData extends Model
 				//$sx .= $this->modAI($dt, $id);
 				break;
 			case 'X':
-				$sx .= h('Erro',1);
+				$sx .= h('Erro Lattes ID',1);
 				$sx .= '<p>'.file_get_contents($file).'</p>';
 				break;
 			default:
@@ -336,19 +308,7 @@ class LattesData extends Model
 		}
 		$dv['url'] = $_ENV['DATAVERSE_URL'];
 		$dv['apikey'] = $_ENV['DATAVERSE_APIKEY'];
-		$dv['api'] = 'api/dataverses/pq2014/datasets';
-
-		/* Davaserve */
-		$processo = $dt['numeroProcesso'];
-
-		$modalidade_ano = substr($processo,7,4);
-		$modalidade = (array)$dt['modalidade'];
-		$modadidade_cod = $modalidade['codigo'];
-		$modalidade_nome = $modalidade['nome'];
-		$dv_name = 'Chamada '.$modalidade_nome.' - '.$modadidade_cod.' - '.$modalidade_ano;
-		$dv_id = strtolower($modadidade_cod.$modalidade_ano);
-		echo h($dv_name);
-		echo h($dv_id);
+		$dv['api'] = 'api/dataverses/produtividadePQ1A/datasets';
 
 		return $dv;
 

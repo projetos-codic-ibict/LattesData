@@ -6,6 +6,8 @@ helper(['boostrap', 'url', 'graphs',
         'sisdoc_forms', 'form', 'nbr', 'sessions',
         'database']);
 define("URL", getenv('app.baseURL'));
+define("PATH", getenv('app.baseURL').'index.php/home/dataverse');
+define("MODULE", '');
 class Home extends BaseController
 {
     public function index()
@@ -41,6 +43,19 @@ class Home extends BaseController
         $sx .= view('header/footer');
         return $sx;
     }
+
+    function dataverse($d1='',$d2='',$d3='',$d4='')
+        {
+            $PA = new \App\Models\Dataverse\PA_Schema();
+            $sx = '';
+            $sx .= view('header/head');
+            $sx .= view('header/navbar');
+
+            $sx .= $PA->index($d1,$d2,$d3,$d4);
+            
+            $sx .= view('header/footer');
+            return($sx);
+        }
 
     function about()
     {

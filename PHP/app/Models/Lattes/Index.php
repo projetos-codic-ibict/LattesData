@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Dataverse;
+namespace App\Models\Lattes;
 
 use CodeIgniter\Model;
 
-class API extends Model
+class Index extends Model
 {
 	protected $DBGroup              = 'default';
-	protected $table                = 'apis';
+	protected $table                = 'indices';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
@@ -40,44 +40,28 @@ class API extends Model
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
-	function curlExec($dt)
-	{
-		$rsp = array();
-		$rsp['msg'] = '';
-
-		if ((!isset($dt['url'])) or (!isset($dt['api'])) or (!isset($dt['apikey']))) {
-			$sx = "Error: Missing URL, API or API Key";
-			$rsp['msg'] = $sx;
-		} else {
-			$url = $dt['url'] . $dt['api'];
-			$apiKey = $dt['apikey'];
-
-			/* Comando */
-			$cmd = 'curl ';
-			/* APIKEY */
-			if (isset($dt['AUTH'])) {
-				$cmd .= '-H X-Dataverse-key:' . $apiKey . ' ';
-			}
-
-			/* POST */
-			if (isset($dt['POST'])) {
-				$cmd .= '-X POST ' . $url . ' ';
-			}
-
-			/* POST */
-			if (isset($dt['FILE'])) {
-				if (!file_exists($dt['FILE'])) {
-					$rsp['msg'] .= bsmessage('File not found - ' . $dt['FILE'], 3);
+	function index($d1,$id)
+		{
+			switch($d1)
+				{
+					case 'findid':
+						$sx = $this->findId($d1,$id);
+					break;
 				}
-				//		$cmd .= '-H "Content-Type: application/json" ';
-				$cmd .= '--upload-file ' . realpath($dt['FILE']) . ' ';
-			}
-
-			$rsp['msg'] .= $cmd;
-
-			$txt = shell_exec($cmd);
-			$rsp['json'] = $txt;
+				return $sx;
 		}
-		return $rsp;
-	}
+	function findId($txt,$id)
+		{
+				$LattesId = new \App\Models\Lattes\LattesId();
+				$dt = $LattesId->LattesFindID($txt);
+
+				if (count($dt))
+					{
+						if (count($dt) == 1)
+							{
+								print_r($dt);
+								exit;
+							}
+					}
+		}
 }
