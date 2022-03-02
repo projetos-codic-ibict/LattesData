@@ -142,7 +142,7 @@ class PA_Schema extends Model
                     $sx .= '</form>';
                 }
 
-            $sx .= '<a href="'.PATH.'/viewid/'.$d1.'" class="btn btn-primary">'.lang('dataverse.return').'</a>';
+            $sx .= '<a href="'.PATH.MODULE.'/viewid/'.$d1.'" class="btn btn-primary">'.lang('dataverse.return').'</a>';
 
             $sx = bs(bsc($sx));
             return $sx;
@@ -201,9 +201,9 @@ class PA_Schema extends Model
             $this->path = PATH;
             if ($d1 == 0)
                 {
-                    $this->path_back = PATH.'/';
+                    $this->path_back = PATH.MODULE.'/';
                 } else {
-                    $this->path_back = PATH.'/viewid/'.$d1;
+                    $this->path_back = PATH.MODULE.'/viewid/'.$d1;
                 }
             
             $sx = h(lang('dataverse.SchemaEd'),1);
@@ -216,7 +216,7 @@ class PA_Schema extends Model
         {
             $PA_Field = new \App\Models\Dataverse\PA_Field();
             $this->id = $d1;
-            $this->path = PATH.'datafieldEd/'.$d1;
+            $this->path = PATH.MODULE.'datafieldEd/'.$d1;
             $sx = h(lang('dataverse.datafieldEd'),1);
             $sx .= $PA_Field->editar($d1,$d3);
             return $sx;
@@ -231,9 +231,9 @@ class PA_Schema extends Model
             $query = $this->db->query($sql);
             $row = $query->getRowArray();
 
-            $sx .= '<a href="'.PATH.'home/dataverse/export/'.$id.'">'.lang('dataverse.export').'</a>';
+            $sx .= '<a href="'.PATH.MODULE.'/export/'.$id.'">'.lang('dataverse.export').'</a>';
             $sx .= ' | ';
-            $sx .= '<a href="'.PATH.'home/dataverse/import/'.$id.'">'.lang('dataverse.import').'</a>';
+            $sx .= '<a href="'.PATH.MODULE.'/import/'.$id.'">'.lang('dataverse.import').'</a>';
             
             $sx .= '<h2>'.$row['mt_displayName'].'</h2>';
             $sx .= '<p>'.$row['mt_blockURI'].'</p>';
@@ -249,7 +249,7 @@ class PA_Schema extends Model
 
     function tableview()
         {
-            $this->path = PATH;
+            $this->path = PATH.MODULE;
             $sx = tableview($this);
             $sx = bs(bsc($sx));
             return $sx;

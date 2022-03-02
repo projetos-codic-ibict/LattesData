@@ -71,14 +71,14 @@ class PA_Field extends Model
 
     function editar($id)
         {
-            $this->path = PATH.'/datafieldEd/'.$id;
+            $this->path = PATH.MODULE.'/datafieldEd/'.$id;
             $this->id = $id;
             $ifr = get('m_schema');
             if ($ifr > 0)
                 {
-                    $this->path_back = PATH.'/viewid/'.$ifr;
+                    $this->path_back = PATH.MODULE.'/viewid/'.$ifr;
                 } else {                    
-                    $this->path_back = PATH;
+                    $this->path_back = PATH.MODULE;
                 }
             
             
