@@ -1,4 +1,13 @@
 <?php
+function hexdump($string)
+    {
+        $sx = '';
+        for ($i = 0; $i < strlen($string); $i++) {
+            $sx .= str_pad(dechex(ord($string[$i])), 2, '0', STR_PAD_LEFT);
+            $sx .= ' ';
+        }        
+        return $sx;
+    }
 function romano($n)
 {
     $n = sonumero($n);

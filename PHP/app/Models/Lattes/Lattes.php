@@ -40,23 +40,26 @@ class Lattes extends Model
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
-	function link($dt)
+	function link($dt,$size=50)
 		{
 			$link1 = '';
 			if ($dt['a_lattes'] > 0)
 			{
 				$link = 'http://lattes.cnpq.br/' . trim($dt['a_lattes']);
-				$link1 = '<a href="' . $link . '" target="_new' . $dt['a_lattes'] . '">';
-				$link1 .= '<img src="' . base_url('img/icones/lattes.png') . '" style="height: 50px">';
+				$link1 = '<a href="' . $link . '" target="_new' . $dt['a_lattes'] . '" title="'.lang('brapci.link_to_lattes').'">';
+				$link1 .= '<img src="' . base_url('img/icones/lattes.png') . '" style="height:'.$size.'px">';
 				$link1 .= '</a>';
 			} else {
 				//http://brapci3/index.php/res/admin/authority/findid/1
 				if ($dt['a_brapci'] > 0)
 					{
-						$link = PATH.MODULE.'/admin/authority/findid/'.$dt['id_a'];
-						$link1 = '<a href="' . $link . '" target="_new' . $dt['a_lattes'] . '">';
-						$link1 .= 'Busca <img src="' . base_url('img/icones/lattes.png') . '" style="height: 50px">';
-						$link1 .= '</a>';
+						if (isset($dt['id_a']))
+						{
+							$link = PATH.MODULE.'/admin/authority/findid/'.$dt['id_a'];
+							$link1 = '<a href="' . $link . '" target="_new' . $dt['a_lattes'] . '">';
+							$link1 .= 'Busca <img src="' . base_url('img/icones/lattes.png') . '" style="height: '.$size.'px">';
+							$link1 .= '</a>';
+						}
 					}
 			}
 			return $link1;

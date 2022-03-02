@@ -89,8 +89,10 @@ class Socials extends Model
 			case 'test':
 				if ($_SERVER['CI_ENVIRONMENT'] == 'development') {
 					$_SESSION['id'] = 99999999;
-					$_SESSION['user'] = 'social_teste';
+					$_SESSION['id'] = 'social_teste';
 					$_SESSION['email'] = 'Usuário Teste';
+					$_SESSION['access'] = substr(md5('#ADMIN'),6,6);
+					$_SESSION['check'] = substr($_SESSION['id'].$_SESSION['id'],0,10);
 					echo metarefresh(PATH);
 					exit;
 				}
@@ -188,13 +190,7 @@ class Socials extends Model
 
 	function perfil($tp='')
 		{
-			$acess = true;
-			if ((isset($_SESSION['check'])) and (isset($_SESSION['acess'])))
-				{
-					$check = $_SESSION['check'];
-					$priv = $_SESSION['acess'];
-				}
-			return $acess;
+			return perfil($tp);
 		}
 
 	function perfil_show($perfil='')
@@ -223,7 +219,9 @@ class Socials extends Model
 			if ($dt[0]['us_password'] == md5($pwd)) {
 				$_SESSION['id'] = $dt[0]['id_us'];
 				$_SESSION['user'] = $dt[0]['us_nome'];
-				$_SESSION['email'] = $dt[0]['us_email'];
+				$_SESSION['email'] = $dt[0]['us_email'];				
+				$_SESSION['access'] = substr(md5('#ADMIN'),6,6);
+				$_SESSION['check'] = substr($_SESSION['id'].$_SESSION['id'],0,10);
 				$sx .= '<h2>' . lang('social.success') . '<h2>';
 				$sx .= '<meta http-equiv="refresh" content="2;URL=\'' . PATH . MODULE . '\'">';
 			} else {

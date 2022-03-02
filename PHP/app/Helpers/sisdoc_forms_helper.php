@@ -63,13 +63,14 @@ require('sisdoc_drag_drop.php');
 
     function perfil($tp='')
     {
-        $acess = true;
-        if ((isset($_SESSION['check'])) and (isset($_SESSION['acess'])))
-            {
+        $access = false;
+        if ((isset($_SESSION['check'])) and (isset($_SESSION['access'])))
+            {                
                 $check = $_SESSION['check'];
-                $priv = $_SESSION['acess'];
+                $priv = $_SESSION['access'];
+                $access = true;
             }
-        return $acess;
+        return $access;
     }    
 
     function ascii($d)

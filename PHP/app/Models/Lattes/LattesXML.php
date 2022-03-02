@@ -177,7 +177,7 @@ class LattesXML extends Model
 
 				if (strlen($codo) > 0) {
 					$class = 'frbr:CorporateBody';
-					$idc = $RDF->RDP_concept($inst, $class);
+					$idc = $RDF->RDF_concept($inst, $class);
 					clog('Lattes - Instrituicao - ' . $inst);
 
 					$prop = 'brapci:isCNPqInstCode';
@@ -190,15 +190,15 @@ class LattesXML extends Model
 
 					$name = strzero($idc,10).'-'.strzero($id,8).'-Employee';
 					$class = 'frbr:EmploymentRelationship';
-					$idv = $RDF->RDP_concept($name, $class);
+					$idv = $RDF->RDF_concept($name, $class);
 					clog('Lattes - Vinculo - ' . $name);
 
 					$prop = 'brapci:Date';
-					$iddi = $RDF->RDP_concept($codo1, $class);
+					$iddi = $RDF->RDF_concept($codo1, $class);
 					clog('Lattes - Admissão - ' . $codo1);
 
 					$prop = 'brapci:employeeType';
-					$idet = $RDF->RDP_concept($name, $class);
+					$idet = $RDF->RDF_concept($name, $class);
 					clog('Lattes - Vinculo - ' . $et);
 
 					$RDF->propriety($idv, 'brapci:employeeType', $idet);
@@ -209,7 +209,7 @@ class LattesXML extends Model
 					if ($af > 1900)
 					{
 						$prop = 'brapci:Date';
-						$iddf = $RDF->RDP_concept($codo2, $class);
+						$iddf = $RDF->RDF_concept($codo2, $class);
 						clog('Lattes - Demissão - ' . $codo2);
 						$RDF->propriety($idv, 'brapci:employeeFired', $iddf);
 					}
@@ -248,7 +248,7 @@ class LattesXML extends Model
 		/* Instituição */
 		$inst = $dados['NOME-INSTITUICAO-EMPRESA'];
 		$class = 'frbr:CorporateBody';
-		$idc = $RDF->RDP_concept($inst, $class);
+		$idc = $RDF->RDF_concept($inst, $class);
 		clog('Lattes - Instrituicao');
 
 		/* Codigo */
@@ -262,20 +262,20 @@ class LattesXML extends Model
 		$inst = $dados['PAIS'];
 		if (strlen($inst) > 0) {
 			$class = 'brapci:Place';
-			$id_country = $RDF->RDP_concept($inst, $class);
+			$id_country = $RDF->RDF_concept($inst, $class);
 		}
 
 		$inst = $dados['UF'];
 		if (strlen($inst) > 0) {
 			$class = 'frbr:Place';
-			$id_state = $RDF->RDP_concept($inst, $class);
+			$id_state = $RDF->RDF_concept($inst, $class);
 			$RDF->propriety($id_country, 'brapci:haveState', $id_state);
 		}
 
 		$inst = $dados['CIDADE'];
 		if (strlen($inst) > 0) {
 			$class = 'frbr:Place';
-			$id_city = $RDF->RDP_concept($inst, $class);
+			$id_city = $RDF->RDF_concept($inst, $class);
 			$RDF->propriety($id_state, 'brapci:haveCity', $id_city);
 		}
 
@@ -286,13 +286,13 @@ class LattesXML extends Model
 
 		$inst = $dados['NOME-ORGAO'];
 		$class = 'frbr:CorporateBodyDep';
-		$idcd = $RDF->RDP_concept($inst, $class);
+		$idcd = $RDF->RDF_concept($inst, $class);
 		//$RDF->propriety($id_country,'brapci:haveCity',$id_state);
 
 		/* Affiliation */
 		$inst = 'Affiliation:' . strzero($idc, 8) . '.' . strzero($id, 8);
 		$class = 'frbr:Affiliation';
-		$id_aff = $RDF->RDP_concept($inst, $class);
+		$id_aff = $RDF->RDF_concept($inst, $class);
 
 		echo 'id==>' . $id;
 		echo 'aff==>' . $id_aff;

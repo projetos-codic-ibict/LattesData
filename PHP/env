@@ -15,6 +15,12 @@
 #--------------------------------------------------------------------
 
 # CI_ENVIRONMENT = production
+CI_ENVIRONMENT = development
+
+DATAVERSE_URL = 'http://200.130.0.214:8080/'
+DATAVERSE_APIKEY = 'b8fb20a6-15ed-40b1-87e1-a1da20a82c1b'
+
+token_lattes = 'API KEY LATTES';
 
 #--------------------------------------------------------------------
 # APP
@@ -22,6 +28,8 @@
 
 # app.baseURL = ''
 # app.forceGlobalSecureRequests = false
+app.baseURL = 'http://lattesdata/'
+url_lattes = 'https://brapci.inf.br/ws/api/?verb=lattesdata&q='
 
 # app.sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler'
 # app.sessionCookieName = 'ci_session'
@@ -37,19 +45,19 @@
 # DATABASE
 #--------------------------------------------------------------------
 
-# database.default.hostname = localhost
-# database.default.database = ci4
-# database.default.username = root
-# database.default.password = root
-# database.default.DBDriver = MySQLi
-# database.default.DBPrefix =
+database.default.hostname = localhost
+database.default.database = lattesdata
+database.default.username = root
+database.default.password = 
+database.default.DBDriver = MySQLi
+database.default.DBPrefix =
 
-# database.tests.hostname = localhost
-# database.tests.database = ci4
-# database.tests.username = root
-# database.tests.password = root
-# database.tests.DBDriver = MySQLi
-# database.tests.DBPrefix =
+database.schema.hostname = localhost
+database.schema.database = lattesdata
+database.schema.username = root
+database.schema.password = 
+database.schema.DBDriver = MySQLi
+database.schema.DBPrefix =
 
 #--------------------------------------------------------------------
 # CONTENT SECURITY POLICY

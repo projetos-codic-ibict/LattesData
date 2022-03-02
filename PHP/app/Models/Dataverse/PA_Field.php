@@ -20,7 +20,7 @@ class PA_Field extends Model
         'm_title','m_description','m_watermark',
         'm_fieldType','m_displayOrder','m_displayFormat',
         'm_advancedSearchField','m_allowControlledVocabulary','m_allowmultiples',
-        'm_facetable','m_displayoncreate','m_required',
+        'm_facetable','m_displayoncreate','m_required','metadatablock_id',
         'm_parent','m_termURI'
     ];
 
@@ -28,7 +28,7 @@ class PA_Field extends Model
         'hidden','sn','sql:id_mt:mt_name:dataverse_tsv_schema','string:100',
         'string:100','string:100','string:100',
         'string:100','[1-100]','string:100',
-        'string:100','sn','sn',
+        'string:100','sn','sn','int',
         'sn','sn','sn',
         'string:100','string:100'
     ];    
@@ -164,6 +164,51 @@ class PA_Field extends Model
         return 0;
     }
 
+    function Export_metadataBlock($id)
+        {
+            $sep = '§';
+            $dt = $this->where('m_schema',$id)->orderBy('m_displayOrder')->findAll();
+            $meta = array(
+                '#datasetField','name','title','description',
+                'watermark','fieldType','displayOrder',
+                'displayFormat','advancedSearchField','allowControlledVocabulary',
+                'allowmultiples','facetable','displayoncreate',
+                'required','parent','metadatablock_id','termURI'
+                );
+
+            $field = array(
+                '','m_name','m_title','m_description',
+                'm_watermark', 'm_fieldType','m_displayOrder',
+                'm_displayFormat', 'm_advancedSearchField','m_allowControlledVocabulary',
+                'm_allowmultiples', 'm_facetable','m_displayoncreate',
+                'm_required', 'm_parent','m_termURI','metadatablock_id'
+                );
+            $sx = '';
+            $sh = '';
+            for ($r=0;$r < count($dt);$r++)
+                {
+                    $line = $dt[$r];
+                    for($i=0;$i < count($field);$i++)
+                        {
+                            if ($r==0)
+                                {
+                                    $sh .= $meta[$i] . $sep;
+                                }
+                            if ($field[$i]=='')
+                                {
+                                    $sx .=$sep;
+                                } else {
+                                    if (strlen($sx) > 0) { $sx .= $sep; }
+                                    $sx .= $line[$field[$i]];
+                                }
+                        }
+                    $sx .= "\n";
+                }          
+                echo '<pre>'.$sh."\n".$sx;
+                exit;
+            return $sx;
+        }
+
     function import($id, $ln)
     {
         $ln = troca($ln, chr(9), ';');
@@ -176,44 +221,42 @@ class PA_Field extends Model
             print_r($col);
             print_r($d);
             echo '</pre>';
-        }
+        }       
 
         $d['m_schema'] = $id;
-        $d['m_name'] = $col[0];
-        $d['m_title'] = $col[1];
-        $d['m_description'] = $col[2];
-        $d['m_watermark'] = $col[3];
-        $d['m_fieldType'] = $col[4];
-        $d['m_displayOrder'] = $col[5];
-        $d['m_displayFormat'] = $col[6];
-        $d['m_advancedSearchField'] = $this->TrueFalse($col[7]);
-        $d['m_allowControlledVocabulary'] = $this->TrueFalse($col[8]);
-        $d['m_allowmultiples'] = $this->TrueFalse($col[9]);
-        $d['m_facetable'] = $this->TrueFalse($col[10]);
-        $d['m_displayoncreate'] = $this->TrueFalse($col[11]);
-        $d['m_required'] = $this->TrueFalse($col[12]);
-        $d['m_parent'] = $col[14];
-        if (isset($col[15])) {
-            $d['m_termURI'] = $col[15];
+        $d['m_name'] = $col[1];
+        $d['m_title'] = $col[2];
+        $d['m_description'] = $col[3];
+        $d['m_watermark'] = $col[4];
+        $d['m_fieldType'] = $col[5];
+        $d['m_displayOrder'] = $col[6];
+        $d['m_displayFormat'] = $col[7];
+        $d['m_advancedSearchField'] = $this->TrueFalse($col[8]);
+        $d['m_allowControlledVocabulary'] = $this->TrueFalse($col[9]);
+        $d['m_allowmultiples'] = $this->TrueFalse($col[10]);
+        $d['m_facetable'] = $this->TrueFalse($col[11]);
+        $d['m_displayoncreate'] = $this->TrueFalse($col[12]);
+        $d['m_required'] = $this->TrueFalse($col[13]);
+        $d['m_parent'] = $col[15];
+        $d['metadatablock_id'] = $col[14];
+        if (isset($col[16])) {
+            $d['m_termURI'] = $col[16];
         } else {
             $d['m_termURI'] = '';
         }
         $d['m_active'] = 1;
 
+        $sx = lang('dataverse.import_field');
+        $sx .= ' <b>"'.$d['m_name'].'"</b> ';
         $dt = $this->where('m_schema', $id)->where('m_name', $d['m_name'])->findAll();
         if (count($dt) == 0) {
             $idn = $this->insert($d);
+            $sx .= '<b class="text-primary">'.lang('dataverse.insered').'</b>';
         } else {
             $idn = $dt[0]['id_m'];
             $idn = $this->set($d)->where('id_m', $idn)->update();
+            $sx .= '<b class="text-success">'.lang('dataverse.update').'</b>';
         }
-        /*
-            echo '<pre>';
-            print_r($col);
-            print_r($d);
-            echo '</pre>';
-                exit;
-            */
-        return $idn;
+        return $sx;
     }
 }

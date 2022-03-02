@@ -20,7 +20,7 @@ class PA_Schema extends Model
     ];
 
     protected $typeFields    = [
-        'hidden','string:100','string:100',
+        'hidden','string:100*','string:100',
         'string:100','string:100'
     ];    
 
@@ -50,9 +50,15 @@ class PA_Schema extends Model
 
     function index($d1,$d2,$d3,$d4)
         {
-            $sx = '==>'.$d1;
+            $sx = '';
             switch($d1)
                 {
+                    case 'export':
+                        $sx .= $this->export($d2,$d3,$d4);
+                        break;
+                    case 'import':
+                        $sx .= $this->import($d2,$d3,$d4);
+                        break;                        
                     case 'delete':
                         $this->delete($d2);
                         $sx .= $this->tableview();
@@ -72,11 +78,98 @@ class PA_Schema extends Model
                 }
             return $sx;
         }
-    function edit($d1,$d2,$d3)
+
+    function import($d1,$d2,$d3)
         {
             $PA_Field = new \App\Models\Dataverse\PA_Field();
+            $sx = '';
+            $sx .= h('Import Schema');
+            if ((isset($_FILES)) and (count($_FILES) > 0))
+                {
+                    $file = $_FILES['file'];
+                    $file = $file['tmp_name'];
+                    $handle = fopen($file, "r");
+                    $phase = 0;
+                    if ($handle) {
+                        while (($line = fgets($handle)) !== false) {
+                            $cmd = substr($line,0,strpos($line,"\t"));
+                            switch ($cmd)
+                                {
+                                    case '#metadataBlock':
+                                    $phase = 1;
+                                    break;
+
+                                    case '#datasetField':
+                                    $phase = 2;
+                                    break;
+
+                                    case '#controlledVocabulary':
+                                    $phase = 3;
+                                    break;
+
+                                    default:
+                                        switch($phase)
+                                            {
+                                                case 2:
+                                                    $sx .= '<li>'.$PA_Field->import($d1,$line).'</li>';
+                                                    break;
+                                            }
+                                }
+                        }
+                        fclose($handle);
+                    } else {
+                        // error opening the file.
+                    }                     
+                } else {
+                    $sx .= lang('dataverse.upload_file_tsl');
+                    $sx .= '<form method="post" enctype="multipart/form-data">';
+                    $sx .= '<input type="file" name="file" id="file" />';
+                    $sx .= '<input type="submit" value="Import" />';
+                    $sx .= '</form>';
+                }
+
+            $sx .= '<a href="'.PATH.'/viewid/'.$d1.'" class="btn btn-primary">'.lang('dataverse.return').'</a>';
+
+            $sx = bs(bsc($sx));
+            return $sx;
+        }
+
+    function export($d1,$d2,$d3)
+        {
+            $sx = $this->Export_metadataBlock($d1);
+            echo '<pre>';
+            echo $sx;
+        }
+
+
+    function Export_metadataBlock($d1)
+        {
+            $PA_Field = new \App\Models\Dataverse\PA_Field();
+            $tab = "\t";
+            $dt = $this->find($d1);
+            $meta = array('#metadataBlock','name','dataverseAlias','displayName','blockURI');
+            $field = array('','mt_name','mt_dataverseAlias','mt_displayName','mt_blockURI');
+            $ln1 = '';
+            $ln2 = '';
+            for ($r=0;$r < count($meta);$r++)
+                {
+                    $ln1 .= $meta[$r].$tab;
+                    if ($field[$r] == '')
+                        {
+                            $ln2 .= $tab;
+                        } else {
+                            $ln2 .= $dt[$field[$r]].$tab;
+                        }
+                }
+
+            $blnk2 = $PA_Field->Export_metadataBlock($d1);
+            return $ln1.chr(10).$ln2;
+        }
+
+    function edit($d1,$d2,$d3)
+        {
             $this->id = $d1;
-            $this->path = PATH.'/edit/'.$d1;
+            $this->path = PATH;
             if ($d1 == 0)
                 {
                     $this->path_back = PATH.'/';
@@ -84,7 +177,6 @@ class PA_Schema extends Model
                     $this->path_back = PATH.'/viewid/'.$d1;
                 }
             
-
             $sx = h(lang('dataverse.SchemaEd'),1);
             $sx .= form($this);
             $sx = bs(bsc($sx,12));
@@ -108,6 +200,10 @@ class PA_Schema extends Model
             $sql = "select * from ".$this->table." where id_mt = '".$id."'";
             $query = $this->db->query($sql);
             $row = $query->getRowArray();
+
+            $sx .= '<a href="'.URL.'home/dataverse/export/'.$id.'">'.lang('dataverse.export').'</a>';
+            $sx .= ' | ';
+            $sx .= '<a href="'.URL.'home/dataverse/import/'.$id.'">'.lang('dataverse.import').'</a>';
             
             $sx .= '<h2>'.$row['mt_displayName'].'</h2>';
             $sx .= '<p>'.$row['mt_blockURI'].'</p>';
