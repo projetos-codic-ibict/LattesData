@@ -49,7 +49,6 @@ class Database extends Config
         'failover' => [],
         'port'     => 3306,
     ];
-
     public $schema = [
         'DSN'      => '',
         'hostname' => 'localhost',
