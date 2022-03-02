@@ -1,0 +1,9 @@
+CREATE TABLE "dataverse_tsv_schema" (
+        "id_mt" SERIAL NOT NULL,
+        "mt_name" VARCHAR(200) NOT NULL,
+        "mt_dataverseAlias" VARCHAR(200) NOT NULL,
+        "mt_displayName" VARCHAR(200) NOT NULL,
+        "mt_blockURI" VARCHAR(200) NOT NULL,
+        created_at TIMESTAMP DEFAULT NOW(),
+        updated_at TIMESTAMP DEFAULT NOW(),
+        CONSTRAINT "pk_dataverse_tsv_schema" PRIMARY KEY("id_mt"));
