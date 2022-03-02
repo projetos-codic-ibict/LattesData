@@ -20,15 +20,15 @@ class PA_Field extends Model
         'm_title','m_description','m_watermark',
         'm_fieldType','m_displayOrder','m_displayFormat',
         'm_advancedSearchField','m_allowControlledVocabulary','m_allowmultiples',
-        'm_facetable','m_displayoncreate','m_required','metadatablock_id',
-        'm_parent','m_termURI'
+        'm_facetable','m_displayoncreate','m_required',
+        'metadatablock_id','m_parent','m_termURI'
     ];
 
     protected $typeFields    = [
         'hidden','sn','sql:id_mt:mt_name:dataverse_tsv_schema','string:100',
         'string:100','string:100','string:100',
-        'string:100','[1-100]','string:100',
-        'string:100','sn','sn','int',
+        'string:100','[1-100]','text:5:5',
+        'sn','sn','sn',
         'sn','sn','sn',
         'string:100','string:100'
     ];    
@@ -56,6 +56,18 @@ class PA_Field extends Model
     protected $afterFind      = [];
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
+
+    function change($id,$d2)
+        {
+            $dt = $this->find($d2);
+            $vlr = $dt['m_active'];
+            if ($vlr == 1) { $vlr = 0; } else { $vlr = 1; }
+            $dd['m_active'] = $vlr;
+            $this->set($dd)->where('id_m',$d2)->update();
+
+            $sx = wclose();
+            return $sx;            
+        }
 
     function editar($id)
         {
@@ -86,10 +98,11 @@ class PA_Field extends Model
         $dt = $this->where('m_schema', $id)->orderBy('m_displayOrder')->findAll();
         $sx = '<table class="table table-sm table-striped">';
         $sx .= '<thead>';
-        $sx .= '<tr>';
+        $sx .= '<tr class="small">';
         $sx .= '<th width="2%">#</th>';
         $sx .= '<th width="15%">Name</th>';
         $sx .= '<th width="15%">Title</th>';
+        $sx .= '<th width="2%">Act.</th>';
         $sx .= '<th width="30%">Descript</th>';
         $sx .= '<th width="10%">Watermark</th>';
         $sx .= '<th width="10%">Type</th>';
@@ -122,6 +135,16 @@ class PA_Field extends Model
             $sx .= '<td>' . ($r + 1) . '</td>';
             $sx .= '<td>' . $stl.$link.$ln['m_name'] .$linka. $stla.'</td>';
             $sx .= '<td>' . $stl.$ln['m_title'] . $stla.'</td>';
+            if (($ln['m_required'] == 1) and ($ln['m_active'] == 1))
+                {
+                    $sx .= '<td></td>';
+                } else {
+                    $sx .= '<td>';
+                    $sx .= onclick(PATH.MODULE.'/change_field/'.$id.'/'.$ln['id_m'],200,100);
+                    $sx .= $this->onoff($ln['m_active']);
+                    $sx .= '</span>';
+                    $sx .= '</td>';
+                }             
             $sx .= '<td>' . $stl.$ln['m_description'] .$stla. '</td>';
             $sx .= '<td>' . $stl.$ln['m_watermark'] . $stla.'</td>';
             $sx .= '<td  width="10%">' . $ln['m_fieldType'] . '</td>';
@@ -138,7 +161,7 @@ class PA_Field extends Model
             } else {
                 $sx .= '<td>-</td>';
             }
-            $sx .= '<td>' . '<a href="' . PATH . MODULE . '/datafieldEd/' . $ln['id_m'].'">' . bsicone('edit', 16) . '</a></td>';
+            $sx .= '<td>' . '<a href="' . PATH . MODULE . '/datafieldEd/' . $ln['id_m'].'">' . bsicone('edit', 16) . '</a></td>';           
             $sx .= '</tr>';
         }
         $sx .= '</table>';
@@ -163,11 +186,24 @@ class PA_Field extends Model
         }
         return 0;
     }
+    function nTrueFalse($v)
+    {
+        if ($v == 1) {
+            return 'TRUE';
+        }
+        return 'FALSE';
+    }    
 
     function Export_metadataBlock($id)
         {
-            $sep = '§';
-            $dt = $this->where('m_schema',$id)->orderBy('m_displayOrder')->findAll();
+            $sep = "\t";
+            $dt = $this
+                ->join('dataverse_tsv_schema','id_mt = m_schema')
+                ->where('m_schema',$id)
+                ->where('m_active',1)
+                ->orderBy('m_displayOrder')
+                ->findAll();
+
             $meta = array(
                 '#datasetField','name','title','description',
                 'watermark','fieldType','displayOrder',
@@ -181,13 +217,23 @@ class PA_Field extends Model
                 'm_watermark', 'm_fieldType','m_displayOrder',
                 'm_displayFormat', 'm_advancedSearchField','m_allowControlledVocabulary',
                 'm_allowmultiples', 'm_facetable','m_displayoncreate',
-                'm_required', 'm_parent','m_termURI','metadatablock_id'
+                'm_required', 'm_parent','mt_dataverseAlias','m_termURI'
                 );
+
+            $type = array(
+                '','','','',
+                '', '','n',
+                '', 'SN','SN',
+                'SN', 'SN','SN',
+                'SN', '','',''
+                );    
+
             $sx = '';
             $sh = '';
             for ($r=0;$r < count($dt);$r++)
                 {
                     $line = $dt[$r];
+                    $sl = '';
                     for($i=0;$i < count($field);$i++)
                         {
                             if ($r==0)
@@ -196,16 +242,28 @@ class PA_Field extends Model
                                 }
                             if ($field[$i]=='')
                                 {
-                                    $sx .=$sep;
+                                    $sl .= '';
                                 } else {
-                                    if (strlen($sx) > 0) { $sx .= $sep; }
-                                    $sx .= $line[$field[$i]];
+                                    switch($type[$i])
+                                        {
+                                            case 'SN':
+                                                $sl .= $sep.$this->nTrueFalse($line[$field[$i]]);
+                                                break;
+                                            case 'n':
+                                                $sl .= $sep.$line[$field[$i]];
+                                                break;
+                                            default:
+                                                $txt = troca($line[$field[$i]],chr(10),'');
+                                                $txt = troca($line[$field[$i]],chr(13),'');
+                                                $txt = trim($txt);
+                                                $sl .= $sep.$txt;
+                                                break;
+                                        }                                    
                                 }
                         }
-                    $sx .= "\n";
+                    $sx .= $sl."\n";
                 }          
-                echo '<pre>'.$sh."\n".$sx;
-                exit;
+                $sx = $sh."\n".$sx;
             return $sx;
         }
 

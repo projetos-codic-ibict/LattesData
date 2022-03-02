@@ -53,6 +53,15 @@ class PA_Schema extends Model
             $sx = '';
             switch($d1)
                 {
+                    case 'vocabulary':
+                        $PA_Vocabulary = new \App\Models\Dataverse\PA_Vocabulary();
+                        $sx .= $PA_Vocabulary->index($d2,$d3,$d4);
+                        break;
+                    case 'change_field':
+                        $PA_Field = new \App\Models\Dataverse\PA_Field();
+                        echo $PA_Field->change($d2,$d3);
+                        exit;
+                        break;
                     case 'export':
                         $sx .= $this->export($d2,$d3,$d4);
                         break;
@@ -82,6 +91,8 @@ class PA_Schema extends Model
     function import($d1,$d2,$d3)
         {
             $PA_Field = new \App\Models\Dataverse\PA_Field();
+            $PA_Vocabulary = new \App\Models\Dataverse\PA_Vocabulary();
+            
             $sx = '';
             $sx .= h('Import Schema');
             if ((isset($_FILES)) and (count($_FILES) > 0))
@@ -113,6 +124,9 @@ class PA_Schema extends Model
                                                 case 2:
                                                     $sx .= '<li>'.$PA_Field->import($d1,$line).'</li>';
                                                     break;
+                                                case 3:
+                                                    $sx .= '<li>'.$PA_Vocabulary->import($d1,$line).'</li>';
+                                                    break;                                                    
                                             }
                                 }
                         }
@@ -145,12 +159,14 @@ class PA_Schema extends Model
     function Export_metadataBlock($d1)
         {
             $PA_Field = new \App\Models\Dataverse\PA_Field();
+            $PA_Vocabulary = new \App\Models\Dataverse\PA_Vocabulary();
             $tab = "\t";
             $dt = $this->find($d1);
             $meta = array('#metadataBlock','name','dataverseAlias','displayName','blockURI');
             $field = array('','mt_name','mt_dataverseAlias','mt_displayName','mt_blockURI');
             $ln1 = '';
             $ln2 = '';
+            $ln3 = '#controlledVocabulary	DatasetField	Value	identifier	displayOrder											'.chr(10);
             for ($r=0;$r < count($meta);$r++)
                 {
                     $ln1 .= $meta[$r].$tab;
@@ -163,7 +179,20 @@ class PA_Schema extends Model
                 }
 
             $blnk2 = $PA_Field->Export_metadataBlock($d1);
-            return $ln1.chr(10).$ln2;
+
+
+            $vcs = $PA_Vocabulary->vocabularies_name($d1);
+            for ($r=0;$r < count($vcs);$r++)
+                {
+                    $line = $vcs[$r];
+                    $vc = $line['m_name'];
+                    $ln3 .= $PA_Vocabulary->export($vc);
+                }
+            header("Content-Type: text/plain; charset=UTF-8");
+            header('Content-Disposition: attachment; filename="'.$dt['mt_name'].'.tsv"');
+            header('Expires: 0');
+            echo $ln1.chr(10).$ln2.chr(10).$blnk2.$ln3;
+            exit;
         }
 
     function edit($d1,$d2,$d3)
@@ -196,6 +225,7 @@ class PA_Schema extends Model
     function viewid($id)
         {
             $PA_Field = new \App\Models\Dataverse\PA_Field();
+            $PA_Vocabulary = new \App\Models\Dataverse\PA_Vocabulary();
             $sx = '';
             $sql = "select * from ".$this->table." where id_mt = '".$id."'";
             $query = $this->db->query($sql);
@@ -207,6 +237,8 @@ class PA_Schema extends Model
             
             $sx .= '<h2>'.$row['mt_displayName'].'</h2>';
             $sx .= '<p>'.$row['mt_blockURI'].'</p>';
+
+            $sx .= $PA_Vocabulary->vocabularies($id);
             
             $sx = bs(bsc($sx),12);
 

@@ -6,6 +6,9 @@ use CodeIgniter\Database\Migration;
 
 class DataverseTsvMetadata extends Migration
 {
+
+    protected $DBGroup = 'schema';
+
     public function up()
     {
 $this->forge->addField([
@@ -73,8 +76,8 @@ $this->forge->addField([
                 'default' => 0
             ],
             'm_parent' => [
-                'type' => 'INT',
-                'default' => 0
+                'type' => 'VARCHAR',
+                'constraint' => '80'
             ],            
             'metadatablock_id' => [
                 'type' => 'VARCHAR',
