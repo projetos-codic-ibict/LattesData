@@ -93,6 +93,7 @@ class PA_Vocabulary extends Model
         {
             $PA_Field = new \App\Models\Dataverse\PA_Field();
             $dt = $PA_Field
+                ->select("m_name")
                 ->where('m_allowControlledVocabulary',1)
                 ->where('m_active',1)
                 ->groupBy('m_name')
