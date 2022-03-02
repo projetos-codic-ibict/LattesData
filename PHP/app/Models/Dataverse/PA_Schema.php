@@ -231,9 +231,9 @@ class PA_Schema extends Model
             $query = $this->db->query($sql);
             $row = $query->getRowArray();
 
-            $sx .= '<a href="'.URL.'home/dataverse/export/'.$id.'">'.lang('dataverse.export').'</a>';
+            $sx .= '<a href="'.PATH.'home/dataverse/export/'.$id.'">'.lang('dataverse.export').'</a>';
             $sx .= ' | ';
-            $sx .= '<a href="'.URL.'home/dataverse/import/'.$id.'">'.lang('dataverse.import').'</a>';
+            $sx .= '<a href="'.PATH.'home/dataverse/import/'.$id.'">'.lang('dataverse.import').'</a>';
             
             $sx .= '<h2>'.$row['mt_displayName'].'</h2>';
             $sx .= '<p>'.$row['mt_blockURI'].'</p>';

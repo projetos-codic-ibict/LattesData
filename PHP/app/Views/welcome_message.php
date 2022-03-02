@@ -38,4 +38,4 @@ if (!isset($erro)) { $erro = ''; }
 		<div class="col-2"></div>
 	</div>
 </div>
-<a href="<?php echo URL.'index.php/home/dataverse/';?>" style="color: white; font-size: 6px;">[TT]</a>
+<a href="<?php echo URL.'home/dataverse/';?>" style="color: white; font-size: 6px;">[TT]</a>
