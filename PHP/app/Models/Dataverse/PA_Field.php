@@ -27,7 +27,7 @@ class PA_Field extends Model
     protected $typeFields    = [
         'hidden','sn','sql:id_mt:mt_name:dataverse_tsv_schema','string:100',
         'string:100','string:100','string:100',
-        'string:100','[1-100]','text:5:5',
+        'select:none:text:email:textbox:date:url','[1-100]','select:#VALUE',
         'sn','sn','sn',
         'sn','sn','sn',
         'string:100','string:100'

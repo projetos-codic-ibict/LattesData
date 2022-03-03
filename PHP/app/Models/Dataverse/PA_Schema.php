@@ -53,6 +53,10 @@ class PA_Schema extends Model
             $sx = '';
             switch($d1)
                 {
+                    case 'edit_field':
+                        $PA_Field = new \App\Models\Dataverse\PA_Field();
+                        $sx .= $PA_Field->editar($d2,$d3);
+                        break;
                     case 'vocabulary':
                         $PA_Vocabulary = new \App\Models\Dataverse\PA_Vocabulary();
                         $sx .= $PA_Vocabulary->index($d2,$d3,$d4);
@@ -188,10 +192,14 @@ class PA_Schema extends Model
                     $vc = $line['m_name'];
                     $ln3 .= $PA_Vocabulary->export($vc);
                 }
+            $rst = $ln1.chr(10).$ln2.chr(10).$blnk2.$ln3;
+            $size = strlen($rst);
+            header('Content-Description: File Transfer');
             header("Content-Type: text/plain; charset=UTF-8");
             header('Content-Disposition: attachment; filename="'.$dt['mt_name'].'.tsv"');
             header('Expires: 0');
-            echo $ln1.chr(10).$ln2.chr(10).$blnk2.$ln3;
+            header('Content-Length: ' . $size);
+            echo $rst;
             exit;
         }
 
@@ -234,6 +242,8 @@ class PA_Schema extends Model
             $sx .= '<a href="'.PATH.MODULE.'/export/'.$id.'">'.lang('dataverse.export').'</a>';
             $sx .= ' | ';
             $sx .= '<a href="'.PATH.MODULE.'/import/'.$id.'">'.lang('dataverse.import').'</a>';
+            $sx .= ' | ';
+            $sx .= '<a href="'.PATH.MODULE.'/edit_field/0?m_schema='.$id.'">'.lang('dataverse.new_field').'</a>';
             
             $sx .= '<h2>'.$row['mt_displayName'].'</h2>';
             $sx .= '<p>'.$row['mt_blockURI'].'</p>';

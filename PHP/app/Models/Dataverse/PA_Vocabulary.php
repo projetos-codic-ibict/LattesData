@@ -96,6 +96,7 @@ class PA_Vocabulary extends Model
                 ->select("m_name")
                 ->where('m_allowControlledVocabulary',1)
                 ->where('m_active',1)
+                ->where('m_schema',$id)
                 ->groupBy('m_name')
                 ->orderBy('m_name')
                 ->findAll();
