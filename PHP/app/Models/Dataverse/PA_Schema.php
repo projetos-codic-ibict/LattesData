@@ -102,9 +102,7 @@ class PA_Schema extends Model
             $txt = file_get_contents($file);
             $filename = '/tmp/perfil_application_'.$id.'tls';
             file_put_contents($filename,$txt);
-            echo $txt;
-            echo $file;
-            exit;
+
             $cmd = 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$filename.' -H "Content-type: text/tab-separated-values';
             $txt = shell_exec($cmd);
             echo '<pre>';
