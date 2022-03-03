@@ -97,10 +97,12 @@ class PA_Schema extends Model
 
     function API_send($id)
         {
+            $dir = '../.tmp';
+            dircheck($dir);
 
             $file = (PATH.MODULE).'/export/'.$id;
             $txt = file_get_contents($file);
-            $filename = '/tmp/perfil_application_'.$id.'tls';
+            $filename = '../.tmp/perfil_application_'.$id.'.tls';
             file_put_contents($filename,$txt);
 
             $cmd = 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$filename.' -H "Content-type: text/tab-separated-values';
