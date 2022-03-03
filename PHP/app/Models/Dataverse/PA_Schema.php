@@ -104,9 +104,11 @@ class PA_Schema extends Model
             file_put_contents($filename,$txt);
 
             $cmd = 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$filename.' -H "Content-type: text/tab-separated-values';
+
             $txt = shell_exec($cmd);
-            echo '<pre>';
-            echo $txt;
+            $sx = h($cmd,5);
+            $sx .= '<pre>'.$txt.'</pre>';
+            return $sx;
         }
 
     function import($d1,$d2,$d3)
