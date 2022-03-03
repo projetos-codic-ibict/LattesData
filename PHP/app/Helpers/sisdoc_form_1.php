@@ -259,6 +259,7 @@ function form_fields($typ, $fld, $vlr, $th = array())
             $sg = '<select id="' . $fld . '" name="' . $fld . '" value="' . $vlr . '" class="form-control">' . cr();
             for ($r = 0; $r < count($op); $r++) {
                 $sel = '';
+                if ($opc[$r] == $vlr) { $sel = 'selected'; }
                 $sg .= '<option value="' . $op[$r] . '" ' . $sel . '>' . $opc[$r] . '</option>' . cr();
             }
             $sg .= '</select>' . cr();

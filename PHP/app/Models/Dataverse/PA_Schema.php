@@ -66,6 +66,9 @@ class PA_Schema extends Model
                         echo $PA_Field->change($d2,$d3);
                         exit;
                         break;
+                    case 'api_send_schema':
+                        $sx .= $this->API_send($d2,$d3,$d4);
+                        break;                        
                     case 'export':
                         $sx .= $this->export($d2,$d3,$d4);
                         break;
@@ -90,6 +93,22 @@ class PA_Schema extends Model
                         break;
                 }
             return $sx;
+        }
+
+    function API_send($id)
+        {
+
+            $file = (PATH.MODULE).'/export/'.$id;
+            $txt = file_get_contents($file);
+            $filename = '/tmp/perfil_application_'.$id.'tls';
+            file_put_contents($filename,$txt);
+            echo $txt;
+            echo $file;
+            exit;
+            $cmd = 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$filename.' -H "Content-type: text/tab-separated-values';
+            $txt = shell_exec($cmd);
+            echo '<pre>';
+            echo $txt;
         }
 
     function import($d1,$d2,$d3)
@@ -240,6 +259,8 @@ class PA_Schema extends Model
             $row = $query->getRowArray();
 
             $sx .= '<a href="'.PATH.MODULE.'/export/'.$id.'">'.lang('dataverse.export').'</a>';
+            $sx .= ' | ';
+            $sx .= '<a href="'.PATH.MODULE.'/api_send_schema/'.$id.'">'.lang('dataverse.api_send').'</a>';            
             $sx .= ' | ';
             $sx .= '<a href="'.PATH.MODULE.'/import/'.$id.'">'.lang('dataverse.import').'</a>';
             $sx .= ' | ';
