@@ -198,7 +198,7 @@ class PA_Schema extends Model
     function edit($d1,$d2,$d3)
         {
             $this->id = $d1;
-            $this->path = PATH;
+            $this->path = PATH.MODULE;
             if ($d1 == 0)
                 {
                     $this->path_back = PATH.MODULE.'/';
