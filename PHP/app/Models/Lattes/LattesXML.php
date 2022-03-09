@@ -58,9 +58,11 @@ class LattesXML extends Model
 		}
 		clog('Harvesting XML - End');
 
+		clog('Lattes Produção');
 		$LattesProducao->producao_xml($xml, $lattes);
+		clog('Lattes Produção-FIM');
 		return '';
-		return $xml;
+		clog('Lattes Vinculo');
 		$this->vinculo($xml, $lattes);
 		return $xml;
 	}
@@ -68,8 +70,7 @@ class LattesXML extends Model
 	function LattesLoad($id)
 	{		
 		$tela = '';
-		$url = 'https://brapci.inf.br/ws/api/?verb=lattes&q=' . $id;
-		
+		$url = 'https://brapci.inf.br/ws/api/?verb=lattes&q=' . $id;		
 
 		$dir = '.tmp';
 		dircheck($dir);

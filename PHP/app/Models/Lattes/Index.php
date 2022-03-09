@@ -42,14 +42,23 @@ class Index extends Model
 
 	function index($d1,$id)
 		{
+			$sx = '';
 			switch($d1)
 				{
+					case 'harvesting':
+						$LattesXML = new \App\Models\Lattes\LattesXML();
+						$sx .= h('Importing XML',1);
+						$sx .= $LattesXML->xml($id);						
+						break;
+						
 					case 'findid':
 						$sx = $this->findId($d1,$id);
-					break;
+						break;
 				}
+				$sx = bs(bsc($sx,12));
 				return $sx;
 		}
+
 	function findId($txt,$id)
 		{
 				$LattesId = new \App\Models\Lattes\LattesId();
