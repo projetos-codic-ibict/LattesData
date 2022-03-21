@@ -156,6 +156,14 @@ function nbr_author($xa,$xp)
                                 $name .= $Nf[$r].' ';
                             }
                         break;
+                    /* Somente primeira litra maíscula */
+                    case '8':
+                        $name = $Nf[0];
+                        for ($r=0;$r < ($TOT);$r++)
+                            {
+                                $name .= ' '.$Nm[$r];
+                            }
+                        break;                        
                 default:
                     echo h($xa);
                     echo "Method ".$xp." not implemented";

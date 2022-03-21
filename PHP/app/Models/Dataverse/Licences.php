@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Models\Lattes;
+namespace App\Models\Dataverse;
 
 use CodeIgniter\Model;
 
-class Index extends Model
+class Licences extends Model
 {
 	protected $DBGroup              = 'default';
-	protected $table                = 'indices';
+	protected $table                = 'licences';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
@@ -40,37 +40,8 @@ class Index extends Model
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
-	function index($d1,$id)
+	function index()
 		{
-			$sx = '';
-			switch($d1)
-				{
-					case 'harvesting':
-						$LattesXML = new \App\Models\Lattes\LattesXML();
-						$sx .= h('Importing XML',1);
-						$sx .= $LattesXML->xml($id);						
-						break;
-						
-					case 'findid':
-						$sx = $this->findId($d1,$id);
-						break;
-				}
-				$sx = bs(bsc($sx,12));
-				return $sx;
-		}
-
-	function findId($txt,$id)
-		{
-				$LattesId = new \App\Models\Lattes\LattesId();
-				$dt = $LattesId->LattesFindID($txt);
-
-				if (count($dt))
-					{
-						if (count($dt) == 1)
-							{
-								print_r($dt);
-								exit;
-							}
-					}
+			
 		}
 }

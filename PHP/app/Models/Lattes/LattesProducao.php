@@ -137,17 +137,6 @@ function producao_xml($xml,$id)
 							->where('lp_journal',$p['lp_journal'])
 							->findAll();
 
-					/*
-					echo '<h1>'.$id.'</h1>';
-					echo '<pre>';
-					print_r($line);
-					echo '<font color="blue">';
-					print_r($p);
-					echo '</font>';
-					echo '</pre>';
-					echo '<hr>';
-					*/
-					
 					if (count($rst) == 0)
 						{
 							$this->insert($p);
