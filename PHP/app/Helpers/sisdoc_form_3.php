@@ -35,6 +35,17 @@ function read_link($url, $read = 'CURL')
     return ($contents);
 }
 
+function menu($menu)
+    {
+        $sx = '<ul>';
+        foreach($menu as $link=>$name)
+            {
+                $sx .= '<li><a href="' . $link . '">' . $name . '</a></li>';
+            }
+        $sx .= '</ul>';
+        return $sx;
+    }
+
 function pre($dt)
 {
     echo '<pre>';
@@ -42,6 +53,23 @@ function pre($dt)
     echo '</pre>';
     exit;
 }
+
+if (!function_exists("current_url")) {
+    function current_url()
+    {
+        $url = getenv('app.baseURL');
+        return $url;    
+    }
+}
+
+if (!function_exists("site_url")) {
+    function site_url()
+    {
+        $url = getenv('app.baseURL');
+        return $url;    
+    }
+}
+
 
 function hexdump($string)
 {
@@ -52,6 +80,15 @@ function hexdump($string)
     }
     return $sx;
 }
+
+function geturl()
+    {
+        $path = $_SERVER['REQUEST_URI'];
+        if (strlen($path) == 0) { $path = $_SERVER['PATH_INFO']; }
+        if (strlen($path) == 0) { $path = $_SERVER['PHP_SELF']; }
+        return $path;
+    }
+
 function romano($n)
 {
     $n = sonumero($n);

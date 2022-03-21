@@ -97,7 +97,18 @@ function form($th)
                     } 
                 $sx .= bsmessage('SALVO');
                 if (isset($th->path_back)) {
-                    $sx .= metarefresh($th->path_back, 0);
+                    switch($th->path_back)
+                        {
+                            case 'close':
+                                $sx .= '<script>close();</script>';
+                                break;
+                            case 'nome':
+                                $sx .= '';
+                                break;
+                            default:
+                                $sx .= metarefresh($th->path_back, 1);
+                                break;    
+                        }                    
                 } else {
                     $sx .= bsmessage('$this->path_back não foi informado! - ' . $th->table, 3);
                 }
@@ -298,8 +309,8 @@ function form_fields($typ, $fld, $vlr, $th = array(),$obg=0, $pre='')
             for ($r = $opc[0]; $r <= $opc[1]; $r++) {
                 $sel = '';
                 $vll = strzero($r,2);
-                if ($vlr == $r) { $sel = 'selected'; }
-                $sg .= '<option value="' . $vll . '" ' . strzero($r,2) . '>' . $vll . '</option>' . cr();
+                if (round($vlr) == $r) { $sel = 'selected'; }
+                $sg .= '<option value="' . $vll . '" ' . strzero($r,2) . ' '.$sel.'>' . $vll . '</option>' . cr();
             }
             $sg .= '</select>' . cr();
             $sx .= $sg;

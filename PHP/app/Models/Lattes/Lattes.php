@@ -42,6 +42,8 @@ class Lattes extends Model
 
 	function link($dt,$size=50)
 		{
+			$this->Socials = new \App\Models\Socials();
+
 			$link1 = '';
 			if ($dt['a_lattes'] > 0)
 			{
@@ -50,7 +52,7 @@ class Lattes extends Model
 				$link1 .= '<img src="' . base_url('img/icones/lattes.png') . '" style="height:'.$size.'px">';
 				$link1 .= '</a>';
 
-				if (perfil("#ADM"))
+				if ($this->Socials->getAccess("#ADM"))
 				{
 					$link = PATH.MODULE . 'admin/lattes/harvesting/'.trim($dt['a_lattes']).'/'.trim($dt['a_brapci']);
 					$link1 .= '<a href="' . $link . '" target="_new' . $dt['a_lattes'] . '" title="'.lang('brapci.link_to_lattes').'">';

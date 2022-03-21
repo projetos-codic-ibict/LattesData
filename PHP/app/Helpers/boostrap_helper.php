@@ -135,7 +135,21 @@ function bsicone($type='',$w=16)
                 case 'flag':
                     $sx .= '<path d="M14.778.085A.5.5 0 0 1 15 .5V8a.5.5 0 0 1-.314.464L14.5 8l.186.464-.003.001-.006.003-.023.009a12.435 12.435 0 0 1-.397.15c-.264.095-.631.223-1.047.35-.816.252-1.879.523-2.71.523-.847 0-1.548-.28-2.158-.525l-.028-.01C7.68 8.71 7.14 8.5 6.5 8.5c-.7 0-1.638.23-2.437.477A19.626 19.626 0 0 0 3 9.342V15.5a.5.5 0 0 1-1 0V.5a.5.5 0 0 1 1 0v.282c.226-.079.496-.17.79-.26C4.606.272 5.67 0 6.5 0c.84 0 1.524.277 2.121.519l.043.018C9.286.788 9.828 1 10.5 1c.7 0 1.638-.23 2.437-.477a19.587 19.587 0 0 0 1.349-.476l.019-.007.004-.002h.001M14 1.221c-.22.078-.48.167-.766.255-.81.252-1.872.523-2.734.523-.886 0-1.592-.286-2.203-.534l-.008-.003C7.662 1.21 7.139 1 6.5 1c-.669 0-1.606.229-2.415.478A21.294 21.294 0 0 0 3 1.845v6.433c.22-.078.48-.167.766-.255C4.576 7.77 5.638 7.5 6.5 7.5c.847 0 1.548.28 2.158.525l.028.01C9.32 8.29 9.86 8.5 10.5 8.5c.668 0 1.606-.229 2.415-.478A21.317 21.317 0 0 0 14 7.655V1.222z"/>';
                     break;
-                break;                
+                break;    
+                
+                case 'list':
+                    $sx .= '<path fill-rule="evenodd" d="M0 .5A.5.5 0 0 1 .5 0h2a.5.5 0 0 1 0 1h-2A.5.5 0 0 1 0 .5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10A.5.5 0 0 1 4 .5Zm-4 2A.5.5 0 0 1 .5 2h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 4h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 6h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2A.5.5 0 0 1 .5 8h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 0 1h-8a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1h-10a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5Zm-4 2a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1h-2a.5.5 0 0 1-.5-.5Zm4 0a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5Z"/>';
+                    break;
+                break;                 
+
+                case 'list-2':
+                    $sx .= '<path fill-rule="evenodd" d="M2 2.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5V3a.5.5 0 0 0-.5-.5H2zM3 3H2v1h1V3z"/>
+                    <path d="M5 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM5.5 7a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9zm0 4a.5.5 0 0 0 0 1h9a.5.5 0 0 0 0-1h-9z"/>
+                    <path fill-rule="evenodd" d="M1.5 7a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5V7zM2 7h1v1H2V7zm0 3.5a.5.5 0 0 0-.5.5v1a.5.5 0 0 0 .5.5h1a.5.5 0 0 0 .5-.5v-1a.5.5 0 0 0-.5-.5H2zm1 .5H2v1h1v-1z"/>
+                  ';
+                    break;
+                break;                 
+
 
                 case 'view':
                     $sx .= '
@@ -164,8 +178,21 @@ function bsicone($type='',$w=16)
         return $sx;
     }
 
-function breadcrumbs($its)
+function breadcrumbs($its=array())
         {
+            if (count($its) == 0)
+                {
+                    $path = geturl();
+                    $p = explode('/', $path);
+                    $dir = '';
+                    for ($r=3;$r < count($p);$r++)
+                        {
+                            if ($dir != '') { $dir .= '/';}
+                            $dir .= $p[$r];
+                            $name = lang(troca($dir, '/', '.'));
+                            $its[$name] = PATH.MODULE.$dir;
+                        }
+                }
             $sx ='';
             $sx .= '<nav aria-label="breadcrumb">'.cr();
             $sx .= '<ol class="breadcrumb">'.cr();
@@ -178,7 +205,7 @@ function breadcrumbs($its)
                             $linka = ''; 
                             $linkl = ''; 
                         }
-                    $sx .= '<li class="breadcrumb-item active" aria-current="page">'.$linkl.lang('brapci.'.$label).$linka.'</li>';
+                    $sx .= '<li class="breadcrumb-item active" aria-current="page">'.$linkl.lang($label).$linka.'</li>';
                 }
             $sx .= ' </ol></nav>';
             $sx = bs(bsc($sx,12));
@@ -328,6 +355,22 @@ function bsclose($n=0)
                 $sx .= bsdivclose().cr();
             }
         return($sx);
+    }
+
+function bsmenu($menu,$class='')
+    {
+        $sx = '';
+        $sx .= '<ul class="nav-item '.$class.'">';
+        foreach ($menu as $link => $label) {
+            $sx .= '<li class="nav-item">';
+            $sx .= '<a class="nav-link" href="' . PATH . MODULE . $link . '">';
+            $sx .= lang($label);
+            $sx .= '</a>';
+            $sx .= '</li>';
+        }
+        $sx .= '</ul>';
+
+        return $sx;    
     }
 function bsmessage($txt,$t=0)
     {
