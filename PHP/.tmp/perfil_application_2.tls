@@ -1,0 +1,7 @@
+#metadataBlock	name	dataverseAlias	displayName	blockURI	
+	useTerm	useTerm	Termos de postagem de dados		
+#datasetField	name	title	description	watermark	fieldType	displayOrder	displayFormat	advancedSearchField	allowControlledVocabulary	allowmultiples	facetable	displayoncreate	required	parent	metadatablock_id	termURI	
+	useTerm	Termo de uso	useTerm	useTerm	none	1		FALSE	FALSE	FALSE	FALSE	FALSE	FALSE		useTerm	
+	use_term_check	use_term_check	use_term_check		text	2		FALSE	TRUE	FALSE	FALSE	FALSE	FALSE		useTerm	
+#controlledVocabulary	DatasetField	Value	identifier	displayOrder											
+	use_term_check	Yes	1	0

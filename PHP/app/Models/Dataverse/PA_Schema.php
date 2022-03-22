@@ -51,6 +51,7 @@ class PA_Schema extends Model
     function index($d1,$d2,$d3,$d4)
         {
             $sx = '';
+            $sx .= breadcrumbs();
             switch($d1)
                 {
                     case 'edit_field':
@@ -70,7 +71,21 @@ class PA_Schema extends Model
                         $sx .= $this->API_send($d2,$d3,$d4);
                         break;                        
                     case 'export':
-                        $sx .= $this->export($d2,$d3,$d4);
+                        $rst = $this->export($d2,$d3,$d4);
+                        $size = strlen($rst);
+
+                        $PA_Field = new \App\Models\Dataverse\PA_Field();
+                        $dt = $this->find($d2);
+                        $file = trim($dt['mt_name']).'.tsv';
+
+                        header('Content-Description: File Transfer');
+                        header("Content-Type: text/plain; charset=UTF-8");
+                        header('Content-Disposition: attachment; filename="'.$file.'"');
+                        header('Expires: 0');
+                        header('Content-Length: ' . $size);
+                        echo $rst;
+                        exit;
+
                         break;
                     case 'import':
                         $sx .= $this->import($d2,$d3,$d4);
@@ -100,16 +115,27 @@ class PA_Schema extends Model
             $dir = '../.tmp';
             dircheck($dir);
 
-            $file = (PATH.MODULE).'/export/'.$id;
-            $txt = file_get_contents($file);
-            $filename = '../.tmp/perfil_application_'.$id.'.tls';
-            file_put_contents($filename,$txt);
+            $PA_Field = new \App\Models\Dataverse\PA_Field();
+            $dt = $this->find($id);
+            $file = trim($dt['mt_name']).'.tsv';
 
-            $cmd = 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$filename.' -H "Content-type: text/tab-separated-values';
+            $dir = '../.tmp/';
+            dircheck($dir);
+            $dir = '../.tmp/schema/';
+            dircheck($dir);
+            $filename = $dir.$file;
+            $filename2 = $file;
 
-            $txt = shell_exec($cmd);
-            $sx = h($cmd,5);
-            $sx .= '<pre>'.$txt.'</pre>';
+            $rst = $this->export($id);
+            file_put_contents($filename,$rst);
+
+            $cmd = 'cd '.$dir;
+            $cmd .= '<br>';
+            $cmd .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$filename.' -H "Content-type: text/tab-separated-values';
+            $cmd .= '<br>';
+
+            //$txt = shell_exec($cmd);
+            $sx = h('<pre>'.$cmd.'</pre>',5);
             return $sx;
         }
 
@@ -173,11 +199,10 @@ class PA_Schema extends Model
             return $sx;
         }
 
-    function export($d1,$d2,$d3)
+    function export($d1)
         {
             $sx = $this->Export_metadataBlock($d1);
-            echo '<pre>';
-            echo $sx;
+            return $sx;
         }
 
 
@@ -188,7 +213,7 @@ class PA_Schema extends Model
             $tab = "\t";
             $dt = $this->find($d1);
             $file = trim($dt['mt_name']).'.tsv';
-            
+
             $meta = array('#metadataBlock','name','dataverseAlias','displayName','blockURI');
             $field = array('','mt_name','mt_dataverseAlias','mt_displayName','mt_blockURI');
             $ln1 = '';
@@ -216,14 +241,7 @@ class PA_Schema extends Model
                     $ln3 .= $PA_Vocabulary->export($vc);                    
                 }
             $rst = $ln1.chr(10).$ln2.chr(10).$blnk2.$ln3;
-            $size = strlen($rst);
-            header('Content-Description: File Transfer');
-            header("Content-Type: text/plain; charset=UTF-8");
-            header('Content-Disposition: attachment; filename="'.$file.'"');
-            header('Expires: 0');
-            header('Content-Length: ' . $size);
-            echo $rst;
-            exit;
+            return $rst;
         }
 
     function edit($d1,$d2,$d3)
