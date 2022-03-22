@@ -57,24 +57,12 @@ class Solr extends Model
 		}
 
 	function updateSchema()
-		{
-			//$url = 'curl "http://localhost:8080/api/admin/index/solr/schema"';
+		{			
 			$url = 'http://localhost/api/admin/index/solr/schema';			
-			$dir = 'D:\Projeto\www\LattesData\_Documentação\PerfilAplicação\\';
-			$file = $dir.'schema_dv.xml';
-			if (file_exists($file))
-				{
-					echo "OK";
-				} else {
-					$file = 'D:\Projetos\www\LattesData\_Documentação\PerfilAplicação\schema_dv.xml';
-					if (file_exists($file))
-					{
-						$dir = 'D:\Projetos\www\LattesData\_Documentação\PerfilAplicação\\';
-					} else {
-						echo "File not found - ".$file;
-						exit;
-					}	
-				}
+			$txt = file_get_contents($url);
+
+			
+			pre($txt);
 			
 			$orig = file_get_contents($file);
 			//$txt = troca($txt,'<','&lt;');
