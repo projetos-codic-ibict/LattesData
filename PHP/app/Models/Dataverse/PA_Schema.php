@@ -129,10 +129,10 @@ class PA_Schema extends Model
             $rst = $this->export($id);
             file_put_contents($filename,$rst);
 
-            $cmd = 'cd '.$dir;
-            $cmd .= 'echo "Start"';
-            $cmd .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$filename2.' -H "Content-type: text/tab-separated-values"';
-            $cmd .= 'echo "End"';
+            $cmd = 'cd '.$dir.cr();
+            $cmd .= 'echo "Start"'.cr();
+            $cmd .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$filename2.' -H "Content-type: text/tab-separated-values"'.cr();
+            $cmd .= 'echo "End"'.cr();
 
             $txt = shell_exec($cmd);
             $sx = h('<pre>'.$cmd.'</pre>',5);
