@@ -212,7 +212,7 @@ class PA_Schema extends Model
                     $line = $vcs[$r];
                     $vc = $line['m_name'];
                     $ln3 .= $PA_Vocabulary->export($vc);
-                    $file = trim($line['n_name']).'.tsv';
+                    $file = trim($line['m_name']).'.tsv';
                 }
             $rst = $ln1.chr(10).$ln2.chr(10).$blnk2.$ln3;
             $size = strlen($rst);
