@@ -135,8 +135,13 @@ class PA_Schema extends Model
             $cmd .= 'echo "End"'.cr();
 
             $txt = shell_exec($cmd);
-            $sx = h('<pre>'.$cmd.'</pre>',5);
-            $sx .= '<pre>'.$txt.'</pre>';
+            $sx = $cmd.'<hr>';;
+            $sx .= '<tt>'.$txt.'</tt>';
+
+            /*****************************************************************/
+            $Solr = new \App\Models\Dataverse\Solr();
+            $Solr->updateSchema();
+
             return $sx;
         }
 
