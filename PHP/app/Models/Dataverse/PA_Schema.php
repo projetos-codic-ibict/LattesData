@@ -212,12 +212,13 @@ class PA_Schema extends Model
                     $line = $vcs[$r];
                     $vc = $line['m_name'];
                     $ln3 .= $PA_Vocabulary->export($vc);
+                    $file = trim($line['n_name']).'.tsv';
                 }
             $rst = $ln1.chr(10).$ln2.chr(10).$blnk2.$ln3;
             $size = strlen($rst);
             header('Content-Description: File Transfer');
             header("Content-Type: text/plain; charset=UTF-8");
-            header('Content-Disposition: attachment; filename="'.$dt['mt_name'].'.tsv"');
+            header('Content-Disposition: attachment; filename="'.$file.'"');
             header('Expires: 0');
             header('Content-Length: ' . $size);
             echo $rst;
