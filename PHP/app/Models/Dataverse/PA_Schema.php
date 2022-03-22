@@ -130,13 +130,13 @@ class PA_Schema extends Model
             file_put_contents($filename,$rst);
 
             $cmd = 'cd '.$dir;
-            $cmd .= '<br>';
+            $cmd .= 'echo "Start"';
             $cmd .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$filename2.' -H "Content-type: text/tab-separated-values"';
-            $cmd .= '<br>';
+            $cmd .= 'echo "End"';
 
             $txt = shell_exec($cmd);
-            echo $txt;
             $sx = h('<pre>'.$cmd.'</pre>',5);
+            $sx .= '<pre>'.$txt.'</pre>';
             return $sx;
         }
 
