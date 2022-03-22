@@ -187,6 +187,8 @@ class PA_Schema extends Model
             $PA_Vocabulary = new \App\Models\Dataverse\PA_Vocabulary();
             $tab = "\t";
             $dt = $this->find($d1);
+            $file = trim($dt['mt_name']).'.tsv';
+            
             $meta = array('#metadataBlock','name','dataverseAlias','displayName','blockURI');
             $field = array('','mt_name','mt_dataverseAlias','mt_displayName','mt_blockURI');
             $ln1 = '';
@@ -211,8 +213,7 @@ class PA_Schema extends Model
                 {
                     $line = $vcs[$r];
                     $vc = $line['m_name'];
-                    $ln3 .= $PA_Vocabulary->export($vc);
-                    $file = trim($line['m_name']).'.tsv';
+                    $ln3 .= $PA_Vocabulary->export($vc);                    
                 }
             $rst = $ln1.chr(10).$ln2.chr(10).$blnk2.$ln3;
             $size = strlen($rst);
