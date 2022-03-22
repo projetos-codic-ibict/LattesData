@@ -58,21 +58,28 @@ class Solr extends Model
 
 	function updateSchema()
 		{			
-			$url = 'http://localhost/api/admin/index/solr/schema';			
-			$txt = file_get_contents($url);
+			$url = 'http://localhost:8080/api/admin/index/solr/schema';			
+			$dv = file_get_contents($url);
 
-			
-			pre($txt);
-			
+			$dir = '../.tmp/';
+			dircheck($dir.'solr');
+			$file = $dir.'solr/schema_api.xml';
+			file_put_contents($file,$dv);
+			/********************************************************************************************/
+			$dir_solr = '/usr/local/solr/solr-8.8.1/server/solr/collection1/conf/';
+			$file1 = 'schema.xml';
+			$file2 = 'schema_dv_mdb_fields.xml';
+
+			copy($dir_solr.$file1,$dir.'solr/'.$file1);			
+			copy($dir_solr.$file2,$dir.'solr/'.$file2);			
+
 			$orig = file_get_contents($file);
-			//$txt = troca($txt,'<','&lt;');
-			//$orig = explode(chr(10),$orig);
+
 			$orig_field = substr($orig,0,strpos($orig,'---'));
 			$orig_copy = substr($orig,strpos($orig,'---')+5,strlen($orig_field));
 
 			/******************************************************************** SOLR SCHEMA *****/
-			$file = $dir.'schema.xml';
-			$solr = file_get_contents($file);
+			$solr = file_get_contents($dir_solr.$file1);
 
 			/* SUBS */
 			$txa = '<!-- Dataverse copyField from http://localhost:8080/api/admin/index/solr/schema -->';
@@ -85,7 +92,7 @@ class Solr extends Model
 			$solr = $solr_start . $orig_copy . $solr_end;
 
 			/*********************************************************** SOLR DATAVERSE SCHEMA *****/
-			$file = $dir.'schema_dv_mdb_fields.xml';
+			$file = $dir_solr.$file2;
 			$dv = '<fields>'.chr(10);
 			$dv .= $orig_field;
 			$dv .= '</fields>';
