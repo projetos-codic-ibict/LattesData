@@ -131,7 +131,7 @@ class PA_Schema extends Model
 
             $cmd = 'cd '.$dir.cr();
             $cmd .= 'echo "Start"'.cr();
-            $cmd .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$filename2.' -H "Content-type: text/tab-separated-values"'.cr();
+            $cmd .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @../.tmp/schema/'.$filename2.' -H "Content-type: text/tab-separated-values"'.cr();
             $cmd .= 'echo "End"'.cr();
 
             $txt = shell_exec($cmd);
