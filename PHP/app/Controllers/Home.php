@@ -9,6 +9,8 @@ define("URL", getenv('app.baseURL'));
 define("PATH", getenv('app.baseURL').'index.php/home/');
 define("MODULE", '');
 
+$this->session = \Config\Services::session();
+
 class Home extends BaseController
 {
     public function index()
