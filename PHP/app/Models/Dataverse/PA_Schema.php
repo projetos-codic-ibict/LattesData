@@ -141,12 +141,13 @@ class PA_Schema extends Model
             $cmd .= 'Checando '.$DIR.'update-fields.sh'.cr();
             if (!file_exists($DIR.'update-fields.sh'))
                 {
-                    $cmd .= 'echo "COPIANDO ARQUIVO DE CONFIGURACAO"<br>';
+                    $cmd .= 'echo "COPIANDO ARQUIVO DE CONFIGURACAO"'.cr();
                     $cmd .= 'cp '.troca($PATH,'/PHP/public','').'_Documentation/Dataverse/update-fields.sh update-fields.sh'.cr();
                     $cmd .= '<br>';
                 }
 
             $cmd .= 'echo "ENVIANDO METADADOS PARA O SISTEMA"'.cr();
+            $cmd .= 'rm *.tsv -r'.cr();
             $f2 = $PATH.$filename;
             $f2 = troca($f2,'/PHP/public../','/PHP/');
             $cmd .= 'cp '.$f2.' '.$DIR.$file.cr();
@@ -174,9 +175,7 @@ class PA_Schema extends Model
             $sx = '<code>'.troca($cmd,chr(10),'<br>').'</code>';
             $sx .= '<tt>'.$txt.'</tt>';
 
-            /*****************************************************************/
-            $Solr = new \App\Models\Dataverse\Solr();
-            $Solr->updateSchema();
+                    echo $sx;
 
             return $sx;
         }
