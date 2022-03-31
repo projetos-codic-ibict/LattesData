@@ -72,9 +72,11 @@ class Solr extends Model
 
 		foreach($d as $id=>$dire)
 			{
-				echo '>'.$dire;
-				echo '==>'.is_dir($dir.$dire);
-				echo '<hr>';
+				if (is_dir($dir.$dire))
+					{
+						$comp = 'server/solr/collection1/conf/';
+						$file = $dir.$dire.'/conf/schema.xml';
+					}
 			}
 
 		pre($d);
@@ -107,7 +109,7 @@ class Solr extends Model
 		if (file_exists($file)) {
 			echo "OK";
 		} else {
-			echo "ERRO";
+			echo "ERRO2";
 			exit;
 		}
 

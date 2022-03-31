@@ -113,22 +113,47 @@ class PA_Schema extends Model
 
     function API_send($id)
         {
+
+            /*************************************** CRIAR RESULTADO */
+            echo "1";
             $dir = '../.tmp';
+            dircheck($dir);
+            $dir = '../.tmp/schema/';
             dircheck($dir);
 
             $PA_Field = new \App\Models\Dataverse\PA_Field();
             $dt = $this->find($id);
             $file = trim($dt['mt_name']).'.tsv';
 
-            $dir = '../.tmp/';
-            dircheck($dir);
-            $dir = '../.tmp/schema/';
-            dircheck($dir);
             $filename = $dir.$file;
             $filename2 = $file;
 
             $rst = $this->export($id);
             file_put_contents($filename,$rst);
+
+            /*************************************** Recupera Schema */
+            $DIR = '/home/dataverse/dataverse-api/';
+            $PATH = $_SERVER['DOCUMENT_ROOT'];
+
+            $cmd = '';
+            $cmd .= 'echo "ACESSANDO A PASTA DE CONFIGURACOES"<br>';
+            $cmd .= 'cd '.$DIR.'<br>';
+            if (!file_exists($DIR.'update-fields.sh'))
+                {
+                    $cmd .= 'echo "COPIANDO ARQUIVO DE CONFIGURACAO"<br>';
+                    $cmd .= 'cp '.$PATH.'/_Documentation/Dataverse/update-fields.sh '.'<br>';
+                    $cmd .= '<br>';
+                }
+            $cmd .= 'echo "CARREGANDO A ATUALIZACAO DO SCHEMA"<br>';
+            $cmd .= 'curl "http://localhost:8080/api/admin/index/solr/schema" > schema.xml '.'<br>';
+            $cmd .= 'cp '.$PATH.troca($filename,'../','/').' '.$DIR.$file.'<br>';
+            $cmd .= 'echo "ATUALIZANDO O SCHEMA"<br>';
+            $cmd .= 'cat schema.xml | ./update-fields.sh /usr/local/solr/solr-8.11.1/server/solr/collection1/conf/schema.xml'.'<br>';
+            $cmd .= 'echo "ATUALIZANDO O SOLR"<br>';
+            $cmd .= 'curl "http://localhost:8983/solr/admin/cores?action=RELOAD&core=collection1"'.'<br>';
+
+
+            echo '<pre>'.$cmd.'</pre>';
 
             $cmd = 'cd '.$dir.cr();
             $cmd .= 'echo "Start"'.cr();
