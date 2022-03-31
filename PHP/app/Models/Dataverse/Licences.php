@@ -66,13 +66,13 @@ class Licences extends Model
 		{
 			$Dataverse = new \App\Models\Dataverse\Index();
 			$url = $Dataverse->server();
-			$url .= 'api/licenses';
+			$url .= '/api/licenses';
 
 			$sx = h($url,6);
 			$txt = file_get_contents($url);
 			$txt = (array)json_decode($txt,true);
 
-			$link = '<a href="'.PATH.MODULE.'dataverse/licences/0/add">'.lang('dataverse.licence_add').'</a>';
+			$link = '<a href="'.PATH.MODULE.'dataverse/licences/0/add" class="btn btn-outline-primary">'.lang('dataverse.licence_add').'</a>';
 			$sx .= bsc($link,12);
 
 			$sx .= bsc(lang('dataverse.license'),2);
@@ -81,8 +81,6 @@ class Licences extends Model
 			$sx .= bsc(lang('dataverse.active'),1);
 			$sx .= bsc(lang('dataverse.default'),1);
 			$sx .= bsc(lang('dataverse.trash'),1);
-
-			
 
 			if (isset($txt['data']))
 				{
@@ -125,6 +123,7 @@ class Licences extends Model
 						$sx .= h(lang('dataverse.licence_add'),4);
 						$sx .= $this->select_licence_type();
 						break;
+
 					case 'addx':
 						$dt = $this->licenses();
 						$link = '<a href="https://guides.dataverse.org/en/5.10/installation/config.html#id117" target="_blank">'.'add-license.json'.'</a>';
@@ -149,7 +148,7 @@ class Licences extends Model
 						$cmd .= '<br>';
 						$cmd .= 'export API_TOKEN='.$Dataverse->token();
 						$cmd .= '<br>';
-						$cmd .= 'export SERVER_URL='.$Dataverse->server();
+						$cmd .= 'export SERVER_URL='.troca($Dataverse->server(),'//','/');
 						$cmd .= '<br>';
 						$cmd .= 'export FILE='.$FILE;
 						$cmd .= '<br>';

@@ -67,6 +67,7 @@ class Index extends Model
 		{
 			if (strlen($this->server()))
 			{
+				$menu['#C1'] = LANG('dataverse.menu.1');
 				$menu[PATH.MODULE.'dataverse/server'] = 'dataverse.SetServer' . ': <b>'.$this->server().'</b>';
 				$menu[PATH.MODULE.'dataverse/token'] = 'dataverse.SetToken' . ': <b>'.$this->token().'</b>';
 				$menu[PATH.MODULE.'dataverse/licences'] = 'dataverse.Licences';
