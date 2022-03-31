@@ -76,7 +76,7 @@ class Solr extends Model
 			file_put_contents($file,$orig);
 			$sx = 'Read schema from '.$api.'<br>';
 
-			$sx .= '<hr><pre>'.$orig.'</pre>';
+			$sx .= '<hr><pre>'.troca($orig,'<','&lt;').'</pre>';
 			return $sx;
 		}
 
