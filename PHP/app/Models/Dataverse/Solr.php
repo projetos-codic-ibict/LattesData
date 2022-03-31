@@ -61,6 +61,13 @@ class Solr extends Model
 			return $sx;			
 		}
 
+	function readDVSchema()
+		{
+			$dir = '/usr/local/solr/';
+			$d = scandir($dir);
+			pre($d);
+		}
+
 	function readSchema()
 		{
 			$Dataverse = new \App\Models\Dataverse\index();
@@ -82,22 +89,14 @@ class Solr extends Model
 
 	function updateSchema()
 		{
-			//$url = 'curl "http://localhost:8080/api/admin/index/solr/schema"';
-			$url = 'http://localhost/api/admin/index/solr/schema';			
-			$dir = 'D:\Projeto\www\LattesData\_Documentação\PerfilAplicação\\';
+			$dir = '../.tmp/';
 			$file = $dir.'schema_dv.xml';
 			if (file_exists($file))
 				{
 					echo "OK";
 				} else {
-					$file = 'D:\Projetos\www\LattesData\_Documentação\PerfilAplicação\schema_dv.xml';
-					if (file_exists($file))
-					{
-						$dir = 'D:\Projetos\www\LattesData\_Documentação\PerfilAplicação\\';
-					} else {
-						echo "File not found - ".$file;
-						exit;
-					}	
+					echo "ERRO";
+					exit;7
 				}
 			
 			$orig = file_get_contents($file);
