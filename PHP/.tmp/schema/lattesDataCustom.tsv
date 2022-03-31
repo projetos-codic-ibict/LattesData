@@ -1,0 +1,39 @@
+#metadataBlock	name	dataverseAlias	displayName	blockURI	
+	lattesDataCustom	lattesDataCustom	LattesData Custom		
+#datasetField	name	title	description	watermark	fieldType	displayOrder	displayFormat	advancedSearchField	allowControlledVocabulary	allowmultiples	facetable	displayoncreate	required	parent	metadatablock_id	termURI	
+	TítuloDoProjeto	Título do projeto	Informe o nome do projeto	Informe o nome do projeto	text	1	#VALUE	FALSE	FALSE	FALSE	FALSE	TRUE	TRUE		lattesDataCustom	
+	NomeDoCoordenadorDoProjeto	Nome do coordenador do projeto	Informe o nome do coordenador do projeto	Informe o nome do coordenador do projeto	text	2	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	TRUE		lattesDataCustom	
+	E-mailDoCoordenadorDoProjeto	E-mail do coordenador do projeto	Informe o e-mail do coordenador do projeto	Informe o e-mail do coordenador do projeto	email	3	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	TRUE		lattesDataCustom	
+	IDLattesDoCoordenadorDoProjeto	ID Lattes do coordenador do projeto	Informe o número do identificador do currículo Lattes do coordenador	Número do identificador do currículo Lattes do coordenador	text	4	#VALUE	FALSE	FALSE	TRUE	FALSE	TRUE	TRUE		lattesDataCustom	
+	ResumoDoProjeto	Resumo do projeto	Descreva sucintamente o projeto	Descreva sucintamente o projeto	textbox	5	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	TRUE		lattesDataCustom	
+	VigênciaDoProjeto	Vigência do projeto	Insira a data de início e final do projeto de acordo com o modelo: ANO/ MÊS/ DIA	ANO/ MÊS/ DIA	date	6	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	TRUE		lattesDataCustom	
+	ChamadaDoProjeto	Chamada do projeto	Informe, por extenso, o nome da Chamada	Informe, por extenso, o nome da Chamada	text	7		FALSE	FALSE	FALSE	FALSE	FALSE	TRUE		lattesDataCustom	
+	IdentificadorDoProcesso	Identificador do processo	Informe o número do processo	Informe o número do processo	text	8	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	TRUE		lattesDataCustom	
+	ÁreaDoConhecimentoDoCNPq	Área do conhecimento do CNPq	Selecione as principais áreas do conhecimento em que o conjunto de dados faz parte, de acordo com a tabela de áreas do conhecimento - CNPq		text	10	#VALUE	TRUE	TRUE	TRUE	FALSE	FALSE	TRUE		lattesDataCustom	
+	LicençaCreativeCommons	Licença Creative Commons	Selecione, entre as licenças Licenças Creative Commons, aquela que define as condições estabelecidas pelo autor para uso, adaptação e redistribuição dos dados depositados. O conteúdo completo das Licenças Creative Commons pode ser acessado pelo link: https://br.creativecommons.org/licencas/		text	10	#VALUE	FALSE	FALSE	FALSE	FALSE	TRUE	TRUE		lattesDataCustom	
+	ÁreaDoConhecimentoInternacional	Área do conhecimento internacional	Selecione as principais áreas do conhecimento internacionais em que o conjunto de dados faz parte, de acordo com a tabela de áreas do conhecimento internacional baseadas na Library of Congress Classification		text	11	#VALUE	FALSE	TRUE	FALSE	FALSE	FALSE	TRUE		lattesDataCustom	
+	TipoDeAcesso	Tipo de acesso	Selecione o tipo de acesso permitido ao conjunto de dados		text	11	#VALUE	FALSE	TRUE	FALSE	FALSE	TRUE	TRUE		lattesDataCustom	
+	PeríodoDeEmbargo	Período de embargo	Preencha em meses (período de até 12 meses) o tempo que o conjunto de dados ficará embargado. Após esse período o conjunto de dados passará a ser de acesso aberto ou poderá renovar o período de embargo por mais 12 meses, diante de justificativa	Preencha em meses o período de embargo	text	13	#VALUE	FALSE	FALSE	FALSE	FALSE	TRUE	FALSE	Tipo de acesso	lattesDataCustom	
+	TipoDeArquivoDoConjuntoDeDados	Tipo de arquivo do conjunto de dados	Selecione o (s) tipo (s) do (s) recurso (s) utilizado para armazenar o dado científico		text	14	#VALUE	FALSE	TRUE	FALSE	FALSE	TRUE	TRUE		lattesDataCustom	
+	IdentificadorAlternativoDoConjuntoDeDados	Identificador alternativo do conjunto de dados	Informe outro identificador persistente do conjunto de dados obtido de outra forma que não o principal utilizado no repositório LattesData. Identificador persistente é um identificador único de longa duração de um recurso na Internet que se mantém válido mesmo que a tecnologia de acesso ou a localização física do recurso identificado se modifique no tempo. Exemplos: DOI (Digital Object Identifier), Handle, URN, PURL, ARK, URL. Para indicar mais de uma resposta clique no botão “Mais”, que se encontra à direita do preenchimento		url	15	#VALUE	FALSE	FALSE	TRUE	FALSE	FALSE	FALSE		lattesDataCustom	
+#controlledVocabulary	DatasetField	Value	identifier	displayOrder											
+	TipoDeAcesso	Acesso aberto	AA	1
+	TipoDeAcesso	Acesso restrito		2
+	TipoDeAcesso	Acesso embargado		3
+	TipoDeArquivoDoConjuntoDeDados	Aplicações de Software		0
+	TipoDeArquivoDoConjuntoDeDados	Apresentação		1
+	TipoDeArquivoDoConjuntoDeDados	Bancos de dados		2
+	TipoDeArquivoDoConjuntoDeDados	Código fonte		3
+	TipoDeArquivoDoConjuntoDeDados	Dados arquivados		4
+	TipoDeArquivoDoConjuntoDeDados	Dados audiovisuais		5
+	TipoDeArquivoDoConjuntoDeDados	Dados baseados em rede		6
+	TipoDeArquivoDoConjuntoDeDados	Dados de configuração		7
+	TipoDeArquivoDoConjuntoDeDados	Dados não tratados		8
+	TipoDeArquivoDoConjuntoDeDados	Documento de texto		9
+	TipoDeArquivoDoConjuntoDeDados	Formatos de dados científicos e estatísticos		10
+	TipoDeArquivoDoConjuntoDeDados	Gráficos estruturados		11
+	TipoDeArquivoDoConjuntoDeDados	Imagens		12
+	TipoDeArquivoDoConjuntoDeDados	Planilha		13
+	TipoDeArquivoDoConjuntoDeDados	Texto estruturado		14
+	TipoDeArquivoDoConjuntoDeDados	Texto simples		15
+	TipoDeArquivoDoConjuntoDeDados	Outros		16

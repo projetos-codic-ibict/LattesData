@@ -146,12 +146,14 @@ class PA_Schema extends Model
                 }
 
             $cmd .= 'echo "ENVIANDO METADADOS PARA O SISTEMA"<br>';
+            $f2 = $PATH.$filename;
+            $cmd .= 'cp '.$f2.' '.$DIR.$file.'<br>';
             $cmd .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$file.' -H "Content-type: text/tab-separated-values"<br>';
 
             $cmd .= 'echo "CARREGANDO A ATUALIZACAO DO SCHEMA"<br>';
             $cmd .= 'rm schema.xml -r<br>';
             $cmd .= 'curl "http://localhost:8080/api/admin/index/solr/schema" > schema.xml '.'<br>';
-            $cmd .= 'cp '.$PATH.troca($filename,'../','/').' '.$DIR.$file.'<br>';
+            
             $cmd .= 'echo "ATUALIZANDO O SCHEMA"<br>';
             $cmd .= 'cat schema.xml | ./update-fields.sh /usr/local/solr/solr-8.11.1/server/solr/collection1/conf/schema.xml'.'<br>';
             $cmd .= 'echo "ATUALIZANDO O SOLR"<br>';
