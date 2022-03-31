@@ -141,10 +141,11 @@ class PA_Schema extends Model
             if (!file_exists($DIR.'update-fields.sh'))
                 {
                     $cmd .= 'echo "COPIANDO ARQUIVO DE CONFIGURACAO"<br>';
-                    $cmd .= 'cp '.$PATH.'_Documentation/Dataverse/update-fields.sh update-fields.sh'.'<br>';
+                    $cmd .= 'cp '.troca($PATH,'/PHP/public','').'_Documentation/Dataverse/update-fields.sh update-fields.sh'.'<br>';
                     $cmd .= '<br>';
                 }
             $cmd .= 'echo "CARREGANDO A ATUALIZACAO DO SCHEMA"<br>';
+            $cmd .= 'rm schema.xml -r<br>';
             $cmd .= 'curl "http://localhost:8080/api/admin/index/solr/schema" > schema.xml '.'<br>';
             $cmd .= 'cp '.$PATH.troca($filename,'../','/').' '.$DIR.$file.'<br>';
             $cmd .= 'echo "ATUALIZANDO O SCHEMA"<br>';
@@ -279,12 +280,12 @@ class PA_Schema extends Model
     function edit($d1,$d2,$d3)
         {
             $this->id = $d1;
-            $this->path = PATH.MODULE;
+            $this->path = PATH.MODULE.'dataverse/pa/';
             if ($d1 == 0)
                 {
-                    $this->path_back = PATH.MODULE.'/';
+                    $this->path_back = PATH.MODULE.'dataverse/pa/';
                 } else {
-                    $this->path_back = PATH.MODULE.'/viewid/'.$d1;
+                    $this->path_back = PATH.MODULE.'dataverse/pa/viewid/'.$d1;
                 }
             
             $sx = h(lang('dataverse.SchemaEd'),1);
@@ -297,7 +298,7 @@ class PA_Schema extends Model
         {
             $PA_Field = new \App\Models\Dataverse\PA_Field();
             $this->id = $d1;
-            $this->path = PATH.MODULE.'datafieldEd/'.$d1;
+            $this->path = PATH.MODULE.'dataverse/pa/datafieldEd/'.$d1;
             $sx = h(lang('dataverse.datafieldEd'),1);
             $sx .= $PA_Field->editar($d1,$d3);
             return $sx;
