@@ -138,6 +138,7 @@ class PA_Schema extends Model
             $cmd = '';
             $cmd .= 'echo "ACESSANDO A PASTA DE CONFIGURACOES"<br>';
             $cmd .= 'cd '.$DIR.'<br>';
+            $cmd .= 'Checando '.$DIR.'update-fields.sh';
             if (!file_exists($DIR.'update-fields.sh'))
                 {
                     $cmd .= 'echo "COPIANDO ARQUIVO DE CONFIGURACAO"<br>';
@@ -147,6 +148,7 @@ class PA_Schema extends Model
 
             $cmd .= 'echo "ENVIANDO METADADOS PARA O SISTEMA"<br>';
             $f2 = $PATH.$filename;
+            $f2 = troca($f2,'/PHP/public../','/PHP/');
             $cmd .= 'cp '.$f2.' '.$DIR.$file.'<br>';
             $cmd .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$file.' -H "Content-type: text/tab-separated-values"<br>';
 
