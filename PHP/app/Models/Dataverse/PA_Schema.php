@@ -136,30 +136,30 @@ class PA_Schema extends Model
             $PATH = $_SERVER['DOCUMENT_ROOT'];
 
             $cmd = '';
-            $cmd .= 'echo "ACESSANDO A PASTA DE CONFIGURACOES"<br>';
+            $cmd .= 'echo "ACESSANDO A PASTA DE CONFIGURACOES"'.cr();
             $cmd .= 'cd '.$DIR.'<br>';
-            $cmd .= 'Checando '.$DIR.'update-fields.sh';
+            $cmd .= 'Checando '.$DIR.'update-fields.sh'.cr();
             if (!file_exists($DIR.'update-fields.sh'))
                 {
                     $cmd .= 'echo "COPIANDO ARQUIVO DE CONFIGURACAO"<br>';
-                    $cmd .= 'cp '.troca($PATH,'/PHP/public','').'_Documentation/Dataverse/update-fields.sh update-fields.sh'.'<br>';
+                    $cmd .= 'cp '.troca($PATH,'/PHP/public','').'_Documentation/Dataverse/update-fields.sh update-fields.sh'.cr();
                     $cmd .= '<br>';
                 }
 
-            $cmd .= 'echo "ENVIANDO METADADOS PARA O SISTEMA"<br>';
+            $cmd .= 'echo "ENVIANDO METADADOS PARA O SISTEMA"'.cr();
             $f2 = $PATH.$filename;
             $f2 = troca($f2,'/PHP/public../','/PHP/');
-            $cmd .= 'cp '.$f2.' '.$DIR.$file.'<br>';
-            $cmd .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$file.' -H "Content-type: text/tab-separated-values"<br>';
+            $cmd .= 'cp '.$f2.' '.$DIR.$file.cr();
+            $cmd .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$file.' -H "Content-type: text/tab-separated-values"'.cr();
 
-            $cmd .= 'echo "CARREGANDO A ATUALIZACAO DO SCHEMA"<br>';
-            $cmd .= 'rm schema.xml -r<br>';
-            $cmd .= 'curl "http://localhost:8080/api/admin/index/solr/schema" > schema.xml '.'<br>';
+            $cmd .= 'echo "CARREGANDO A ATUALIZACAO DO SCHEMA"'.cr();
+            $cmd .= 'rm schema.xml -r'.cr();
+            $cmd .= 'curl "http://localhost:8080/api/admin/index/solr/schema" > schema.xml '.cr();
             
-            $cmd .= 'echo "ATUALIZANDO O SCHEMA"<br>';
-            $cmd .= 'cat schema.xml | ./update-fields.sh /usr/local/solr/solr-8.11.1/server/solr/collection1/conf/schema.xml'.'<br>';
-            $cmd .= 'echo "ATUALIZANDO O SOLR"<br>';
-            $cmd .= 'curl "http://localhost:8983/solr/admin/cores?action=RELOAD&core=collection1"'.'<br>';
+            $cmd .= 'echo "ATUALIZANDO O SCHEMA"'.cr();
+            $cmd .= 'cat schema.xml | ./update-fields.sh /usr/local/solr/solr-8.11.1/server/solr/collection1/conf/schema.xml'.cr();
+            $cmd .= 'echo "ATUALIZANDO O SOLR"'.cr();
+            $cmd .= 'curl "http://localhost:8983/solr/admin/cores?action=RELOAD&core=collection1"'.cr();
 
 
             echo '<pre>'.$cmd.'</pre>';
@@ -167,7 +167,8 @@ class PA_Schema extends Model
             $cmd = 'cd '.$dir.cr();
             $cmd .= 'echo "Start"'.cr();
             $cmd .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @../.tmp/schema/'.$filename2.' -H "Content-type: text/tab-separated-values"'.cr();
-            $cmd .= 'echo "End"'.cr();
+            $cmd .= 'echo "End"<br>'.cr();
+            $cmd .= '/data/LattesData<br>';
 
             $txt = shell_exec($cmd);
             $sx = '<code>'.troca($cmd,chr(10),'<br>').'</code>';
