@@ -70,16 +70,13 @@ class Solr extends Model
 		$dir = '/usr/local/solr/';
 		$d = scandir($dir);
 
-		for ($r=0;$r < count($d);$r++) {
-				if (is_dir($d[$r]))
-					{
-						if (file_exists($dir.$d[$r].'/server'))
-							{
-							echo '==>'.$d[$r];
-							echo '<br>';
-							}
-					}
+		foreach($d as $id=>$dire)
+			{
+				echo '>'.$dire;
+				echo '==>'.is_dir($dir.$dire);
+				echo '<hr>';
 			}
+
 		pre($d);
 	}
 
