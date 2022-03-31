@@ -79,7 +79,6 @@ class Index extends Model
 				$menu[PATH.MODULE.'dataverse/token'] = 'dataverse.SetToken' . ': <b>'.$this->token().'</b>';
 				$menu[PATH.MODULE.'dataverse/licences'] = 'dataverse.Licences';
 				$menu[PATH.MODULE.'dataverse/solr'] = 'dataverse.Solr';
-				$menu[PATH.MODULE.'dataverse/solrDV'] = 'dataverse.SolrDV';				
 
 				$menu[PATH.MODULE.'dataverse/pa'] = lang('dataverse.PerfilApplication');
 
@@ -103,14 +102,6 @@ class Index extends Model
 			$Solr = new \App\Models\Dataverse\Solr();
 			$sx = h('dataverse.Solr',1);
 			$sx .= $Solr->index($d1,$d2,$d3);
-			return $sx;
-		}	
-		
-	function solrDV($d1,$d2,$d3)
-		{
-			$Solr = new \App\Models\Dataverse\Solr();
-			$sx = h('dataverse.Solr',1);
-			$sx .= $Solr->readDVSchema($d1,$d2,$d3);
 			return $sx;
 		}		
 
