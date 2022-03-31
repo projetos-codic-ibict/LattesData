@@ -72,14 +72,14 @@ class PA_Field extends Model
 
     function editar($id)
         {
-            $this->path = PATH.MODULE.'/datafieldEd/'.$id;
+            $this->path = PATH.MODULE.'dataverse/pa/datafieldEd/'.$id;
             $this->id = $id;
             $ifr = get('m_schema');
             if ($ifr > 0)
                 {
-                    $this->path_back = PATH.MODULE.'/viewid/'.$ifr;
+                    $this->path_back = PATH.MODULE.'dataverse/pa/viewid/'.$ifr;
                 } else {                    
-                    $this->path_back = PATH.MODULE;
+                    $this->path_back = PATH.MODULE.'dataverse/pa';
                 }
             
             
@@ -121,7 +121,7 @@ class PA_Field extends Model
 
         for ($r = 0; $r < count($dt); $r++) {
             $ln = $dt[$r];
-            $link = '<a href="'.PATH.MODULE.'/viewfieldid/'.$ln['id_m'].'">';
+            $link = '<a href="'.PATH.MODULE.'dataverse/pa/viewfieldid/'.$ln['id_m'].'">';
             $linka = '</a>';
             $link = '';
             $linka = '';
@@ -141,7 +141,7 @@ class PA_Field extends Model
                     $sx .= '<td></td>';
                 } else {
                     $sx .= '<td>';
-                    $sx .= onclick(PATH.MODULE.'/change_field/'.$id.'/'.$ln['id_m'],200,100);
+                    $sx .= onclick(PATH.MODULE.'dataverse/pa/change_field/'.$id.'/'.$ln['id_m'],200,100);
                     $sx .= $this->onoff($ln['m_active']);
                     $sx .= '</span>';
                     $sx .= '</td>';
@@ -162,7 +162,7 @@ class PA_Field extends Model
             } else {
                 $sx .= '<td>-</td>';
             }
-            $sx .= '<td>' . '<a href="' . PATH . MODULE . '/datafieldEd/' . $ln['id_m'].'">' . bsicone('edit', 16) . '</a></td>';           
+            $sx .= '<td>' . '<a href="' . PATH . MODULE . 'dataverse/pa/datafieldEd/' . $ln['id_m'].'">' . bsicone('edit', 16) . '</a></td>';           
             $sx .= '</tr>';
         }
         $sx .= '</table>';

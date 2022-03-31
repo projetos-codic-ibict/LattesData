@@ -6,8 +6,8 @@ helper(['boostrap', 'url', 'graphs',
         'sisdoc_forms', 'form', 'nbr', 'sessions',
         'database']);
 define("URL", getenv('app.baseURL'));
-define("PATH", getenv('app.baseURL').'index.php/home/');
-define("MODULE", '');
+define("PATH", getenv('app.baseURL').'index.php/');
+define("MODULE", 'home/');
 
 $this->session = \Config\Services::session();
 

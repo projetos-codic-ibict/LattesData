@@ -40,12 +40,16 @@ class Index extends Model
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
-	function index($d1,$d2,$d3,$d4)
+	function index($d1,$d2,$d3,$d4,$d5='')
 		{
 			$sx = '';
 			$sx = breadcrumbs();
 			switch($d1)
 				{
+					case 'pa':
+						$PA_Schema = new \App\Models\Dataverse\PA_Schema();
+						$sx = $PA_Schema->index($d2,$d3,$d4,$d5);
+						break;
 					case 'solr':
 						$sx = $this->solr($d2,$d3,$d4);
 						break;
@@ -67,11 +71,14 @@ class Index extends Model
 		{
 			if (strlen($this->server()))
 			{
-				$menu['#C1'] = LANG('dataverse.menu.1');
+				$menu['#C1'] = lang('dataverse.menu.1');
 				$menu[PATH.MODULE.'dataverse/server'] = 'dataverse.SetServer' . ': <b>'.$this->server().'</b>';
 				$menu[PATH.MODULE.'dataverse/token'] = 'dataverse.SetToken' . ': <b>'.$this->token().'</b>';
 				$menu[PATH.MODULE.'dataverse/licences'] = 'dataverse.Licences';
 				$menu[PATH.MODULE.'dataverse/solr'] = 'dataverse.Solr';
+
+				$menu[PATH.MODULE.'dataverse/pa'] = lang('dataverse.PerfilApplication');
+
 			} else {
 				$menu[PATH.MODULE.'dataverse/server'] = 'dataverse.SetServer';
 			}

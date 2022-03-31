@@ -58,6 +58,7 @@ class PA_Schema extends Model
                         $PA_Field = new \App\Models\Dataverse\PA_Field();
                         $sx .= $PA_Field->editar($d2,$d3);
                         break;
+                        
                     case 'vocabulary':
                         $PA_Vocabulary = new \App\Models\Dataverse\PA_Vocabulary();
                         $sx .= $PA_Vocabulary->index($d2,$d3,$d4);
@@ -135,7 +136,7 @@ class PA_Schema extends Model
             $cmd .= 'echo "End"'.cr();
 
             $txt = shell_exec($cmd);
-            $sx = $cmd.'<hr>';;
+            $sx = '<code>'.troca($cmd,chr(10),'<br>').'</code>';
             $sx .= '<tt>'.$txt.'</tt>';
 
             /*****************************************************************/
@@ -199,7 +200,7 @@ class PA_Schema extends Model
                     $sx .= '</form>';
                 }
 
-            $sx .= '<a href="'.PATH.MODULE.'/viewid/'.$d1.'" class="btn btn-primary">'.lang('dataverse.return').'</a>';
+            $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/viewid/'.$d1.'" class="btn btn-primary">'.lang('dataverse.return').'</a>';
 
             $sx = bs(bsc($sx));
             return $sx;
@@ -286,13 +287,13 @@ class PA_Schema extends Model
             $query = $this->db->query($sql);
             $row = $query->getRowArray();
 
-            $sx .= '<a href="'.PATH.MODULE.'/export/'.$id.'">'.lang('dataverse.export').'</a>';
+            $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/export/'.$id.'">'.lang('dataverse.export').'</a>';
             $sx .= ' | ';
-            $sx .= '<a href="'.PATH.MODULE.'/api_send_schema/'.$id.'">'.lang('dataverse.api_send').'</a>';            
+            $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/api_send_schema/'.$id.'">'.lang('dataverse.api_send').'</a>';            
             $sx .= ' | ';
-            $sx .= '<a href="'.PATH.MODULE.'/import/'.$id.'">'.lang('dataverse.import').'</a>';
+            $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/import/'.$id.'">'.lang('dataverse.import').'</a>';
             $sx .= ' | ';
-            $sx .= '<a href="'.PATH.MODULE.'/edit_field/0?m_schema='.$id.'">'.lang('dataverse.new_field').'</a>';
+            $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/edit_field/0?m_schema='.$id.'">'.lang('dataverse.new_field').'</a>';
             
             $sx .= '<h2>'.$row['mt_displayName'].'</h2>';
             $sx .= '<p>'.$row['mt_blockURI'].'</p>';
@@ -308,7 +309,7 @@ class PA_Schema extends Model
 
     function tableview()
         {
-            $this->path = PATH.MODULE;
+            $this->path = PATH.MODULE.'dataverse/pa';
             $sx = tableview($this);
             $sx = bs(bsc($sx));
             return $sx;

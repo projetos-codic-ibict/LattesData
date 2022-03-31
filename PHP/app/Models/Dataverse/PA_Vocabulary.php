@@ -65,8 +65,8 @@ class PA_Vocabulary extends Model
 
     function edit($d2,$d3)
         {
-            $this->path = PATH.MODULE.'/vocabulary/';
-            $this->path_back = PATH.MODULE.'/vocabulary/vc/'.get("vc_name");
+            $this->path = PATH.MODULE.'dataverse/pa/vocabulary/';
+            $this->path_back = PATH.MODULE.'dataverse/pa/vocabulary/vc/'.get("vc_name");
             $this->id = $d2;
             $sx = form($this);
             $sx = bs(bsc($sx,12));
@@ -79,7 +79,7 @@ class PA_Vocabulary extends Model
             ->where('vc_name',$id)
             ->orderBy('vc_order','asc');
 
-            $this->path = PATH.MODULE.'/vocabulary';
+            $this->path = PATH.MODULE.'dataverse/pa/vocabulary';
 
             $sx = tableview($this);
 
@@ -133,7 +133,7 @@ class PA_Vocabulary extends Model
                 for ($r=0;$r < count($dt);$r++)
                     {
                         $line = $dt[$r];
-                        $link = '<a href="'.PATH.MODULE.'/vocabulary/vc/'.$line['m_name'].'">';
+                        $link = '<a href="'.PATH.MODULE.'dataverse/pa/vocabulary/vc/'.$line['m_name'].'">';
                         $linka = '</a>';
                         $sx .= $link.'<b>'.$line['m_name'].'</b>'.$linka.' | ';
                     }

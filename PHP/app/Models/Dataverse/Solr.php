@@ -46,14 +46,38 @@ class Solr extends Model
 			switch($d1)
 				{
 					case 'schema':
+						$sx = $this->readSchema($d2,$d3);
+						break;
+
+					case 'schema_export':
 						$sx = $this->updateSchema($d2,$d3);
 						break;
 					default:
-						$menu[PATH.MODULE.'dataverse/solr/schema'] = 'dataverse.Solr.Schema';
+						$menu[PATH.MODULE.'dataverse/solr/schema'] = 'dataverse.Solr.Schema.Read';
+						$menu[PATH.MODULE.'dataverse/solr/schema_export'] = 'dataverse.Solr.Schema.Export';
 						$menu[PATH.MODULE.'dataverse/solr'] = 'dataverse.Solr';
 						$sx .= menu($menu);
 				}
 			return $sx;			
+		}
+
+	function readSchema()
+		{
+			$Dataverse = new \App\Models\Dataverse\index();
+			//$url = $Dataverse->server();
+			$url = 'http://localhost:8080';
+			$api = $url.'/api/admin/index/solr/schema';
+			
+
+			dircheck('../.tmp/');
+			$file = '../.tmp/schema_dv.xml';
+
+			$orig = file_get_contents($api);
+			file_put_contents($file,$orig);
+			$sx = 'Read schema from '.$api.'<br>';
+
+			$sx .= '<hr><pre>'.$orig.'</pre>';
+			return $sx;
 		}
 
 	function updateSchema()

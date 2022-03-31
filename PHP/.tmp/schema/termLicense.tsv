@@ -1,0 +1,7 @@
+#metadataBlock	name	dataverseAlias	displayName	blockURI	
+	termLicense	termLicense	termLicense		
+#datasetField	name	title	description	watermark	fieldType	displayOrder	displayFormat	advancedSearchField	allowControlledVocabulary	allowmultiples	facetable	displayoncreate	required	parent	metadatablock_id	termURI	
+	termLicense	termLicense			none	1		FALSE	FALSE	FALSE	FALSE	FALSE	FALSE		termLicense	
+	termAccept	termAccept	termAccept			1		FALSE	TRUE	FALSE	FALSE	FALSE	FALSE		termLicense	
+#controlledVocabulary	DatasetField	Value	identifier	displayOrder											
+	termAccept	YES		0

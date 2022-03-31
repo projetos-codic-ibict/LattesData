@@ -64,12 +64,14 @@ class Licences extends Model
 
 	function getLicences($d1,$d2,$d3)
 		{
+			$cmd = '';
 			$Dataverse = new \App\Models\Dataverse\Index();
 			$url = $Dataverse->server();
 			$url .= '/api/licenses';
 
 			$sx = h($url,6);
 			$txt = file_get_contents($url);
+			$cmd = 'curl '.$url;
 			$txt = (array)json_decode($txt,true);
 
 			$link = '<a href="'.PATH.MODULE.'dataverse/licences/0/add" class="btn btn-outline-primary">'.lang('dataverse.licence_add').'</a>';
@@ -116,7 +118,7 @@ class Licences extends Model
 							
 						}
 				}
-			$cmd = '';
+			
 			switch($d3)
 				{
 					case 'add':
@@ -135,7 +137,6 @@ class Licences extends Model
 						$FILE = $F[count($F)-1];
 						$FILE = '@'.$FILE;
 
-						$cmd = '';
 						$cmd .= 'echo \'************************** Remove json files\'';
 						$cmd .= '<br>';
 						$cmd .= 'rm *.json -f';
@@ -160,7 +161,7 @@ class Licences extends Model
 						$cmd .= '<br>';
 						break;
 					case 'trash':
-						$cmd = '';
+						
 						$cmd .= 'export API_TOKEN='.$Dataverse->token();
 						$cmd .= '<br>';
 						$cmd .= 'export SERVER_URL='.$Dataverse->server().'<br>';
@@ -169,7 +170,7 @@ class Licences extends Model
 						$cmd .= '<br>';
 						break;
 					case 'setdefault':
-						$cmd = '';
+						
 						$cmd .= 'export API_TOKEN='.$Dataverse->token();
 						$cmd .= '<br>';
 						$cmd .= 'export SERVER_URL='.$Dataverse->server().'<br>';
@@ -179,7 +180,7 @@ class Licences extends Model
 						$cmd .= '<br>';
 						break;
 					case 'setactive':						
-						$cmd = '';
+						
 						$cmd .= 'export API_TOKEN='.$Dataverse->token();
 						$cmd .= '<br>';
 						$cmd .= 'export SERVER_URL='.$Dataverse->server().'<br>';
@@ -189,7 +190,7 @@ class Licences extends Model
 						$cmd .= '<br>';
 						break;
 					case 'setdesactive':
-						$cmd = '';
+						
 						$cmd .= 'export API_TOKEN='.$Dataverse->token();
 						$cmd .= '<br>';
 						$cmd .= 'export SERVER_URL='.$Dataverse->server().'<br>';						
