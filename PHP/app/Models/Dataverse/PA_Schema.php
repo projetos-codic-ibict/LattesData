@@ -141,7 +141,7 @@ class PA_Schema extends Model
             if (!file_exists($DIR.'update-fields.sh'))
                 {
                     $cmd .= 'echo "COPIANDO ARQUIVO DE CONFIGURACAO"<br>';
-                    $cmd .= 'cp '.$PATH.'/_Documentation/Dataverse/update-fields.sh '.'<br>';
+                    $cmd .= 'cp '.$PATH.'_Documentation/Dataverse/update-fields.sh update-fields.sh'.'<br>';
                     $cmd .= '<br>';
                 }
             $cmd .= 'echo "CARREGANDO A ATUALIZACAO DO SCHEMA"<br>';
