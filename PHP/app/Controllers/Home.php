@@ -7,11 +7,28 @@ helper(['boostrap', 'url', 'graphs',
         'database']);
 define("URL", getenv('app.baseURL'));
 define("PATH", getenv('app.baseURL').'index.php/home/');
-define("MODULE", 'dataverse/');
+define("MODULE", '');
 
 class Home extends BaseController
 {
     public function index()
+        {
+            $sx = '';
+            $sx .= view('header/head');
+            $sx .= view('header/navbar');
+            $sx .= bs(bsc('<div class="mb-5"></div>',12));
+            $sx .= bs(bsc('<div class="mb-5"></div>',12));
+            $sx .= bs(
+                    bsc('',3).
+                    bsc('<img src="'.URL.'/img/logo_lattesdata.png" width="100%" class="img-fluid">',6)).
+                    bsc('',3)
+                    ;
+            $sx .= bs(bsc('<div class="mb-5"></div>',12));
+            $sx .= bs(bsc('<h2 class="text-center text-danger">Under Construction</h2>',12));
+            return $sx;
+        }
+
+    public function inport()
     {
         $sx = '';
         $sx .= view('header/head');
@@ -45,12 +62,35 @@ class Home extends BaseController
         return $sx;
     }
 
+    function cab($tp='')
+        {
+            $sx = '';
+            switch($tp)
+                {
+                    case 'footer':
+                        $sx = '';
+                        break;
+                    default:
+                        $sx .= view('header/head');
+                        $sx .= view('header/navbar');
+                        break;        
+                }
+            return $sx;
+        }
+
     function dataverse($d1='',$d2='',$d3='',$d4='')
+	{
+		$Dataverse = new \App\Models\Dataverse\Index();
+		$tela = $this->cab();		
+		$tela .= bs($Dataverse->index($d1,$d2,$d3,$d4));
+		$tela .= $this->cab("footer");		
+		return $tela;
+	}
+
+    function xxdataverse($d1='',$d2='',$d3='',$d4='')
         {
             $PA = new \App\Models\Dataverse\PA_Schema();
             $sx = '';
-            $sx .= view('header/head');
-            $sx .= view('header/navbar');
 
             $sx .= $PA->index($d1,$d2,$d3,$d4);
             

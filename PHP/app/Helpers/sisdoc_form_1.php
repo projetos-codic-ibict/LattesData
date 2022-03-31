@@ -102,6 +102,9 @@ function form($th)
                             case 'close':
                                 $sx .= '<script>close();</script>';
                                 break;
+                            case 'wclose':
+                                $sx .= '<script>window.opener.location.reload(); close();</script>';
+                                break;                                
                             case 'nome':
                                 $sx .= '';
                                 break;

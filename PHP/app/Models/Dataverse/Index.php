@@ -49,6 +49,9 @@ class Index extends Model
 					case 'solr':
 						$sx = $this->solr($d2,$d3,$d4);
 						break;
+					case 'token':
+						$sx .= $this->setToken();
+						break;						
 					case 'server':
 						$sx .= $this->setURL();
 						break;
@@ -64,7 +67,8 @@ class Index extends Model
 		{
 			if (strlen($this->server()))
 			{
-				$menu[PATH.MODULE.'dataverse/server'] = 'dataverse.SetServer' . ': '.$this->server();
+				$menu[PATH.MODULE.'dataverse/server'] = 'dataverse.SetServer' . ': <b>'.$this->server().'</b>';
+				$menu[PATH.MODULE.'dataverse/token'] = 'dataverse.SetToken' . ': <b>'.$this->token().'</b>';
 				$menu[PATH.MODULE.'dataverse/licences'] = 'dataverse.Licences';
 				$menu[PATH.MODULE.'dataverse/solr'] = 'dataverse.Solr';
 			} else {
@@ -105,6 +109,40 @@ class Index extends Model
 				}
 			return $sx;
 		}
+
+	function setToken()
+		{
+			$sx = form_open();
+			$sx .= '<span class="small">'.lang('dataverse.token').'</span>';
+			$sx .= '<input type="text" name="token" value="'.$this->token().'" class="form-control">';
+			$sx .= '<input type="submit" value="'.lang('dataverse.save').'" class="btn btn-outline-primary">';
+			$sx .= form_close();
+
+			$token = get("token");
+			if ($token  != '')
+				{
+					$this->token($token);
+					$sx .= metarefresh(PATH.MODULE.'dataverse/');					
+				}
+			return $sx;
+		}		
+
+	function token($url='')
+		{
+			if ($url != '')
+				{
+					$_SESSION['dataverse_token'] = $url;
+					return $url;
+				}
+			if (isset($_SESSION['dataverse_token']))
+				{
+					$url = $_SESSION['dataverse_token'];
+				} else {
+					$url = '';
+				}
+			return $url;
+		}
+
 	function server($url='')
 		{
 			if ($url != '')
