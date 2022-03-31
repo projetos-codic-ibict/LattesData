@@ -77,7 +77,6 @@ class Solr extends Model
 						echo '<br>';
 					}
 			}
-		}
 		pre($d);
 	}
 
