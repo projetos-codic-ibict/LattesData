@@ -2,7 +2,6 @@
 
 function read_link($url, $read = 'CURL')
 {
-    $read = 'CURL';
     switch ($read) {
         case 'file':
             if (substr($url, 0, 4) == 'http') {
