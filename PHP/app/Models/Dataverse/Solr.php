@@ -73,8 +73,11 @@ class Solr extends Model
 		for ($r=0;$r < count($d);$r++) {
 				if (is_dir($d[$r]))
 					{
-						echo '==>'.$d[$r];
-						echo '<br>';
+						if (file_exists($dir.$d[$r].'/server'))
+							{
+							echo '==>'.$d[$r];
+							echo '<br>';
+							}
 					}
 			}
 		pre($d);
