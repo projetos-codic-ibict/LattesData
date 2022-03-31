@@ -144,6 +144,10 @@ class PA_Schema extends Model
                     $cmd .= 'cp '.troca($PATH,'/PHP/public','').'_Documentation/Dataverse/update-fields.sh update-fields.sh'.'<br>';
                     $cmd .= '<br>';
                 }
+
+            $cmd .= 'echo "ENVIANDO METADADOS PARA O SISTEMA"<br>';
+            $cmd .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$file.' -H "Content-type: text/tab-separated-values"<br>';
+
             $cmd .= 'echo "CARREGANDO A ATUALIZACAO DO SCHEMA"<br>';
             $cmd .= 'rm schema.xml -r<br>';
             $cmd .= 'curl "http://localhost:8080/api/admin/index/solr/schema" > schema.xml '.'<br>';
