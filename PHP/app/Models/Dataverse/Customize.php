@@ -99,6 +99,7 @@ class Customize extends Model
 							{
 								$dir .= $p[$r].'/';
 								$dir = troca($dir,'//','/');
+								echo $dir.'<br>';
 								if (!is_dir($dir))
 									{
 										mkdir($dir);
