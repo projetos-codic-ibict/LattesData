@@ -65,7 +65,8 @@ class Customize extends Model
 
 					case 'logo':
 						$cmd .= 'echo "Grave o logo na pasta abaixo:"'.cr();
-						$cmd .= 'echo "/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/logo.png"'.cr();
+						$cmd .= 'echo "/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/$file"'.cr();
+						$cmd .= 'curl -X PUT -d \'/logos/navbar/$file\' http://localhost:8080/api/admin/settings/:LogoCustomizationFile';
 						$file = true;
 						$PATH = '/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
 						break;
@@ -105,6 +106,7 @@ class Customize extends Model
 							}
 						move_uploaded_file($file,$PATH.$name);						
 						$sx .= bsmessage('Uploaded - '.$name,1);
+						$cmd = troca($cmd,'$file',$name);
 					}
 				
 			}
