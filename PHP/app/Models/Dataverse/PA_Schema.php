@@ -166,17 +166,16 @@ class PA_Schema extends Model
 
             $cmd2 .= 'echo "Iniciando atualização do SOLR"'.cr();
             $cmd2 .= 'cd '.$DIR.'<br>';
-            $cmd2 .= 'echo "ATUALIZANDO O SOLR"'.cr();
+            
+            $cmd2 = 'cd '.$dir.cr();
+            $cmd2 .= 'echo "Start"'.cr();
+            $cmd2 .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @../.tmp/schema/'.$filename2.' -H "Content-type: text/tab-separated-values"'.cr();
+
+            $cmd2 .= 'echo "\n\nATUALIZANDO O SOLR"'.cr();
             $cmd2 .= 'curl "http://localhost:8983/solr/admin/cores?action=RELOAD&core=collection1"'.cr();
 
-            echo '<pre>'.$cmd1.'</pre>';
-            echo '<pre>'.$cmd2.'</pre>';
-
-            $cmd = 'cd '.$dir.cr();
-            $cmd .= 'echo "Start"'.cr();
-            $cmd .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @../.tmp/schema/'.$filename2.' -H "Content-type: text/tab-separated-values"'.cr();
-            $cmd .= 'echo "End"<br>'.cr();
-            $cmd .= '/data/LattesData<br>';
+            $cmd2 .= 'echo "End"<br>'.cr();
+            $cmd2 .= '/data/LattesData<br>';
 
             $txt1 = shell_exec($cmd1);
             $txt2 = shell_exec($cmd2);
