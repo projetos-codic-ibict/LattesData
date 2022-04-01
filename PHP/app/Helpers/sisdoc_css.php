@@ -1,4 +1,8 @@
 <style>
+    .supersmall
+        {
+            font-size: 50%;
+        }
     .form-group input 
         {
             color: #000;

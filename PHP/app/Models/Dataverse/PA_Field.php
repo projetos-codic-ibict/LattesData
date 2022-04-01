@@ -134,7 +134,7 @@ class PA_Field extends Model
 
             $parent = '';
             if (strlen($ln['m_parent']) > 0) {
-                $parent = '=><i>'.$ln['m_parent'].'</i>';
+                $parent = '<br><span class="supersmall">=><i>'.$ln['m_parent'].'</i></span>';
             }
 
             $sx .= '<tr>';
