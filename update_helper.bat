@@ -4,6 +4,8 @@ echo off
 echo "Language"
 mkdir php\app\Language\pt-BR
 copy ..\Brapci3.0\app\Language\pt-BR\social.* php\app\Language\pt-BR\*.* 
+copy ..\Brapci3.0\app\Language\pt-BR\dataverse.* php\app\Language\pt-BR\*.* 
+copy ..\Brapci3.0\app\Language\pt-BR\sisdoc.* php\app\Language\pt-BR\*.* 
 
 echo "Copiando Helper"
 copy ..\Brapci3.0\app\Helpers\*.* php\app\Helpers\*.* 
