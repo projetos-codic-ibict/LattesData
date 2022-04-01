@@ -1,7 +1,7 @@
 <style>
     .supersmall
         {
-            font-size: 50%;
+            font-size: 65%;
         }
     .form-group input 
         {
