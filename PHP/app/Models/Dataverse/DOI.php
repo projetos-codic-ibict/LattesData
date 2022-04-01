@@ -7,7 +7,7 @@ use CodeIgniter\Model;
 class DOI extends Model
 {
 	protected $DBGroup              = 'default';
-	protected $table                = 'apis';
+	protected $table                = 'dois';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
@@ -40,8 +40,40 @@ class DOI extends Model
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
-	function doi()
+	function index($d1,$d2,$d3)
 		{
-			$cmd = 'curl -X PUT -d \'10.80102\' localhost:8080/api/admin/settings/:Authority';
+			$sx = h('DOI',1);
+			if (strlen($d1) > 0)
+				{
+					$sx .= h('dataverse.doi_'.$d1,4);
+				}
+			
+			$cmd = '';
+			switch($d1)
+				{
+					case 'doi_FilePID':
+						$cmd .= 'echo "Atribui DOI para cada dataset, sem gerar para arquivos"'.cr();
+						$cmd .= 'curl -X PUT -d \'false\' http://localhost:8080/api/admin/settings/:FilePIDsEnabled'.cr();
+						$cmd .= 'echo "Atribui DOI para cada arquivo"'.cr();
+						$cmd .= 'curl -X PUT -d \'true\' http://localhost:8080/api/admin/settings/:FilePIDsEnabled'.cr();
+						break;
+					case 'shoulder':
+						$cmd .= 'export $PREFIX=PRE'.cr();
+						$cmd .= 'curl -X PUT -d "$PREFIX/" http://localhost:8080/api/admin/settings/:Shoulder';
+						break;
+					case 'fake':
+						$cmd = 'curl http://localhost:8080/api/admin/settings/:DoiProvider -X PUT -d FAKE_DOI_PROVIDER=true';						
+						break;
+					default:				
+					$menu[PATH.MODULE.'dataverse/doi/fake'] = 'dataverse.doi_fake';
+					$menu[PATH.MODULE.'dataverse/doi/shoulder'] = 'dataverse.doi_shoulder';
+					$menu[PATH.MODULE.'dataverse/doi/doi_FilePID'] = 'dataverse.doi_dataset';
+					$sx .= menu($menu);
+					break;
+				}
+
+			//curl http://localhost:8080/api/admin/settings/:DoiProvider -X PUT -d FAKE_DOI_PROVIDER=true			
+			$sx .= '<pre>'.troca($cmd,chr(10),'<br>').'</pre>';
+			return $sx;
 		}
 }

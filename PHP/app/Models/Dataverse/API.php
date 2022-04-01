@@ -40,6 +40,8 @@ class API extends Model
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
+	//curl -X PUT -d allow http://localhost:8080/api/admin/settings/:BlockedApiPolicy
+
 	function curlExec($dt)
 	{
 		$rsp = array();
