@@ -136,10 +136,11 @@ function version()
                             $sx .= '<td class="sisdoc_td">'.anchor(($url.'/viewid/'.$line[$fl[0]]),$vlr).'</td>';
                         }   
                     /* Botoes */
-                    $sx .= '<td>';
-                    //$sx .= btn_edit($url.'/edit/'.$line[$fl[0]]);
-
+                    $sx .= '<td><nobr>';
+                    $sx .= btn_edit($url.'/edit/'.$line[$fl[0]]);
+                    $sx .= '&nbsp;';
                     $sx .= btn_trash($url.'/delete/'.$line[$fl[0]]);
+                    $sx .= '</nobr>';
                     $sx .= '</td>';
 
                     $sx .= '</tr>'.cr();

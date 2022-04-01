@@ -132,9 +132,14 @@ class PA_Field extends Model
                 $stla = '';
             }
 
+            $parent = '';
+            if (strlen($ln['m_parent']) > 0) {
+                $parent = '=><i>'.$ln['m_parent'].'</i>';
+            }
+
             $sx .= '<tr>';
             $sx .= '<td>' . ($r + 1) . '</td>';
-            $sx .= '<td>' . $stl.$link.$ln['m_name'] .$linka. $stla.'</td>';
+            $sx .= '<td>' . $stl.$link.$ln['m_name'] .$linka. $parent.$stla.'</td>';
             $sx .= '<td>' . $stl.$ln['m_title'] . $stla.'</td>';
             if (($ln['m_required'] == 1) and ($ln['m_active'] == 1))
                 {
@@ -162,9 +167,10 @@ class PA_Field extends Model
             } else {
                 $sx .= '<td>-</td>';
             }            
-            $sx .= '<td>';
+            $sx .= '<td><nobr>';
             $sx .= btn_edit(PATH . MODULE . 'dataverse/pa/datafieldEd/' . $ln['id_m']);
             $sx .= btn_trash_popup(PATH . MODULE . 'dataverse/pa/datafieldDel/' . $ln['id_m']);
+            $sx .= '</nobr>';
             $sx .= '</td>';           
             $sx .= '</tr>';
         }
