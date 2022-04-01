@@ -46,6 +46,10 @@ class Index extends Model
 			$sx = breadcrumbs();
 			switch($d1)
 				{
+					case 'pa':
+			            $PA = new \App\Models\Dataverse\PA_Schema();
+			            $sx .= $PA->index($d1,$d2,$d3,$d4);					
+						break;					
 					case 'customize':
 						$Customize = new \App\Models\Dataverse\Customize();
 						$sx .= $Customize->index($d2,$d3,$d4);
@@ -66,6 +70,9 @@ class Index extends Model
 					case 'licences':
 						$sx .= $this->licences($d1,$d2,$d3,$d4);
 						break;
+					case 'settings':
+						$sx .= $this->settings($d1,$d2,$d3,$d4);
+						break;						
 					default:
 						$sx = $this->menu();
 				}
@@ -80,11 +87,31 @@ class Index extends Model
 				$menu[PATH.MODULE.'dataverse/licences'] = 'dataverse.Licences';
 				$menu[PATH.MODULE.'dataverse/doi'] = 'dataverse.DOI';
 				$menu[PATH.MODULE.'dataverse/customize'] = 'dataverse.Customize';
-				$menu[PATH.MODULE.'dataverse/solr'] = 'dataverse.Solr';				
+				$menu[PATH.MODULE.'dataverse/solr'] = 'dataverse.Solr';
+				$menu[PATH.MODULE.'dataverse/settings'] = 'dataverse.Settings';	
+				$menu[PATH.MODULE.'dataverse/pa'] = 'dataverse.PA';	
 			} else {
 				$menu[PATH.MODULE.'dataverse/server'] = 'dataverse.SetServer';
 			}
 			$sx = menu($menu);
+			return $sx;
+		}
+	function settings()
+		{
+			$sx = '';
+			$url = $this->server();
+			$url .= '/api/admin/settings';
+			$sx .= bs(bsc('curl '.$url,12));
+			$txt = read_link($url);
+			$txt = (array)json_decode($txt);
+			$txt = (array)$txt['data'];
+			$sa = '';
+			foreach($txt as $key => $value)
+				{
+					$sa .= bsc($key,3,'text-end small fst-italic');
+					$sa .= bsc($value,9);
+				}
+			$sx .= bs($sa);
 			return $sx;
 		}
 	function licences($d1,$d2,$d3)

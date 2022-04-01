@@ -53,6 +53,12 @@ class Customize extends Model
 			$file = false;
 			switch($d1)
 				{
+					case 'sitemap':
+						$cmd .= 'curl -X POST http://localhost:8080/api/admin/sitemap';
+						$sx .= 'Result in: '.cr();
+						$sx .= '/usr/local/payara5/glassfish/domains/domain1/docroot/sitemap/sitemap.xml';
+
+						break;
 					case 'homePage':
 						$cmd .= 'mkdir /var/www/dataverse/'.cr();
 						$cmd .= 'mkdir /var/www/dataverse/branding/'.cr();
@@ -70,9 +76,27 @@ class Customize extends Model
 						$file = true;
 						$PATH = '/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
 						break;
+
+
 					default:				
 					$menu[PATH.MODULE.'dataverse/customize/logo'] = 'dataverse.customize_logo';
 					$menu[PATH.MODULE.'dataverse/customize/homePage'] = 'dataverse.customize_homepage';
+					$menu[PATH.MODULE.'dataverse/customize/homeHeader'] = 'dataverse.customize_header';
+					$menu[PATH.MODULE.'dataverse/customize/homeFooter'] = 'dataverse.customize_footer';
+					$menu[PATH.MODULE.'dataverse/customize/homeLanguages'] = 'dataverse.customize_language';
+					$menu[PATH.MODULE.'dataverse/customize/googleanalytics'] = 'dataverse.customize_GoogleAnalytics';
+					$menu[PATH.MODULE.'dataverse/customize/sitemap'] = 'dataverse.customize_sitemap';
+					$menu[PATH.MODULE.'dataverse/customize/copyright'] = 'dataverse.customize_FooterCopyright';
+					//:NavbarAboutUrl
+					//:NavbarGuidesUrl
+					//:GuidesBaseUrl
+					//:GuidesVersion
+					//:NavbarSupportUrl
+					//:MetricsUrl
+					//:MaxFileUploadSizeInBytes
+					//:ZipDownloadLimit
+					//:TabularIngestSizeLimit
+
 					$PATH = '/var/www/dataverse/branding/';
 					$sx .= menu($menu);
 					break;

@@ -107,12 +107,18 @@ class Users extends Model
             $us['useridentifier'] = $ids['IDLATTES'];
             $us['new'] = false;
 
-            $dt = $this->where('email',$us['email'])->findAll();
-            if (count($dt) == 0)
-                {
-                    $this->insert($us);
-                    $us['new'] = true;
-                }
+            $dv['firstName'] = '';
+            $dv['lastName'] = '';
+            $dv['userName'] = '';
+            $dv['affiliation'] = '';
+            $dv['position'] = '';
+            $dv['email'] = '';
+
+            //https://guides.dataverse.org/en/latest/installation/config.html?highlight=doi#id169
+            //curl -X PUT -d builtInS3kretKey http://localhost:8080/api/admin/settings/BuiltinUsers.KEY
+
+            $cmd = 'curl -d @user-add.json -H "Content-type:application/json" "$SERVER_URL/api/builtin-users?password=$NEWUSER_PASSWORD&key=$BUILTIN_USERS_KEY"';
+
             return $us;            
         }
 }
