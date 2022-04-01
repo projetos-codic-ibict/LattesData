@@ -343,6 +343,8 @@ class PA_Schema extends Model
             $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/import/'.$id.'">'.lang('dataverse.import').'</a>';
             $sx .= ' | ';
             $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/edit_field/0?m_schema='.$id.'">'.lang('dataverse.new_field').'</a>';
+            $sx .= ' | ';
+            $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/viewid/'.$id.'?reorder=2">'.lang('dataverse.reorder').'</a>';
             
             $sx .= '<h2>'.$row['mt_displayName'].'</h2>';
             $sx .= '<p>'.$row['mt_blockURI'].'</p>';

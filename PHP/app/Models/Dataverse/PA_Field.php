@@ -96,6 +96,21 @@ class PA_Field extends Model
 
     function viewid($id)
     {
+
+        if (get("reorder") != '')
+        {
+            $ini = 0;
+            $red = round(get("reorder"));
+            $dt = $this->where('m_schema', $id)->orderBy('m_displayOrder')->findAll();
+            for ($r=0;$r < count($dt);$r++)
+            {                
+                $dd['m_displayOrder'] = $ini;
+                $this->set($dd)->where('id_m',$dt[$r]['id_m'])->update();
+                $ini = $ini + $red;
+            }
+        }
+        
+
         $dt = $this->where('m_schema', $id)->orderBy('m_displayOrder')->findAll();
         $sx = '<table class="table table-sm table-striped">';
         $sx .= '<thead>';
@@ -138,7 +153,7 @@ class PA_Field extends Model
             }
 
             $sx .= '<tr>';
-            $sx .= '<td>' . ($r + 1) . '</td>';
+            $sx .= '<td>' . ($ln['m_displayOrder']) . '</td>';
             $sx .= '<td>' . $stl.$link.$ln['m_name'] .$linka. $parent.$stla.'</td>';
             $sx .= '<td>' . $stl.$ln['m_title'] . $stla.'</td>';
             if (($ln['m_required'] == 1) and ($ln['m_active'] == 1))
