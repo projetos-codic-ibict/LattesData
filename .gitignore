@@ -1,3 +1,6 @@
 .env
 *.json
 *.log
+PHP\writable\session\
+PHP\writable\session\ci_session*
+PHP\.tmp

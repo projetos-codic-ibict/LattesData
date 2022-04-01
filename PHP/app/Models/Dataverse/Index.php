@@ -40,15 +40,15 @@ class Index extends Model
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
-	function index($d1,$d2,$d3,$d4)
+	function index($d1,$d2,$d3,$d4,$d5='')
 		{
 			$sx = '';
 			$sx = breadcrumbs();
 			switch($d1)
 				{
 					case 'pa':
-			            $PA = new \App\Models\Dataverse\PA_Schema();
-			            $sx .= $PA->index($d1,$d2,$d3,$d4);					
+						$PA_Schema = new \App\Models\Dataverse\PA_Schema();
+						$sx .= $PA_Schema->index($d2,$d3,$d4,$d5);
 						break;					
 					case 'customize':
 						$Customize = new \App\Models\Dataverse\Customize();
@@ -74,7 +74,8 @@ class Index extends Model
 						$sx .= $this->settings($d1,$d2,$d3,$d4);
 						break;						
 					default:
-						$sx = $this->menu();
+						$sx .= h(lang('dataverse.main_menu'),4);
+						$sx .= $this->menu();
 				}
 			return $sx;
 		}

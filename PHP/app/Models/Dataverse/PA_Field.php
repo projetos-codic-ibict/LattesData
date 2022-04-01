@@ -115,7 +115,7 @@ class PA_Field extends Model
         $sx .= '<th width="2%"><a href="#" class="link-secondary" title="' . lang('Dataverse.m_displayoncreate') . '">DSC</a></th>';
         $sx .= '<th width="2%"><a href="#" class="link-secondary" title="' . lang('Dataverse.m_required') . '">R</a></th>';
         $sx .= '<th width="2%"><a href="#" class="link-secondary" title="' . lang('Dataverse.m_termURI') . '">URL</a></th>';
-        $sx .= '<th width="2%"><a href="#" class="link-secondary" title="' . lang('Dataverse.edit') . '">ED</a></th>';
+        $sx .= '<th width="4%"><a href="#" class="link-secondary" title="' . lang('Dataverse.edit') . '">ED</a></th>';
         $sx .= '</tr>';
         $sx .= '</thead>';
 
@@ -161,8 +161,11 @@ class PA_Field extends Model
                 $sx .= '<td><a href="' . $ln['m_termURI'] . '" class="link-secondary" target="_blank">' . bsicone('url', 16) . '</a></td>';
             } else {
                 $sx .= '<td>-</td>';
-            }
-            $sx .= '<td>' . '<a href="' . PATH . MODULE . 'dataverse/pa/datafieldEd/' . $ln['id_m'].'">' . bsicone('edit', 16) . '</a></td>';           
+            }            
+            $sx .= '<td>';
+            $sx .= btn_edit(PATH . MODULE . 'dataverse/pa/datafieldEd/' . $ln['id_m']);
+            $sx .= btn_trash_popup(PATH . MODULE . 'dataverse/pa/datafieldDel/' . $ln['id_m']);
+            $sx .= '</td>';           
             $sx .= '</tr>';
         }
         $sx .= '</table>';

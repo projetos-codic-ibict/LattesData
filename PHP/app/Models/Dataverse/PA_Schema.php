@@ -98,6 +98,9 @@ class PA_Schema extends Model
                     case 'datafieldEd':
                         $sx .= $this->datafieldEd($d2,$d3,$d4);
                         break;
+                    case 'datafieldDel':
+                            $sx .= $this->datafieldDel($d2,$d3,$d4);
+                            break;                        
                     case 'edit':
                         $sx .= $this->edit($d2,$d3,$d4);
                         break;                        
@@ -138,7 +141,7 @@ class PA_Schema extends Model
             $cmd = '';
             $cmd .= 'echo "ACESSANDO A PASTA DE CONFIGURACOES"'.cr();
             $cmd .= 'cd '.$DIR.'<br>';
-            $cmd .= 'Checando '.$DIR.'update-fields.sh'.cr();
+            $cmd .= 'echo "Checando '.$DIR.'update-fields.sh"'.cr();
             if (!file_exists($DIR.'update-fields.sh'))
                 {
                     $cmd .= 'echo "COPIANDO ARQUIVO DE CONFIGURACAO"'.cr();
@@ -311,6 +314,15 @@ class PA_Schema extends Model
             $sx .= $PA_Field->editar($d1,$d3);
             return $sx;
         }
+
+    function datafieldDel($d1,$d2,$d3)
+        {
+            $PA_Field = new \App\Models\Dataverse\PA_Field();
+            $this->id = $d1;
+            $PA_Field->where('id_m',$d1)->delete();
+            $sx = wclose();
+            return $sx;
+        }        
 
     function viewid($id)
         {
