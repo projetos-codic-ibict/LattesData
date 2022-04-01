@@ -138,35 +138,39 @@ class PA_Schema extends Model
             $DIR = '/home/dataverse/dataverse-api/';
             $PATH = $_SERVER['DOCUMENT_ROOT'];
 
-            $cmd = '';
-            $cmd .= 'echo "ACESSANDO A PASTA DE CONFIGURACOES"'.cr();
-            $cmd .= 'cd '.$DIR.'<br>';
-            $cmd .= 'echo "Checando '.$DIR.'update-fields.sh"'.cr();
+            $cmd1 = '';
+            $cmd2 = '';
+            $cmd1 .= 'echo "ACESSANDO A PASTA DE CONFIGURACOES"'.cr();
+            $cmd1 .= 'cd '.$DIR.'<br>';
+            $cmd1 .= 'echo "Checando '.$DIR.'update-fields.sh"'.cr();
             if (!file_exists($DIR.'update-fields.sh'))
                 {
-                    $cmd .= 'echo "COPIANDO ARQUIVO DE CONFIGURACAO"'.cr();
-                    $cmd .= 'cp '.troca($PATH,'/PHP/public','').'_Documentation/Dataverse/update-fields.sh update-fields.sh'.cr();
-                    $cmd .= '<br>';
+                    $cmd1 .= 'echo "COPIANDO ARQUIVO DE CONFIGURACAO"'.cr();
+                    $cmd1 .= 'cp '.troca($PATH,'/PHP/public','').'_Documentation/Dataverse/update-fields.sh update-fields.sh'.cr();
+                    $cmd1 .= '<br>';
                 }
 
-            $cmd .= 'echo "ENVIANDO METADADOS PARA O SISTEMA"'.cr();
-            $cmd .= 'rm *.tsv -r'.cr();
+            $cmd1 .= 'echo "ENVIANDO METADADOS PARA O SISTEMA"'.cr();
+            $cmd1 .= 'rm *.tsv -r'.cr();
             $f2 = $PATH.$filename;
             $f2 = troca($f2,'/PHP/public../','/PHP/');
-            $cmd .= 'cp '.$f2.' '.$DIR.$file.cr();
-            $cmd .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$file.' -H "Content-type: text/tab-separated-values"'.cr();
+            $cmd1 .= 'cp '.$f2.' '.$DIR.$file.cr();
+            $cmd1 .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$file.' -H "Content-type: text/tab-separated-values"'.cr();
 
-            $cmd .= 'echo "CARREGANDO A ATUALIZACAO DO SCHEMA"'.cr();
-            $cmd .= 'rm schema.xml -r'.cr();
-            $cmd .= 'curl "http://localhost:8080/api/admin/index/solr/schema" > schema.xml '.cr();
+            $cmd1 .= 'echo "CARREGANDO A ATUALIZACAO DO SCHEMA"'.cr();
+            $cmd1 .= 'rm schema.xml -r'.cr();
+            $cmd1 .= 'curl "http://localhost:8080/api/admin/index/solr/schema" > schema.xml '.cr();
             
-            $cmd .= 'echo "ATUALIZANDO O SCHEMA"'.cr();
-            $cmd .= 'cat schema.xml | ./update-fields.sh /usr/local/solr/solr-8.11.1/server/solr/collection1/conf/schema.xml'.cr();
-            $cmd .= 'echo "ATUALIZANDO O SOLR"'.cr();
-            $cmd .= 'curl "http://localhost:8983/solr/admin/cores?action=RELOAD&core=collection1"'.cr();
+            $cmd1 .= 'echo "ATUALIZANDO O SCHEMA"'.cr();
+            $cmd1 .= 'cat schema.xml | ./update-fields.sh /usr/local/solr/solr-8.11.1/server/solr/collection1/conf/schema.xml'.cr();
 
+            $cmd2 .= 'echo "Iniciando atualização do SOLR"'.cr();
+            $cmd2 .= 'cd '.$DIR.'<br>';
+            $cmd2 .= 'echo "ATUALIZANDO O SOLR"'.cr();
+            $cmd2 .= 'curl "http://localhost:8983/solr/admin/cores?action=RELOAD&core=collection1"'.cr();
 
-            echo '<pre>'.$cmd.'</pre>';
+            echo '<pre>'.$cmd1.'</pre>';
+            echo '<pre>'.$cmd2.'</pre>';
 
             $cmd = 'cd '.$dir.cr();
             $cmd .= 'echo "Start"'.cr();
@@ -174,12 +178,13 @@ class PA_Schema extends Model
             $cmd .= 'echo "End"<br>'.cr();
             $cmd .= '/data/LattesData<br>';
 
-            $txt = shell_exec($cmd);
-            $sx = '<code>'.troca($cmd,chr(10),'<br>').'</code>';
-            $sx .= '<tt>'.$txt.'</tt>';
-
-                    echo $sx;
-
+            $txt1 = shell_exec($cmd1);
+            $txt2 = shell_exec($cmd2);
+            $sx = '<code>'.troca($cmd1.$cmd2,chr(10),'<br>').'</code>';
+            $sx .= h('Resultado do envio #1 - ');
+            $sx .= '<tt>'.$txt1.'</tt>';
+            $sx .= h('Resultado do envio #2 - SOLR');
+            $sx .= '<tt>'.$txt2.'</tt>';
             return $sx;
         }
 
