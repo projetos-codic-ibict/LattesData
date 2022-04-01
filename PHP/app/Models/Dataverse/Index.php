@@ -48,7 +48,7 @@ class Index extends Model
 				{
 					case 'pa':
 						$PA_Schema = new \App\Models\Dataverse\PA_Schema();
-						$sx .= $PA_Schema->index($d2,$d3,$d4,$d5);
+						$sx = $PA_Schema->index($d2,$d3,$d4,$d5);
 						break;					
 					case 'customize':
 						$Customize = new \App\Models\Dataverse\Customize();
@@ -83,16 +83,16 @@ class Index extends Model
 		{
 			if (strlen($this->server()))
 			{
-				$menu[PATH.MODULE.'dataverse/server'] = 'dataverse.SetServer' . ': <b>'.$this->server().'</b>';
-				$menu[PATH.MODULE.'dataverse/token'] = 'dataverse.SetToken' . ': <b>'.$this->token().'</b>';
-				$menu[PATH.MODULE.'dataverse/licences'] = 'dataverse.Licences';
-				$menu[PATH.MODULE.'dataverse/doi'] = 'dataverse.DOI';
-				$menu[PATH.MODULE.'dataverse/customize'] = 'dataverse.Customize';
-				$menu[PATH.MODULE.'dataverse/solr'] = 'dataverse.Solr';
-				$menu[PATH.MODULE.'dataverse/settings'] = 'dataverse.Settings';	
-				$menu[PATH.MODULE.'dataverse/pa'] = 'dataverse.PA';	
+				$menu[PATH.MODULE.'dataverse/server'] = lang('dataverse.SetServer') . ': <b>'.$this->server().'</b>';
+				$menu[PATH.MODULE.'dataverse/token'] = lang('dataverse.SetToken') . ': <b>'.$this->token().'</b>';
+				$menu[PATH.MODULE.'dataverse/licences'] = lang('dataverse.Licences');
+				$menu[PATH.MODULE.'dataverse/doi'] = lang('dataverse.DOI_settings');
+				$menu[PATH.MODULE.'dataverse/customize'] = lang('dataverse.Customize');
+				$menu[PATH.MODULE.'dataverse/solr'] = lang('dataverse.Solr');
+				$menu[PATH.MODULE.'dataverse/settings'] = lang('dataverse.Settings');	
+				$menu[PATH.MODULE.'dataverse/pa'] = lang('dataverse.PA');	
 			} else {
-				$menu[PATH.MODULE.'dataverse/server'] = 'dataverse.SetServer';
+				$menu[PATH.MODULE.'dataverse/server'] = lang('dataverse.SetServerDefine');
 			}
 			$sx = menu($menu);
 			return $sx;

@@ -31,7 +31,8 @@ class PA_Field extends Model
         'op:&none:#VALUE&#VALUE',
         'sn','sn','sn',
         'sn','sn','sn',
-        'string:100','string:100'
+        //'string:100','sql:m_name:m_name:dataverse_tsv_metadata','string:100'
+        'string:100','string:100','string:100'
     ];    
 
     // Dates
