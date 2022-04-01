@@ -342,7 +342,6 @@ function form_fields($typ, $fld, $vlr, $th = array(),$obg=0, $pre='')
             $op = array(1, 0);            
             $opt = substr($typ, strpos($typ, ':') + 1, strlen($typ));
             $opc = explode(':', $opt);
-            print_r($opc);
             $sg = '<select id="' . $fld . '" name="' . $fld . '" value="' . $vlr . '" class="form-control">' . cr();
             $sg .= '<option value="">:: options ::</option>'.cr();
             for ($r = 0; $r < count($opc); $r++) {
