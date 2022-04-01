@@ -99,14 +99,13 @@ class Customize extends Model
 							{
 								$dir .= $p[$r].'/';
 								$dir = troca($dir,'//','/');
-								echo $dir.'<br>';
 								if (!is_dir($dir))
 									{
 										mkdir($dir);
 									}
 							}
 						move_uploaded_file($file,$PATH.$name);						
-						$sx .= bsmessage('Uploaded - '.$name.'<br>'.$PATH.$name,1);
+						$sx .= bsmessage('Uploaded - Move:' .$file.' to '.$PATH.$name.'<br>'.$PATH.$name,1);
 						$cmd = troca($cmd,'$file',$name);
 					}
 				
