@@ -154,28 +154,27 @@ class PA_Schema extends Model
             $cmd1 .= 'rm *.tsv -r'.cr();
             $f2 = $PATH.$filename;
             $f2 = troca($f2,'/PHP/public../','/PHP/');
-            $cmd1 .= 'cp '.$f2.' '.$DIR.$file.cr();
+            $cmd1 .= 'cp '.$f2.' '.$DIR.$file.cr();            
+            $cmd1 .= cr().cr();
+            $cmd1 .= 'echo "CARREGANDO A ATUALIZACAO DO SCHEMA"'.cr();
             $cmd1 .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$file.' -H "Content-type: text/tab-separated-values"'.cr();
 
-            $cmd1 .= 'echo "CARREGANDO A ATUALIZACAO DO SCHEMA"'.cr();
+            $cmd1 .= cr().cr();
+            $cmd1 .= 'echo "CARREGANDO SCHEMA"'.cr();
             $cmd1 .= 'rm schema.xml -r'.cr();
             $cmd1 .= 'curl "http://localhost:8080/api/admin/index/solr/schema" > schema.xml '.cr();
             
+            $cmd1 .= cr().cr();
             $cmd1 .= 'echo "ATUALIZANDO O SCHEMA"'.cr();
             $cmd1 .= 'cat schema.xml | ./update-fields.sh /usr/local/solr/solr-8.11.1/server/solr/collection1/conf/schema.xml'.cr();
 
             $cmd2 .= 'echo "Iniciando atualização do SOLR"'.cr();
-            $cmd2 .= 'cd '.$DIR.'<br>';
-            
             $cmd2 = 'cd '.$dir.cr();
-            $cmd2 .= 'echo "Start"'.cr();
-            $cmd2 .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @../.tmp/schema/'.$filename2.' -H "Content-type: text/tab-separated-values"'.cr();
-
-            $cmd2 .= 'echo "\n\nATUALIZANDO O SOLR"'.cr();
+            $cmd2 .= 'echo "Atualizando o SOLR"'.cr();
             $cmd2 .= 'curl "http://localhost:8983/solr/admin/cores?action=RELOAD&core=collection1"'.cr();
 
             $cmd2 .= 'echo "End"<br>'.cr();
-            $cmd2 .= '/data/LattesData<br>';
+            $cmd2 .= 'cd /data/LattesData'.cr();
 
             $txt1 = shell_exec($cmd1);
             $txt2 = shell_exec($cmd2);
