@@ -105,7 +105,7 @@ class Customize extends Model
 									}
 							}
 						move_uploaded_file($file,$PATH.$name);						
-						$sx .= bsmessage('Uploaded - '.$name,1);
+						$sx .= bsmessage('Uploaded - '.$name.'<br>'.$PATH.$name,1);
 						$cmd = troca($cmd,'$file',$name);
 					}
 				
