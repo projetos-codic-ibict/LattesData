@@ -161,7 +161,7 @@ class Licences extends Model
 						$cmd .= '<br>';
 						break;
 					case 'trash':
-						
+						$cmd = '<br>';
 						$cmd .= 'export API_TOKEN='.$Dataverse->token();
 						$cmd .= '<br>';
 						$cmd .= 'export SERVER_URL='.$Dataverse->server().'<br>';
@@ -170,7 +170,7 @@ class Licences extends Model
 						$cmd .= '<br>';
 						break;
 					case 'setdefault':
-						
+						$cmd = '<br>';
 						$cmd .= 'export API_TOKEN='.$Dataverse->token();
 						$cmd .= '<br>';
 						$cmd .= 'export SERVER_URL='.$Dataverse->server().'<br>';
@@ -180,7 +180,7 @@ class Licences extends Model
 						$cmd .= '<br>';
 						break;
 					case 'setactive':						
-						
+						$cmd = '<br>';
 						$cmd .= 'export API_TOKEN='.$Dataverse->token();
 						$cmd .= '<br>';
 						$cmd .= 'export SERVER_URL='.$Dataverse->server().'<br>';
@@ -190,7 +190,7 @@ class Licences extends Model
 						$cmd .= '<br>';
 						break;
 					case 'setdesactive':
-						
+						$cmd = '<br>';
 						$cmd .= 'export API_TOKEN='.$Dataverse->token();
 						$cmd .= '<br>';
 						$cmd .= 'export SERVER_URL='.$Dataverse->server().'<br>';						

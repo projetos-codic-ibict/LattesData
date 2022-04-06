@@ -50,14 +50,112 @@ class Customize extends Model
 				}
 			
 			$cmd = '';
+			
 			$file = false;
 			switch($d1)
 				{
+					case 'Languages':
+						$tlang = '';
+						$subdir = array('en_US','pt_BR','es','fr','de','it','pt','ru','zh');
+						$lang_n = array('English','Português','Espanhol','Frances','Alemão','Italiano','Português','Russo','Chinês');
+						$langs = array('en','br');
+						$default = 'br';
+						$cmd = '';
+						$cmd .= 'mkdir /var/www/dataverse/'.cr();
+						$cmd .= 'mkdir /var/www/dataverse/langBundles/'.cr();
+						$cmd .= 'mkdir /var/www/dataverse/langTmp/'.cr();
+						$cmd .= 'mkdir /var/www/dataverse/langTmp/pt_BR'.cr();
+						$cmd .= 'mkdir /var/www/dataverse/langTmp/source'.cr();
+						$cmd .= 'echo "Baixando atualizações"'.cr();
+						$cmd .= 'echo "==>Portugues"'.cr();
+						$cmd .= 'cd /var/www/dataverse/langTmp/pt_BR/'.cr();
+						$cmd .= 'rm * -r'.cr();
+						$cmd .= 'wget https://github.com/RNP-dadosabertos/dataverse-language-packs/archive/develop.zip'.cr();;
+						$cmd .= 'unzip develop.zip'.cr();
+						
+						$cmd .= 'echo "==>Outros Idiomas"'.cr();
+						$cmd .= 'cd /var/www/dataverse/langTmp/source/'.cr();
+						$cmd .= 'rm * -r'.cr();
+						$cmd .= 'wget https://github.com/GlobalDataverseCommunityConsortium/dataverse-language-packs/archive/refs/heads/develop.zip'.cr();
+						$cmd .= 'unzip develop.zip'.cr();
+
+						$cmd .= 'echo "Copiando os arquivos necessários"'.cr();
+						$cmd .= 'rm /var/www/dataverse/langTmp/*.properties'.cr();
+						$cmd .= 'rm /var/www/dataverse/langTmp/*.zip'.cr();
+						$files = array(
+								'astrophysics$lg.properties',
+								'biomedical$lg.properties',
+								'BuiltInRoles$lg.properties',
+								'Bundle$lg.properties',
+								'citation$lg.properties',
+								'geospatial$lg.properties',
+								'journal$lg.properties',
+								'MimeTypeDetectionByFileExtension$lg.properties',
+								'MimeTypeDisplay$lg.properties',
+								'MimeTypeFacets$lg.properties',
+								'socialscience$lg.properties',
+								'ValidationMessages$lg.properties',
+						);
+						for ($r=0;$r < count($langs);$r++)
+							{
+								echo cr();
+								$cmd .= "======================== Copy files =".$langs[$r].cr();
+								$n_subdir = $subdir[$r];
+								if ($langs[$r] == 'br')
+									{
+										$dir = '/var/www/dataverse/langTmp/pt_BR/dataverse-language-packs-develop/'.$n_subdir;
+										$out = '/var/www/dataverse/langTmp/';
+									} else {
+										$dir = '/var/www/dataverse/langTmp/source/dataverse-language-packs-develop/'.$n_subdir;
+										$out = '/var/www/dataverse/langTmp/';
+									}
+								if (strlen($tlang) > 0) { $tlang .= ', ';}
+								$tlang .= '{"locale":"'.$langs[$r].'","title":"'.$lang_n[$r].'"}';
+								for ($f=0;$f < count($files);$f++)
+									{	
+										$xlang = $langs[$r];							
+										if (($xlang == $default))
+										{
+											$xlang = '';
+										} else {
+											$xlang = '_'.$xlang;
+										}
+
+										$ori = $dir .'/'.$files[$f];
+										$ori = troca($ori,'$lg',$xlang);
+
+										$des = $out .$files[$f];										
+										$des = troca($des,'$lg',$xlang);
+
+										$cmd .= "cp $ori $des".cr();
+									}
+							}
+						$cmd .=  cr();
+						$cmd .= 'echo "===>Preparing ZIP FILE"'.cr();
+						$cmd .= 'cd /var/www/dataverse/langTmp/'.cr();
+						$cmd .= 'rm *.zip'.cr();
+						$cmd .= 'zip languages.zip *.properties'.cr();
+						$cmd .= 'export PAYARA=/usr/local/payara5/glassfish'.cr();
+						$cmd .= '$PAYARA/bin/asadmin create-jvm-options \'-Ddataverse.lang.directory=/var/www/dataverse/langBundles\''.cr();
+						$cmd .= '$PAYARA/bin/asadmin stop-domain'.cr();
+						$cmd .= '$PAYARA/bin/asadmin start-domain'.cr();
+						$cmd .= 'curl http://localhost:8080/api/admin/datasetfield/loadpropertyfiles -X POST --upload-file languages.zip -H "Content-Type: application/zip"';
+						$cmd .= cr();
+						$cmd .= 'curl http://localhost:8080/api/admin/settings/:Languages -X PUT -d \'['.$tlang.']\''.cr();
+
+						$cmd .= 'echo "===>Definindo o idoma principal do Dataverse"'.cr();
+						$cmd .= 'cd /var/www/dataverse/langBundles'.cr();
+						$cmd .= 'cp *.properties /usr/local/payara5/glassfish/domains/domain1/applications/dataverse/WEB-INF/classes/propertyFiles/.'.cr();
+						$cmd .= '$PAYARA/bin/asadmin stop-domain'.cr();
+						$cmd .= '$PAYARA/bin/asadmin start-domain'.cr();
+						$cmd .= cr();
+						$cmd .= 'echo "FIM DA ATUALIZAÇÂO"'.cr();
+						$cmd .= cr();
+						break;
 					case 'sitemap':
 						$cmd .= 'curl -X POST http://localhost:8080/api/admin/sitemap';
 						$sx .= 'Result in: '.cr();
 						$sx .= '/usr/local/payara5/glassfish/domains/domain1/docroot/sitemap/sitemap.xml';
-
 						break;
 					case 'homePage':
 						$cmd .= 'mkdir /var/www/dataverse/'.cr();
@@ -83,7 +181,7 @@ class Customize extends Model
 					$menu[PATH.MODULE.'dataverse/customize/homePage'] = 'dataverse.customize_homepage';
 					$menu[PATH.MODULE.'dataverse/customize/homeHeader'] = 'dataverse.customize_header';
 					$menu[PATH.MODULE.'dataverse/customize/homeFooter'] = 'dataverse.customize_footer';
-					$menu[PATH.MODULE.'dataverse/customize/homeLanguages'] = 'dataverse.customize_language';
+					$menu[PATH.MODULE.'dataverse/customize/Languages'] = 'dataverse.customize_language';
 					$menu[PATH.MODULE.'dataverse/customize/googleanalytics'] = 'dataverse.customize_GoogleAnalytics';
 					$menu[PATH.MODULE.'dataverse/customize/sitemap'] = 'dataverse.customize_sitemap';
 					$menu[PATH.MODULE.'dataverse/customize/copyright'] = 'dataverse.customize_FooterCopyright';
@@ -134,7 +232,8 @@ class Customize extends Model
 					}
 				
 			}
-			$sx .= '<pre>'.troca($cmd,chr(10),'<br>').'</pre>';
+			//$cmd = troca($cmd,chr(10),'<br>');
+			$sx .= '<pre>'.$cmd.'</pre>';
 			return $sx;
 		}	
 }
