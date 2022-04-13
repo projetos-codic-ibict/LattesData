@@ -1,0 +1,28 @@
+notation;preLabel
+1.00.00.00.00.00.3;Ciências exatas e da terra
+1.00.10.00.00.00.8;Matemática
+1.00.10.01.00.00.4;Álgebra
+1.00.10.01.00.10.2;Conjuntos
+1.00.10.01.00.20.0;Lógica matemática
+1.00.10.01.00.30.9;Teoria dos números
+1.00.10.01.00.40.7;Grupos de algebra não-comutaviva
+1.00.10.01.00.50.5;Álgebra comutativa
+1.00.10.01.00.60.3;Geometria algébrica
+1.00.10.02.00.00.0;Análise
+1.00.10.02.00.10.9;Análise complexa
+1.00.10.02.00.20.7;Análise funcional
+1.00.10.02.00.30.5;Análise funcional não-linear
+1.00.10.02.00.40.3;Equações diferenciais ordinárias
+1.00.10.02.00.50.1;Equações diferenciais parciais
+1.00.10.02.00.60.0;Equações diferenciais funcionais
+1.00.10.03.00.00.7;Geometria e topologia
+1.00.10.03.00.10.5;Geometria diferencial
+1.00.10.03.00.20.3;Topologia algébrica
+1.00.10.03.00.30.1;Topologia das variedades
+1.00.10.03.00.40.0;Sistemas dinâmicos
+1.00.10.03.00.50.8;Teoria das singularidades e teoria das catástrofes
+1.00.10.03.00.60.6;Teoria das folheações
+1.00.10.04.00.00.3;Matemática aplicada
+1.00.10.04.00.10.1;Física matemática
+1.00.10.04.00.20.0;Análise numérica
+1.00.10.04.00.30.8;Matemática discreta e combinatória

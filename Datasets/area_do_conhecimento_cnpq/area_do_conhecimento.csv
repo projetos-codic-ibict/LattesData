@@ -1,0 +1,1313 @@
+notation;preLabel
+1.00.00.00.00.00.3;Ciências exatas e da terra
+1.00.10.00.00.00.8;Matemática
+1.00.10.01.00.00.4;Álgebra
+1.00.10.01.00.10.2;Conjuntos
+1.00.10.01.00.20.0;Lógica matemática
+1.00.10.01.00.30.9;Teoria dos números
+1.00.10.01.00.40.7;Grupos de algebra não-comutaviva
+1.00.10.01.00.50.5;Álgebra comutativa
+1.00.10.01.00.60.3;Geometria algébrica
+1.00.10.02.00.00.0;Análise
+1.00.10.02.00.10.9;Análise complexa
+1.00.10.02.00.20.7;Análise funcional
+1.00.10.02.00.30.5;Análise funcional não-linear
+1.00.10.02.00.40.3;Equações diferenciais ordinárias
+1.00.10.02.00.50.1;Equações diferenciais parciais
+1.00.10.02.00.60.0;Equações diferenciais funcionais
+1.00.10.03.00.00.7;Geometria e topologia
+1.00.10.03.00.10.5;Geometria diferencial
+1.00.10.03.00.20.3;Topologia algébrica
+1.00.10.03.00.30.1;Topologia das variedades
+1.00.10.03.00.40.0;Sistemas dinâmicos
+1.00.10.03.00.50.8;Teoria das singularidades e teoria das catástrofes
+1.00.10.03.00.60.6;Teoria das folheações
+1.00.10.04.00.00.3;Matemática aplicada
+1.00.10.04.00.10.1;Física matemática
+1.00.10.04.00.20.0;Análise numérica
+1.00.10.04.00.30.8;Matemática discreta e combinatória
+1.00.20.00.00.00.2;Probabilidade e estatística
+1.00.20.01.00.00.9;Probabilidade
+1.00.20.01.00.10.7;Teoria geral e fundamentos da probabilidade
+1.00.20.01.00.20.5;Teoria geral e processos estocásticos
+1.00.20.01.00.30.3;Teoremas de limite
+1.00.20.01.00.40.1;Processos markovianos
+1.00.20.01.00.50.0;Análise estocástica
+1.00.20.01.00.60.8;Processos estocásticos especiais
+1.00.20.02.00.00.5;Estatística
+1.00.20.02.00.10.3;Fundamentos da estatística
+1.00.20.02.00.20.1;Inferência paramétrica
+1.00.20.02.00.30.0;Inferência não-paramétrica
+1.00.20.02.00.40.8;Inferência em processos estocásticos
+1.00.20.02.00.50.6;Análise multivariada
+1.00.20.02.00.60.4;Regressão e correlação
+1.00.20.02.00.70.2;Planejamento de experimentos
+1.00.20.02.00.80.0;Análise de dados
+1.00.20.03.00.00.1;Probabilidade e estatística aplicadas
+1.00.30.00.00.00.7;Ciência da computação
+1.00.30.01.00.00.3;Teoria da computação
+1.00.30.01.00.10.1;Computabilidade e modelos de computação
+1.00.30.01.00.20.0;Linguagem formais e autômatos
+1.00.30.01.00.30.8;Análise de algoritmos e complexidade de computação
+1.00.30.01.00.40.6;Lógicas e semântica de programas
+1.00.30.02.00.00.0;Matemática da computação
+1.00.30.02.00.10.8;Matemática simbólica
+1.00.30.02.00.20.6;Modelos analíticos e de simulação
+1.00.30.03.00.00.6;Metodologia e técnicas da computação
+1.00.30.03.00.10.4;Linguagens de programação
+1.00.30.03.00.20.2;Engenharia de software
+1.00.30.03.00.30.0;Banco de dados
+1.00.30.03.00.40.9;Sistemas de informação
+1.00.30.03.00.50.7;Processamento gráfico (graphics)
+1.00.30.04.00.00.2;Sistemas de computação
+1.00.30.04.00.10.0;Hardware
+1.00.30.04.00.20.9;Arquitetura de sistemas de computação
+1.00.30.04.00.30.7;Software básico
+1.00.30.04.00.40.5;Teleinformática
+1.00.40.00.00.00.1;Astronomia
+1.00.40.01.00.00.8;Astronomia de posição e mecânica celeste
+1.00.40.01.00.10.6;Astronomia fundamental
+1.00.40.01.00.20.4;Astronomia dinâmica
+1.00.40.02.00.00.4;Astrofísica estelar
+1.00.40.03.00.00.0;Astrofísica do meio interestelar
+1.00.40.03.00.10.9;Meio interestelar
+1.00.40.03.00.20.7;Nebulosa
+1.00.40.04.00.00.7;Astrofísica extragaláctica
+1.00.40.04.00.10.5;Galáxias
+1.00.40.04.00.20.3;Aglomerados de galáxias
+1.00.40.04.00.30.1;Quasares
+1.00.40.04.00.40.0;Cosmologia
+1.00.40.05.00.00.3;Astrofísica do sistema solar
+1.00.40.05.00.10.1;Física solar
+1.00.40.05.00.20.0;Movimento da terra
+1.00.40.05.00.30.8;Sistema planetário
+1.00.40.06.00.00.0;Instrumentação astronômica
+1.00.40.06.00.10.8;Astronomia ótica
+1.00.40.06.00.20.6;Radioastronomia
+1.00.40.06.00.30.4;Astronomia espacial
+1.00.40.06.00.40.2;Processamento de dados astronômicos
+1.00.50.00.00.00.6;Física
+1.00.50.01.00.00.2;Física geral
+1.00.50.01.00.10.0;Métodos matemáticos da física
+1.00.50.01.00.20.9;Física clássica e física quântica mecânica e campos
+1.00.50.01.00.30.7;Relatividade e gravitação
+1.00.50.01.00.40.5;Física estatística e termodinâmica
+1.00.50.01.00.50.3;Metrologia, técnicas gerais de laboratório, sistema de instrumentação
+1.00.50.01.00.60.1;Instrumentação específica de uso geral em física
+1.00.50.02.00.00.9;Áreas clássicas de fenomenologia e suas aplicações
+1.00.50.02.00.10.7;Eletricidade e magnetismo campos e partículas carregadas
+1.00.50.02.00.20.5;Ótica
+1.00.50.02.00.30.3;Acústica
+1.00.50.02.00.40.1;Transferência de calor processos térmicos e termodinâmicos
+1.00.50.02.00.50.0;Mecânica, elasticidade e reologia
+1.00.50.02.00.60.8;Dinâmica dos fluidos
+1.00.50.07.01.00.8;Transp.eletrônicos e prop. elétricas de superfícies interfaces e películas
+1.00.50.03.00.00.5;Física das partículas elementares e campos
+1.00.50.03.00.10.3;Teoria geral de partículas e campos
+1.00.50.03.00.20.1;Teorias específicas e modelos de interação sistematica de partículas raios cósmicos
+1.00.50.03.00.30.0;Reações específicas e fenomiologia de partículas
+1.00.50.03.00.40.8;Propriedades de partículas específicas e ressonâncias
+1.00.50.04.00.00.1;Física nuclear
+1.00.50.04.00.10.0;Estrutura nuclear
+1.00.50.04.00.20.8;Desintegração nuclear e radioatividade
+1.00.50.04.00.30.6;Reações nucleares e espalhamento geral
+1.00.50.04.00.40.4;Reações nucleares e espalhamento (reações específicas)
+1.00.50.04.00.50.2;Propriedades de núcleos específicos
+1.00.50.04.00.60.0;Métodos experimentais e instrumentação para partículas elementares e física nuclear
+1.00.50.05.00.00.8;Física atômica e molecular
+1.00.50.05.00.10.6;Estrutura eletrônica de átomos e moléculas teoria
+1.00.50.05.00.20.4;Espectros atômicos e integração de fótons
+1.00.50.05.00.30.2;Espectros moleculares e interações de fótons com moléculas
+1.00.50.05.00.40.0;Processos de colisão e interações de átomos e moléculas
+1.00.50.05.00.50.9;Inf.sobre átomos e moléculas obtidos experimentalmente instrumentação e técnicas
+1.00.50.05.00.60.7;Estudos de átomos e moléculas especiais
+1.00.50.06.00.00.4;Física dos flúidos, física de plasmas e descargas elétricas
+1.00.50.06.00.10.2;Cinética e teoria de transporte de flúidos propriedades físicas de gases
+1.00.50.06.00.20.0;Física de plasmas e descargas elétricas
+1.00.50.07.00.00.0;Física da matéria condensada
+1.00.50.07.00.10.9;Estrutura de líquidos e sólidos cristalografia
+1.00.50.07.00.20.7;Propriedades mecânicas e acústicas da matéria condensada
+1.00.50.07.00.30.5;Dinâmica da rede e estatística de cristais
+1.00.50.07.00.40.3;Equação de estado, equilíbrio de fases e transições de fase
+1.00.50.07.00.50.1;Propriedades térmicas da matéria condensada
+1.00.50.07.00.60.0;Propriedades de transportes de matéria condensada (não eletrônicas)
+1.00.50.07.00.70.8;Campos quânticos e sólidos, hélio, líquido, sólido
+1.00.50.07.00.80.6;Superfícies e interfaces películas e filamentos
+1.00.50.07.00.90.4;Estados eletrônicos
+1.00.50.07.01.10.6;Estruturas eletrônicas e propriedades elétricas de superfícies interfaces e películas
+1.00.50.07.01.20.4;Supercondutividade
+1.00.50.07.01.30.2;Materiais magnéticos e propriedades magnéticas
+1.00.50.07.01.40.0;Ressonância mag.e relax.na mat.condensefeitos mosbauercorr.ang.pertubada
+1.00.50.07.01.50.9;Materiais dielétricos e propriedades dielétricas
+1.00.50.07.01.60.7;Prop.óticas e espectrosc.da mat.condensoutras inter.da mat.com rad.e part.
+1.00.50.07.01.70.5;Emissão eletrônica e iônica por líquidos e sólidos fenômenos de impacto
+1.00.60.00.00.00.0;Química
+1.00.60.01.00.00.7;Química orgânica
+1.00.60.01.00.10.5;Estrutura, conformação e estereoquímica
+1.00.60.01.00.20.3;Síntese orgânica
+1.00.60.01.00.30.1;Físico-química orgânica
+1.00.60.01.00.40.0;Fotoquímica orgânica
+1.00.60.01.00.50.8;Química dos produtos naturais
+1.00.60.01.00.60.6;Evolução, sistemática e ecologia química
+1.00.60.01.00.70.4;Polímeros e colóides
+1.00.60.02.00.00.3;Química inorgânica
+1.00.60.02.00.10.1;Campos de coordenação
+1.00.60.02.00.20.0;Não-metais e seus compostos
+1.00.60.02.00.30.8;Compostos organo-metálicos
+1.00.60.02.00.40.6;Determinação de estrutura de compostos inorgânicos
+1.00.60.02.00.50.4;Foto-química inorgânica
+1.00.60.02.00.60.2;Físico química inorgânica
+1.00.60.02.00.70.0;Química bio-inorgânica
+1.00.60.03.00.00.0;Físico-química
+1.00.60.03.00.10.8;Cinética química e catálise
+1.00.60.03.00.20.6;Eletroquímica
+1.00.60.03.00.30.4;Espectroscopia
+1.00.60.03.00.40.2;Química de interfaces
+1.00.60.03.00.50.0;Química do estado condensado
+1.00.60.03.00.60.9;Química nuclear e radioquímica
+1.00.60.03.00.70.7;Química teórica
+1.00.60.03.00.80.5;Termodinâmica química
+1.00.60.04.00.00.6;Química analítica
+1.00.60.04.00.10.4;Separação
+1.00.60.04.00.20.2;Métodos óticos de análise
+1.00.60.04.00.30.0;Eletroanalítica
+1.00.60.04.00.40.9;Gravimetria
+1.00.60.04.00.50.7;Titimetria
+1.00.60.04.00.60.5;Instrumentação analítica
+1.00.60.04.00.70.3;Análise de traços e química ambiental
+1.00.70.00.00.00.5;Geociências
+1.00.70.01.00.00.1;Geologia
+1.00.70.01.00.10.0;Mineralogia
+1.00.70.01.00.20.8;Petrologia
+1.00.70.01.00.30.6;Geoquímica
+1.00.70.01.00.40.4;Geologia regional
+1.00.70.01.00.50.2;Geotectônica
+1.00.70.01.00.60.0;Geocronologia
+1.00.70.01.00.70.9;Cartografia geológica
+1.00.70.01.00.80.7;Metalogenia
+1.00.70.01.00.90.5;Hidrogeologia
+1.00.70.01.01.00.9;Prospecção mineral
+1.00.70.01.01.10.7;Sedimentologia
+1.00.70.01.01.20.5;Paleontologia estratigráfica
+1.00.70.01.01.30.3;Estratigrafia
+1.00.70.01.01.40.1;Geologia ambiental
+1.00.70.02.00.00.8;Geofísica
+1.00.70.02.00.10.6;Geomagnetismo
+1.00.70.02.00.20.4;Sismologia
+1.00.70.02.00.30.2;Geotermia e fluxo térmico
+1.00.70.02.00.40.0;Propriedades físicas das rochas
+1.00.70.02.00.50.9;Geofísica nuclear
+1.00.70.02.00.60.7;Sensoriamento remoto
+1.00.70.02.00.70.5;Aeronomia
+1.00.70.02.00.80.3;Desenvolvimento de instrumentação geofísica
+1.00.70.02.00.90.1;Geofísica aplicada
+1.00.70.02.01.00.5;Gravimetria
+1.00.70.03.00.00.4;Meteorologia
+1.00.70.03.00.10.2;Meteorologia dinâmica
+1.00.70.03.00.20.0;Meteorologia sinótica
+1.00.70.03.00.30.9;Meteorologia física
+1.00.70.03.00.40.7;Química da atmosfera
+1.00.70.03.00.50.5;Instrumentação meteorológica
+1.00.70.03.00.60.3;Climatologia
+1.00.70.03.00.70.1;Micrometeorologia
+1.00.70.03.00.80.0;Sensoriamento remoto da atmosfera
+1.00.70.03.00.90.8;Meteorologia aplicada
+1.00.70.04.00.00.0;Geodésia
+1.00.70.04.00.10.9;Geodésia física
+1.00.70.04.00.20.7;Geodésia geométrica
+1.00.70.04.00.30.5;Geodésia celeste
+1.00.70.04.00.40.3;Fotogrametria
+1.00.70.04.00.50.1;Cartografia básica
+1.00.70.05.00.00.7;Geografia física
+1.00.70.05.00.10.5;Geomorfologia
+1.00.70.05.00.20.3;Climatologia geográfica
+1.00.70.05.00.30.1;Pedologia
+1.00.70.05.00.40.0;Hidrogeografia
+1.00.70.05.00.50.8;Geoecologia
+1.00.70.05.00.60.6;Fotogeografia (físico-ecológica)
+1.00.70.05.00.70.4;Geocartografia
+1.00.80.00.00.00.0;Oceanografia
+1.00.80.01.00.00.6;Oceanografia biológica
+1.00.80.01.00.10.4;Interação entre os organismos marinhos e os parâmetros ambientais
+1.00.80.02.00.00.2;Oceanografia física
+1.00.80.02.00.10.0;Variáveis físicas da água do mar
+1.00.80.02.00.20.9;Movimento da água do mar
+1.00.80.02.00.30.7;Origem das massas de água
+1.00.80.02.00.40.5;Interação do oceano com o leito do mar
+1.00.80.02.00.50.3;Interação do oceano com a atmosfera
+1.00.80.03.00.00.9;Oceanografia química
+1.00.80.03.00.10.7;Propriedades químicas da água do mar
+1.00.80.03.00.20.5;Interaçõess químico-biológicas/geológicas das substâncias químicas da água do mar
+1.00.80.04.00.00.5;Oceanografia geológica
+1.00.80.04.00.10.3;Geomorfologia submarina
+1.00.80.04.00.20.1;Sedimentologia marinha
+1.00.80.04.00.30.0;Geofísica marinha
+2.00.00.00.00.00.6;Ciências biológicas
+2.00.10.00.00.00.0;Biologia Geral
+2.00.20.00.00.00.5;Genética
+2.00.20.01.00.00.1;Genética quantitativa
+2.00.20.02.00.00.8;Genética molecular e de microorganismos
+2.00.20.03.00.00.4;Genética vegetal
+2.00.20.04.00.00.0;Genética animal
+2.00.20.05.00.00.7;Genética humana e médica
+2.00.20.06.00.00.3;Mutagênese
+2.00.30.00.00.00.0;Botânica
+2.00.30.01.00.00.6;Paleobotânica
+2.00.30.02.00.00.2;Morfologia vegetal
+2.00.30.02.00.10.0;Morfologia externa
+2.00.30.02.00.20.9;Citologia vegetal
+2.00.30.02.00.30.7;Anatomia vegetal
+2.00.30.02.00.40.5;Palinologia
+2.00.30.03.00.00.9;Fisiologia vegetal
+2.00.30.03.00.10.7;Nutrição e crescimento vegetal
+2.00.30.03.00.20.5;Reprodução vegetal
+2.00.30.03.00.30.3;Ecofisiologia vegetal
+2.00.30.04.00.00.5;Taxonomia vegetal
+2.00.30.04.00.10.3;Taxonomia de criptógamos
+2.00.30.04.00.20.1;Taxonomia de fanerógamos
+2.00.30.05.00.00.1;Fitogeografia
+2.00.30.06.00.00.8;Botânica aplicada
+2.00.40.00.00.00.4;Zoologia
+2.00.40.01.00.00.0;Paleozoologia
+2.00.40.02.00.00.7;Morfologia dos grupos recentes
+2.00.40.03.00.00.3;Fisiologia dos grupos recentes
+2.00.40.04.00.00.0;Comportamento animal
+2.00.40.05.00.00.6;Taxonomia dos grupos recentes
+2.00.40.06.00.00.2;Zoologia aplicada
+2.00.40.06.00.10.0;Conservação das espécies animais
+2.00.40.06.00.20.9;Utilização dos animais
+2.00.40.06.00.30.7;Controle populacional de animais
+2.00.50.00.00.00.9;Ecologia
+2.00.50.01.00.00.5;Ecologia teórica
+2.00.50.02.00.00.1;Ecologia de ecossistemas
+2.00.50.03.00.00.8;Ecologia aplicada
+2.00.60.00.00.00.3;Morfologia
+2.00.60.01.00.00.0;Citologia e biologia celular
+2.00.60.02.00.00.6;Embriologia
+2.00.60.03.00.00.2;Histologia
+2.00.60.04.00.00.9;Anatomia
+2.00.60.04.00.10.7;Anatomia humana
+2.00.70.00.00.00.8;Fisiologia
+2.00.70.01.00.00.4;Fisiologia geral
+2.00.70.02.00.00.0;Fisiologia de órgaos e sistemas
+2.00.70.02.00.10.9;Neurofisiologia
+2.00.70.02.00.20.7;Fisiologia cardiovascular
+2.00.70.02.00.30.5;Fisiologia da respiração
+2.00.70.02.00.40.3;Fisiologia renal
+2.00.70.02.00.50.1;Fisiologia endocrina
+2.00.70.02.00.60.0;Fisiologia da digestão
+2.00.70.02.00.70.8;Cinesiologia
+2.00.70.03.00.00.7;Fisiologia do esforço
+2.00.70.04.00.00.3;Fisiologia comparada
+2.00.80.00.00.00.2;Bioquímica
+2.00.80.01.00.00.9;Química de macromoléculas
+2.00.80.01.00.10.7;Proteínas
+2.00.80.01.00.20.5;Lipídeos
+2.00.80.01.00.30.3;Glicídeos
+2.00.80.02.00.00.5;Bioquímica dos microorganismos
+2.00.80.03.00.00.1;Metabolismo e bioenergética
+2.00.80.04.00.00.8;Biologia molecular
+2.00.80.05.00.00.4;Enzimologia
+2.00.90.00.00.00.7;Biofísica
+2.00.90.01.00.00.3;Biofísica molecular
+2.00.90.02.00.00.0;Biofísica celular
+2.00.90.03.00.00.6;Biofísica de processos e sistemas
+2.00.90.04.00.00.2;Radiologia e fotobiologia
+2.01.00.00.00.00.0;Farmacologia
+2.01.00.01.00.00.6;Farmacologia geral
+2.01.00.01.00.10.4;Farmacocinética
+2.01.00.01.00.20.2;Biodisponibilidade
+2.01.00.02.00.00.2;Farmacologia autonômica
+2.01.00.03.00.00.9;Neuropsicofarmacologia
+2.01.00.04.00.00.5;Farmacologia cardiorenal
+2.01.00.05.00.00.1;Farmacologia bioquímica e molecular
+2.01.00.06.00.00.8;Etnofarmacologia
+2.01.00.07.00.00.4;Toxicologia
+2.01.00.08.00.00.0;Farmacologia clínica
+2.01.10.00.00.00.4;Imunologia
+2.01.10.01.00.00.0;Imunoquímica
+2.01.10.02.00.00.7;Imunologia celular
+2.01.10.03.00.00.3;Imunogenética
+2.01.10.04.00.00.0;Imunologia aplicada
+2.01.20.00.00.00.9;Microbiologia
+2.01.20.01.00.00.5;Biologia e fisiologia dos microorganismos
+2.01.20.01.00.10.3;Virologia
+2.01.20.01.00.20.1;Bacterologia
+2.01.20.01.00.30.0;Micologia
+2.01.20.02.00.00.1;Microbiologia aplicada
+2.01.20.02.00.10.0;Microbiologia médica
+2.01.20.02.00.20.8;Microbiologia industrial e de fermentação
+2.01.30.00.00.00.3;Parasitologia
+2.01.30.01.00.00.0;Protozoologia de parasitos
+2.01.30.01.00.10.8;Protozoologia parasitária humana
+2.01.30.01.00.20.6;Protozoologia parasitária animal
+2.01.30.02.00.00.6;Helmintologia de parasitos
+2.01.30.02.00.10.4;Helmintologia humana
+2.01.30.02.00.20.2;Helmintologia animal
+2.01.30.03.00.00.2;Entomologia e malacologia de parasitos e vetores
+3.00.00.00.00.00.9;Engenharias
+3.00.10.00.00.00.3;Engenharia civil
+3.00.10.01.00.00.0;Construção civil
+3.00.10.01.00.10.8;Materiais e componentes de construção
+3.00.10.01.00.20.6;Processos construtivos
+3.00.10.01.00.30.4;Instalações prediais
+3.00.10.02.00.00.6;Estruturas
+3.00.10.02.00.10.4;Estruturas de concreto
+3.00.10.02.00.20.2;Estruturas de madeiras
+3.00.10.02.00.30.0;Estruturas metálicas
+3.00.10.02.00.40.9;Mecânica das estruturas
+3.00.10.03.00.00.2;Geotécnica
+3.00.10.03.00.10.0;Fundações e escavações
+3.00.10.03.00.20.9;Mecânicas das rochas
+3.00.10.03.00.30.7;Mecânicas dos solos
+3.00.10.03.00.40.5;Obras de terra e enrocamento
+3.00.10.03.00.50.3;Pavimentos
+3.00.10.04.00.00.9;Engenharia hidráulica
+3.00.10.04.00.10.7;Hidráulica
+3.00.10.04.00.20.5;Hidrologia
+3.00.10.05.00.00.5;Infra-estrutura de transportes
+3.00.10.05.00.10.3;Aeroportos projeto e construção
+3.00.10.05.00.20.1;Ferrovias projetos e construção
+3.00.10.05.00.30.0;Portos e vias nevegáveis projeto e construção
+3.00.10.05.00.40.8;Rodovias projeto e construção
+3.00.20.00.00.00.8;Engenharia de minas
+3.00.20.01.00.00.4;Pesquisa mineral
+3.00.20.01.00.10.2;Caracterização do minério
+3.00.20.01.00.20.0;Dimensionamento de jazidas
+3.00.20.02.00.00.0;Lavra
+3.00.20.02.00.10.9;Lavra a céu aberto
+3.00.20.02.00.20.7;Lavra de mina subterrânea
+3.00.20.02.00.30.5;Equipamentos de lavra
+3.00.20.03.00.00.7;Tratamento de minérios
+3.00.20.03.00.10.5;Métodos de concentração e enriquecimento de minérios
+3.00.20.03.00.20.3;Equipamentos de beneficiamento de minérios
+3.00.30.00.00.00.2;Engenharia de materiais e metalúrgica
+3.00.30.01.00.00.9;Instalações e equipamentos metalúrgicos
+3.00.30.01.00.10.7;Instalações metalúrgicas
+3.00.30.01.00.20.5;Equipamentos metalúrgicos
+3.00.30.02.00.00.5;Metalurgia extrativa
+3.00.30.02.00.10.3;Aglomeração
+3.00.30.02.00.20.1;Eletrometalurgia
+3.00.30.02.00.30.0;Hidrometalurgia
+3.00.30.02.00.40.8;Pirometalurgia
+3.00.30.02.00.50.6;Tratamento de minérios
+3.00.30.03.00.00.1;Metalurgia de transformação
+3.00.30.03.00.10.0;Conformação mecânica
+3.00.30.03.00.20.8;Fundição
+3.00.30.03.00.30.6;Metalurgia de pó
+3.00.30.03.00.40.4;Recobrimentos
+3.00.30.03.00.50.2;Soldagem
+3.00.30.03.00.60.0;Tratamento térmicos, mecânicos e químicos
+3.00.30.03.00.70.9;Usinagem
+3.00.30.04.00.00.8;Metalurgia física
+3.00.30.04.00.10.6;Estrutura dos metais e ligas
+3.00.30.04.00.20.4;Propriedades físicas dos metais e ligas
+3.00.30.04.00.30.2;Propriedades mecânicas dos metais e ligas
+3.00.30.04.00.40.0;Transformação de fases
+3.00.30.04.00.50.9;Corrosão
+3.00.30.05.00.00.4;Materiais nao metálicos
+3.00.30.05.00.10.2;Extração e transformação de materiais
+3.00.30.05.00.20.0;Cerâmicos
+3.00.30.05.00.30.9;Materiais conjugados não metálicos
+3.00.30.05.00.40.7;Polímeros, aplicações
+3.00.40.00.00.00.7;Engenharia elétrica
+3.00.40.01.00.00.3;Materiais elétricos
+3.00.40.01.00.10.1;Materiais condutores
+3.00.40.01.00.20.0;Materiais e componentes semicondutores
+3.00.40.01.00.30.8;Materiais e dispositivos supercondutores
+3.00.40.01.00.40.6;Materiais dielétricos, piesoelétricos e ferroelétricos
+3.00.40.01.00.50.4;Materiais e componentes eletroóticos e magnetoóticos, materiais fotoelétricos
+3.00.40.01.00.60.2;Materiais e dispositivos magnéticos
+3.00.40.02.00.10.8;Medidas elétricas
+3.00.40.02.00.20.6;Medidas magnéticas
+3.00.40.02.00.30.4;Instrumentação eletromecânica
+3.00.40.02.00.40.2;Instrumentação eletrônica
+3.00.40.02.00.50.0;Sistemas eletrônicos de medida e de controle
+3.00.40.03.00.00.6;Circuitos elétricos, magnéticos e eletrônicos
+3.00.40.03.00.10.4;Teoria geral dos circuitos elétricos
+3.00.40.03.00.20.2;Circuitos lineares e não-lineares
+3.00.40.03.00.30.0;Circuitos eletrônicos
+3.00.40.03.00.40.9;Circuitos magnéticos, magnetismos, eletromagnetismo
+3.00.40.04.00.00.2;Sistemas elétricos de potência
+3.00.40.04.00.10.0;Geração da energia elétrica
+3.00.40.04.00.20.9;Transmissão da energia elétrica, distribuição da energia elétrica
+3.00.40.04.00.30.7;Conversão e retificação da energia elétrica
+3.00.40.04.00.40.5;Medição, controle, correção e proteção de sistemas elétricos de potência
+3.00.40.04.00.50.3;Máquinas elétricas e dispositivos de potência
+3.00.40.04.00.60.1;Instalações elétricas prediais e industriais
+3.00.40.05.00.00.9;Eletrônica industrial, sistemas e controles eletrônicos
+3.00.40.05.00.10.7;Eletrônica industrial
+3.00.40.05.00.20.5;Automação eletrônica de processos elétricos e industriais
+3.00.40.05.00.30.3;Controle de processos eletrônicos, retroalimentação
+3.00.40.06.00.00.5;Telecomunicações
+3.00.40.06.00.10.3;Teoria eletromagnética, microondas, propagação de ondas, antenas
+3.00.40.06.00.20.1;Radionavegação e radioastronomia
+3.00.40.06.00.30.0;Sistemas de telecomunicações
+3.00.50.00.00.00.1;Engenharia mecânica
+3.00.50.01.00.00.8;Fenômenos de transporte
+3.00.50.01.00.10.6;Transferência de calor
+3.00.50.01.00.20.4;Mecânica dos fluídos
+3.00.50.01.00.30.2;Dinâmica dos gases
+3.00.50.01.00.40.0;Princípios variacionais e métodos numéricos
+3.00.50.02.00.00.4;Engenharia térmica
+3.00.50.02.00.10.2;Termodinâmica
+3.00.50.02.00.20.0;Controle ambiental
+3.00.50.02.00.30.9;Aproveitamento da energia
+3.00.50.03.00.00.0;Mecânica dos sólidos
+3.00.50.03.00.10.9;Mecânica dos corpos sólidos, elásticos e plásticos
+3.00.50.03.00.20.7;Dinâmica dos corpos rígidos, elásticos e plásticos
+3.00.50.03.00.30.5;Análise de tensões
+3.00.50.03.00.40.3;Termoelasticidade
+3.00.50.04.00.00.7;Projetos de máquinas
+3.00.50.04.00.10.5;Teoria dos mecanismos
+3.00.50.04.00.20.3;Estática e dinâmica aplicada
+3.00.50.04.00.30.1;Elementos de máquinas
+3.00.50.04.00.40.0;Fundamentos gerais de projetos das máquinas
+3.00.50.04.00.50.8;Máquinas, motores e equipamentos
+3.00.50.04.00.60.6;Métodos de síntese e otimização aplicados ao projeto mecânico
+3.00.50.04.00.70.4;Controle de sistemas mecânicos
+3.00.50.04.00.80.2;Aproveitamento de energia
+3.00.50.05.00.00.3;Processos de fabricação
+3.00.50.05.00.10.1;Matrizes e ferramentas
+3.00.50.05.00.20.0;Máquinas de usinagem e conformação
+3.00.50.05.00.30.8;Controle numérico
+3.00.50.05.00.40.6;Robotização
+3.00.50.05.00.50.4;Processos de fabricação, seleção econômica
+3.00.60.00.00.00.6;Engenharia química
+3.00.60.01.00.00.2;Processos industriais de engenharia química
+3.00.60.01.00.10.0;Processos bioquímicos
+3.00.60.01.00.20.9;Processos orgânicos
+3.00.60.01.00.30.7;Processos inorgânicos
+3.00.60.02.00.00.9;Operações industriais e equipamentos para engenharia química
+3.00.60.02.00.10.7;Reatores químicos
+3.00.60.02.00.20.5;Operações características de processos bioquímicos
+3.00.60.02.00.30.3;Operações de separação e mistura
+3.00.60.03.01.00.2;Detergentes
+3.00.60.03.02.00.0;Tratamentos e aproveitamento de rejeitos
+3.00.60.03.02.10.8;Xisto
+3.00.60.03.00.00.5;Tecnologia química
+3.00.60.03.00.10.3;Balanços globais de matéria e energia
+3.00.60.03.00.20.1;Água
+3.00.60.03.00.30.0;Álcool
+3.00.60.03.00.40.8;Alimentos
+3.00.60.03.00.50.6;Borrachas
+3.00.60.03.00.60.4;Carvão
+3.00.60.03.00.70.2;Cerâmica
+3.00.60.03.00.80.0;Cimento
+3.00.60.03.00.90.9;Couro
+3.00.60.03.01.10.0;Fertilizantes
+3.00.60.03.01.20.9;Medicamentos
+3.00.60.03.01.30.7;Metais não-ferrosos
+3.00.60.03.01.40.5;Óleos
+3.00.60.03.01.50.3;Papel e celulose
+3.00.60.03.01.60.1;Petróleo e petroquímica
+3.00.60.03.01.70.0;Polímeros
+3.00.60.03.01.80.8;Produtos naturais
+3.00.60.03.01.90.6;Têxteis
+3.00.70.00.00.00.0;Engenharia sanitária
+3.00.70.01.00.00.7;Recursos hídricos
+3.00.70.01.00.10.5;Planejamento integrado dos recursos hídricos
+3.00.70.01.00.20.3;Tecnologia e problemas sanitários de irrigação
+3.00.70.01.00.30.1;Águas subterrâneas e poços profundos
+3.00.70.01.00.40.0;Controle de enchentes e de barragens
+3.00.70.01.00.50.8;Sedimentologia
+3.00.70.02.00.00.3;Tratamento de águas de abastecimento e residuárias
+3.00.70.02.00.10.1;Química sanitária
+3.00.70.02.00.20.0;Processos simplificados de tratamento de águas
+3.00.70.02.00.30.8;Técnicas convencionais de tratamento de águas
+3.00.70.02.00.40.6;Técnicas avançadas de tratamento de águas
+3.00.70.02.00.50.4;Estudos e caracterização de efluentes industriais
+3.00.70.02.00.60.2;Lay out de processos industriais
+3.00.70.02.00.70.0;Resíduos radioativos
+3.00.70.03.00.00.0;Saneamento básico
+3.00.70.03.00.10.8;Técnicas de abastecimento da água
+3.00.70.03.00.20.6;Drenagem de águas residuárias
+3.00.70.03.00.30.4;Drenagem urbana de águas pluviais
+3.00.70.03.00.40.2;Resíduos sólidos, domésticos e industriais
+3.00.70.03.00.50.0;Limpeza pública
+3.00.70.03.00.60.9;Instalações hidráulico-sanitárias
+3.00.70.04.00.00.6;Saneamento ambiental
+3.00.70.04.00.10.4;Ecologia aplicada à engenharia sanitária
+3.00.70.04.00.20.2;Microbiologia aplicada e engenharia sanitária
+3.00.70.04.00.30.0;Parasitologia aplicada à engenharia sanitária
+3.00.70.04.00.40.9;Qualidade do ar, das águas e do solo
+3.00.70.04.00.50.7;Controle da poluição
+3.00.70.04.00.60.5;Legislação ambiental
+3.00.80.00.00.00.5;Engenharia de produção
+3.00.80.01.00.00.1;Gerência de produção
+3.00.80.01.00.10.0;Planejamento de instalações industriais
+3.00.80.01.00.20.8;Planejamento, projeto e controle de sistemas de produção
+3.00.80.01.00.30.6;Higiene e segurança do trabalho
+3.00.80.01.00.40.4;Suprimentos
+3.00.80.01.00.50.2;Garantia de controle de qualidade
+3.00.80.02.00.00.8;Pesquisa operacional
+3.00.80.02.00.10.6;Processos estocásticos e teorias da filas
+3.00.80.02.00.20.4;Programação linear, não-linear, mista e dinâmica
+3.00.80.02.00.30.2;Séries temporais
+3.00.80.02.00.40.0;Teoria dos grafos
+3.00.80.02.00.50.9;Teoria dos jogos
+3.00.80.03.00.00.4;Engenharia do produto
+3.00.80.03.00.10.2;Ergonomia
+3.00.80.03.00.20.0;Metodologia de projeto do produto
+3.00.80.03.00.30.9;Processos de trabalho
+3.00.80.03.00.40.7;Gerência do projeto e do produto
+3.00.80.03.00.50.5;Desenvolvimento de produto
+3.00.80.04.00.00.0;Engenharia econômica
+3.00.80.04.00.10.9;Estudo de mercado
+3.00.80.04.00.20.7;Localização industrial
+3.00.80.04.00.30.5;Análise de custos
+3.00.80.04.00.40.3;Economia de tecnologia
+3.00.80.04.00.50.1;Vida econômica dos equipamentos
+3.00.80.04.00.60.0;Avaliação de projetos
+3.00.90.00.00.00.0;Engenharia nuclear
+3.00.90.01.00.00.6;Aplicações de radioisótopos
+3.00.90.01.00.10.4;Produção de radioisótopos
+3.00.90.01.00.20.2;Aplicações industriais de radioisótopos
+3.00.90.01.00.30.0;Instrumentação para medida e controle de radiação
+3.00.90.02.00.00.2;Fusão controlada
+3.00.90.02.00.10.0;Processos industriais da fusão controlada
+3.00.90.02.00.20.9;Problemas tecnológicos da fusão controlada
+3.00.90.03.00.00.9;Combustível nuclear
+3.00.90.03.00.10.7;Extração de combustível nuclear
+3.00.90.03.00.20.5;Conversão, enriquecimento e fabricação de combustível nuclear
+3.00.90.03.00.30.3;Reprocessamento de combustível nuclear
+3.00.90.03.00.40.1;Rejeitos de combustível nuclear
+3.00.90.04.00.00.5;Tecnologia dos reatores
+3.00.90.04.00.10.3;Núcleo do reator
+3.00.90.04.00.20.1;Materiais nucleares e blindagem de reatores
+3.00.90.04.00.30.0;Transferência de calor em reatores
+3.00.90.04.00.40.8;Geração e integração com sistemas elétricos em reatores
+3.00.90.04.00.50.6;Instrumentação para operação e controle de reatores
+3.00.90.04.00.60.4;Segurança, localização e licenciamento de reatores
+3.00.90.04.00.70.2;Aspectos econômicos de reatores
+3.01.00.00.00.00.2;Engenharia de transportes
+3.01.00.01.00.00.9;Planejamento de transportes
+3.01.00.01.00.10.7;Planejamento e organização do sistema de transporte
+3.01.00.01.00.20.5;Economia dos transportes
+3.01.00.02.00.00.5;Veículos e equipamentos de controle
+3.01.00.02.00.10.3;Vias de transporte
+3.01.00.02.00.20.1;Veículos de transportes
+3.01.00.02.00.30.0;Estação de transporte
+3.01.00.02.00.40.8;Equipamentos auxiliares e controles
+3.01.00.03.00.00.1;Operações de transportes
+3.01.00.03.00.10.0;Engenharia de tráfego
+3.01.00.03.00.20.8;Capacidade de vias de transporte
+3.01.00.03.00.30.6;Operação de sistemas de transporte
+3.01.10.00.00.00.7;Engenharia naval e oceânica
+3.01.10.01.00.00.3;Hidrodinâmica de navios e sistemas oceânicos
+3.01.10.01.00.10.1;Resistência hidrodinâmica
+3.01.10.01.00.20.0;Propulsão de navios
+3.01.10.02.00.00.0;Estruturas navais e oceânicas
+3.01.10.02.00.10.8;Análise teórica e experimental de estrutura
+3.01.10.02.00.20.6;Dinâmica estrutural naval e oceânica
+3.01.10.02.00.30.4;Síntese estrutural naval e oceânica
+3.01.10.03.00.00.6;Máquinas marítimas
+3.01.10.03.00.10.4;Análise de sistemas propulsores
+3.01.10.03.00.20.2;Controle e automação de sistemas propulsores
+3.01.10.03.00.30.0;Equipamentos auxiliares do sistema propulsivo
+3.01.10.03.00.40.9;Motor de propulsão
+3.01.10.04.00.00.2;Projeto de navios e de sistemas oceânicos
+3.01.10.04.00.10.0;Projetos de navios
+3.01.10.04.00.20.9;Projetos de sistemas oceânicos fixos e semi-fixos
+3.01.10.04.00.30.7;Projetos de embarcações não-convencionais
+3.01.10.05.00.00.9;Tecnologia de construção naval e de sistemas oceânicas
+3.01.10.05.00.10.7;Métodos de fabricação de navios e sistemas oceânicos
+3.01.10.05.00.20.5;Soldagem de estruturas navais e oceânicos
+3.01.10.05.00.30.3;Custos de construção naval
+3.01.10.05.00.40.1;Normatização e certificação de qualidade de navios
+3.01.20.00.00.00.1;Engenharia aeroespacial
+3.01.20.01.00.00.8;Aerodinâmica
+3.01.20.01.00.10.6;Aerodinâmica de aeronaves espaciais
+3.01.20.01.00.20.4;Aerodinâmica dos processos geofísicos e interplanetários
+3.01.20.02.00.00.4;Dinâmica de vôo
+3.01.20.02.00.10.2;Trajetórias e órbitas
+3.01.20.02.00.20.0;Estabilidade e controle
+3.01.20.03.00.00.0;Estruturas aeroespaciais
+3.01.20.03.00.10.9;Aeroelasticidade
+3.01.20.03.00.20.7;Fadiga
+3.01.20.03.00.30.5;Projeto de estruturas aeroespaciais
+3.01.20.04.00.00.7;Materiais e processos para engenharia aeronáutica e aeroespacial
+3.01.20.05.00.00.3;Propulsão aeroespacial
+3.01.20.05.00.10.1;Combustão e escoamento com reações químicas
+3.01.20.05.00.20.0;Propulsão de foguetes
+3.01.20.05.00.30.8;Máquinas de fluxo
+3.01.20.05.00.40.6;Motores alternativos
+3.01.20.06.00.00.0;Sistemas aeroespaciais
+3.01.20.06.00.10.8;Aviões
+3.01.20.06.00.20.6;Foguetes
+3.01.20.06.00.30.4;Helicópteros
+3.01.20.06.00.40.2;Hovercraft
+3.01.20.06.00.50.0;Satélites e outros dispositivos aeroespaciais
+3.01.20.06.00.60.9;Normatização e certificação de qualidade de aeronaves e componentes
+3.01.20.06.00.70.7;Manutenção de sistemas aeroespaciais
+3.01.30.00.00.00.6;Engenharia biomédica
+3.01.30.01.00.00.2;Bioengenharia
+3.01.30.01.00.10.0;Processamento de sinais biológicos
+3.01.30.01.00.20.9;Modelagem de fenômenos biológicos
+3.01.30.01.00.30.7;Modelagem de sistemas biológicos
+3.01.30.02.00.00.9;Engenharia médica
+3.01.30.02.00.10.7;Biomateriais e materiais biocompatíveis
+3.01.30.02.00.20.5;Transdutores para aplicações biomédicas
+3.01.30.02.00.30.3;Instrumentação odontológica e médico-hospitalar
+3.01.30.02.00.40.1;Tecnologia de próteses
+4.00.00.00.00.00.1;Ciências da saúde
+4.00.10.00.00.00.6;Medicina
+4.00.10.01.00.00.2;Clínica médica
+4.00.10.01.00.10.0;Angiologia
+4.00.10.01.00.20.9;Dermatologia
+4.00.10.01.00.30.7;Alergologia e imunologia clínica
+4.00.10.01.00.40.5;Cancerologia
+4.00.10.01.00.50.3;Hematologia
+4.00.10.01.00.60.1;Endocrinologia
+4.00.10.01.00.70.0;Neurologia
+4.00.10.01.00.80.8;Pediatria
+4.00.10.01.00.90.6;Doenças infecciosas e parasitárias
+4.00.10.01.01.00.0;Cardiologia
+4.00.10.01.01.10.8;Gastroenterologia
+4.00.10.01.01.20.6;Pneumologia
+4.00.10.01.01.30.4;Nefrologia
+4.00.10.01.01.40.2;Reumatologia
+4.00.10.01.01.50.0;Ginecologia e obstetrícia
+4.00.10.01.01.60.9;Fisiatria
+4.00.10.01.01.70.7;Oftalmologia
+4.00.10.01.01.80.6;Ortopedia
+4.00.10.02.00.00.9;Cirurgia
+4.00.10.02.00.10.7;Cirurgia plástica e restauradora
+4.00.10.02.00.20.5;Cirurgia otorrinolaringológica
+4.00.10.02.00.30.3;Cirurgia oftalmológica
+4.00.10.02.00.40.1;Cirurgia cardiovascular
+4.00.10.02.00.50.0;Cirurgia toráxica
+4.00.10.02.00.60.8;Cirurgia gastroenterologia
+4.00.10.02.00.70.6;Cirurgia pediátrica
+4.00.10.02.00.80.4;Neurocirurgia
+4.00.10.02.00.90.2;Cirurgia urológica
+4.00.10.02.01.00.6;Cirurgia proctológica
+4.00.10.02.01.10.4;Cirurgia ortopédica
+4.00.10.02.01.20.2;Cirurgia traumatológica
+4.00.10.02.01.30.0;Anestesiologia
+4.00.10.02.01.40.9;Cirurgia experimental
+4.00.10.03.00.00.5;Saúde materno-infantil
+4.00.10.04.00.00.1;Psiquiatria
+4.00.10.05.00.00.8;Anatomia patológica e patologia clínica
+4.00.10.06.00.00.4;Radiologia médica
+4.00.10.07.00.00.0;Medicina legal e deontologia
+4.00.20.00.00.00.0;Odontologia
+4.00.20.01.00.00.7;Clínica odontológica
+4.00.20.02.00.00.3;Cirurgia buco-maxilo-facial
+4.00.20.03.00.00.0;Ortodontia
+4.00.20.04.00.00.6;Odontopediatria
+4.00.20.05.00.00.2;Periodontia
+4.00.20.06.00.00.9;Endodontia
+4.00.20.07.00.00.5;Radiologia odontológica
+4.00.20.08.00.00.1;Odontologia social e preventiva
+4.00.20.09.00.00.8;Materiais odontológicos
+4.00.30.00.00.00.5;Farmácia
+4.00.30.01.00.00.1;Farmacotecnia
+4.00.30.02.00.00.8;Farmacognosia
+4.00.30.03.00.00.4;Análise toxicológica
+4.00.30.04.00.00.0;Análise e controle e medicamentos
+4.00.30.05.00.00.7;Bromatologia
+4.00.40.00.00.00.0;Enfermagem
+4.00.40.01.00.00.6;Enfermagem médico-cirúrgica
+4.00.40.02.00.00.2;Enfermagem obstétrica
+4.00.40.03.00.00.9;Enfermagem pediátrica
+4.00.40.04.00.00.5;Enfermagem psiquiátrica
+4.00.40.05.00.00.1;Enfermagem de doenças contagiosas
+4.00.40.06.00.00.8;Enfermagem de sáude pública
+4.00.50.00.00.00.4;Nutrição
+4.00.50.01.00.00.0;Bioquímica da nutrição
+4.00.50.02.00.00.7;Dietética
+4.00.50.03.00.00.3;Análise nutricional de população
+4.00.50.04.00.00.0;Desnutrição e desenvolvimento fisiológico
+4.00.60.00.00.00.9;Saúde coletiva
+4.00.60.01.00.00.5;Epidemiologia
+4.00.60.02.00.00.1;Saúde pública
+4.00.60.03.00.00.8;Medicina preventiva
+4.00.70.00.00.00.3;Fonoaudiologia
+4.00.80.00.00.00.8;Fisioterapia e terapia ocupacional
+4.00.90.00.00.00.2;Educação física
+5.00.00.00.00.00.4;Ciências agrárias
+5.00.10.00.00.00.9;Agronomia
+5.00.10.01.00.00.5;Ciência do solo
+5.00.10.01.00.10.3;Gênese, morfologia e classificação dos solos
+5.00.10.01.00.20.1;Física do solo
+5.00.10.01.00.30.0;Química do solo
+5.00.10.01.00.40.8;Microbiologia e bioquímica do solo
+5.00.10.01.00.50.6;Fertilidade do solo e adubação
+5.00.10.01.00.60.4;Manejo e conservação do solo
+5.00.10.02.00.00.1;Fitossanidade
+5.00.10.02.00.10.0;Fitopatologia
+5.00.10.02.00.20.8;Entomologia agrícola
+5.00.10.02.00.30.6;Parasitologia agrícola
+5.00.10.02.00.40.4;Microbiologia agrícola
+5.00.10.02.00.50.2;Defesa fitossanitária
+5.00.10.03.00.00.8;Fitotecnia
+5.00.10.03.00.10.6;Manejo e tratos culturais
+5.00.10.03.00.20.4;Mecanização agrícola
+5.00.10.03.00.30.2;Produção e beneficiamento de sementes
+5.00.10.03.00.40.0;Produção de mudas
+5.00.10.03.00.50.9;Melhoramento vegetal
+5.00.10.03.00.60.7;Fisiologia de plantas cultivadas
+5.00.10.03.00.70.5;Matologia
+5.00.10.04.00.00.4;Floricultura, parques e jardins
+5.00.10.04.00.10.2;Floricultura
+5.00.10.04.00.20.0;Parques e jardins
+5.00.10.04.00.30.9;Arborização de vias públicas
+5.00.10.05.00.00.0;Agrometeorologia
+5.00.10.06.00.00.7;Extensão rural
+5.00.20.00.00.00.3;Recursos florestais e engenharia florestal
+5.00.20.01.00.00.0;Silvicultura
+5.00.20.01.00.10.8;Dendrologia
+5.00.20.01.00.20.6;Florestamento e reflorestamento
+5.00.20.01.00.30.4;Genética e melhoramento florestal
+5.00.20.01.00.40.2;Sementes florestais
+5.00.20.01.00.50.0;Nutrição florestal
+5.00.20.01.00.60.9;Fisiologia florestal
+5.00.20.01.00.70.7;Solos florestais
+5.00.20.01.00.80.5;Proteção florestal
+5.00.20.02.00.00.6;Manejo florestal
+5.00.20.02.00.10.4;Economia florestal
+5.00.20.02.00.20.2;Política e legislação florestal
+5.00.20.02.00.30.0;Administração florestal
+5.00.20.02.00.40.9;Dendrometria e inventário florestal
+5.00.20.02.00.50.7;Fotointerpretação florestal
+5.00.20.02.00.60.5;Ordenamento florestal
+5.00.20.03.00.00.2;Técnicas e operações florestais
+5.00.20.03.00.10.0;Exploração florestal
+5.00.20.03.00.20.9;Mecanização florestal
+5.00.20.04.00.00.9;Tecnologia e utilização de produtos florestais
+5.00.20.04.00.10.7;Anatomia e identificação de produtos florestais
+5.00.20.04.00.20.5;Propriedades físico-mecânicas da madeira
+5.00.20.04.00.30.3;Relações água-madeira e secagem
+5.00.20.04.00.40.1;Tratamento da madeira
+5.00.20.04.00.50.0;Processamento mecânico da madeira
+5.00.20.04.00.60.8;Química da madeira
+5.00.20.04.00.70.6;Resinas de madeiras
+5.00.20.04.00.80.4;Tecnologia de celulose e papel
+5.00.20.04.00.90.2;Tecnologia de chapas
+5.00.20.05.00.00.5;Conservação da natureza
+5.00.20.05.00.10.3;Hidrologia florestal
+5.00.20.05.00.20.1;Conservação de áreas silvestres
+5.00.20.05.00.30.0;Conservação de bacias hidrográficas
+5.00.20.05.00.40.8;Recuperação de áreas degradadas
+5.00.20.06.00.00.1;Energia de biomassa florestal
+5.00.30.00.00.00.8;Engenharia agrícola
+5.00.30.01.00.00.4;Máquinas e implementos agrícolas
+5.00.30.02.00.00.0;Engenharia de água e solo
+5.00.30.02.00.10.9;Irrigação e drenagem
+5.00.30.02.00.20.7;Conservação de solo e água
+5.00.30.03.00.00.7;Engenharia de processamento de produtos agrícolas
+5.00.30.03.00.10.5;Pré-processamento de produtos agrícolas
+5.00.30.03.00.20.3;Armazenamento de produtos agrícolas
+5.00.30.03.00.30.1;Transferência de produtos agrícolas
+5.00.30.04.00.00.3;Construções rurais e ambiência
+5.00.30.04.00.10.1;Assentamento rural
+5.00.30.04.00.20.0;Engenharia de construções rurais
+5.00.30.04.00.30.8;Saneamento rural
+5.00.30.05.00.00.0;Energização rural
+5.00.40.00.00.00.2;Zootecnia
+5.00.40.01.00.00.9;Ecologia dos animais domésticos e etologia
+5.00.40.02.00.00.5;Genética e melhoramento dos animais domésticos
+5.00.40.03.00.00.1;Nutrição e alimentação animal
+5.00.40.03.00.10.0;Exigências nutricionais dos animais
+5.00.40.03.00.20.8;Avaliação de alimentos para animais
+5.00.40.03.00.30.6;Conservação de alimentos para animais
+5.00.40.04.00.00.8;Pastagem e forragicultura
+5.00.40.04.00.10.6;Avaliação, produção e conservação de forragens
+5.00.40.04.00.20.4;Manejo e conservação de pastagens
+5.00.40.04.00.30.2;Fisiologia de plantas forrageiras
+5.00.40.04.00.40.0;Melhoramento de plantas forrageiras e produção de sementes
+5.00.40.04.00.50.9;Toxicologia e plantas tóxicas
+5.00.40.05.00.00.4;Produção animal
+5.00.40.05.00.10.2;Criação de animais
+5.00.40.05.00.20.0;Manejo de animais
+5.00.40.05.00.30.9;Instalações para produção animal
+5.00.50.00.00.00.7;Medicina veterinária
+5.00.50.01.00.00.3;Clínica e cirurgia animal
+5.00.50.01.00.10.1;Anestesiologia animal
+5.00.50.01.00.20.0;Técnica cirúrgica animal
+5.00.50.01.00.30.8;Radiologia de animais
+5.00.50.01.00.40.6;Farmacologia e terapêutica animal
+5.00.50.01.00.50.4;Obstetrícia animal
+5.00.50.01.00.60.2;Clínica veterinária
+5.00.50.01.00.70.0;Clínica cirúrgica animal
+5.00.50.01.00.80.9;Toxicologia animal
+5.00.50.02.00.00.0;Medicina veterinária preventiva
+5.00.50.02.00.10.8;Epidemiologia animal
+5.00.50.02.00.20.6;Saneamento aplicado  à saúde do homem
+5.00.50.02.00.30.4;Doenças infecciosas de animais
+5.00.50.02.00.40.2;Doenças parasitárias de animais
+5.00.50.02.00.50.0;Saúde animal (programas sanitários)
+5.00.50.03.00.00.6;Patologia animal
+5.00.50.03.00.10.4;Patologia aviária
+5.00.50.03.00.20.2;Anatomia patologia animal
+5.00.50.03.00.30.0;Patologia clínica animal
+5.00.50.04.00.00.2;Reprodução animal
+5.00.50.04.00.10.0;Ginecologia e andrologia animal
+5.00.50.04.00.20.9;Inseminação artificial animal
+5.00.50.04.00.30.7;Fisiopatologia da reprodução animal
+5.00.50.05.00.00.9;Inspeção de produtos de origem animal
+5.00.60.00.00.00.1;Recursos pesqueiros e engenharia de pesca
+5.00.60.01.00.00.8;Recursos pesqueiros marinhos
+5.00.60.01.00.10.6;Fatores abióticos do mar
+5.00.60.01.00.20.4;Avaliação de estoques pesqueiros marinhos
+5.00.60.01.00.30.2;Exploração pesqueira marinha
+5.00.60.01.00.40.0;Manejo e conservação de recursos pesqueiros marinhos
+5.00.60.02.00.00.4;Recursos pesqueiros de águas interiores
+5.00.60.02.00.10.2;Fatores abióticos de águas interiores
+5.00.60.02.00.20.0;Avaliação de estoques pesqueiros de águas interiores
+5.00.60.02.00.30.9;Explotação pesqueira de águas interiores
+5.00.60.02.00.40.7;Manejo e conservação de recursos pesqueiros de águas interiores
+5.00.60.03.00.00.0;Aquicultura
+5.00.60.03.00.10.9;Maricultura
+5.00.60.03.00.20.7;Carcinocultura
+5.00.60.03.00.30.5;Ostreicultura
+5.00.60.03.00.40.3;Piscicultura
+5.00.60.04.00.00.7;Engenharia de pesca
+5.00.70.00.00.00.6;Ciência e tecnologia de alimentos
+5.00.70.01.00.00.2;Ciência de alimentos
+5.00.70.01.00.10.0;Valor nutritivo de alimentos
+5.00.70.01.00.20.9;Química, física, físico-química e bioquímica dos alim. e das mat.-primas alimentares
+5.00.70.01.00.30.7;Microbiologia de alimentos
+5.00.70.01.00.40.5;Fisiologia pós-colheita
+5.00.70.01.00.50.3;Toxicidade e resíduos de pesticidas em alimentos
+5.00.70.01.00.60.1;Avaliação e controle de qualidade de alimentos
+5.00.70.01.00.70.0;Padrões, legislação e fiscalização de alimentos
+5.00.70.02.00.00.9;Tecnologia de alimentos
+5.00.70.02.00.10.7;Tecnologia de produtos de origem animal
+5.00.70.02.00.20.5;Tecnologia de produtos de origem vegetal
+5.00.70.02.00.30.3;Tecnologia das bebidas
+5.00.70.02.00.40.1;Tecnologia de alimentos dietéticos e nutricionais
+5.00.70.02.00.50.0;Aproveitamento de subprodutos
+5.00.70.02.00.60.8;Embalagens de produtos alimentares
+5.00.70.03.00.00.5;Engenharia de alimentos
+5.00.70.03.00.10.3;Instalações industriais de produção de alimentos
+5.00.70.03.00.20.1;Armazenamento de alimentos
+6.00.00.00.00.00.7;Ciências sociais aplicadas
+6.00.10.00.00.00.1;Direito
+6.00.10.01.00.00.8;Teoria do direito
+6.00.10.01.00.10.6;Teoria geral do direito
+6.00.10.01.00.20.4;Teoria geral do processo
+6.00.10.01.00.30.2;Teoria do estado
+6.00.10.01.00.40.0;História do direito
+6.00.10.01.00.50.9;Filosofia do direito
+6.00.10.01.00.60.7;Lógica jurídica
+6.00.10.01.00.70.5;Sociologia jurídica
+6.00.10.01.00.80.3;Antropologia jurídica
+6.00.10.02.00.00.4;Direito público
+6.00.10.02.00.10.2;Direito tributário
+6.00.10.02.00.20.0;Direito penal
+6.00.10.02.00.30.9;Direito processual penal
+6.00.10.02.00.40.7;Direito processual civil
+6.00.10.02.00.50.5;Direito constitucional
+6.00.10.02.00.60.3;Direito administrativo
+6.00.10.02.00.70.1;Direito internacional público
+6.00.10.03.00.00.0;Direito privado
+6.00.10.03.00.10.9;Direito civil
+6.00.10.03.00.20.7;Direito comercial
+6.00.10.03.00.30.5;Direito do trabalho
+6.00.10.03.00.40.3;Direito internacional privado
+6.00.10.04.00.00.7;Direitos especiais
+6.00.20.00.00.00.6;Administração
+6.00.20.01.00.00.2;Administração de empresas
+6.00.20.01.00.10.0;Administração da produção
+6.00.20.01.00.20.9;Administração financeira
+6.00.20.01.00.30.7;Mercadologia
+6.00.20.01.00.40.5;Negócios internacionais
+6.00.20.01.00.50.3;Administração de recursos humanos
+6.00.20.02.00.00.9;Administração pública
+6.00.20.02.00.10.7;Contabilidade e finanças públicas
+6.00.20.02.00.20.5;Organizações públicas
+6.00.20.02.00.30.3;Política e planejamento governamentais
+6.00.20.02.00.40.1;Administração de pessoal
+6.00.20.03.00.00.5;Administração de setores específicos
+6.00.20.04.00.00.1;Ciencias contábeis
+6.00.30.00.00.00.0;Economia
+6.00.30.01.00.00.7;Teoria econômica
+6.00.30.01.00.10.5;Economia geral
+6.00.30.01.00.20.3;Teoria geral da economia
+6.00.30.01.00.30.1;História do pensamento econômico
+6.00.30.01.00.40.0;História econômica
+6.00.30.01.00.50.8;Sistemas econômicos
+6.00.30.02.00.00.3;Métodos quantitativos em economia
+6.00.30.02.00.10.1;Métodos e modelos matemáticos, econométricos e estatísticos
+6.00.30.02.00.20.0;Estatística sócio-econômica
+6.00.30.02.00.30.8;Contabilidade nacional
+6.00.30.02.00.40.6;Economia matemática
+6.00.30.10.00.00.6;Economias agrária e dos recursos naturais
+6.00.30.10.00.10.4;Economia agrária
+6.00.30.10.00.20.2;Economia dos recursos naturais
+6.00.30.03.00.00.0;Economia monetária e fiscal
+6.00.30.03.00.10.8;Teoria monetária e financeira
+6.00.30.03.00.20.6;Instituições monetárias e financeiras do Brasil
+6.00.30.03.00.30.4;Finanças públicas internas
+6.00.30.03.00.40.2;Política fiscal do Brasil
+6.00.30.04.00.00.6;Crescimento, flutuações e planejamento econômico
+6.00.30.04.00.10.4;Crescimento e desenvolvimento econômico
+6.00.30.04.00.20.2;Teoria e política de planejamento econômico
+6.00.30.04.00.30.0;Flutuações cíclicas e projeções econômicas
+6.00.30.04.00.40.9;Inflação
+6.00.30.05.00.00.2;Economia internacional
+6.00.30.05.00.10.0;Teoria do comércio internacional
+6.00.30.05.00.20.9;Relações do comércio política comercial integração econômica
+6.00.30.05.00.30.7;Balanço de pagamentos finanças internacionais
+6.00.30.05.00.40.5;Investimentos internacionais e ajuda externa
+6.00.30.06.00.00.9;Economia dos recursos humanos
+6.00.30.06.00.10.7;Treinamento e alocação de mão-de-obra oferta de mão-de-obra e força de trabalho
+6.00.30.06.00.20.5;Mercado de trabalho política do governo
+6.00.30.06.00.30.3;Sindicatos, dissídios coletivos, relações de emprego (empregador/empregado)
+6.00.30.06.00.40.1;Capital humano
+6.00.30.06.00.50.0;Demografia econômica
+6.00.30.07.00.00.5;Economia industrial
+6.00.30.07.00.10.3;Organização industrial e estudos industriais
+6.00.30.07.00.20.1;Mudanca tecnológica
+6.00.30.08.00.00.1;Economia do bem-estar social
+6.00.30.08.00.10.0;Economia dos programas de bem-estar social
+6.00.30.08.00.20.8;Economia do consumidor
+6.00.30.09.00.00.8;Economia regional e urbana
+6.00.30.09.00.10.6;Economia regional
+6.00.30.09.00.20.4;Economia urbana
+6.00.30.09.00.30.2;Renda e tributação
+6.00.40.00.00.00.5;Arquitetura e urbanismo
+6.00.40.01.00.00.1;Fundamentos de arquitetura e urbanismo
+6.00.40.01.00.10.0;História da arquitetura e urbanismo
+6.00.40.01.00.20.8;Teoria da arquitetura
+6.00.40.01.00.30.6;História do urbanismo
+6.00.40.01.00.40.4;Teoria do urbanismo
+6.00.40.02.00.00.8;Projeto de arquitetuta e urbanismo
+6.00.40.02.00.10.6;Planejamento e projetos da edificação
+6.00.40.02.00.20.4;Planejamento e projeto do espaço urbano
+6.00.40.02.00.30.2;Planejamento e projeto do equipamento
+6.00.40.03.00.00.4;Tecnologia de arquitetura e urbanismo
+6.00.40.03.00.10.2;Adequação ambiental
+6.00.40.04.00.00.0;Paisagismo
+6.00.40.04.00.10.9;Desenvolvimento histórico do paisagismo
+6.00.40.04.00.20.7;Conceituação de paisagismo e metodologia do paisagismo
+6.00.40.04.00.30.5;Estudos de organização do espaço exterior
+6.00.40.04.00.40.3;Projetos de espaços livres urbanos
+6.00.50.00.00.00.0;Planejamento urbano e regional
+6.00.50.01.00.00.6;Fundamentos do planejamento urbano e regional
+6.00.50.01.00.10.4;Teoria do planejamento urbano e regional
+6.00.50.01.00.20.2;Teoria da urbanização
+6.00.50.01.00.30.0;Política urbana
+6.00.50.01.00.40.9;História urbana
+6.00.50.02.00.00.2;Métodos e técnicas do planejamento urbano e regional
+6.00.50.02.00.10.0;Informação, cadastro e mapeamento
+6.00.50.02.00.20.9;Técnica de previsão urbana e regional
+6.00.50.02.00.30.7;Técnicas de análise e avaliação urbana e regional
+6.00.50.02.00.40.5;Técnicas de planejamento e projeto urbanos e regionais
+6.00.50.03.00.00.9;Serviços urbanos e regionais
+6.00.50.03.00.10.7;Administração municipal e urbana
+6.00.50.03.00.20.5;Estudos da habitação
+6.00.50.03.00.30.3;Aspectos sociais do planejamento urbano e regional
+6.00.50.03.00.40.1;Aspectos econômicos do planejamento urbano e regional
+6.00.50.03.00.50.0;Aspectos físico-ambientais do planejamento urbano e regional
+6.00.50.03.00.60.8;Serviços comunitários
+6.00.50.03.00.70.6;Infra-estruturas urbanas e regionais
+6.00.50.03.00.80.4;Transporte e tráfego urbano e regional
+6.00.50.03.00.90.2;Legislação urbana e regional
+6.00.60.00.00.00.4;Demografia
+6.00.60.01.00.00.0;Distribuição espacial
+6.00.60.01.00.10.9;Distribuição espacial geral
+6.00.60.01.00.20.7;Distribuição espacial urbana
+6.00.60.01.00.30.5;Distribuição espacial rural
+6.00.60.02.00.00.7;Tendência populacional
+6.00.60.02.00.10.5;Tendências passadas
+6.00.60.02.00.20.3;Taxas e estimativas correntes
+6.00.60.02.00.30.1;Projeções
+6.00.60.03.00.00.3;Componentes da dinâmica demografica
+6.00.60.03.00.10.1;Fecundidade
+6.00.60.03.00.20.0;Mortalidade
+6.00.60.03.00.30.8;Migração
+6.00.60.04.00.00.0;Nupcialidade e família
+6.00.60.04.00.10.8;Casamento e divórcio
+6.00.60.04.00.20.6;Família e reprodução
+6.00.60.05.00.00.6;Demografia histórica
+6.00.60.05.00.10.4;Distribuição espacial
+6.00.60.05.00.20.2;Natalidade, mortalidade, migração
+6.00.60.05.00.30.0;Nupcialidade e família
+6.00.60.05.00.40.9;Métodos e técnicas de demografia histórica
+6.00.60.06.00.00.2;Política pública e população
+6.00.60.06.00.10.0;Política populacional
+6.00.60.06.00.20.9;Políticas de redistribuição de população
+6.00.60.06.00.30.7;Políticas de planejamento familiar
+6.00.60.07.00.00.9;Fontes de dados demográficos
+6.00.70.00.00.00.9;Ciência da informação
+6.00.70.01.00.00.5;Teoria da informação
+6.00.70.01.00.10.3;Teoria geral da informação
+6.00.70.01.00.20.1;Processos da comunicação
+6.00.70.01.00.30.0;Representação da informação
+6.00.70.02.00.00.1;Biblioteconomia
+6.00.70.02.00.10.0;Teoria da classificação
+6.00.70.02.00.20.8;Métodos quantitativos. bibliometria
+6.00.70.02.00.30.6;Técnicas de recuperação de informação
+6.00.70.02.00.40.4;Processos de disseminação da informação
+6.00.70.03.00.00.8;Arquivologia
+6.00.70.03.00.10.6;Organização de arquivos
+6.00.80.00.00.00.3;Museologia
+6.00.90.00.00.00.8;Comunicação
+6.00.90.01.00.00.4;Teoria da comunicação
+6.00.90.02.00.00.0;Jornalismo e editoração
+6.00.90.02.00.10.9;Teoria e ética do jornalismo
+6.00.90.02.00.20.7;Organização editorial de jornais
+6.00.90.02.00.30.5;Organização comercial de jornais
+6.00.90.02.00.40.3;Jornalismo especializado (comunitário, rural, empresarial, científico)
+6.00.90.03.00.00.7;Rádio e televisão
+6.00.90.03.00.10.5;Radiodifusão
+6.00.90.03.00.20.3;Videodifusão
+6.00.90.04.00.00.3;Relações públicas e propaganda
+6.00.90.05.00.00.0;Comunicação visual
+6.01.00.00.00.00.0;Servico social
+6.01.00.01.00.00.7;Fundamentos do serviço social
+6.01.00.02.00.00.3;Serviço social aplicado
+6.01.00.02.00.10.1;Serviço social do trabalho
+6.01.00.02.00.20.0;Serviço social da educação
+6.01.00.02.00.30.8;Serviço social do menor
+6.01.00.02.00.40.6;Serviço social da saúde
+6.01.00.02.00.50.4;Serviço social da habitação
+6.01.10.00.00.00.5;Economia doméstica
+6.01.20.00.00.00.0;Desenho industrial
+6.01.20.01.00.00.6;Programação visual
+6.01.20.02.00.00.2;Desenho de produto
+6.01.30.00.00.00.4;Turismo
+7.00.00.00.00.00.0;Ciências humanas
+7.00.10.00.00.00.4;Filosofia
+7.00.10.01.00.00.0;História da filosofia
+7.00.10.02.00.00.7;Metafísica
+7.00.10.03.00.00.3;Lógica
+7.00.10.04.00.00.0;Ética
+7.00.10.05.00.00.6;Epistemologia
+7.00.10.06.00.00.2;Filosofia brasileira
+7.00.20.00.00.00.9;Sociologia
+7.00.20.01.00.00.5;Fundamentos da sociologia
+7.00.20.01.00.10.3;Teoria sociológica
+7.00.20.01.00.20.1;História da sociologia
+7.00.20.02.00.00.1;Sociologia do conhecimento
+7.00.20.03.00.00.8;Sociologia do desenvolvimento
+7.00.20.04.00.00.4;Sociologia urbana
+7.00.20.05.00.00.0;Sociologia rural
+7.00.20.06.00.00.7;Sociologia da saúde
+7.00.20.07.00.00.3;Outras sociologias específicas
+7.00.30.00.00.00.3;Antropologia
+7.00.30.01.00.00.0;Teoria antropológica
+7.00.30.02.00.00.6;Etnologia indígena
+7.00.30.03.00.00.2;Antropologia urbana
+7.00.30.04.00.00.9;Antropologia rural
+7.00.30.05.00.00.5;Antropologia das populações afro-brasileiras
+7.00.40.00.00.00.8;Arqueologia
+7.00.40.01.00.00.4;Teoria e método em arqueologia
+7.00.40.02.00.00.0;Arqueologia pré-histórica
+7.00.40.03.00.00.7;Arqueologia histórica
+7.00.50.00.00.00.2;História
+7.00.50.01.00.00.9;Teoria e filosofia da história
+7.00.50.02.00.00.5;História antiga e medieval
+7.00.50.03.00.00.1;História moderna e contemporânea
+7.00.50.04.00.00.8;História da América
+7.00.50.04.00.10.6;História dos Estados Unidos
+7.00.50.04.00.20.4;História latino-americana
+7.00.50.05.00.00.4;História do Brasil
+7.00.50.05.00.10.2;História do Brasil colônia
+7.00.50.05.00.20.0;História do Brasil império
+7.00.50.05.00.30.9;História do Brasil república
+7.00.50.05.00.40.7;História regional do Brasil
+7.00.50.06.00.00.0;História das ciências
+7.00.60.00.00.00.7;Geografia
+7.00.60.01.00.00.3;Geografia humana
+7.00.60.01.00.10.1;Geografia da população
+7.00.60.01.00.20.0;Geografia agrária
+7.00.60.01.00.30.8;Geografia urbana
+7.00.60.01.00.40.6;Geografia econômica
+7.00.60.01.00.50.4;Geografia política
+7.00.60.02.00.00.0;Geografia regional
+7.00.60.02.00.10.8;Teoria do desenvolvimento regional
+7.00.60.02.00.20.6;Regionalização
+7.00.60.02.00.30.4;Análise regional
+7.00.70.00.00.00.1;Psicologia
+7.00.70.01.00.00.8;Fundamentos e medidas da psicologia
+7.00.70.01.00.10.6;História, teorias e sistemas em psicologia
+7.00.70.01.00.20.4;Metodologia, instrumentação e equipamento em psicologia
+7.00.70.01.00.30.2;Construção e validade de testes, escalas e outras medidas psicológicas
+7.00.70.01.00.40.0;Técnicas de processamento estatístico, matemático e computacional em psicologia
+7.00.70.02.00.00.4;Psicologia experimental
+7.00.70.02.00.10.2;Processos perceptuais e motores
+7.00.70.02.00.20.0;Processos de aprendizagem, memória e motivação
+7.00.70.02.00.30.9;Processos cognitivos e atencionais
+7.00.70.02.00.40.7;Estados subjetivos e emoção
+7.00.70.10.00.00.7;Tratamento e prevenção psicológica
+7.00.70.10.00.10.5;Intervenção terapêutica
+7.00.70.10.00.20.3;Programas de atendimento comunitário
+7.00.70.10.00.30.1;Treinamento e reabilitação
+7.00.70.10.00.40.0;Desvios da conduta
+7.00.70.10.00.50.8;Distúrbios da linguagem
+7.00.70.10.00.60.6;Distúrbios psicossomáticos
+7.00.70.03.00.00.0;Psicologia fisiológica
+7.00.70.03.00.10.9;Neurologia, eletrofisiologia e comportamento
+7.00.70.03.00.20.7;Processos psico-fisiológicos
+7.00.70.03.00.30.5;Estimulação elétrica e com drogas comportamento
+7.00.70.03.00.40.3;Psicobiologia
+7.00.70.04.00.00.7;Psicologia comparativa
+7.00.70.04.00.10.5;Estudos naturalísticos do comportamento animal
+7.00.70.04.00.20.3;Mecanismos instintivos e processos sociais em animais
+7.00.70.05.00.00.3;Psicologia social
+7.00.70.05.00.10.1;Relações interpessoais
+7.00.70.05.00.20.0;Processos grupais e de comunicação
+7.00.70.05.00.30.8;Papéis e estruturas sociais indivíduo
+7.00.70.06.00.00.0;Psicologia cognitiva
+7.00.70.07.00.00.6;Psicologia do desenvolvimento humano
+7.00.70.07.00.10.4;Processos perceptuais e cognitivos desenvolvimento
+7.00.70.07.00.20.2;Desenvolvimento social e da personalidade
+7.00.70.08.00.00.2;Psicologia do ensino e da aprendizagem
+7.00.70.08.00.10.0;Planejamento institucional
+7.00.70.08.00.20.9;Programação de condições de ensino
+7.00.70.08.00.30.7;Treinamento de pessoal
+7.00.70.08.00.40.5;Aprendizagem e desempenho acadêmicos
+7.00.70.08.00.50.3;Ensino e aprendizagem na sala de aula
+7.00.70.09.00.00.9;Psicologia do trabalho e organizacional
+7.00.70.09.00.10.7;Análise institucional
+7.00.70.09.00.20.5;Recrutamento e seleção de pessoal
+7.00.70.09.00.30.3;Treinamento e avaliação
+7.00.70.09.00.40.1;Fatores humanos no trabalho
+7.00.70.09.00.50.0;Planejamento ambiental e comportamento humano
+7.00.80.00.00.00.6;Educação
+7.00.80.01.00.00.2;Fundamentos da educação
+7.00.80.01.00.10.0;Filosofia da educação
+7.00.80.01.00.20.9;História da educação
+7.00.80.01.00.30.7;Sociologia da educação
+7.00.80.01.00.40.5;Antropologia educacional
+7.00.80.01.00.50.3;Economia da educação
+7.00.80.01.00.60.1;Psicologia educacional
+7.00.80.02.00.00.9;Administração educacional
+7.00.80.02.00.10.7;Administração de sistemas educacionais
+7.00.80.02.00.20.5;Administração de unidades educativas
+7.00.80.03.00.00.5;Planejamento e avaliação educacional
+7.00.80.03.00.10.3;Política educacional
+7.00.80.03.00.20.1;Planejamento educacional
+7.00.80.03.00.30.0;Avaliação de sistemas, instituições, planos e programas educacionais
+7.00.80.04.00.00.1;Ensino-aprendizagem
+7.00.80.04.00.10.0;Teorias da instrução
+7.00.80.04.00.20.8;Métodos e técnicas de ensino
+7.00.80.04.00.30.6;Tecnologia educacional
+7.00.80.04.00.40.4;Avaliação da aprendizagem
+7.00.80.05.00.00.8;Currículo
+7.00.80.05.00.10.6;Teoria geral de planejamento e desenvolvimento curricular
+7.00.80.05.00.20.4;Currículos específicos para níveis e tipos de educação
+7.00.80.06.00.00.4;Orientação e aconselhamento
+7.00.80.06.00.10.2;Orientação educacional
+7.00.80.06.00.20.0;Orientação vocacional
+7.00.80.07.00.00.0;Tópicos específicos de educação
+7.00.80.07.00.10.9;Educação de adultos
+7.00.80.07.00.20.7;Educação permanente
+7.00.80.07.00.30.5;Educação rural
+7.00.80.07.00.40.3;Educação em periferias urbanas
+7.00.80.07.00.50.1;Educação especial
+7.00.80.07.00.60.0;Educação pré-escolar
+7.00.80.07.00.70.8;Ensino profissionalizante
+7.00.90.00.00.00.0;Ciência política
+7.00.90.01.00.00.7;Teoria Política
+7.00.90.01.00.10.5;Teoria política clássica
+7.00.90.01.00.20.3;Teoria política medieval
+7.00.90.01.00.30.1;Teoria política moderna
+7.00.90.01.00.40.0;Teoria política contemporânea
+7.00.90.02.00.00.3;Estado e governo
+7.00.90.02.00.10.1;Estrutura e transformação do estado
+7.00.90.02.00.20.0;Sistemas governamentais comparados
+7.00.90.02.00.30.8;Relações intergovernamentais
+7.00.90.02.00.40.6;Estudos do poder local
+7.00.90.02.00.50.4;Instituições governamentais específicas
+7.00.90.03.00.00.0;Comportamento político
+7.00.90.03.00.10.8;Estudos eleitorais e partidos políticos
+7.00.90.03.00.20.6;Atitude e ideologias políticas
+7.00.90.03.00.30.4;Conflitos e coalizões políticas
+7.00.90.03.00.40.2;Comportamento legislativo
+7.00.90.03.00.50.0;Classes sociais e grupos de interesse
+7.00.90.04.00.00.6;Políticas públicas
+7.00.90.04.00.10.4;Análise do processo decisório
+7.00.90.04.00.20.2;Análise institucional
+7.00.90.04.00.30.0;Técnicas de antecipação
+7.00.90.05.00.00.2;Política internacional
+7.00.90.05.00.10.0;Política externa do Brasil
+7.00.90.05.00.20.9;Organizações internacionais
+7.00.90.05.00.30.7;Integração internacional, conflito, guerra e paz
+7.00.90.05.00.40.5;Relações internacionais, bilaterais e multilaterais
+7.01.00.00.00.00.3;Teologia
+7.01.00.01.00.00.0;História da teologia
+7.01.00.02.00.00.6;Teologia moral
+7.01.00.03.00.00.2;Teologia sistemática
+7.01.00.04.00.00.9;Teologia pastoral
+8.00.00.00.00.00.2;Linguística, letras e artes
+8.00.10.00.00.00.7;Linguística
+8.00.10.01.00.00.3;Teoria e análise linguística
+8.00.10.02.00.00.0;Fisiologia da linguagem
+8.00.10.03.00.00.6;Linguística histórica
+8.00.10.04.00.00.2;Sociolinguística e dialetologia
+8.00.10.05.00.00.9;Psicolinguística
+8.00.10.06.00.00.5;Linguística aplicada
+8.00.20.00.00.00.1;Letras
+8.00.20.01.00.00.8;Língua portuguesa
+8.00.20.02.00.00.4;Línguas estrangeiras modernas
+8.00.20.10.00.00.7;Literatura comparada
+8.00.20.03.00.00.0;Línguas clássicas
+8.00.20.04.00.00.7;Línguas indígenas
+8.00.20.05.00.00.3;Teoria literária
+8.00.20.06.00.00.0;Literatura brasileira
+8.00.20.07.00.00.6;Outras literaturas vernáculas
+8.00.20.08.00.00.2;Literaturas estrangeiras modernas
+8.00.20.09.00.00.9;Literaturas clássicas
+8.00.30.00.00.00.6;Artes
+8.00.30.01.00.00.2;Fundamentos e crítica das artes
+8.00.30.01.00.10.0;Teoria da arte
+8.00.30.01.00.20.9;História da arte
+8.00.30.01.00.30.7;Crítica da arte
+8.00.30.02.00.00.9;Artes plásticas
+8.00.30.02.00.10.7;Pintura
+8.00.30.02.00.20.5;Desenho
+8.00.30.02.00.30.3;Gravura
+8.00.30.02.00.40.1;Escultura
+8.00.30.02.00.50.0;Cerâmica
+8.00.30.02.00.60.8;Tecelagem
+8.00.30.10.00.00.1;Educação artística
+8.00.30.03.00.00.5;Música
+8.00.30.03.00.10.3;Regência
+8.00.30.03.00.20.1;Instrumentação musical
+8.00.30.03.00.30.0;Composição musical
+8.00.30.03.00.40.8;Canto
+8.00.30.04.00.00.1;Dança
+8.00.30.04.00.10.0;Execução da dança
+8.00.30.04.00.20.8;Coreografia
+8.00.30.05.00.00.8;Teatro
+8.00.30.05.00.10.6;Dramaturgia
+8.00.30.05.00.20.4;Direção teatral
+8.00.30.05.00.30.2;Cenografia
+8.00.30.05.00.40.0;Interpretação teatral
+8.00.30.06.00.00.4;Ópera
+8.00.30.07.00.00.0;Fotografia
+8.00.30.08.00.00.7;Cinema
+8.00.30.08.00.10.5;Administração e produção de filmes
+8.00.30.08.00.20.3;Roteiro e direção cinematográficos
+8.00.30.08.00.30.1;Técnicas de registro e processamento de filmes
+8.00.30.08.00.40.0;Interpretação cinematográfica
+8.00.30.09.00.00.3;Artes do vídeo
+9.00.00.00.00.00.5;Multidisciplinar
+9.00.10.00.00.00.0;Administração hospitalar
+9.00.20.00.00.00.4;Administração rural
+9.00.30.00.00.00.9;Carreira militar
+9.00.40.00.00.00.3;Carreira religiosa
+9.00.50.00.00.00.8;Ciências
+9.00.60.00.00.00.2;Biomedicina
+9.00.70.00.00.00.7;Ciências atuariais
+9.00.80.00.00.00.1;Ciências sociais
+9.00.90.00.00.00.6;Decoração
+9.01.00.00.00.00.9;Desenho de moda
+9.01.10.00.00.00.3;Desenho de projetos
+9.01.20.00.00.00.8;Diplomacia
+9.01.30.00.00.00.2;Engenharia de agrimensura
+9.01.40.00.00.00.7;Engenharia cartográfica
+9.01.50.00.00.00.1;Engenharia de armamentos
+9.01.60.00.00.00.6;Engenharia mecatrônica
+9.01.70.00.00.00.0;Engenharia têxtil
+9.01.80.00.00.00.5;Estudos sociais
+9.01.90.00.00.00.0;História natural
+9.02.00.00.00.00.2;Química industrial
+9.02.10.00.00.00.7;Relações internacionais
+9.02.20.00.00.00.1;Relações públicas
+9.02.30.00.00.00.6;Secretariado executivo
