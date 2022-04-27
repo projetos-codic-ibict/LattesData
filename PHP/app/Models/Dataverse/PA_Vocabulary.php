@@ -120,7 +120,6 @@ class PA_Vocabulary extends Model
                     $sx .= $sep.round(trim($line['vc_order']));
                     $sx .= "\n";
                 }
-            $sx = substr($sx,0,strlen($sx)-2).'xx';
             return $sx;
         }      
 
