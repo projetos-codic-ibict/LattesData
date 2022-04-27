@@ -288,7 +288,7 @@ class PA_Schema extends Model
                     $vc = $line['m_name'];
                     $ln3 .= $PA_Vocabulary->export($vc);                    
                 }
-            $rst = $ln1.chr(10).$ln2.chr(10).$blnk2.$ln3;
+            $rst = $ln1.chr(10).$ln2.chr(10).$blnk2.$ln3.'xx';;
             while(ord(substr($rst,strlen($rst)-1)) < 32)
                 {
                     $rst = substr($rst,0,strlen($rst)-1);
