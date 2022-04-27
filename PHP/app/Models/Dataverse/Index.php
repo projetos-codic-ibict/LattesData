@@ -76,7 +76,10 @@ class Index extends Model
 						break;
 					case 'settings':
 						$sx .= $this->settings($d1,$d2,$d3,$d4);
-						break;						
+						break;
+					case 'apache':
+						$sx .= $this->apache($d1,$d2,$d3,$d4);
+						break;
 					default:
 						$sx .= h(lang('dataverse.main_menu'),4);
 						$sx .= $this->menu();
@@ -96,6 +99,7 @@ class Index extends Model
 				$menu[PATH.MODULE.'dataverse/settings'] = lang('dataverse.Settings');	
 				$menu[PATH.MODULE.'dataverse/pa'] = lang('dataverse.PA');
 				$menu[PATH.MODULE.'dataverse/embargo'] = lang('dataverse.Embargo');
+				$menu[PATH.MODULE.'dataverse/apache'] = lang('dataverse.Apache-Proxy');
 			} else {
 				$menu[PATH.MODULE.'dataverse/server'] = lang('dataverse.SetServerDefine');
 			}
@@ -127,6 +131,43 @@ class Index extends Model
 			$sx .= $Licences->getLicences($d1,$d2,$d3);
 			return $sx;
 		}
+
+		function apache($d1,$d2,$d3)
+		{
+			$sx = h('dataverse.Apache2',1);
+			$sx .= 'PROXY para apache';
+			
+			$code = '
+			<Location />
+					ProxyPass http://localhost:8080/
+					SetEnv force-proxy-request-1.0 1
+					SetEnv proxy-nokeepalive 1
+			</Location>
+
+			<Location /config>
+					ProxyPass http://localhost:81
+					SetEnv force-proxy-request-1.0 1
+					SetEnv proxy-nokeepalive 1
+			</Location>';
+
+			$code .= cr();
+			$code .= '
+			<VirtualHost *:81>
+				ServerAdmin renefgj@gmail.com
+				ServerName pocdadosabertos.inep.rnp.br
+				ServerAlias 20.197.236.31
+				DocumentRoot /data/LattesData/PHP/public
+				<Directory "/data/LattesData/PHP/public">
+					Require all granted
+				</Directory>
+			</VirtualHost>
+			';
+			$code = troca($code,'<','&lt;');
+			$code = troca($code,chr(13),'<br>');
+			$sx .= '<tt>'.$code.'</tt>';
+			
+			return $sx;
+		}		
 
 	function solr($d1,$d2,$d3)
 		{

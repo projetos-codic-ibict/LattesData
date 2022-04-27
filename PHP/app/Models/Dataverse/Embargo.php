@@ -59,7 +59,9 @@ class Embargo extends Model
 	{
 		$Dataverse = new \App\Models\Dataverse\index();
 		$url = $Dataverse->server();
-		$sx = 'curl -X PUT -d 24 '.$url.'/api/admin/settings/:MaxEmbargoDurationInMonths';
+		$sx = 'curl -X PUT -d <b>24</b> '.$url.'/api/admin/settings/:MaxEmbargoDurationInMonths';
+		$sx .= '<br>';
+		$sx .= 
 		return $sx;
 	}
 }
