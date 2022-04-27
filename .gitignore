@@ -4,3 +4,4 @@
 PHP\writable\session\*
 PHP\writable\session\ci_session*
 PHP\.tmp
+PHP/writable/session/*

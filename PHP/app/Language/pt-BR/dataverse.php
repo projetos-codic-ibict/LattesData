@@ -15,6 +15,7 @@ return[
         'export'=>'Gerar TSV',
         'vocabulary_select'=>'Vocabulários Controlados',
         'PA'=>'Perfil de Aplicação (Metadados)',
+        'PA_External'=>'Perfil de Aplicação (Vocabulários Externos)',
         'Settings'=>'Configurações',
         'Customize'=>'Customizações',
         'Licences'=>'Licensas de uso',

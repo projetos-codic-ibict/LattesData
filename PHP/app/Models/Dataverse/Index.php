@@ -49,7 +49,11 @@ class Index extends Model
 					case 'pa':
 						$PA_Schema = new \App\Models\Dataverse\PA_Schema();
 						$sx = $PA_Schema->index($d2,$d3,$d4,$d5);
-						break;	
+						break;
+					case 'pave':
+						$PA_SchemaExternal = new \App\Models\Dataverse\PA_SchemaExternal();
+						$sx = $PA_SchemaExternal->index($d2,$d3,$d4,$d5);
+						break;							
 					case 'embargo':
 						$Embargo = new \App\Models\Dataverse\Embargo();
 						$sx = $Embargo->index($d2,$d3,$d4,$d5);
@@ -98,6 +102,7 @@ class Index extends Model
 				$menu[PATH.MODULE.'dataverse/solr'] = lang('dataverse.Solr');
 				$menu[PATH.MODULE.'dataverse/settings'] = lang('dataverse.Settings');	
 				$menu[PATH.MODULE.'dataverse/pa'] = lang('dataverse.PA');
+				$menu[PATH.MODULE.'dataverse/pave'] = lang('dataverse.PA_External');
 				$menu[PATH.MODULE.'dataverse/embargo'] = lang('dataverse.Embargo');
 				$menu[PATH.MODULE.'dataverse/apache'] = lang('dataverse.Apache-Proxy');
 			} else {
