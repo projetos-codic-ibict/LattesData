@@ -363,20 +363,24 @@
         }
 
         #investigadores {
-            color: #62c6ac;
+            /* color: #62c6ac; */
+            color: #3174AF;
         }
 
         #proyectos_inv {
-            color: #83c42f;
+            /*color: #83c42f; */
+            color: #3174AF;
         }
 
         #headAllTimeAllDatasetsValue {
-            color: #fe842b;
+            /*color: #fe842b; */
+            color: #3174AF;
         }
 
 
         #activityAllTimeDepositedFilesValue {
-            color: rgba(152, 84, 201, 1);
+            /* color: rgba(152, 84, 201, 1); */
+            color: #3174AF;
         }
 
         /* .archivos-text{
@@ -428,12 +432,7 @@
 
     <div class="container-intro">
         <div class="col-xs-12">
-            <p class="text-intro">El Repositorio de datos de investigación de la Universidad del Rosario es una
-                plataforma
-                online para administrar, almacenar y difundir datos de investigación de los investigadores de la UR y
-                sus
-                aliados, convirtiéndose también en un espacio de trabajo colaborativo que permite el acceso a datos
-                publicados para su análisis y re-uso.</p>
+            <p class="text-intro">O LattesData é o repositório de dados de pesquisa de projetos fomentados pelo CNPq</p>
         </div>
         <div class="col-xs-12">
 
@@ -445,7 +444,7 @@
                                 onkeydown="if (event.keyCode == 13) document.getElementById('btnDataverseSearch').click();">
                             <span class="input-group-btn">
                                 <button id="btnDataverseSearch" class="btn btn-default" type="button"
-                                    onclick="window.location = '/dataverse/ur?q=' + document.getElementById('inputDataverseSearch').value;return false;"><span
+                                    onclick="window.location = '/dataverse/lattesdata?q=' + document.getElementById('inputDataverseSearch').value;return false;"><span
                                         class="glyphicon glyphicon-search"></span> <span
                                         class="button-find-text">Buscar</span></button>
                             </span>
@@ -454,7 +453,7 @@
                     <div class="col-md-2 col-sm-12 col-xs-12 explorar">
                         <span class="input-group-btn ">
                             <button id="btnDataverseSearch" class="btn btn-default " type="button"
-                                onclick="window.location = '/dataverse/ur?q=' + document.getElementById('inputDataverseSearch').value;return false;">
+                                onclick="window.location = '/dataverse/lattesdata?q=' + document.getElementById('inputDataverseSearch').value;return false;">
                                 <span class="button-find-text">Explorar</span></button>
                         </span>
                     </div>
@@ -469,19 +468,19 @@
             <div class="col-xs-12 col-md-4 right-column">
                 <div class="investigadores-container">
                     <div id="investigadores" class="col-xs-3"></div>
-                    <div class="investigadores-text col-xs-9">Investigadores</div>
+                    <div class="investigadores-text col-xs-9">Pesquisadores</div>
                 </div>
                 <div class="proyectos-container">
                     <div id="proyectos_inv" class="col-xs-3"></div>
-                    <div class="proyectos-text col-xs-9">Proyectos de investigación</div>
+                    <div class="proyectos-text col-xs-9">Conjunto de Dados (Datasets)</div>
                 </div>
                 <div class="dataverses-container">
                     <div id="headAllTimeAllDatasetsValue" class="col-xs-3"></div>
-                    <div class="dataverses-text col-xs-9">Datasets abiertos</div>
+                    <div class="dataverses-text col-xs-9">Grupos de Pesquisa</div>
                 </div>
                 <div class="archivos-container">
                     <div id="activityAllTimeDepositedFilesValue" class="col-xs-3">...</div>
-                    <div class="archivos-text col-xs-9">Archivos</div>
+                    <div class="archivos-text col-xs-9">Projetos</div>
                 </div>
             </div>
         </div>
@@ -511,7 +510,7 @@
                     NOTE: The alias of the root dataverse will need to be configured in this URL 
                     -->
                 <!-- <div class="col-xs-12 margin-top">
-                    <p class="browse-subjects small text-muted"><a href="/dataverse/ur">ALL DATA</a> <span
+                    <p class="browse-subjects small text-muted"><a href="/dataverse/lattesdata">ALL DATA</a> <span
                             class="glyphicon glyphicon-chevron-right"></span></p>
                 </div> -->
             </div>
@@ -531,7 +530,7 @@
         var simpleCatSearch = baseUrl + "/api/search?q=*&type=dataset&sort=dateSort&order=desc&fq=categoryOfDataverse:";
         var simpleCatSearchDataverse = baseUrl + "/api/search?q=*&type=dataverse&sort=dateSort&order=desc&fq=dvCategory:";
         var simpleCatSearchInvestigador = baseUrl + "api/search?q=*&type=dataset&sort=dateSort&order=desc&per_page=1000";
-        //http://ec2-52-91-47-172.compute-1.amazonaws.com:8080/dataverse/ur?q=&fq1=dvCategory%3A%22Research+Project%22&fq0=dvObjectType%3A%28dataverses+OR+datasets%29&types=dataverses%3Adatasets&sort=dateSort&order=
+        //http://ec2-52-91-47-172.compute-1.amazonaws.com:8080/dataverse/lattesdata?q=&fq1=dvCategory%3A%22Research+Project%22&fq0=dvObjectType%3A%28dataverses+OR+datasets%29&types=dataverses%3Adatasets&sort=dateSort&order=
         function writeRecentDatasetsInDataverses(fqString, resultCount, elm) {
             $.get(simpleCatSearch + fqString + "&per_page=" + resultCount, function (jData) {
                 var resultHtml = "";
@@ -625,8 +624,8 @@
                     fullArray.sort();
                     fullArray.forEach(function (subject) {
                         // NOTE: The alias of the root dataverse will need to be configured in this URL 
-                        // resultHtml += "<p class=\"browse-subjects\"><a href=\"/dataverse/ur?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + "</a> <span class=\"text-muted\">" + subject[1] + "</span></p>";
-                        resultHtml += "<a class=\"browse-subjects\" href=\"/dataverse/ur?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + " " + subject[1] + "</a>";
+                        // resultHtml += "<p class=\"browse-subjects\"><a href=\"/dataverse/lattesdata?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + "</a> <span class=\"text-muted\">" + subject[1] + "</span></p>";
+                        resultHtml += "<a class=\"browse-subjects\" href=\"/dataverse/lattesdata?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + " " + subject[1] + "</a>";
                     });
                     document.getElementById(elm).innerHTML = resultHtml;
                 });
@@ -663,8 +662,8 @@
                 fullArray.sort();
                 fullArray.forEach(function (subject) {
                     // NOTE: The alias of the root dataverse will need to be configured in this URL 
-                    // resultHtml += "<p class=\"browse-subjects\"><a href=\"/dataverse/ur?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + "</a> <span class=\"text-muted\">" + subject[1] + "</span></p>";
-                    resultHtml += "<a class=\"browse-subjects\" href=\"/dataverse/ur?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=datasets&sort=dateSort&order=desc\"><span>" + subject[0] + " " + subject[1] + "</span></a>";
+                    // resultHtml += "<p class=\"browse-subjects\"><a href=\"/dataverse/lattesdata?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + "</a> <span class=\"text-muted\">" + subject[1] + "</span></p>";
+                    resultHtml += "<a class=\"browse-subjects\" href=\"/dataverse/lattesdata?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=datasets&sort=dateSort&order=desc\"><span>" + subject[0] + " " + subject[1] + "</span></a>";
                     // console.log(subject[0]+" - "+subject[1]);
                 });
                 document.getElementById(elm).innerHTML = resultHtml;
