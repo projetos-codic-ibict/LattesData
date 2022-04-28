@@ -1,41 +1,702 @@
-<style>
+<script>
+    //JFLF: Validacion de URL's para esconder/mostrar el navbar-icon al hacer scroll
+    var navbar = document.getElementById("navbar-icon");
+    var sticky = navbar.offsetTop;
 
-</style>
-<div class="container">
-    <div class="row">
-        <div class=""col-md-4">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">
-                        <a href="http://www.cnpq.br/">
-                            <img src="http://www.cnpq.br/wp-content/themes/cnpq/images/logo-cnpq.png" alt="CNPq" width="100" height="100" />
-                        </a>
-                    </h3>
+    URL = window.location.pathname;
+
+    $(document).ready(function () {
+        if ((URL == "/") || ((URL.indexOf("dataverse.xhtml") != -1)
+            || (URL.indexOf("dataset.xhtml") != -1)
+            || (URL.indexOf("file.xhtml") != -1)
+            || (URL.indexOf("editdatafiles.xhtml") != -1)
+            || (URL.indexOf("dataverse-") != -1)
+            || (URL.indexOf("/dataverse/") != -1))) {
+
+            window.onscroll = function () {
+                var prevScrollpos = window.pageYOffset;
+                if (prevScrollpos > 100) {
+                    navbar.classList.remove("hidden-logo");
+                } else {
+                    navbar.classList.add("hidden-logo");
+                }
+
+            }
+        } else {
+            navbar.classList.remove("hidden-logo");
+        }
+    })
+</script>
+<div class="container" id="content">
+    <style>
+        /* Custom CSS for the custom homepage... */
+        .lite-header {
+            font-weight: normal;
+        }
+
+        .heavy-rule {
+            border: 1px solid #DDD;
+        }
+
+        .spacer-rule {
+            border: 0;
+            margin-top: 0;
+        }
+
+        .activity-rule {
+            width: 85%;
+            margin-left: 30px;
+        }
+
+        div.hmpg-action-block {
+            padding-top: 1em;
+        }
+
+        .btn-harvard {
+            color: #A51C30;
+            background: #FFFFFF;
+            font-weight: bold;
+        }
+
+        .btn-harvard:hover,
+        .btn-harvard:focus,
+        .btn-harvard:active,
+        .btn-harvard.active,
+        .open .dropdown-toggle.btn-harvard {
+            color: #7F000A;
+            background: #FFFFFF;
+            font-weight: bold;
+        }
+
+        .btn-harvard span.glyphicon {
+            margin-right: 0;
+        }
+
+
+        @media (min-width: 768px) {
+            #dataversesBySubject {
+                -webkit-column-count: 3;
+                -moz-column-count: 3;
+                column-count: 3;
+                overflow: hidden;
+                -webkit-column-break-inside: avoid;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                break-inside: avoid-column;
+                display: flex;
+                justify-content: space-evenly;
+                flex-wrap: wrap;
+            }
+
+            #journals {
+                -webkit-column-count: 1;
+                -moz-column-count: 1;
+                column-count: 1;
+                overflow: hidden;
+            }
+
+            #researchers {
+                -webkit-column-count: 2;
+                -moz-column-count: 2;
+                column-count: 2;
+                overflow: hidden;
+            }
+
+            #journals div.hmpg-recent-block,
+            #researchers div.hmpg-recent-block {
+                -webkit-column-break-inside: avoid;
+                page-break-inside: avoid;
+                break-inside: avoid;
+                break-inside: avoid-column;
+            }
+
+        }
+
+        #dataversesBySubject a.browse-subjects {
+            display: inline-block;
+            width: 100%;
+            height: 6em;
+            padding: 0 2px;
+            flex: 0 0 30%;
+        }
+
+        #dataversesBySubject a.browse-subjects a {
+            color: #C55B28;
+        }
+
+        #dataversesBySubject a.browse-subjects a:focus,
+        #dataversesBySubject a.browse-subjects a:hover {
+            color: #9F3502;
+        }
+
+        div.hmpg-recent-col p.placeholder {
+            display: inline-block;
+        }
+
+        div.hmpg-recent-col div.hmpg-recent-block {
+            border-bottom: 1px solid #DDD;
+            margin-bottom: 12px;
+        }
+
+        /* NOTE: REMOVED THUMBNAILS
+        div.hmpg-recent-col div.col-xs-2.hmpg-recent-thumb {width: 48px !important;height:48px;padding: 0 !important;}
+        div.hmpg-recent-col div.hmpg-recent-thumb img {max-height:48px;max-width:48px;}
+        div.hmpg-recent-col div.hmpg-recent-thumb span {font-size:38px;}
+        */
+
+        div.activity-label {
+            line-height: 19px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        /***CAMBIOS UR***/
+        .text-intro {
+            margin-top: 2rem;
+            padding: 10px;
+            text-align: justify;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        div.search-widget {
+            /* padding-bottom: 2em; */
+            border: 1px #609eda solid;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        #inputDataverseSearch {
+            border: none;
+        }
+
+        #btnDataverseSearch {
+            border-radius: 20px;
+        }
+
+        .button-find-text {
+            color: #609eda;
+            font-weight: 600;
+        }
+
+        .btn span.glyphicon {
+            color: white;
+            text-shadow: -1px 0 #609eda, 0 1px #609eda, 1px 0 #609eda, 0 -1px #609eda;
+            font-weight: 600;
+        }
+
+        .datasets-publicos-border {
+            width: 170px;
+            height: 170px;
+            border-radius: 50%;
+            background: conic-gradient(red, yellow, green, cyan, blue, magenta, red);
+            background: #1b5c7e;
+            display: flex;
+            margin-left: 10em;
+        }
+
+        .dataset-publicos {
+            margin: auto;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: white;
+            text-align: center;
+            display: inline-grid;
+            padding-left: 2em;
+            padding-right: 2em;
+            padding-top: 1em;
+            padding-bottom: 1em;
+            -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.19);
+            box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.19);
+        }
+
+        .dataset-publicos #headAllTimeAllDatasetsValue {
+            margin: auto;
+            font-size: 55px;
+        }
+
+        .dataset-publicos-texto {
+            font-size: 15px;
+        }
+
+        .dataset-row {
+            display: flex;
+            margin-top: 2em;
+            margin-bottom: 3em;
+        }
+
+        .datasets-downloads {
+            display: flex;
+            margin: auto;
+            border: #d3d3d3 1px solid;
+            margin-left: 3em;
+            padding: unset;
+            border-top-right-radius: 25px;
+            border-bottom-right-radius: 25px;
+            overflow: hidden;
+        }
+
+        .datasets-downloads .text-muted {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            background: chocolate;
+            clip-path: polygon(100% 0%, 100% 51%, 100% 100%, 25% 100%, 0% 50%, 25% 0%);
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            padding-left: 1em;
+            background: linear-gradient(90deg, rgba(50, 49, 128, 1) 4%, rgba(109, 68, 195, 1) 100%);
+        }
+
+        #headAllTimeAllDownloadsValue {
+            font-size: 35px;
+            color: #393477;
+        }
+
+        .browse-subjects {
+            border: 1px #406568 solid;
+            border-radius: 10px;
+            margin-bottom: 1em;
+            display: inline-table !important;
+            display: flex !important;
+            align-items: center;
+            height: 50px;
+            padding: 10px !important;
+            color: #999a9c;
+            color: #1b5a7c;
+            //background: linear-gradient(90deg, rgba(243, 244, 246, 1) 4%, rgba(201, 201, 201, 1) 48%, rgba(243, 244, 246, 1) 100%);
+        }
+
+        a.browse-subjects:hover {
+            text-decoration: none;
+            transition: 1s;
+            background: white;
+            background: #1b5a7c;
+            color: white;
+        }
+
+        .explorar {
+            padding: unset;
+        }
+
+        .investigadores-container,
+        .proyectos-container,
+        .dataverses-container,
+        .archivos-container {
+            display: flex;
+            height: 80px;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            /* border: 1px solid black; */
+            align-items: center;
+            border-radius: 3em;
+            overflow: hidden;
+            -webkit-box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.21);
+            box-shadow: 5px 5px 15px 5px rgba(0, 0, 0, 0.21);
+        }
+
+        .right-column {
+            display: flex;
+            flex-direction: column;
+        }
+
+        #investigadores,
+        #proyectos_inv,
+        #headAllTimeAllDataversesValue,
+        #activityAllTimeDepositedFilesValue,
+        #headAllTimeAllDatasetsValue {
+            text-align: center;
+            font-size: 30px;
+        }
+
+        .investigadores-text,
+        .proyectos-text,
+        .dataverses-text,
+        .archivos-text {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            font-size: 25px;
+        }
+
+        #activityAllTimeDepositedFilesValue {
+            justify-content: center;
+            height: 100%;
+            display: flex;
+            align-items: center;
+        }
+
+        .investigadores-text {
+            background: linear-gradient(90deg, rgba(99, 197, 172, 1) 0%, rgba(53, 224, 164, 1) 100%);
+            color: white;
+            font-size: 25px;
+            -webkit-box-shadow: -4px 2px 16px 3px rgba(0, 0, 0, 0.14);
+            box-shadow: -4px 2px 16px 3px rgba(0, 0, 0, 0.14);
+        }
+
+        .proyectos-text {
+            background: linear-gradient(90deg, rgba(128, 195, 46, 1) 0%, rgba(197, 224, 65, 1) 100%);
+            color: white;
+            font-size: 25px;
+            -webkit-box-shadow: -4px 2px 16px 3px rgba(0, 0, 0, 0.14);
+            box-shadow: -4px 2px 16px 3px rgba(0, 0, 0, 0.14);
+        }
+
+        .dataverses-text {
+            background: linear-gradient(90deg, rgba(254, 130, 43, 1) 0%, rgba(254, 172, 53, 1) 100%);
+            color: white;
+            font-size: 25px;
+            -webkit-box-shadow: -4px 2px 16px 3px rgba(0, 0, 0, 0.14);
+            box-shadow: -4px 2px 16px 3px rgba(0, 0, 0, 0.14);
+        }
+
+
+        .archivos-text {
+            background: linear-gradient(90deg, rgba(174, 120, 218, 1) 0%, rgba(152, 84, 201, 1) 100%);
+            color: white;
+            font-size: 25px;
+            -webkit-box-shadow: 5px 2px 16px 3px rgba(0, 0, 0, 0.14);
+            box-shadow: 5px 2px 16px 3px rgba(0, 0, 0, 0.14);
+        }
+
+        #investigadores {
+            color: #62c6ac;
+        }
+
+        #proyectos_inv {
+            color: #83c42f;
+        }
+
+        #headAllTimeAllDatasetsValue {
+            color: #fe842b;
+        }
+
+
+        #activityAllTimeDepositedFilesValue {
+            color: rgba(152, 84, 201, 1);
+        }
+
+        /* .archivos-text{
+            color:#9956ca;
+        } */
+
+        .explorar .input-group-btn {
+            text-align: center;
+        }
+
+        @media only screen and (max-width: 676px) {
+            #headAllTimeAllDownloadsValue {
+                /* font-size: 20px; */
+            }
+
+            .datasets-downloads .text-muted {
+                /* font-size: 15px; */
+            }
+
+            .dataset-row {
+                flex-direction: column;
+            }
+
+            .datasets-downloads {
+                max-width: 85%;
+            }
+
+            .datasets-downloads {
+                margin-top: 2em;
+            }
+
+            .row {
+                margin-right: unset;
+                margin-left: unset;
+                align-items: center;
+            }
+
+            .datasets-publicos-border {
+                margin-left: unset;
+            }
+        }
+
+        /***QUITAR SI HAY ESTADISTICAS***/
+        .datasets-publicos-border {
+            margin-left: 20em;
+        }
+    </style>
+
+
+    <div class="container-intro">
+        <div class="col-xs-12">
+            <p class="text-intro">El Repositorio de datos de investigación de la Universidad del Rosario es una
+                plataforma
+                online para administrar, almacenar y difundir datos de investigación de los investigadores de la UR y
+                sus
+                aliados, convirtiéndose también en un espacio de trabajo colaborativo que permite el acceso a datos
+                publicados para su análisis y re-uso.</p>
+        </div>
+        <div class="col-xs-12">
+
+            <div class="col-xs-12 col-md-8">
+                <div class="row">
+                    <div class="col-md-10 col-sm-12 col-xs-12">
+                        <div class="search-widget input-group">
+                            <input id="inputDataverseSearch" class="form-control" type="text" placeholder=""
+                                onkeydown="if (event.keyCode == 13) document.getElementById('btnDataverseSearch').click();">
+                            <span class="input-group-btn">
+                                <button id="btnDataverseSearch" class="btn btn-default" type="button"
+                                    onclick="window.location = '/dataverse/ur?q=' + document.getElementById('inputDataverseSearch').value;return false;"><span
+                                        class="glyphicon glyphicon-search"></span> <span
+                                        class="button-find-text">Buscar</span></button>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="col-md-2 col-sm-12 col-xs-12 explorar">
+                        <span class="input-group-btn ">
+                            <button id="btnDataverseSearch" class="btn btn-default " type="button"
+                                onclick="window.location = '/dataverse/ur?q=' + document.getElementById('inputDataverseSearch').value;return false;">
+                                <span class="button-find-text">Explorar</span></button>
+                        </span>
+                    </div>
                 </div>
-                <div class="panel-body">
-                    <p>
-                        <a href="http://www.cnpq.br/">
-                            <img src="http://www.cnpq.br/wp-content/themes/cnpq/images/logo-cnpq.png" alt="CNPq" width="100" height="100" />
-                        </a>
-                    </p>
-                    <p>
-                        <a href="http://www.cnpq.br/">
-                            <img src="http://www.cnpq.br/wp-content/themes/cnpq/images/logo-cnpq.png" alt="CNPq" width="100" height="100" />
-                        </a>
-                    </p>
-                    <p>
-                        <a href="http://www.cnpq.br/">
-                            <img src="http://www.cnpq.br/wp-content/themes/cnpq/images/logo-cnpq.png" alt="CNPq" width="100" height="100" />
-                        </a>
-                    </p>
-                    <p>
-                        <a href="http://www.cnpq.br/">
-                            <img src="http://www.cnpq.br/wp-content/themes/cnpq/images/logo-cnpq.png" alt="CNPq" width="100" height="100" />
-                        </a>
-                    </p>
-                    <p>
-                        <a href="http://www.cnpq.br/">
-                            <img
+                <div class="row dataset-row">
+
+                </div>
+                <div id="dataversesBySubject" class="col-xs-12">
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-4 right-column">
+                <div class="investigadores-container">
+                    <div id="investigadores" class="col-xs-3"></div>
+                    <div class="investigadores-text col-xs-9">Investigadores</div>
+                </div>
+                <div class="proyectos-container">
+                    <div id="proyectos_inv" class="col-xs-3"></div>
+                    <div class="proyectos-text col-xs-9">Proyectos de investigación</div>
+                </div>
+                <div class="dataverses-container">
+                    <div id="headAllTimeAllDatasetsValue" class="col-xs-3"></div>
+                    <div class="dataverses-text col-xs-9">Datasets abiertos</div>
+                </div>
+                <div class="archivos-container">
+                    <div id="activityAllTimeDepositedFilesValue" class="col-xs-3">...</div>
+                    <div class="archivos-text col-xs-9">Archivos</div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <!-- <hr class="heavy-rule" /> -->
+
+    <!-- SEARCH + BROWSE + RECENT -->
+    <div class="row hmpg-browse-block">
+
+        <!-- SEARCH -->
+        <!-- 
+            NOTE: The alias of the root dataverse will need to be configured in this URL 
+            -->
+
+
+        <!-- BROWSE SUBJECT -->
+        <div id="browseBySubject" class="col-xs-12">
+            <!-- <p class="text-muted margin-bottom">Browse by subject</p> -->
+            <div class="row margin-bottom">
+                <!-- SUBJECTS -->
+                <div id="dataversesBySubject" class="col-xs-12">
+                </div>
+
+                <!-- VIEW ALL -->
+                <!-- 
+                    NOTE: The alias of the root dataverse will need to be configured in this URL 
+                    -->
+                <!-- <div class="col-xs-12 margin-top">
+                    <p class="browse-subjects small text-muted"><a href="/dataverse/ur">ALL DATA</a> <span
+                            class="glyphicon glyphicon-chevron-right"></span></p>
+                </div> -->
+            </div>
+        </div>
+
+    </div>
+
+    <script type="text/javascript">
+        //<![CDATA[
+
+        //switch baseUrl to point to a different server than the local box
+        var baseUrl = "";
+
+        // NOTE: REMOVED THUMBNAILS
+        // var thumbBaseURL = baseUrl + "/api/datasets/:persistentId/thumbnail" + "?persistentId=";
+        var metricBaseUrl = baseUrl + "/api/info/metrics/";
+        var simpleCatSearch = baseUrl + "/api/search?q=*&type=dataset&sort=dateSort&order=desc&fq=categoryOfDataverse:";
+        var simpleCatSearchDataverse = baseUrl + "/api/search?q=*&type=dataverse&sort=dateSort&order=desc&fq=dvCategory:";
+        var simpleCatSearchInvestigador = baseUrl + "api/search?q=*&type=dataset&sort=dateSort&order=desc&per_page=1000";
+        //http://ec2-52-91-47-172.compute-1.amazonaws.com:8080/dataverse/ur?q=&fq1=dvCategory%3A%22Research+Project%22&fq0=dvObjectType%3A%28dataverses+OR+datasets%29&types=dataverses%3Adatasets&sort=dateSort&order=
+        function writeRecentDatasetsInDataverses(fqString, resultCount, elm) {
+            $.get(simpleCatSearch + fqString + "&per_page=" + resultCount, function (jData) {
+                var resultHtml = "";
+                jData.data.items.forEach(function (item) {
+                    var options = { year: 'numeric', month: 'short', day: 'numeric' };
+                    var date = new Date(item.published_at).toLocaleString('en-US', options);
+                    resultHtml += "<div class=\"hmpg-recent-block clearfix\">";
+                    // NOTE: REMOVED THUMBNAILS
+                    // resultHtml += "<div class=\"col-xs-2 text-center hmpg-recent-thumb\"><a href=\"/dataset.xhtml?persistentId=" + item.global_id + "\">";
+                    // resultHtml += "<object data=\"" + thumbBaseURL + item.global_id + "\" type=\"image/png\"/><span class=\"icon-dataset\"></span></object>";
+                    // resultHtml += "</a></div>";
+                    // NOTE: REMOVED THUMBNAILS... in next line, change grid layout class to `col-xs-9 col-md-10`
+                    resultHtml += "<div class=\"col-xs-12 hmpg-recent-metadata\"><p><a href=\"/dataset.xhtml?persistentId=" + item.global_id + "\">" + item.name + "</a></p><p class=\"small text-muted\"><a href=\"/dataverse/" + item.identifier_of_dataverse + "\" class=\"highlightBold\">" + item.name_of_dataverse + "</a> " + date + "</p></div>";
+                    resultHtml += "</div>";
+                });
+                document.getElementById(elm).innerHTML = resultHtml;
+            });
+        }
+
+        function proyectosInvestigacion(fqString, resultCount, elm) {
+            $.get(simpleCatSearchDataverse + fqString + "&per_page=" + resultCount, function (jData) {
+                console.log(jData.data.total_count);
+                document.getElementById(elm).innerHTML = jData.data.total_count + "";
+
+            });
+        }
+
+        function investigadores(fqString, resultCount, elm) {
+            $.get(simpleCatSearchInvestigador + fqString + "&per_page=" + resultCount, function (jData) {
+                let authorCount = [];
+                jData.data.items.forEach(function (item) {
+                    item.authors.forEach(author => {
+                        if (!authorCount.includes(author)) {
+                            authorCount.push(author)
+                        }
+                    });
+
+                });
+                document.getElementById(elm).innerHTML = authorCount.length + "";
+
+            });
+        }
+
+        //For metrics that return simple json with a count
+        //Can take a single element or an array of elements
+        function queryMetricSimple(metricRelPath, month, elm) {
+            $.get(metricBaseUrl + metricRelPath + month, function (jData) {
+                var resultCount = jData.data.count;
+                if (Array.isArray(elm)) {
+                    elm.forEach(function (e) {
+                        document.getElementById(e).innerHTML = resultCount.toLocaleString('en');
+                    });
+                } else {
+                    document.getElementById(elm).innerHTML = resultCount.toLocaleString('en');
+                }
+            });
+        }
+
+        function queryMetricSearch(metricRelPath, month) {
+            $.get(metricBaseUrl + metricRelPath + month, function (jData) {
+                var resultCount = jData.data.count;
+                var roundedDatasetCount = Math.floor(resultCount / 100) * 100;
+                var dynamicSearchPlaceholder = "Search over " + roundedDatasetCount.toLocaleString('en') + " datasets...";
+                $("#inputDataverseSearch").attr({ "placeholder": dynamicSearchPlaceholder });
+            });
+        }
+
+        function querySubjectDataverseDataset(elm) {
+            var dvArray = [];
+            var fullArray = [];
+            $.get(metricBaseUrl + "dataverses/bySubject", function (jData) {
+                jData.data.forEach(function (item) {
+                    if (item.subject !== "N/A" && item.subject !== "Other") {
+                        dvArray.push([item.subject, item.count]);
+                    }
+                });
+                $.get(metricBaseUrl + "datasets/bySubject?dataLocation=all", function (jData) {
+                    var resultHtml = "";
+                    jData.data.forEach(function (item) {
+                        if (item.subject !== "N/A" && item.subject !== "Other") {
+                            var dvCount = 0;
+                            for (var dvi = 0; dvi < dvArray.length; dvi++) {
+                                if (item.subject === dvArray[dvi][0]) {
+                                    dvCount = dvArray[dvi][1];
+                                    break;
+                                }
+                            }
+                            fullArray.push([item.subject, (item.count + dvCount - 1).toLocaleString('en')]); //subtract 1 to remove root dv from counts
+                        }
+                    });
+                    fullArray.sort();
+                    fullArray.forEach(function (subject) {
+                        // NOTE: The alias of the root dataverse will need to be configured in this URL 
+                        // resultHtml += "<p class=\"browse-subjects\"><a href=\"/dataverse/ur?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + "</a> <span class=\"text-muted\">" + subject[1] + "</span></p>";
+                        resultHtml += "<a class=\"browse-subjects\" href=\"/dataverse/ur?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + " " + subject[1] + "</a>";
+                    });
+                    document.getElementById(elm).innerHTML = resultHtml;
+                });
+            });
+        }
+
+
+        function querySubjectDataset(elm) {
+            var dvArray = [];
+            var fullArray = [];
+            // $.get(metricBaseUrl + "dataverses/bySubject", function (jData) {
+            //     jData.data.forEach(function (item) {
+            //         if (item.subject !== "N/A" && item.subject !== "Other") {
+            //             dvArray.push([item.subject, item.count]);
+            //         }
+            //     });
+
+            // });
+
+            $.get(metricBaseUrl + "datasets/bySubject?dataLocation=all", function (jData) {
+                var resultHtml = "";
+                jData.data.forEach(function (item) {
+                    if (item.subject !== "N/A" && item.subject !== "Other") {
+                        var dvCount = 0;
+                        for (var dvi = 0; dvi < dvArray.length; dvi++) {
+                            if (item.subject === dvArray[dvi][0]) {
+                                dvCount = dvArray[dvi][1];
+                                break;
+                            }
+                        }
+                        fullArray.push([item.subject, (item.count + dvCount).toLocaleString('en')]); //subtract 1 to remove root dv from counts
+                    }
+                });
+                fullArray.sort();
+                fullArray.forEach(function (subject) {
+                    // NOTE: The alias of the root dataverse will need to be configured in this URL 
+                    // resultHtml += "<p class=\"browse-subjects\"><a href=\"/dataverse/ur?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + "</a> <span class=\"text-muted\">" + subject[1] + "</span></p>";
+                    resultHtml += "<a class=\"browse-subjects\" href=\"/dataverse/ur?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=datasets&sort=dateSort&order=desc\"><span>" + subject[0] + " " + subject[1] + "</span></a>";
+                    // console.log(subject[0]+" - "+subject[1]);
+                });
+                document.getElementById(elm).innerHTML = resultHtml;
+            });
+        }
+
+        queryMetricSimple("datasets", "?dataLocation=all", "headAllTimeAllDatasetsValue");
+        queryMetricSimple("downloads", "", "headAllTimeAllDownloadsValue");
+        queryMetricSimple("dataverses", "", "headAllTimeAllDataversesValue");
+
+        // writeRecentDatasetsInDataverses("(Journal)", 3, "journals");
+        // writeRecentDatasetsInDataverses("(\"Research+Project\"%20OR%20Researcher%20OR%20\"Research+Group\")", 6, "researchers");
+
+        proyectosInvestigacion("(\"Research+Project\")", 6, "proyectos_inv");
+        investigadores("", 0, "investigadores");
+
+        // queryMetricSimple("datasets/pastDays", "/30?dataLocation=all", "activity30DaysAllDatasetsValue");
+        // queryMetricSimple("datasets", "?dataLocation=local", "activityAllTimeDepositedDatasetsValue");
+        // queryMetricSimple("datasets/pastDays", "/30?dataLocation=local", "activity30DaysDepositedDatasetsValue");
+        // queryMetricSimple("datasets", "?dataLocation=remote", "activityAllTimeHarvestedDatasetsValue");
+        // queryMetricSimple("datasets/pastDays", "/30?dataLocation=remote", "activity30DaysHarvestedDatasetsValue");
+
+        // queryMetricSimple("downloads/pastDays", "/30", "activity30DaysAllDownloadsValue");
+        queryMetricSimple("files", "", "activityAllTimeDepositedFilesValue");
+        // queryMetricSimple("files/pastDays", "/30", "activity30DaysDepositedFilesValue");
+
+        // querySubjectDataverseDataset("dataversesBySubject");
+        querySubjectDataset("dataversesBySubject");
+        // queryMetricSearch("datasets", "?dataLocation=all");
+    //]]>
+    </script>
+
 </div>
+
+<link rel="stylesheet" href="https://www.urosario.edu.co/App_Themes/Maestra-2018/css/footer/footer.css" />
