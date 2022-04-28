@@ -157,15 +157,31 @@ class Customize extends Model
 						$sx .= 'Result in: '.cr();
 						$sx .= '/usr/local/payara5/glassfish/domains/domain1/docroot/sitemap/sitemap.xml';
 						break;
+					case 'googleanalytics':
+						$cmd = 'https://guides.dataverse.org/en/latest/installation/config.html?highlight=google%20analytics';
+						break;
+						
 					case 'homePage':
 						$cmd .= 'mkdir /var/www/dataverse/'.cr();
 						$cmd .= 'mkdir /var/www/dataverse/branding/'.cr();
 						$cmd .= 'echo "See sample <a href="https://guides.dataverse.org/en/latest/_downloads/0f28d7fe1a9937d9ef47ae3f8b51403e/custom-homepage.html">homepage"</a>'.cr();
 						$cmd .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-homepage.html\' http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
+						$cmd .= cr();
 						$cmd .= 'echo "Remove Custom Page"'.cr();
 						$cmd .= 'curl -X DELETE http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
 						$PATH = '/var/www/dataverse/branding/';
 						break;
+
+					case 'homeFooter':
+						$cmd .= 'mkdir /var/www/dataverse/'.cr();
+						$cmd .= 'mkdir /var/www/dataverse/branding/'.cr();
+						$cmd .= 'echo "See sample <a href="https://guides.dataverse.org/en/latest/_downloads/0f28d7fe1a9937d9ef47ae3f8b51403e/custom-homepage.html">homepage"</a>'.cr();
+						$cmd .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-homepage.html\' http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
+						$cmd .= cr();
+						$cmd .= 'echo "Remove Custom Page"'.cr();
+						$cmd .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-footer.html\' http://localhost:8080/api/admin/settings/:FooterCustomizationFile'.cr();
+						$PATH = '/var/www/dataverse/branding/';
+						break;						
 
 					case 'logo':
 						$cmd .= 'echo "Grave o logo na pasta abaixo:"'.cr();
@@ -174,6 +190,13 @@ class Customize extends Model
 						$file = true;
 						$PATH = '/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
 						break;
+
+					case 'homeFooter':
+						$cmd .= 'echo "Alterar no Rodape os dados sobre Copyright &copy"'.cr();
+						$cmd .= 'echo "/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/$file"'.cr();
+						$cmd .= 'curl -X PUT -d ", CNPq/Ibict" http://localhost:8080/api/admin/settings/:FooterCopyright';
+						$PATH = '/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
+						break;						
 
 
 					default:				

@@ -84,6 +84,12 @@ class Index extends Model
 					case 'apache':
 						$sx .= $this->apache($d1,$d2,$d3,$d4);
 						break;
+					case 'email':
+						$sx .= $this->email($d1,$d2,$d3,$d4);
+						break;						
+					case 'users_login':
+						$sx .= $this->users_login($d1,$d2,$d3,$d4);
+						break;
 					default:
 						$sx .= h(lang('dataverse.main_menu'),4);
 						$sx .= $this->menu();
@@ -97,8 +103,10 @@ class Index extends Model
 				$menu[PATH.MODULE.'dataverse/server'] = lang('dataverse.SetServer') . ': <b>'.$this->server().'</b>';
 				$menu[PATH.MODULE.'dataverse/token'] = lang('dataverse.SetToken') . ': <b>'.$this->token().'</b>';
 				$menu[PATH.MODULE.'dataverse/licences'] = lang('dataverse.Licences');
+				$menu[PATH.MODULE.'dataverse/users_login'] = lang('dataverse.Users_login');
 				$menu[PATH.MODULE.'dataverse/doi'] = lang('dataverse.DOI_settings');
 				$menu[PATH.MODULE.'dataverse/customize'] = lang('dataverse.Customize');
+				$menu[PATH.MODULE.'dataverse/email'] = lang('dataverse.Custom_Email');
 				$menu[PATH.MODULE.'dataverse/solr'] = lang('dataverse.Solr');
 				$menu[PATH.MODULE.'dataverse/settings'] = lang('dataverse.Settings');	
 				$menu[PATH.MODULE.'dataverse/pa'] = lang('dataverse.PA');
@@ -134,6 +142,66 @@ class Index extends Model
 			$Licences = new \App\Models\Dataverse\Licences();
 			$sx = h('dataverse.Licences',1);
 			$sx .= $Licences->getLicences($d1,$d2,$d3);
+			return $sx;
+		}
+
+		function email($d1,$d2,$d3)
+		{
+			$sx = h('dataverse.email',1);
+			$sx .= h($d2,4);
+			switch($d2)
+				{
+					case 'system_email':
+						$sx .= '<p>Para nomear o Replay do e-mail.</p>';
+						$sx .= '<code>curl -X PUT -d \'LattesData &lt;lattesdata@cnpq.br>\' http://localhost:8080/api/admin/settings/:SystemEmail</code>';
+						$sx .= '<p>e também no arquivo domain.xml verificar o siteUrl</p>';
+						$sx .= '<code>nano /usr/local/payara5/glassfish/domains/domain1/config/domain.xml</code>';
+						$sx .= '<p>Insira sua URL</p>';
+						$sx .= '<code>&lt;jvm-options>-Ddataverse.siteUrl=<b>https://lattesdata.cnpq.br.br</b>&lt;/jvm-options></code>';
+						break;
+					case 'google':
+						$sx .= '<p>Para nomear o Replay do e-mail.</p>';
+						$sx .= '<p:No arquivo de configuração do servidor domain.xml remova os parametros do mail-resourse e substitua pelos abaixo.</p>';
+						$sx .= '
+						<code>nano /usr/local/payara5/glassfish/domains/domain1/config/domain.xml</code>
+						<code>
+						&lt;mail-resource auth="false" host="smtp.gmail.com" from="app.email.dvn@gmail.com" user="app.email.dvn@gmail.com" jndi-name="mail/notifyMailSession"><br>
+						&lt;property name="mail.smtp.port" value="465">&lt;/property><br>
+						&lt;property name="mail.smtp.socketFactory.fallback" value="false">&lt;/property><br>
+						&lt;property name="mail.smtp.socketFactory.port" value="465">&lt;/property><br>
+						&lt;property name="mail.smtp.socketFactory.class" value="javax.net.ssl.SSLSocketFactory">&lt;/property><br>
+						&lt;property name="mail.smtp.auth" value="true">&lt;/property><br>
+						&lt;property name="mail.smtp.password" value="<b>asdkgqogvyecineuzxdtge</b>">&lt;/property><br>
+					    &lt;/mail-resource>						
+						</code>';
+						break;						
+					default:
+					$menu[PATH.MODULE.'dataverse/email/system_email'] = lang('dataverse.system_email');
+					$menu[PATH.MODULE.'dataverse/email/google'] = lang('dataverse.system_email_google');
+					$sx .= menu($menu);		
+				}
+			return $sx;
+		}		
+
+	function users_login($d1,$d2,$d3)
+		{
+			$sx = h('dataverse.Users_login',1);
+			$sx .= h($d2,4);
+			switch($d2)
+				{
+					case 'builtinUsers':
+						$sx .= '<p>Para criar uma senha que possibilita criar usuários no sistema viar localhost.</p>';
+						$sx .= '<code>curl -X PUT -d <b>builtInS3kretKey</b> http://localhost:8080/api/admin/settings/BuiltinUsers.KEY</code>';
+						break;
+					case 'allowsignUp':
+						$sx .= '<p>Habilida ou desabilita a criação de usuários via UI.</p>';
+						$sx .= '<code>curl -X PUT -d \'false\' http://localhost:8080/api/admin/settings/:AllowSignUp</code>';
+						break;
+					default:
+					$menu[PATH.MODULE.'dataverse/users_login/builtinUsers'] = lang('dataverse.BuiltinUsers');
+					$menu[PATH.MODULE.'dataverse/users_login/allowsignUp'] = lang('dataverse.AllowSignUp');
+					$sx .= menu($menu);		
+				}
 			return $sx;
 		}
 

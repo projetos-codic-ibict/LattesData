@@ -107,18 +107,29 @@ class Users extends Model
             $us['useridentifier'] = $ids['IDLATTES'];
             $us['new'] = false;
 
-            $dv['firstName'] = '';
-            $dv['lastName'] = '';
-            $dv['userName'] = '';
+            $dv['firstName'] = $firstname;
+            $dv['lastName'] = $lastname;
+            $dv['userName'] = $email;
             $dv['affiliation'] = '';
             $dv['position'] = '';
-            $dv['email'] = '';
+            $dv['email'] = $email;
 
             //https://guides.dataverse.org/en/latest/installation/config.html?highlight=doi#id169
             //curl -X PUT -d builtInS3kretKey http://localhost:8080/api/admin/settings/BuiltinUsers.KEY
+            //https://guides.dataverse.org/en/latest/api/native-api.html?highlight=built
 
             $cmd = 'curl -d @user-add.json -H "Content-type:application/json" "$SERVER_URL/api/builtin-users?password=$NEWUSER_PASSWORD&key=$BUILTIN_USERS_KEY"';
 
+            /*
+            export API_TOKEN=xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
+            export SERVER_URL=https://demo.dataverse.org
+            export ID=24
+
+            curl -H "X-Dataverse-key:$API_TOKEN" $SERVER_URL/api/admin/list-users
+
+            # sort by createdtime (the creation time of the account)
+            curl -H "X-Dataverse-key:$API_TOKEN" "$SERVER_URL/api/admin/list-users?sortKey=createdtime"
+            */
             return $us;            
         }
 }
