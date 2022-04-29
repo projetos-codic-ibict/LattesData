@@ -54,6 +54,10 @@ class Customize extends Model
 			$file = false;
 			switch($d1)
 				{
+					case 'copyright':
+						$sx .= '<code>curl -X PUT -d ", CNPq/Ibict" http://localhost:8080/api/admin/settings/:FooterCopyright</code>';
+						break;
+
 					case 'Languages':
 						$tlang = '';
 						$subdir = array('en_US','pt_BR','es','fr','de','it','pt','ru','zh');
@@ -206,6 +210,7 @@ class Customize extends Model
 					$menu[PATH.MODULE.'dataverse/customize/homeFooter'] = 'dataverse.customize_footer';
 					$menu[PATH.MODULE.'dataverse/customize/Languages'] = 'dataverse.customize_language';
 					$menu[PATH.MODULE.'dataverse/customize/googleanalytics'] = 'dataverse.customize_GoogleAnalytics';
+					$menu[PATH.MODULE.'dataverse/customize/sitemap'] = 'dataverse.customize_sitemap';
 					$menu[PATH.MODULE.'dataverse/customize/sitemap'] = 'dataverse.customize_sitemap';
 					$menu[PATH.MODULE.'dataverse/customize/copyright'] = 'dataverse.customize_FooterCopyright';
 					//:NavbarAboutUrl

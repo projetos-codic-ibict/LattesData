@@ -75,6 +75,9 @@ class Index extends Model
 					case 'server':
 						$sx .= $this->setURL();
 						break;
+					case 'system':
+						$sx .= $this->system();
+						break;						
 					case 'licences':
 						$sx .= $this->licences($d1,$d2,$d3,$d4);
 						break;
@@ -113,6 +116,7 @@ class Index extends Model
 				$menu[PATH.MODULE.'dataverse/pave'] = lang('dataverse.PA_External');
 				$menu[PATH.MODULE.'dataverse/embargo'] = lang('dataverse.Embargo');
 				$menu[PATH.MODULE.'dataverse/apache'] = lang('dataverse.Apache-Proxy');
+				$menu[PATH.MODULE.'dataverse/system'] = lang('dataverse.Custom_system');
 			} else {
 				$menu[PATH.MODULE.'dataverse/server'] = lang('dataverse.SetServerDefine');
 			}
@@ -145,12 +149,46 @@ class Index extends Model
 			return $sx;
 		}
 
+	function system()
+		{
+			$sx = '
+			cd /home/dataverse/<br>
+			nano start<br>
+
+			export PAYARA=/usr/local/payara5/glassfish<br>
+			echo "Starting Payara 5..."<br>
+			$PAYARA/bin/asadmin start-domain<br>
+			<br>
+			<hr>
+			nano stop<br>
+			export PAYARA=/usr/local/payara5/glassfish<br>
+			echo "PAYARA Stoping..."<br>
+			$PAYARA/bin/asadmin stop-domain<br>
+			<br>
+			<hr>
+			nano restart<br>
+			echo "Restarting Payara...."<br>
+			/home/dataverse/stop<br>
+			/home/dataverse/start<br>
+			<br>
+			<hr>
+			chmod 777 start<br>
+			chmod 777 stop<br>
+			chmod 777 restart<br>
+			';
+			return $sx;
+		}
+
 		function email($d1,$d2,$d3)
 		{
 			$sx = h('dataverse.email',1);
 			$sx .= h($d2,4);
 			switch($d2)
 				{
+					case 'sendnotification':
+						$sx .= '<p>Habilita notificações por e-mail</p>';
+						$sx .= '<code>e>curl -X PUT -d true http://localhost:8080/api/admin/settings/:SendNotificationOnDatasetCreation</code>';
+						break;
 					case 'system_email':
 						$sx .= '<p>Para nomear o Replay do e-mail.</p>';
 						$sx .= '<code>curl -X PUT -d \'LattesData &lt;lattesdata@cnpq.br>\' http://localhost:8080/api/admin/settings/:SystemEmail</code>';
@@ -178,6 +216,8 @@ class Index extends Model
 					default:
 					$menu[PATH.MODULE.'dataverse/email/system_email'] = lang('dataverse.system_email');
 					$menu[PATH.MODULE.'dataverse/email/google'] = lang('dataverse.system_email_google');
+					$menu[PATH.MODULE.'dataverse/email/sendnotification'] = lang('dataverse.system_SendNotification');
+					
 					$sx .= menu($menu);		
 				}
 			return $sx;
