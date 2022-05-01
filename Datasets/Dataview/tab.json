@@ -1,0 +1,33 @@
+{
+    "displayName": "RDPBrasil DataView - Dataverse",
+    "description": "Visualizado de dados",
+    "toolName": "brapci_dataview",
+    "scope": "file",
+    "types": [
+        "preview"
+    ],
+    "toolUrl": "http://172.16.16.68/dataview/view/tab",
+    "contentType": "text/tab-separated-values",
+    "toolParameters": {
+        "queryParameters": [
+            {
+                "fileid": "{fileId}"
+            },
+            {
+                "siteUrl": "{siteUrl}"
+            },
+            {
+                "PID": "{datasetPid}"
+            },
+            {
+                "key": "{apiToken}"
+            },
+            {
+                "datasetId": "{datasetId}"
+            },
+            {
+                "localeCode": "{localeCode}"
+            }
+        ]
+    }
+}
