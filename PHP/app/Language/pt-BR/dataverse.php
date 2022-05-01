@@ -23,7 +23,22 @@ return[
         'SetServer'=>'Servidor Dataverse',
         'SetToken'=>'Chave API-KEY (opcional)',
         'DOI_settings'=>'Configurações do DOI',
+        'main_menu'=>'Menu Principal',
+        'dataverse_implementation'=>'Documentação de Implementação do Dataverse (Português)',
+        'checked'=>'check',
         ''=>'',
+        ''=>'',
+        ''=>'',
+        ''=>'',
+        ''=>'',
+        ''=>'',
+        ''=>'',
+        ''=>'',
+        ''=>'',
+        'checkit_postgresql'=>'Checagem do PostGreSQL',
+        'checkit_solr'=>'Checagem do SOLR',
+        'checkit_DOI'=>'Checagem do DOI - Datacite',
+        'checkit_email'=>'Checagem de envio de e-mail',
 
 
 ];

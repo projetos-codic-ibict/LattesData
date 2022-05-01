@@ -46,6 +46,11 @@ class Index extends Model
 			$sx = breadcrumbs();
 			switch($d1)
 				{
+					case 'external_tools':
+						$Dataview = new \App\Models\Dataverse\Dataview();
+						$sx = $Dataview->index($d2,$d3,$d4,$d5);
+						break;					
+						break;
 					case 'pa':
 						$PA_Schema = new \App\Models\Dataverse\PA_Schema();
 						$sx = $PA_Schema->index($d2,$d3,$d4,$d5);
@@ -57,7 +62,11 @@ class Index extends Model
 					case 'embargo':
 						$Embargo = new \App\Models\Dataverse\Embargo();
 						$sx = $Embargo->index($d2,$d3,$d4,$d5);
-						break;											
+						break;	
+					case 'checklist':
+						$Checklist = new \App\Models\Dataverse\Checklist();
+						$sx .= $Checklist->index($d2,$d3,$d4);
+						break;																
 					case 'customize':
 						$Customize = new \App\Models\Dataverse\Customize();
 						$sx .= $Customize->index($d2,$d3,$d4);
@@ -94,32 +103,49 @@ class Index extends Model
 						$sx .= $this->users_login($d1,$d2,$d3,$d4);
 						break;
 					default:
-						$sx .= h(lang('dataverse.main_menu'),4);
-						$sx .= $this->menu();
+						$sa = $this->show_structure();
+						$sb = h(lang('dataverse.main_menu'),4);
+						$sb .= $this->menu();
+						$sx = bsc($sb,3).bsc($sa,9);
 				}
+			return $sx;
+		}
+	function show_structure()
+		{
+			$sx = '<img src="'.URL.'img/structure/diagram.png'.'" class="img-fluid">xx';
 			return $sx;
 		}
 	function menu()
 		{
-			if (strlen($this->server()))
-			{
+
+				$menu['#SETTINGS'] = '<h5><b>'.lang('dataverse.Settings').'</b></h5>';
 				$menu[PATH.MODULE.'dataverse/server'] = lang('dataverse.SetServer') . ': <b>'.$this->server().'</b>';
 				$menu[PATH.MODULE.'dataverse/token'] = lang('dataverse.SetToken') . ': <b>'.$this->token().'</b>';
-				$menu[PATH.MODULE.'dataverse/licences'] = lang('dataverse.Licences');
-				$menu[PATH.MODULE.'dataverse/users_login'] = lang('dataverse.Users_login');
-				$menu[PATH.MODULE.'dataverse/doi'] = lang('dataverse.DOI_settings');
-				$menu[PATH.MODULE.'dataverse/customize'] = lang('dataverse.Customize');
+
+				$menu['#CHECKLIST'] = '<h5><b>'.lang('dataverse.Checklist').'</b></h5>';
+				$menu[PATH.MODULE.'dataverse/checklist'] = lang('dataverse.Checklist');
+
+				$menu['#INSTALL'] = '<h5><b>'.lang('dataverse.DataverseInstall').'</b></h5>';
+				$menu[PATH.MODULE.'dataverse/system'] = lang('dataverse.Custom_system');
+
+				$menu['#S'] = '<h5><b>'.lang('dataverse.System').'</b></h5>';
 				$menu[PATH.MODULE.'dataverse/email'] = lang('dataverse.Custom_Email');
 				$menu[PATH.MODULE.'dataverse/solr'] = lang('dataverse.Solr');
 				$menu[PATH.MODULE.'dataverse/settings'] = lang('dataverse.Settings');	
-				$menu[PATH.MODULE.'dataverse/pa'] = lang('dataverse.PA');
-				$menu[PATH.MODULE.'dataverse/pave'] = lang('dataverse.PA_External');
-				$menu[PATH.MODULE.'dataverse/embargo'] = lang('dataverse.Embargo');
+				$menu[PATH.MODULE.'dataverse/licences'] = lang('dataverse.Licences');
+				$menu[PATH.MODULE.'dataverse/users_login'] = lang('dataverse.Users_login');
+				$menu[PATH.MODULE.'dataverse/doi'] = lang('dataverse.DOI_settings');
 				$menu[PATH.MODULE.'dataverse/apache'] = lang('dataverse.Apache-Proxy');
-				$menu[PATH.MODULE.'dataverse/system'] = lang('dataverse.Custom_system');
-			} else {
-				$menu[PATH.MODULE.'dataverse/server'] = lang('dataverse.SetServerDefine');
-			}
+
+				$menu['#P'] = '<h5><b>'.lang('dataverse.Parametrizations').'</b></h5>';
+				$menu[PATH.MODULE.'dataverse/embargo'] = lang('dataverse.Embargo');
+
+				$menu['#C'] = '<h5><b>'.lang('dataverse.Gadget').'</b></h5>';
+				$menu[PATH.MODULE.'dataverse/customize'] = lang('dataverse.Customize');
+				$menu[PATH.MODULE.'dataverse/external_tools'] = lang('dataverse.ExternalTools');
+				$menu[PATH.MODULE.'dataverse/pa'] = lang('dataverse.PA');
+				$menu[PATH.MODULE.'dataverse/pave'] = lang('dataverse.PA_External');	
+
 			$sx = menu($menu);
 			return $sx;
 		}
