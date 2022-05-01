@@ -48,7 +48,11 @@ class Dataview extends Model
             $sx .= '<code>mkdir /home/dataverse/dataview/</code>';
             $sx .= '<code>cd  /home/dataverse/dataview/</code>';
             $sx .= '<br>';
+            $sx .= '<br>';
+            $sx .= '<code>echo "COPIA Arquivos de configuração"</code>';
             $sx .= '<code>cp /data/LattesData/_Documentation/Dataview/*.json .</code>';
+            $sx .= '<br>';
+            $sx .= '<br>';
 
             $sx .= '<code>curl -X POST -H \'Content-type: application/json\' http://localhost:8080/api/admin/externalTools --upload-file <b>file_config</b>.json</code>';
             return $sx;
