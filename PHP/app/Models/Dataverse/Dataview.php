@@ -50,7 +50,7 @@ class Dataview extends Model
             $sx .= '<br>';
             $sx .= '<br>';
             $sx .= '<code>echo "COPIA Arquivos de configuração"</code>';
-            $sx .= '<code>cp /data/LattesData/_Documentation/Dataview/*.json .</code>';
+            $sx .= '<code>cp /data/LattesData/Datasets/Dataview/*.json .</code>';
             $sx .= '<br>';
             $sx .= '<br>';
 
