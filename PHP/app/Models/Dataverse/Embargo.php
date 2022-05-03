@@ -61,7 +61,7 @@ class Embargo extends Model
 		$url = $Dataverse->server();
 		$sx = 'curl -X PUT -d <b>24</b> '.$url.'/api/admin/settings/:MaxEmbargoDurationInMonths';
 		$sx .= '<br>';
-		$sx .= 
+		$sx .= '<b>24</b> - '
 		return $sx;
 	}
 }

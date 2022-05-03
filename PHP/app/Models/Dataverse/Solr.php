@@ -44,6 +44,10 @@ class Solr extends Model
 	{
 		$sx = $d1;
 		switch ($d1) {
+
+			case 'install':
+				$sx .= $this->installSolr();
+				break;
 			case 'schema':
 				$sx = $this->readSchema($d2, $d3);
 				break;
@@ -56,6 +60,7 @@ class Solr extends Model
 				$sx = $this->updateSchema($d2, $d3);
 				break;
 			default:
+				$menu[PATH . MODULE . 'dataverse/solr/install'] = 'dataverse.Solr.Install';
 				$menu[PATH . MODULE . 'dataverse/solr/schema'] = 'dataverse.Solr.Schema.Read';
 				$menu[PATH . MODULE . 'dataverse/solr/schema_export'] = 'dataverse.Solr.Schema.Export';
 				$menu[PATH . MODULE . 'dataverse/solr/solrDV'] = 'dataverse.SolrDV';
@@ -64,6 +69,76 @@ class Solr extends Model
 		}
 		return $sx;
 	}
+
+	function installSolr()
+		{
+			$ver = '8.11.1';
+			$dataverse_install = '/home/dataverse/install/dvinstall/';
+		$sx = '<h2>Instalando Solr</h2>';
+		$sx .= '<p>Instalando Solr</p>';
+		$sx .= '<code>
+		echo "Adicionando Usuário SOLR"<br>		
+		<code>
+		useradd solr -m</br><br>
+
+		echo "Criando Diretório Solr"<br>
+		mkdir /usr/local/solr<br><br>
+
+		echo "Atribuindo permissão"<br>
+		chown solr:solr /usr/local/solr</code><br><br>
+		
+		echo "Mudando para o usuário SOLR"<br>
+		su solr<br>
+		cd /usr/local/solr<br><br>
+		echo "Baixando Solr"<br>
+		wget https://archive.apache.org/dist/lucene/solr/'.$ver.'/solr-'.$ver.'.tgz<br>
+		tar xvzf solr-'.$ver.'.tgz<br><br>
+		echo "Acessando a pastar de instalação do SOLR"<br>
+		cd solr-'.$ver.'<br><br>
+
+		echo "Definindo as configurações Internas do SOLR"<br>
+		cp -r server/solr/configsets/_default server/solr/collection1<br><br>
+
+		echo "Copiando padrões de configuração do Dataverse para o SOLR"<br>
+		cp '.$dataverse_install.'schema*.xml /usr/local/solr/'.$ver.'/server/solr/collection1/conf<br>
+		cp '.$dataverse_install.'solrconfig.xml /usr/local/solr/'.$ver.'/server/solr/collection1/conf<br><br>
+		</code>
+
+		<h4>Configurando o Jetty</h4>
+		<p>No arquivo jetty.xml alterar o parametro HedaerSize<br>
+		<code>nano /usr/local/solr/solr-8.8.1/server/etc/jetty.xml</code>
+		</p>
+
+		<p>Alterar a linha<br>
+		<code>&lt;Set name="requestHeaderSize">&lt;Property name="solr.jetty.request.header.size" default="<b>8192</b>" />&lt;/Set></code>
+		</p>
+		<p>para<br>
+		<code>&lt;Set name="requestHeaderSize">&lt;Property name="solr.jetty.request.header.size" default="<b>102400</b>" />&lt;/Set></code>
+		</p>
+		
+		<h4>Configurando os limits</h4>
+		<p>
+		<code>nano /etc/security/limits.conf</code>
+		<br>&nbsp;
+		Incluir os valores abaixo<br>
+		<pre>
+		solr soft nproc 65000
+		solr hard nproc 65000
+		solr soft nofile 65000
+		solr hard nofile 65000
+		</pre>
+		</p>
+
+
+		<p>Para testar: sudo bash solr-'.$ver.'/bin/install_solr_service.sh solr-'.$ver.'.tgz</p>
+		<p>https://www.vultr.com/docs/install-apache-solr-on-ubuntu-20-04/</p>
+		';
+
+
+		$sx .= '<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;<br>&nbsp;';
+
+		return $sx;
+		}
 
 	function readDVSchema()
 	{

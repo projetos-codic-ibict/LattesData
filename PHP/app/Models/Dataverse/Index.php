@@ -40,16 +40,151 @@ class Index extends Model
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
+	function java()
+		{
+			$sx = breadcrumbs();
+			$sx .= '<h2>Java</h2>';
+			$sx .= '<br>';
+			$sx .= '<p>Debian</p>';
+			$sx .= '<code>sudo yum install java-11-openjdk</code>';
+			$sx .= '<br>';
+			$sx .= '<br>';
+			$sx .= '<p>Ubuntu 20.04</p>';
+			$sx .= '<code>apt install default-jdk</code>';
+			$sx .= '<br>';
+			$sx .= '<br>';
+			$sx .= '<p>Ver a versão instalada</p>';
+			$sx .= '<code>java -version</code>';
+			$sx .= '<code>openjdk version "11.0.14" 2022-01-18<br>
+			OpenJDK Runtime Environment (build 11.0.14+9-post-Debian-1deb10u1)<br>
+			OpenJDK 64-Bit Server VM (build 11.0.14+9-post-Debian-1deb10u1, mixed mode, sharing)</code>';
+			return $sx;
+		}
+
+		function payara()
+		{
+			$sx = breadcrumbs();
+			$sx .= '<h2>Payara</h2>';
+			$sx .= '<br>';
+			$sx .= '<p>Ubuntu 20.04</p>';
+			$sx .= '
+			<code>
+			echo "Create User Dataverse"<br>
+			useradd dataverse -m<br>
+			<br>
+			echo "Accesse Dataverse Home Directory"<br>
+			cd /home/dataverse<br>
+			mkdir /home/dataverse/install<br>
+			<br>
+			echo "Download Payara"<br>
+			wget https://s3-eu-west-1.amazonaws.com/payara.fish/Payara+Downloads/5.2021.6/payara-5.2021.6.zip<br>
+			unzip payara-5.2021.6.zip<br>
+			mv payara5 /usr/local<br>
+			<br>
+			echo "Change Permissions"<br>
+			chown -R root:root /usr/local/payara5<br>
+			chown dataverse /usr/local/payara5/glassfish/lib<br>
+			chown -R dataverse:dataverse /usr/local/payara5/glassfish/domains/domain1<br>
+			</code>
+
+			&nbsp;<br>
+			<h4>Service Payara</h4>
+			<p>Para ativar o Payara como serviço no Ubuntu</p>
+			<code>
+			export PAYARA=/usr/local/payara5/glassfish/bin/<br>
+			$PAYARA/asadmin create-service --serviceuser payaraadmin domain1<br>
+			systemctl daemon-reload<br>
+			systemctl start payara_domain1.service<br>
+			systemctl enable payara_domain1.service
+			</code>
+			<br>&nbsp;
+			<code>
+			Comandos do serviço<br>
+			service payara_domain1 status<br>
+			service payara_domain1 start<br>
+			service payara_domain1 stop<br>
+			service payara_domain1 restart<br>
+			</code>
+			<br>&nbsp;
+			<p>Source: <a href="https://blog.payara.fish/running-payara-server-as-a-service-added-support-for-systemd-on-linux">https://blog.payara.fish/running-payara-server-as-a-service-added-support-for-systemd-on-linux</a></p>
+			<br>&nbsp;
+			<br>&nbsp;';
+			return $sx;
+		}
+		
+	function postgres()
+		{
+			$sx = '';
+			$sx .= '<h4>Para instalar no Ubuntu</h4>';
+			$sx .= '<code>apt install postgresql</code>';
+			$sx .= '<br>&nbsp;';			
+			$sx .= '<p>Alterar a linhha</p>';
+			$sx .= '<code>nano /etc/postgresql/<b>11</b>/main/postgresql.conf</code>';
+			$sx .= '<pre>
+			#listen_addresses = \'localhost\' 
+    		<i><b>para </b></i>
+			listen_addresses = \'*\' libera para todas as conexões
+			port = 5432</pre>';
+
+			$sx .= '<p>e no arquivo pg_hba alterar a linhha</p>';
+			$sx .= '<code>nano /etc/postgresql/<b>11</b>/main/pg_hba.conf</code>';
+			$sx .= '<pre>
+			host    all             all             127.0.0.1/32            md5
+    		<i><b>para </b></i>
+			host    all             all             127.0.0.1/32            trust
+			</pre>';
+
+			return $sx;
+		}
+
 	function index($d1,$d2,$d3,$d4,$d5='')
 		{
 			$sx = '';
 			$sx = breadcrumbs();
 			switch($d1)
 				{
+					case 'r':
+						$sx .= '<code>
+						sudo apt install r-base
+						</code>
+						
+						<pre>
+						install.packages("R2HTML", repos="https://cloud.r-project.org/", lib="/usr/lib64/R/library" )
+						install.packages("rjson", repos="https://cloud.r-project.org/", lib="/usr/lib64/R/library" )
+						install.packages("DescTools", repos="https://cloud.r-project.org/", lib="/usr/lib64/R/library" )
+						install.packages("Rserve", repos="https://cloud.r-project.org/", lib="/usr/lib64/R/library" )
+						install.packages("haven", repos="https://cloud.r-project.org/", lib="/usr/lib64/R/library" )
+						</pre>
+						';
+						break;
+					case 'jq':
+						$sx .= '<code>
+						cd /usr/bin<br>
+						wget http://stedolan.github.io/jq/download/linux64/jq<br>
+						chmod +x jq<br>
+						jq --version<br>
+						</code>';
+						break;					
+					case 'imagemagick':
+						$sx .= '<code>apt install imagemagick</code>';
+						break;
+					case 'postgres':
+						$sx .= $this->postgres();
+						break;
+					case 'java':
+						$sx .= $this->java();
+						break;
+					case 'payara':
+						$sx .= $this->payara();
+						break;						
+					case 'install':
+						$Install = new \App\Models\Dataverse\Install();
+						$sx = $Install->index($d2,$d3,$d4,$d5);
+						break;					
+
 					case 'external_tools':
 						$Dataview = new \App\Models\Dataverse\Dataview();
 						$sx = $Dataview->index($d2,$d3,$d4,$d5);
-						break;					
 						break;
 					case 'pa':
 						$PA_Schema = new \App\Models\Dataverse\PA_Schema();
@@ -118,6 +253,10 @@ class Index extends Model
 	function menu()
 		{
 
+				$menu['#INSTALL'] = '<h5><b>'.lang('dataverse.DataverseInstall').'</b></h5>';
+				$menu[PATH.MODULE.'dataverse/install'] = lang('dataverse.DataverseInstalling');
+				$menu[PATH.MODULE.'dataverse/upgrade'] = lang('dataverse.DataverseUpgrade');
+
 				$menu['#SETTINGS'] = '<h5><b>'.lang('dataverse.Settings').'</b></h5>';
 				$menu[PATH.MODULE.'dataverse/server'] = lang('dataverse.SetServer') . ': <b>'.$this->server().'</b>';
 				$menu[PATH.MODULE.'dataverse/token'] = lang('dataverse.SetToken') . ': <b>'.$this->token().'</b>';
@@ -125,7 +264,7 @@ class Index extends Model
 				$menu['#CHECKLIST'] = '<h5><b>'.lang('dataverse.Checklist').'</b></h5>';
 				$menu[PATH.MODULE.'dataverse/checklist'] = lang('dataverse.Checklist');
 
-				$menu['#INSTALL'] = '<h5><b>'.lang('dataverse.DataverseInstall').'</b></h5>';
+				
 				$menu[PATH.MODULE.'dataverse/system'] = lang('dataverse.Custom_system');
 
 				$menu['#S'] = '<h5><b>'.lang('dataverse.System').'</b></h5>';
@@ -157,13 +296,19 @@ class Index extends Model
 			$sx .= bs(bsc('curl '.$url,12));
 			$txt = read_link($url);
 			$txt = (array)json_decode($txt);
-			$txt = (array)$txt['data'];
-			$sa = '';
-			foreach($txt as $key => $value)
-				{
-					$sa .= bsc($key,3,'text-end small fst-italic');
-					$sa .= bsc($value,9);
-				}
+			if (isset($txt['data']))
+			{
+				$txt = (array)$txt['data'];
+				$sa = '';
+				foreach($txt as $key => $value)
+					{
+						$sa .= bsc($key,3,'text-end small fst-italic');
+						$sa .= bsc($value,9);
+					}
+			} else {
+				$sa = bsmessage('Erro de acesso '.$url,3);
+				$sa .= anchor(PATH.MODULE.'dataverse/server',lang('dataverse.Settings'));
+			}
 			$sx .= bs($sa);
 			return $sx;
 		}
@@ -238,11 +383,17 @@ class Index extends Model
 						&lt;property name="mail.smtp.password" value="<b>asdkgqogvyecineuzxdtge</b>">&lt;/property><br>
 					    &lt;/mail-resource>						
 						</code>';
-						break;						
+						break;
+					case 'faq':
+						$sx .= '<p>Problemas com e-mail.</p>';
+						$sx .= '<code>./asadmin get server.resources.mail-resource.mail/notifyMailSession.host</code>';
+						$sx .= anchor('./asadmin get server.resources.mail-resource.mail/notifyMailSession.host');
+						break;
 					default:
 					$menu[PATH.MODULE.'dataverse/email/system_email'] = lang('dataverse.system_email');
 					$menu[PATH.MODULE.'dataverse/email/google'] = lang('dataverse.system_email_google');
 					$menu[PATH.MODULE.'dataverse/email/sendnotification'] = lang('dataverse.system_SendNotification');
+					$menu[PATH.MODULE.'dataverse/email/faq'] = lang('dataverse.system_faq');
 					
 					$sx .= menu($menu);		
 				}
@@ -304,6 +455,13 @@ class Index extends Model
 			$code = troca($code,'<','&lt;');
 			$code = troca($code,chr(13),'<br>');
 			$sx .= '<tt>'.$code.'</tt>';
+
+			$sx .= '<pre>
+			# Example commands that demonstrate how to run Payara Server on the "special" ports < 1024
+			#
+			# iptables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8080
+			# iptables -t nat -A PREROUTING -p udp -m udp --dport 80 -j REDIRECT --to-ports 8080
+			</pre>';
 			
 			return $sx;
 		}		
@@ -311,7 +469,8 @@ class Index extends Model
 	function solr($d1,$d2,$d3)
 		{
 			$Solr = new \App\Models\Dataverse\Solr();
-			$sx = h('dataverse.Solr',1);
+			$sx = breadcrumbs();
+			$sx .= h('dataverse.Solr',1);
 			$sx .= $Solr->index($d1,$d2,$d3);
 			return $sx;
 		}		
