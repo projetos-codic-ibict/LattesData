@@ -183,7 +183,12 @@ class Index extends Model
 					case 'install':
 						$Install = new \App\Models\Dataverse\Install();
 						$sx = $Install->index($d2,$d3,$d4,$d5);
-						break;					
+						break;	
+						
+					case 'ingest':
+						$Ingest = new \App\Models\Dataverse\Ingest();
+						$sx = $Ingest->index($d2,$d3,$d4,$d5);
+						break;						
 
 					case 'external_tools':
 						$Dataview = new \App\Models\Dataverse\Dataview();
@@ -287,6 +292,9 @@ class Index extends Model
 				$menu[PATH.MODULE.'dataverse/external_tools'] = lang('dataverse.ExternalTools');
 				$menu[PATH.MODULE.'dataverse/pa'] = lang('dataverse.PA');
 				$menu[PATH.MODULE.'dataverse/pave'] = lang('dataverse.PA_External');	
+
+				$menu['#INGEST'] = '<h5><b>'.lang('dataverse.Ingest').'</b></h5>';
+				$menu[PATH.MODULE.'dataverse/ingest/file'] = lang('dataverse.Ingest_File');
 
 			$sx = menu($menu);
 			return $sx;

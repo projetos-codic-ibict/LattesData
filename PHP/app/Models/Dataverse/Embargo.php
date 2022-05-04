@@ -42,10 +42,10 @@ class Embargo extends Model
 
 	function index($d1, $d2, $d3)
 	{
-		$sx = $d1;
+		$sx = breadcrumbs();
 		switch ($d1) {
 			case 'enable':
-				$sx = $this->enable($d2, $d3);
+				$sx .= $this->enable($d2, $d3);
 				break;
 
 			default:
@@ -59,9 +59,9 @@ class Embargo extends Model
 	{
 		$Dataverse = new \App\Models\Dataverse\index();
 		$url = $Dataverse->server();
-		$sx = 'curl -X PUT -d <b>24</b> '.$url.'/api/admin/settings/:MaxEmbargoDurationInMonths';
+		$sx = 'curl -X PUT -d 24 '.$url.'/api/admin/settings/:MaxEmbargoDurationInMonths';
 		$sx .= '<br>';
-		$sx .= '<b>24</b> - '
+		$sx .= '<b>24</b> - ';
 		return $sx;
 	}
 }

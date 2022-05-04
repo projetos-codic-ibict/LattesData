@@ -4,22 +4,17 @@ namespace App\Models\Dataverse;
 
 use CodeIgniter\Model;
 
-class Files extends Model
+class Ingest extends Model
 {
 	protected $DBGroup              = 'default';
-	protected $table                = '*';
+	protected $table                = 'files';
 	protected $primaryKey           = 'id';
 	protected $useAutoIncrement     = true;
 	protected $insertID             = 0;
 	protected $returnType           = 'array';
 	protected $useSoftDeletes       = false;
 	protected $protectFields        = true;
-	protected $allowedFields        = [
-		'id','file_name','doi'
-	];
-	protected $typeFields        = [
-		'hidden','string:100','string:100'
-	];
+	protected $allowedFields        = [];
 
 	// Dates
 	protected $useTimestamps        = false;
@@ -45,26 +40,23 @@ class Files extends Model
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
-	function form()
-		{
-			$this->path = PATH.MODULE.'dataverse/ingest/file';
-			$sx = form($this);
-			return $sx;
-		}
+    function index($d1,$d2,$d3)
+        {
+            switch($d1)
+                {
+                    case 'file':
+                        $files = new \App\Models\Dataverse\Files();
+                        $sx = $files->form();   
+                        $file_name = get("file_name");
+                        $doi = get("doi");
 
-	function DataverseFileAdd($dataverse,$api_key,$ID='doi:10.5072/FK2/J8SJZB',$file)
-		{
-			$sx = "export API_TOKEN=".$api_key.chr(13);
-			$sx .= "export FILENAME='$file'".chr(13);
-			$sx .= "export SERVER_URL=$dataverse".chr(13);
-			$sx .= "export PERSISTENT_ID=$ID";
-
-			$json = 'jsonData={"description":"My description.","directoryLabel":"data/subdir1","categories":["Data"], "restrict":"false"}';
-			
-			$cmd = $sx . 'curl -H X-Dataverse-key:$API_TOKEN -X POST -F file=@$FILENAME -F \'jsonData='.$json.'\' "$SERVER_URL/api/datasets/:persistentId/add?persistentId=$ID"';
-
-			$cmd = "curl -H X-Dataverse-key:$api_key -X POST -F file=@$file -F '$json' ";
-			$cmd .= ' "$dataverse/api/datasets/:persistentId/add?persistentId='.$ID.'"';
-			return $cmd;
-		}
+                        if (($file_name != '') and ($doi != ''))
+                            {
+                                $dataverse = $_SESSION['dataverse_url'];
+                                $api_key = $_SESSION['dataverse_token'];
+                                $sx = $files->DataverseFileAdd($dataverse,$api_key,$doi,$file_name);
+                            }
+                }
+            return $sx;
+        }
 }
