@@ -46,6 +46,7 @@ class Index extends Model
 			$sx .= '<h2>Java</h2>';
 			$sx .= '<br>';
 			$sx .= '<p>Debian</p>';
+			$sx .= '<code>apt update<br>';
 			$sx .= '<code>sudo yum install java-11-openjdk</code>';
 			$sx .= '<br>';
 			$sx .= '<br>';
@@ -159,6 +160,8 @@ class Index extends Model
 						break;
 					case 'jq':
 						$sx .= '<code>
+						 apt install jq<br>
+						<br><i>ou</i><br><br>
 						cd /usr/bin<br>
 						wget http://stedolan.github.io/jq/download/linux64/jq<br>
 						chmod +x jq<br>

@@ -100,13 +100,14 @@ class Solr extends Model
 		cp -r server/solr/configsets/_default server/solr/collection1<br><br>
 
 		echo "Copiando padrões de configuração do Dataverse para o SOLR"<br>
-		cp '.$dataverse_install.'schema*.xml /usr/local/solr/'.$ver.'/server/solr/collection1/conf<br>
-		cp '.$dataverse_install.'solrconfig.xml /usr/local/solr/'.$ver.'/server/solr/collection1/conf<br><br>
-		</code>
+		cp '.$dataverse_install.'schema*.xml /usr/local/solr/solr-'.$ver.'/server/solr/collection1/conf<br>
+		cp '.$dataverse_install.'solrconfig.xml /usr/local/solr/solr-'.$ver.'/server/solr/collection1/conf<br>
+		echo "name=collection1" > /usr/local/solr/solr-8.11.1/server/solr/collection1/core.properties<br>
+		</code><br>
 
 		<h4>Configurando o Jetty</h4>
 		<p>No arquivo jetty.xml alterar o parametro HedaerSize<br>
-		<code>nano /usr/local/solr/solr-8.8.1/server/etc/jetty.xml</code>
+		<code>nano /usr/local/solr/solr-'.$ver.'/server/etc/jetty.xml</code>
 		</p>
 
 		<p>Alterar a linha<br>

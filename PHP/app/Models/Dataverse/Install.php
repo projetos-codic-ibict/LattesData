@@ -48,6 +48,16 @@ class Install extends Model
 			$sx .= breadcrumbs();
 			switch($d1)
 				{
+					case 'dvnapp':
+						$sx .= '<h1>Dataverse App Install</h1>';
+						$sx .= '<code>cd /home/dataverse/install/dvinstall</code><br>';
+						$sx .= '<p>Configure os valores padrão de acesso ao Dataverse</p>';
+						$sx .= '<code> pico default.config</code><br>';
+						$sx .= '<h4>Install Python</h4>';
+						$sx .= '';
+						$sx .= 'apt install python3-pip<br>';
+						$sx .= '';
+						break;
 					case 'tools':
 						$sx .= '<h1>Tools</h1>';
 						$sx .= anchor(PATH.MODULE.'dataverse/system',msg('dataverse.system_facilities'));
@@ -63,6 +73,9 @@ class Install extends Model
 						$sx .= '<h2>Install Dataverse</h2>';
 						$sx .= '<p>Documentação</p>';
 						$sx .= '<a href="https://guides.dataverse.org/en/latest/installation/installation-main.html">https://guides.dataverse.org/en/latest/installation/installation-main.html</a>';
+						$sx .= '<br>&nbsp;';
+						$sx .= '<h2>Criando usuário Dataverse</h2>';
+						$sx .= '<code>useradd dataverse -m</code>';
 						$sx .= '<br>&nbsp;';
 						$sx .= '<h2>Download the Dataverse</h2>';
 						$sx .= anchor('https://github.com/IQSS/dataverse/releases');
@@ -98,6 +111,7 @@ class Install extends Model
 						$menu[PATH.MODULE.'dataverse/install/download'] = lang('dataverse.DownloadDataverse');
 						$menu[PATH.MODULE.'dataverse/install/pre'] = lang('dataverse.PrepraringInstall');
 						$menu[PATH.MODULE.'dataverse/install/tools'] = lang('dataverse.DataverseTools');
+						$menu[PATH.MODULE.'dataverse/install/dvnapp'] = lang('dataverse.DataverseDvnapp');						
 						$menu[PATH.MODULE.'dataverse/install/access'] = lang('dataverse.DataverseAccess');
 						$sx .= menu($menu);
 				}
