@@ -1,0 +1,5 @@
+#metadataBlock	name	dataverseAlias	displayName	blockURI	
+	LattesData Custom	LattesData Custom	LattesData Custom		
+#datasetField	name	title	description	watermark	fieldType	displayOrder	displayFormat	advancedSearchField	allowControlledVocabulary	allowmultiples	facetable	displayoncreate	required	parent	metadatablock_id	termURI	
+	author_lattes	ID Lattes do autor	ID Lattes do autor		text	1		FALSE	FALSE	FALSE	FALSE	FALSE	FALSE		LattesData Custom	
+#controlledVocabulary	DatasetField	Value	identifier	displayOrder											
