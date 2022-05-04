@@ -40,7 +40,9 @@ class Home extends BaseController
         {
             $sx = '';
             $sa = '';
-            $sa .= bsc('<img src="'.URL.'/img/logos/gt-rdpbrasil.png" width="100%" class="img-fluid">',2);
+            $link = '<a href="'.PATH.MODULE.'dataverse" style="text-decoration: none;">';
+            $linka = '</a>';
+            $sa .= bsc($link.'<img src="'.URL.'/img/logos/gt-rdpbrasil.png" width="100%" class="img-fluid">'.$linka,2);
             $sa .= bsc(h(lang('dataverse.dataverse_implementation'),3),10,'text-center mt-4');
             $sa .= bsc('<hr>',12);
             $sx .= bs($sa,'fluid');
