@@ -12,7 +12,7 @@ define("MODULE", 'home/');
 $this->session = \Config\Services::session();
 $language = \Config\Services::language();
 
-class Home extends BaseController
+class Cnpq extends BaseController
 {
     public function index()
         {

@@ -30,6 +30,8 @@ class Home extends BaseController
             $sx .= bs(bsc('<h2 class="text-center text-danger">Under Construction</h2>',12));
             $sx .= '<div style="position: absolute; bottom: 0; left: 5;">';
             $sx .= '<a href="'.PATH.MODULE.'dataverse" style="text-decoration: none;"><span style="color: white;" class="ms-2">tt</span></a>';
+            $sx .= ' &nbsp; ';
+            $sx .= '<a href="'.PATH.'cnpq/inport/" style="text-decoration: none;"><span style="color: grey;" class="ms-2">cnpq</span></a>';
             $sx .= '</div>';
             return $sx;
         }

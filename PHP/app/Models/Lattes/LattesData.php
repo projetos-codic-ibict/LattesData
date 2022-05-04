@@ -205,10 +205,47 @@ class LattesData extends Model
 		switch ($MOD) {
 			case 'PQ':
 				$Dataset = new \App\Models\Dataverse\Datasets();
+				$Dataverse = new \App\Models\Dataverse\Dataverse();
 				//$sx .= $this->modPQ($dt,$id);
 				$dd = $this->modPQ($dt, $id);
+				
 
 				/* ETAPAS */
+				$PARENT = 'beneficiarios';
+				$dv = $dd['datasetVersion'];
+				$metadataBlocks = $dv['metadataBlocks'];
+				$citation = $metadataBlocks['citation'];
+				$fields = $citation['fields'];
+				$title = 'no_title';
+				$key = '';
+				$desc = '';
+
+				for ($r=0;$r < count($fields);$r++)
+					{
+						$f = $fields[$r];
+						if ($f['typeName'] == 'title')
+							{
+								$title = $f['value'];
+								echo h($title);
+							}
+						if ($f['typeName'] == 'subject')
+							{
+								print_r($f);
+								echo '<hr>';
+							}	
+						if ($f['typeName'] == 'dsDescription')
+							{
+								$desc = $f['value'][0];
+								$desc = $desc['dsDescriptionValue']['value'];
+							}													
+					}
+
+				echo h($title);
+
+				pre($dd);
+				//CreateDataverse($PARENT,$name,$alias,$contact,$affiliation,$descript,$type)
+				$sx = '';
+				$sx .= $Dataverse->CreateDataverse($dd);
 				$sx .= $Dataset->CreateDatasets($dd);
 				/* ENVIA e-MAIL */
 				$msg = 'Dataset processado ' . $id;
