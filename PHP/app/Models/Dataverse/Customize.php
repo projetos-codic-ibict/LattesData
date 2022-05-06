@@ -195,13 +195,17 @@ class Customize extends Model
 						$PATH = '/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
 						break;
 
+					case 'css':
+						$cmd .= $this->css();
+						break;						
+
 					case 'homeFooter':
 						$cmd .= 'echo "Alterar no Rodape os dados sobre Copyright &copy"'.cr();
 						$cmd .= 'echo "/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/$file"'.cr();
 						$cmd .= 'curl -X PUT -d ", CNPq/Ibict" http://localhost:8080/api/admin/settings/:FooterCopyright';
 						$PATH = '/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
 						break;	
-					case '':
+					case 'DOIX':
 						$cmd .= 'curl -X PUT -d http://dataverse.example.edu http://localhost:8080/api/admin/settings/:NavbarAboutUrl';
 						break;
 
@@ -214,7 +218,7 @@ class Customize extends Model
 					$menu[PATH.MODULE.'dataverse/customize/Languages'] = 'dataverse.customize_language';
 					$menu[PATH.MODULE.'dataverse/customize/googleanalytics'] = 'dataverse.customize_GoogleAnalytics';
 					$menu[PATH.MODULE.'dataverse/customize/sitemap'] = 'dataverse.customize_sitemap';
-					$menu[PATH.MODULE.'dataverse/customize/sitemap'] = 'dataverse.customize_sitemap';
+					$menu[PATH.MODULE.'dataverse/customize/css'] = 'dataverse.customize_css';
 					$menu[PATH.MODULE.'dataverse/customize/copyright'] = 'dataverse.customize_FooterCopyright';
 					//:NavbarAboutUrl
 					//:NavbarGuidesUrl
@@ -267,4 +271,30 @@ class Customize extends Model
 			$sx .= '<pre>'.$cmd.'</pre>';
 			return $sx;
 		}	
+
+		function css()
+			{
+				$sx = '';
+				$sx .= h('dataverse.StyleCSS');
+				$sx .= form_open_multipart();
+				$sx .= form_upload('userfile');
+				$sx .= form_submit(array('name'=>'submit','value'=>lang('dataverse.upload')));
+				$sx .= form_close();
+
+				if (isset($_FILES['userfile']['name']))
+					{
+						$file = $_FILES['userfile']['tmp_name'];
+						$name = $_FILES['userfile']['name'];
+						$type = $_FILES['userfile']['type'];
+						if ($type == 'text/css')
+							{
+								move_uploaded_file($file,'/var/www/dataverse/branding/css/custom-stylesheet.css');
+								$sx .= bsmessage('Uploaded - Move:' .$file.' to /var/www/dataverse/branding/css/custom-stylesheet.css');
+							} else {
+								$sx .= bsmessage('File not CSS',3);
+							}
+					}				
+
+				return $sx;
+			}
 }
