@@ -288,7 +288,7 @@ class Customize extends Model
 						$type = $_FILES['userfile']['type'];
 						if ($type == 'text/css')
 							{
-								move_uploaded_file($file,'/var/www/dataverse/branding/css/custom-stylesheet.css');
+								move_uploaded_file($file,'/var/www/dataverse/branding/custom-stylesheet.css');
 								$sx .= bsmessage('Uploaded - Move:' .$file.' to /var/www/dataverse/branding/css/custom-stylesheet.css');
 							} else {
 								$sx .= bsmessage('File not CSS',3);
