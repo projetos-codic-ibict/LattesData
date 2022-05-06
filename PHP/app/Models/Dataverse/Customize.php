@@ -200,7 +200,10 @@ class Customize extends Model
 						$cmd .= 'echo "/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/$file"'.cr();
 						$cmd .= 'curl -X PUT -d ", CNPq/Ibict" http://localhost:8080/api/admin/settings/:FooterCopyright';
 						$PATH = '/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
-						break;						
+						break;	
+					case '':
+						$cmd .= 'curl -X PUT -d http://dataverse.example.edu http://localhost:8080/api/admin/settings/:NavbarAboutUrl';
+						break;
 
 
 					default:				

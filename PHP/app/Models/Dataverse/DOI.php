@@ -61,6 +61,12 @@ class DOI extends Model
 						$cmd .= 'export $PREFIX=PRE'.cr();
 						$cmd .= 'curl -X PUT -d "$PREFIX/" http://localhost:8080/api/admin/settings/:Shoulder';
 						break;
+					case 'protocol':
+						$cmd .= 'curl -X PUT -d doi http://localhost:8080/api/admin/settings/:Protocol';
+						break;
+					case 'authority':
+						$cmd .= 'curl -X PUT -d 10.80102 http://localhost:8080/api/admin/settings/:Authority';
+						break;						
 					case 'fake':
 						$cmd = 'curl http://localhost:8080/api/admin/settings/:DoiProvider -X PUT -d FAKE_DOI_PROVIDER=true';						
 						break;
@@ -68,6 +74,10 @@ class DOI extends Model
 					$menu[PATH.MODULE.'dataverse/doi/fake'] = 'dataverse.doi_fake';
 					$menu[PATH.MODULE.'dataverse/doi/shoulder'] = 'dataverse.doi_shoulder';
 					$menu[PATH.MODULE.'dataverse/doi/doi_FilePID'] = 'dataverse.doi_dataset';
+					$menu[PATH.MODULE.'dataverse/doi/protocol'] = 'dataverse.protocol';
+					$menu[PATH.MODULE.'dataverse/doi/authority'] = 'dataverse.authority';
+					
+					
 					$sx .= menu($menu);
 					break;
 				}
