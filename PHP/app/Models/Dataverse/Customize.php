@@ -166,14 +166,7 @@ class Customize extends Model
 						break;
 						
 					case 'homePage':
-						$cmd .= 'mkdir /var/www/dataverse/'.cr();
-						$cmd .= 'mkdir /var/www/dataverse/branding/'.cr();
-						$cmd .= 'echo "See sample <a href="https://guides.dataverse.org/en/latest/_downloads/0f28d7fe1a9937d9ef47ae3f8b51403e/custom-homepage.html">homepage"</a>'.cr();
-						$cmd .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-homepage.html\' http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
-						$cmd .= cr();
-						$cmd .= 'echo "Remove Custom Page"'.cr();
-						$cmd .= 'curl -X DELETE http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
-						$PATH = '/var/www/dataverse/branding/';
+						$sx .= $this->homepage();
 						break;
 
 					case 'homeFooter':
@@ -271,6 +264,43 @@ class Customize extends Model
 			$sx .= '<pre>'.$cmd.'</pre>';
 			return $sx;
 		}	
+
+		function homepage()
+			{
+				$cmd = '';
+						$cmd .= 'mkdir /var/www/dataverse/'.cr();
+						$cmd .= 'mkdir /var/www/dataverse/branding/'.cr();
+						$cmd .= 'echo "See sample <a href="https://guides.dataverse.org/en/latest/_downloads/0f28d7fe1a9937d9ef47ae3f8b51403e/custom-homepage.html">homepage"</a>'.cr();
+						$cmd .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-homepage.html\' http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
+						$cmd .= cr();
+						$cmd .= 'echo "Remove Custom Page"'.cr();
+						$cmd .= 'curl -X DELETE http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
+						$PATH = '/var/www/dataverse/branding/';
+
+				$sx = '';
+				$sx .= h('dataverse.HomePage');
+				$sx .= form_open_multipart();
+				$sx .= form_upload('userfile');
+				$sx .= form_submit(array('name'=>'submit','value'=>lang('dataverse.upload')));
+				$sx .= form_close();
+
+				if (isset($_FILES['userfile']['name']))
+					{
+						$file = $_FILES['userfile']['tmp_name'];
+						$name = $_FILES['userfile']['name'];
+						$type = $_FILES['userfile']['type'];
+						if ($type == 'text/html')
+							{
+								move_uploaded_file($file,'/var/www/dataverse/branding/cnpq_homepage.html');
+								$sx .= bsmessage('Uploaded - Move:' .$file.' to /var/www/dataverse/branding/css/custom-stylesheet.css');
+							} else {
+								$sx .= bsmessage('File not HTML - ['.$type.']',3);
+							}
+					}
+				$sx .= '<pre>'.$cmd.'</pre>';
+
+				return $sx;
+			}
 
 		function css()
 			{
