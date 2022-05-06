@@ -291,9 +291,10 @@ class Customize extends Model
 						$type = $_FILES['userfile']['type'];
 						if ($type == 'text/html')
 							{
-								$file2 = '/var/www/dataverse/branding/cnpq_homepage.html';
+								$file2 = '/var/www/dataverse/branding/cnpq_homepage.html';								
 								if (file_exists($file2))
 									{
+										$sx .= bsmessage('Delete file exists - '.$file2,3);
 										unlink($file2);
 									}
 
@@ -327,6 +328,7 @@ class Customize extends Model
 								$file2 = '/var/www/dataverse/branding/custom-stylesheet.css';
 								if (file_exists($file2))
 									{
+										$sx .= bsmessage('Delete file exists - '.$file2,3);
 										unlink($file2);
 									}								
 								move_uploaded_file($file,'/var/www/dataverse/branding/custom-stylesheet.css');
