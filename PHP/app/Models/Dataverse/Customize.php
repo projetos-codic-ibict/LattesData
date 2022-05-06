@@ -291,6 +291,12 @@ class Customize extends Model
 						$type = $_FILES['userfile']['type'];
 						if ($type == 'text/html')
 							{
+								$file2 = '/var/www/dataverse/branding/cnpq_homepage.html';
+								if (file_exists($file2))
+									{
+										unlink($file2);
+									}
+
 								move_uploaded_file($file,'/var/www/dataverse/branding/cnpq_homepage.html');
 								$sx .= bsmessage('Uploaded - Move:' .$file.' to /var/www/dataverse/branding/css/custom-stylesheet.css');
 							} else {
@@ -318,6 +324,11 @@ class Customize extends Model
 						$type = $_FILES['userfile']['type'];
 						if ($type == 'text/css')
 							{
+								$file2 = '/var/www/dataverse/branding/custom-stylesheet.css';
+								if (file_exists($file2))
+									{
+										unlink($file2);
+									}								
 								move_uploaded_file($file,'/var/www/dataverse/branding/custom-stylesheet.css');
 								$sx .= bsmessage('Uploaded - Move:' .$file.' to /var/www/dataverse/branding/css/custom-stylesheet.css');
 							} else {
