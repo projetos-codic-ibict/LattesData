@@ -49,8 +49,8 @@ return[
         'Embargo'=>'Aplicação de Embargo',
         'Ingest_File'=>'Scripts de Ingestão (Admissão) de Arquivos em um Dataset',
         'Users_login'=>'Configurações de usuários e Regras de acesso',
-        ''=>'',
-        ''=>'',
+        'form_logo'=>'Fomulário de facilitador',
+        'script_logo'=>'Script Bash de Otimização',
 
 
 ];

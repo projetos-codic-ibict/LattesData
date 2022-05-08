@@ -43,13 +43,13 @@ class Customize extends Model
 	function index($d1,$d2,$d3)
 		{
 			
-			$sx = h('DOI',1);
+			$sx = h(lang('Dataverse.Customize'),1);
 			if (strlen($d1) > 0)
 				{
 					$sx .= h('dataverse.customize_'.$d1,4);
 				}
 			
-			$cmd = '';
+			$sx = '';
 			
 			$file = false;
 			switch($d1)
@@ -64,28 +64,28 @@ class Customize extends Model
 						$lang_n = array('English','Português','Espanhol','Frances','Alemão','Italiano','Português','Russo','Chinês');
 						$langs = array('en','br');
 						$default = 'br';
-						$cmd = '';
-						$cmd .= 'mkdir /var/www/dataverse/'.cr();
-						$cmd .= 'mkdir /var/www/dataverse/langBundles/'.cr();
-						$cmd .= 'mkdir /var/www/dataverse/langTmp/'.cr();
-						$cmd .= 'mkdir /var/www/dataverse/langTmp/pt_BR'.cr();
-						$cmd .= 'mkdir /var/www/dataverse/langTmp/source'.cr();
-						$cmd .= 'echo "Baixando atualizações"'.cr();
-						$cmd .= 'echo "==>Portugues"'.cr();
-						$cmd .= 'cd /var/www/dataverse/langTmp/pt_BR/'.cr();
-						$cmd .= 'rm * -r'.cr();
-						$cmd .= 'wget https://github.com/RNP-dadosabertos/dataverse-language-packs/archive/develop.zip'.cr();;
-						$cmd .= 'unzip develop.zip'.cr();
+						$sx = '';
+						$sx .= 'mkdir /var/www/dataverse/'.cr();
+						$sx .= 'mkdir /var/www/dataverse/langBundles/'.cr();
+						$sx .= 'mkdir /var/www/dataverse/langTmp/'.cr();
+						$sx .= 'mkdir /var/www/dataverse/langTmp/pt_BR'.cr();
+						$sx .= 'mkdir /var/www/dataverse/langTmp/source'.cr();
+						$sx .= 'echo "Baixando atualizações"'.cr();
+						$sx .= 'echo "==>Portugues"'.cr();
+						$sx .= 'cd /var/www/dataverse/langTmp/pt_BR/'.cr();
+						$sx .= 'rm * -r'.cr();
+						$sx .= 'wget https://github.com/RNP-dadosabertos/dataverse-language-packs/archive/develop.zip'.cr();;
+						$sx .= 'unzip develop.zip'.cr();
 						
-						$cmd .= 'echo "==>Outros Idiomas"'.cr();
-						$cmd .= 'cd /var/www/dataverse/langTmp/source/'.cr();
-						$cmd .= 'rm * -r'.cr();
-						$cmd .= 'wget https://github.com/GlobalDataverseCommunityConsortium/dataverse-language-packs/archive/refs/heads/develop.zip'.cr();
-						$cmd .= 'unzip develop.zip'.cr();
+						$sx .= 'echo "==>Outros Idiomas"'.cr();
+						$sx .= 'cd /var/www/dataverse/langTmp/source/'.cr();
+						$sx .= 'rm * -r'.cr();
+						$sx .= 'wget https://github.com/GlobalDataverseCommunityConsortium/dataverse-language-packs/archive/refs/heads/develop.zip'.cr();
+						$sx .= 'unzip develop.zip'.cr();
 
-						$cmd .= 'echo "Copiando os arquivos necessários"'.cr();
-						$cmd .= 'rm /var/www/dataverse/langTmp/*.properties'.cr();
-						$cmd .= 'rm /var/www/dataverse/langTmp/*.zip'.cr();
+						$sx .= 'echo "Copiando os arquivos necessários"'.cr();
+						$sx .= 'rm /var/www/dataverse/langTmp/*.properties'.cr();
+						$sx .= 'rm /var/www/dataverse/langTmp/*.zip'.cr();
 						$files = array(
 								'astrophysics$lg.properties',
 								'biomedical$lg.properties',
@@ -103,7 +103,7 @@ class Customize extends Model
 						for ($r=0;$r < count($langs);$r++)
 							{
 								echo cr();
-								$cmd .= "======================== Copy files =".$langs[$r].cr();
+								$sx .= "======================== Copy files =".$langs[$r].cr();
 								$n_subdir = $subdir[$r];
 								if ($langs[$r] == 'br')
 									{
@@ -131,38 +131,38 @@ class Customize extends Model
 										$des = $out .$files[$f];										
 										$des = troca($des,'$lg',$xlang);
 
-										$cmd .= "cp $ori $des".cr();
+										$sx .= "cp $ori $des".cr();
 									}
 							}
-						$cmd .=  cr();
-						$cmd .= 'echo "===>Preparing ZIP FILE"'.cr();
-						$cmd .= 'cd /var/www/dataverse/langTmp/'.cr();
-						$cmd .= 'rm *.zip'.cr();
-						$cmd .= 'zip languages.zip *.properties'.cr();
-						$cmd .= 'export PAYARA=/usr/local/payara5/glassfish'.cr();
-						$cmd .= '$PAYARA/bin/asadmin create-jvm-options \'-Ddataverse.lang.directory=/var/www/dataverse/langBundles\''.cr();
-						$cmd .= '$PAYARA/bin/asadmin stop-domain'.cr();
-						$cmd .= '$PAYARA/bin/asadmin start-domain'.cr();
-						$cmd .= 'curl http://localhost:8080/api/admin/datasetfield/loadpropertyfiles -X POST --upload-file languages.zip -H "Content-Type: application/zip"';
-						$cmd .= cr();
-						$cmd .= 'curl http://localhost:8080/api/admin/settings/:Languages -X PUT -d \'['.$tlang.']\''.cr();
+						$sx .=  cr();
+						$sx .= 'echo "===>Preparing ZIP FILE"'.cr();
+						$sx .= 'cd /var/www/dataverse/langTmp/'.cr();
+						$sx .= 'rm *.zip'.cr();
+						$sx .= 'zip languages.zip *.properties'.cr();
+						$sx .= 'export PAYARA=/usr/local/payara5/glassfish'.cr();
+						$sx .= '$PAYARA/bin/asadmin create-jvm-options \'-Ddataverse.lang.directory=/var/www/dataverse/langBundles\''.cr();
+						$sx .= '$PAYARA/bin/asadmin stop-domain'.cr();
+						$sx .= '$PAYARA/bin/asadmin start-domain'.cr();
+						$sx .= 'curl http://localhost:8080/api/admin/datasetfield/loadpropertyfiles -X POST --upload-file languages.zip -H "Content-Type: application/zip"';
+						$sx .= cr();
+						$sx .= 'curl http://localhost:8080/api/admin/settings/:Languages -X PUT -d \'['.$tlang.']\''.cr();
 
-						$cmd .= 'echo "===>Definindo o idoma principal do Dataverse"'.cr();
-						$cmd .= 'cd /var/www/dataverse/langBundles'.cr();
-						$cmd .= 'cp *.properties /usr/local/payara5/glassfish/domains/domain1/applications/dataverse/WEB-INF/classes/propertyFiles/.'.cr();
-						$cmd .= '$PAYARA/bin/asadmin stop-domain'.cr();
-						$cmd .= '$PAYARA/bin/asadmin start-domain'.cr();
-						$cmd .= cr();
-						$cmd .= 'echo "FIM DA ATUALIZAÇÂO"'.cr();
-						$cmd .= cr();
+						$sx .= 'echo "===>Definindo o idoma principal do Dataverse"'.cr();
+						$sx .= 'cd /var/www/dataverse/langBundles'.cr();
+						$sx .= 'cp *.properties /usr/local/payara5/glassfish/domains/domain1/applications/dataverse/WEB-INF/classes/propertyFiles/.'.cr();
+						$sx .= '$PAYARA/bin/asadmin stop-domain'.cr();
+						$sx .= '$PAYARA/bin/asadmin start-domain'.cr();
+						$sx .= cr();
+						$sx .= 'echo "FIM DA ATUALIZAÇÂO"'.cr();
+						$sx .= cr();
 						break;
 					case 'sitemap':
-						$cmd .= 'curl -X POST http://localhost:8080/api/admin/sitemap';
+						$sx .= 'curl -X POST http://localhost:8080/api/admin/sitemap';
 						$sx .= 'Result in: '.cr();
 						$sx .= '/usr/local/payara5/glassfish/domains/domain1/docroot/sitemap/sitemap.xml';
 						break;
 					case 'googleanalytics':
-						$cmd = 'https://guides.dataverse.org/en/latest/installation/config.html?highlight=google%20analytics';
+						$sx = 'https://guides.dataverse.org/en/latest/installation/config.html?highlight=google%20analytics';
 						break;
 						
 					case 'homePage':
@@ -170,32 +170,32 @@ class Customize extends Model
 						break;
 
 					case 'homeFooter':
-						$cmd .= 'mkdir /var/www/dataverse/'.cr();
-						$cmd .= 'mkdir /var/www/dataverse/branding/'.cr();
-						$cmd .= 'echo "See sample <a href="https://guides.dataverse.org/en/latest/_downloads/0f28d7fe1a9937d9ef47ae3f8b51403e/custom-homepage.html">homepage"</a>'.cr();
-						$cmd .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-homepage.html\' http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
-						$cmd .= cr();
-						$cmd .= 'echo "Remove Custom Page"'.cr();
-						$cmd .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-footer.html\' http://localhost:8080/api/admin/settings/:FooterCustomizationFile'.cr();
+						$sx .= 'mkdir /var/www/dataverse/'.cr();
+						$sx .= 'mkdir /var/www/dataverse/branding/'.cr();
+						$sx .= 'echo "See sample <a href="https://guides.dataverse.org/en/latest/_downloads/0f28d7fe1a9937d9ef47ae3f8b51403e/custom-homepage.html">homepage"</a>'.cr();
+						$sx .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-homepage.html\' http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
+						$sx .= cr();
+						$sx .= 'echo "Remove Custom Page"'.cr();
+						$sx .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-footer.html\' http://localhost:8080/api/admin/settings/:FooterCustomizationFile'.cr();
 						$PATH = '/var/www/dataverse/branding/';
 						break;						
 
 					case 'logo':
-						$cmd .= $this->logo();
+						$sx .= $this->logo();
 						break;
 
 					case 'css':
-						$cmd .= $this->css();
+						$sx .= $this->css();
 						break;						
 
 					case 'homeFooter':
-						$cmd .= 'echo "Alterar no Rodape os dados sobre Copyright &copy"'.cr();
-						$cmd .= 'echo "/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/$file"'.cr();
-						$cmd .= 'curl -X PUT -d ", CNPq/Ibict" http://localhost:8080/api/admin/settings/:FooterCopyright';
+						$sx .= 'echo "Alterar no Rodape os dados sobre Copyright &copy"'.cr();
+						$sx .= 'echo "/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/$file"'.cr();
+						$sx .= 'curl -X PUT -d ", CNPq/Ibict" http://localhost:8080/api/admin/settings/:FooterCopyright';
 						$PATH = '/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
 						break;	
 					case 'DOIX':
-						$cmd .= 'curl -X PUT -d http://dataverse.example.edu http://localhost:8080/api/admin/settings/:NavbarAboutUrl';
+						$sx .= 'curl -X PUT -d http://dataverse.example.edu http://localhost:8080/api/admin/settings/:NavbarAboutUrl';
 						break;
 
 
@@ -252,22 +252,26 @@ class Customize extends Model
 							}
 						move_uploaded_file($file,$PATH.$name);						
 						$sx .= bsmessage('Uploaded - Move:' .$file.' to '.$PATH.$name.'<br>'.$PATH.$name,1);
-						$cmd = troca($cmd,'$file',$name);
+						$sx = troca($sx,'$file',$name);
 					}
 				
 			}
-			//$cmd = troca($cmd,chr(10),'<br>');
-			$sx .= $cmd;
+			//$sx = troca($sx,chr(10),'<br>');
+			$sx .= $sx;
 			return $sx;
 		}	
 
 		function logo()
 			{
-				$cmd = '';
+				$sx = '';
 				$logo = 'logo.png';
 				if (get("logo") != '') 
-					{ $logo = get('logo'); }
+					{ $logo = get('logo'); }		
+				$sx .= h(lang('dataverse.sample_logo'),2);
+				$sx .= '<img src="'.URL.'img/samples/dataverse_logo.png"  class="img-fluid">';
+				$sx .= '<span class="small">Imgage height: 50px</span>';
 
+				$sx .= h(lang('dataverse.form_logo'),2,'mt-5');
 				$form = '';
 				$form .= form_open();
 				$form .= '<small>'.lang('dataverse.logo_file').'</small>';
@@ -280,45 +284,44 @@ class Customize extends Model
 				$form .= '</div>';
 				$form .= '</div>';
 				$form .= form_close();
-				$cmd .= bs(bsc($form,12));
+				$sx .= bsc($form,12,'shadow p-3 bg-body rounded');
 			
-				$cmd .= '<hr>';
-				$cmd .= h('dataverse.script_logo',2);
-				$cmd .= 'Crie o diretório para gravar o arquivo:<br>';
-				$cmd .= '<pre>';
-				$cmd .= 'mkdir /usr/local/payara5/glassfish/domains/domain1/docroot/logos/'.cr();
-				$cmd .= 'mkdir /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/'.cr();
-				$cmd .= '</pre><br>';
-				$cmd .= 'Acesse a página onde se localiza o arquivo da logo, ex:<br>';
-				$cmd .= '<pre>cd /data/LattesData/_Documentation/Icones</pre><br>';
-				$cmd .= 'Salve o arquivo '.$logo.' no diretorio /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
-				$cmd .= '<br>';
-				$cmd .= '<pre>';
-				$cmd .= 'cp '.$logo.' /usr/local/payara5/glassfish/domains/domain1/docroot/logos/.'.cr();
-				$cmd .= '</pre>';
+				$sx .= h(lang('dataverse.script_logo'),2,'mt-5');
+				$sx .= 'Crie o diretório para gravar o arquivo:<br>';
+				$sx .= '<pre>';
+				$sx .= 'mkdir /usr/local/payara5/glassfish/domains/domain1/docroot/logos/'.cr();
+				$sx .= 'mkdir /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/'.cr();
+				$sx .= '</pre><br>';
+				$sx .= 'Acesse a página onde se localiza o arquivo da logo, ex:<br>';
+				$sx .= '<pre>cd /data/LattesData/_Documentation/Icones</pre><br>';
+				$sx .= 'Salve o arquivo '.$logo.' no diretorio /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
+				$sx .= '<br>';
+				$sx .= '<pre>';
+				$sx .= 'cp '.$logo.' /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/.'.cr();
+				$sx .= '</pre>';
 
-				$cmd .= 'Ativar configurações de logo:<br>';
-				$cmd .= '<pre>';
-				$cmd .= "curl -X PUT -d '/logos/navbar/$logo' http://localhost:8080/api/admin/settings/:LogoCustomizationFile".cr();
-				$cmd .= '</pre>';
+				$sx .= 'Ativar configurações de logo:<br>';
+				$sx .= '<pre>';
+				$sx .= "curl -X PUT -d '/logos/navbar/$logo' http://localhost:8080/api/admin/settings/:LogoCustomizationFile".cr();
+				$sx .= '</pre>';
 				
 				$file = true;
 				$PATH = '/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
-
-				return $cmd;
+				$sx .= bs($sx);
+				return $sx;
 
 			}
 
 		function homepage()
 			{
-				$cmd = '';
-						$cmd .= 'mkdir /var/www/dataverse/'.cr();
-						$cmd .= 'mkdir /var/www/dataverse/branding/'.cr();
-						$cmd .= 'echo "See sample <a href="https://guides.dataverse.org/en/latest/_downloads/0f28d7fe1a9937d9ef47ae3f8b51403e/custom-homepage.html">homepage"</a>'.cr();
-						$cmd .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-homepage.html\' http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
-						$cmd .= cr();
-						$cmd .= 'echo "Remove Custom Page"'.cr();
-						$cmd .= 'curl -X DELETE http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
+				$sx = '';
+						$sx .= 'mkdir /var/www/dataverse/'.cr();
+						$sx .= 'mkdir /var/www/dataverse/branding/'.cr();
+						$sx .= 'echo "See sample <a href="https://guides.dataverse.org/en/latest/_downloads/0f28d7fe1a9937d9ef47ae3f8b51403e/custom-homepage.html">homepage"</a>'.cr();
+						$sx .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-homepage.html\' http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
+						$sx .= cr();
+						$sx .= 'echo "Remove Custom Page"'.cr();
+						$sx .= 'curl -X DELETE http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
 						$PATH = '/var/www/dataverse/branding/';
 
 				$sx = '';
@@ -348,7 +351,7 @@ class Customize extends Model
 								$sx .= bsmessage('File not HTML - ['.$type.']',3);
 							}
 					}
-				$sx .= '<pre>'.$cmd.'</pre>';
+				$sx .= '<pre>'.$sx.'</pre>';
 
 				return $sx;
 			}
