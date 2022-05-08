@@ -181,11 +181,7 @@ class Customize extends Model
 						break;						
 
 					case 'logo':
-						$cmd .= 'echo "Grave o logo na pasta abaixo:"'.cr();
-						$cmd .= 'echo "/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/$file"'.cr();
-						$cmd .= 'curl -X PUT -d \'/logos/navbar/$file\' http://localhost:8080/api/admin/settings/:LogoCustomizationFile';
-						$file = true;
-						$PATH = '/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
+						$cmd .= $this->logo();
 						break;
 
 					case 'css':
@@ -261,9 +257,57 @@ class Customize extends Model
 				
 			}
 			//$cmd = troca($cmd,chr(10),'<br>');
-			$sx .= '<pre>'.$cmd.'</pre>';
+			$sx .= $cmd;
 			return $sx;
 		}	
+
+		function logo()
+			{
+				$cmd = '';
+				$logo = 'logo.png';
+				if (get("logo") != '') 
+					{ $logo = get('logo'); }
+
+				$form = '';
+				$form .= form_open();
+				$form .= '<small>'.lang('dataverse.logo_file').'</small>';
+				$form .= '<div class="input-group">';
+				$form .= form_input(array('name'=>'logo','style'=>'font-size: 250%;','value'=>$logo,'class'=>'form-control'));
+  				$form .= '<div class="input-group-prepend">';
+				$form .= '<span class="input-group-text">ex: logo.png</span>';
+				$form .= form_submit(array('name'=>'submit','class'=>'btn btn-outline-primary','value'=>lang('dataverse.upload_setname')));
+  				$form .= '</div>';
+				$form .= '</div>';
+				$form .= '</div>';
+				$form .= form_close();
+				$cmd .= bs(bsc($form,12));
+			
+				$cmd .= '<hr>';
+				$cmd .= h('dataverse.script_logo',2);
+				$cmd .= 'Crie o diretório para gravar o arquivo:<br>';
+				$cmd .= '<pre>';
+				$cmd .= 'mkdir /usr/local/payara5/glassfish/domains/domain1/docroot/logos/'.cr();
+				$cmd .= 'mkdir /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/'.cr();
+				$cmd .= '</pre><br>';
+				$cmd .= 'Acesse a página onde se localiza o arquivo da logo, ex:<br>';
+				$cmd .= '<pre>cd /data/LattesData/_Documentation/Icones</pre><br>';
+				$cmd .= 'Salve o arquivo '.$logo.' no diretorio /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
+				$cmd .= '<br>';
+				$cmd .= '<pre>';
+				$cmd .= 'cp '.$logo.' /usr/local/payara5/glassfish/domains/domain1/docroot/logos/.'.cr();
+				$cmd .= '</pre>';
+
+				$cmd .= 'Ativar configurações de logo:<br>';
+				$cmd .= '<pre>';
+				$cmd .= "curl -X PUT -d '/logos/navbar/$logo' http://localhost:8080/api/admin/settings/:LogoCustomizationFile".cr();
+				$cmd .= '</pre>';
+				
+				$file = true;
+				$PATH = '/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
+
+				return $cmd;
+
+			}
 
 		function homepage()
 			{

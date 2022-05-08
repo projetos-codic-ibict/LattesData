@@ -39,6 +39,18 @@ return[
         'checkit_solr'=>'Checagem do SOLR',
         'checkit_DOI'=>'Checagem do DOI - Datacite',
         'checkit_email'=>'Checagem de envio de e-mail',
+        
+
+        'Custom_Email'=>'Configurações de E-mail',
+        'Solr'=>'Configurações do SOLR',
+        'Checklist'=>'Checagem do Sistema',
+        'Custom_system'=>'Scripts de Bash de Otimização',
+        'System'=>'Sistema Dataverse',
+        'Embargo'=>'Aplicação de Embargo',
+        'Ingest_File'=>'Scripts de Ingestão (Admissão) de Arquivos em um Dataset',
+        'Users_login'=>'Configurações de usuários e Regras de acesso',
+        ''=>'',
+        ''=>'',
 
 
 ];
