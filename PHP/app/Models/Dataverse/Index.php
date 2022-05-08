@@ -246,11 +246,24 @@ class Index extends Model
 						$sx .= $this->users_login($d1,$d2,$d3,$d4);
 						break;
 					default:
-						$sa = $this->show_structure();
-						$sb = h(lang('dataverse.main_menu'),4);
-						$sb .= $this->menu();
-						$sx = bsc($sb,3).bsc($sa,9);
+						$sb = $this->show_structure();
+						$sb .= $this->dir_structure();
+
+						$sa = h(lang('dataverse.main_menu'),4);
+						$sa .= $this->menu();
+						
+
+						$sx = bsc($sa,3).bsc($sb,9);
 				}
+			return $sx;
+		}
+	function dir_structure()
+		{
+			$sx = '';
+			$sx .= '<ul style="list-style:none;">';
+			$sx .= '<li>/var/www/dataverse/</li>';
+			$sx .= '<li>/var/www/dataverse/build</li>';
+			$sx .= '</ul>';
 			return $sx;
 		}
 	function show_structure()
