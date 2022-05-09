@@ -194,14 +194,19 @@ class Customize extends Model
 						$sx .= 'curl -X PUT -d ", CNPq/Ibict" http://localhost:8080/api/admin/settings/:FooterCopyright';
 						$PATH = '/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
 						break;	
+
 					case 'DOIX':
 						$sx .= 'curl -X PUT -d http://dataverse.example.edu http://localhost:8080/api/admin/settings/:NavbarAboutUrl';
+						break;
+					case 'NavbarAboutUrl':
+						$sx .= $this->NavbarAboutUrl();
 						break;
 
 
 					default:				
 					$menu[PATH.MODULE.'dataverse/customize/logo'] = 'dataverse.customize_logo';
 					$menu[PATH.MODULE.'dataverse/customize/homePage'] = 'dataverse.customize_homepage';
+					$menu[PATH.MODULE.'dataverse/customize/NavbarAboutUrl'] = 'dataverse.NavbarAboutUrl';
 					$menu[PATH.MODULE.'dataverse/customize/homeHeader'] = 'dataverse.customize_header';
 					$menu[PATH.MODULE.'dataverse/customize/homeFooter'] = 'dataverse.customize_footer';
 					$menu[PATH.MODULE.'dataverse/customize/Languages'] = 'dataverse.customize_language';
@@ -257,7 +262,6 @@ class Customize extends Model
 				
 			}
 			//$sx = troca($sx,chr(10),'<br>');
-			$sx .= $sx;
 			return $sx;
 		}	
 
