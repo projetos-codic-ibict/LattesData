@@ -54,17 +54,24 @@ class Files extends Model
 
 	function DataverseFileAdd($dataverse,$api_key,$ID='doi:10.5072/FK2/J8SJZB',$file)
 		{
-			$sx = "export API_TOKEN=".$api_key.chr(13);
-			$sx .= "export FILENAME='$file'".chr(13);
-			$sx .= "export SERVER_URL=$dataverse".chr(13);
-			$sx .= "export PERSISTENT_ID=$ID";
+			$sx = '';
+			$sx .= '<tt>';
+			$sx .= "export API_TOKEN=".$api_key.cr();
+			$sx .= "export FILENAME='$file'".cr();
+			$sx .= "export SERVER_URL=$dataverse".cr();
+			$sx .= "export PERSISTENT_ID=$ID".cr();
 
-			$json = 'jsonData={"description":"My description.","directoryLabel":"data/subdir1","categories":["Data"], "restrict":"false"}';
+			$json = 'jsonData={"description":"My description.","directoryLabel":"data/subdir1","categories":["Data"],"restrict":"false"}';
 			
-			$cmd = $sx . 'curl -H X-Dataverse-key:$API_TOKEN -X POST -F file=@$FILENAME -F \'jsonData='.$json.'\' "$SERVER_URL/api/datasets/:persistentId/add?persistentId=$ID"';
+			$sx .= 'curl -H X-Dataverse-key:$API_TOKEN -X POST -F file=@$FILENAME -F \'jsonData='.$json.'\' "$SERVER_URL/api/datasets/:persistentId/add?persistentId=$ID"'.cr();;
 
-			$cmd = "curl -H X-Dataverse-key:$api_key -X POST -F file=@$file -F '$json' ";
-			$cmd .= ' "$dataverse/api/datasets/:persistentId/add?persistentId='.$ID.'"';
-			return $cmd;
+			$sx .= "curl -H X-Dataverse-key:$api_key -X POST -F file=@$file -F '$json' ";
+			$sx .= ' "'.$dataverse.'/api/datasets/:persistentId/add?persistentId=doi:'.$ID.'"'.cr();;
+			$sx .= '</tt>';
+
+			$sx = troca($sx,cr(),'<br>');
+
+
+			return $sx;
 		}
 }

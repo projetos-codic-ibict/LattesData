@@ -48,6 +48,9 @@ class Install extends Model
 			$sx .= breadcrumbs();
 			switch($d1)
 				{
+					case 'upgrade':
+						$sx .= $this->upgrade();
+						break;
 					case 'dvnapp':
 						$sx .= '<h1>Dataverse App Install</h1>';
 						$sx .= '<code>cd /home/dataverse/install/dvinstall</code><br>';
@@ -117,5 +120,43 @@ class Install extends Model
 				}
 			return $sx;
 		}
+
+		function upgrade()
+			{
+				$ver = '5.10.1';
+				$sx = '<h1>Dataverse Upgrade</h1>';
+				$sx .= h('GitHub - Dataversee',4);
+				$sx .= '<pre><a href="https://github.com/IQSS/dataverse/releases" target="_blank">https://github.com/IQSS/dataverse/releases</a></pre>';
+
+				$cmd = '';
+
+				$cmd .= 'echo "Baixando a última versão atualizada"'.cr();
+				$cmd .= 'cd /home/dataverse/install'.cr();
+				$cmd .= 'wget https://github.com/IQSS/dataverse/releases/download/v'.$ver.'/dataverse-'.$ver.'.war'.cr();
+				$cmd .= cr();
+
+				$cmd .= 'echo "Verificando a versão instalada"'.cr();
+				$cmd .= 'export PAYARA=/usr/local/payara5'.cr();
+
+				$cmd .= 'echo "Mostrando a versão instaada"'.cr();
+				$cmd .= '$PAYARA/bin/asadmin list-applications'.cr();
+				$cmd .= '<span style="color: green">Resultado: <i>dataverse-5.10 &lt;ejb, health, metrics, openapi, web></i></span>'.cr();
+
+				$cmd .= cr();
+				$cmd .= 'echo "Removendo a versão instalada"'.cr();
+				$cmd .= '$PAYARA/bin/asadmin undeploy dataverse<-version>'.cr();
+				$cmd .= './stop'.cr();
+				$cmd .= cr();
+
+				$cmd .= 'rm -rf $PAYARA/glassfish/domains/domain1/generated'.cr();
+				$cmd .= './start'.cr();
+				$cmd .= 'echo "Instalando a nova versão"'.cr();
+				$cmd .= '$PAYARA/bin/asadmin deploy dataverse'.$ver.'.war'.cr();
+				$cmd .= './restart'.cr();
+				
+				$sx .= '<pre>'.$cmd.'</pre>';
+
+				return $sx;
+			}
 
 }

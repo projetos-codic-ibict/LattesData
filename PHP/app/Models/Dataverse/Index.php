@@ -276,7 +276,7 @@ class Index extends Model
 
 				$menu['#INSTALL'] = '<h5><b>'.lang('dataverse.DataverseInstall').'</b></h5>';
 				$menu[PATH.MODULE.'dataverse/install'] = lang('dataverse.DataverseInstalling');
-				$menu[PATH.MODULE.'dataverse/upgrade'] = lang('dataverse.DataverseUpgrade');
+				$menu[PATH.MODULE.'dataverse/install/upgrade'] = lang('dataverse.DataverseUpgrade');
 
 				$menu['#SETTINGS'] = '<h5><b>'.lang('dataverse.Settings').'</b></h5>';
 				$menu[PATH.MODULE.'dataverse/server'] = lang('dataverse.SetServer') . ': <b>'.$this->server().'</b>';

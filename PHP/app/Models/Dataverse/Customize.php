@@ -169,16 +169,12 @@ class Customize extends Model
 						$sx .= $this->homepage();
 						break;
 
-					case 'homeFooter':
-						$sx .= 'mkdir /var/www/dataverse/'.cr();
-						$sx .= 'mkdir /var/www/dataverse/branding/'.cr();
-						$sx .= 'echo "See sample <a href="https://guides.dataverse.org/en/latest/_downloads/0f28d7fe1a9937d9ef47ae3f8b51403e/custom-homepage.html">homepage"</a>'.cr();
-						$sx .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-homepage.html\' http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
-						$sx .= cr();
-						$sx .= 'echo "Remove Custom Page"'.cr();
-						$sx .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-footer.html\' http://localhost:8080/api/admin/settings/:FooterCustomizationFile'.cr();
-						$PATH = '/var/www/dataverse/branding/';
-						break;						
+					case 'FooterCustomizationFile':
+						$sx .= $this->FooterCustomizationFile();
+						break;	
+					case 'HeaderCustomizationFile':
+						$sx .= $this->HeaderCustomizationFile();
+						break;					
 
 					case 'logo':
 						$sx .= $this->logo();
@@ -204,16 +200,16 @@ class Customize extends Model
 
 
 					default:				
-					$menu[PATH.MODULE.'dataverse/customize/logo'] = 'dataverse.customize_logo';
-					$menu[PATH.MODULE.'dataverse/customize/homePage'] = 'dataverse.customize_homepage';
-					$menu[PATH.MODULE.'dataverse/customize/NavbarAboutUrl'] = 'dataverse.NavbarAboutUrl';
-					$menu[PATH.MODULE.'dataverse/customize/homeHeader'] = 'dataverse.customize_header';
-					$menu[PATH.MODULE.'dataverse/customize/homeFooter'] = 'dataverse.customize_footer';
-					$menu[PATH.MODULE.'dataverse/customize/Languages'] = 'dataverse.customize_language';
-					$menu[PATH.MODULE.'dataverse/customize/googleanalytics'] = 'dataverse.customize_GoogleAnalytics';
-					$menu[PATH.MODULE.'dataverse/customize/sitemap'] = 'dataverse.customize_sitemap';
-					$menu[PATH.MODULE.'dataverse/customize/css'] = 'dataverse.customize_css';
-					$menu[PATH.MODULE.'dataverse/customize/copyright'] = 'dataverse.customize_FooterCopyright';
+					$menu[PATH.MODULE.'dataverse/customize/logo'] = lang('dataverse.customize_logo');
+					$menu[PATH.MODULE.'dataverse/customize/homePage'] = lang('dataverse.customize_homepage');
+					$menu[PATH.MODULE.'dataverse/customize/NavbarAboutUrl'] = lang('dataverse.NavbarAboutUrl');
+					$menu[PATH.MODULE.'dataverse/customize/HeaderCustomizationFile'] = lang('dataverse.HeaderCustomizationFile');
+					$menu[PATH.MODULE.'dataverse/customize/FooterCustomizationFile'] = lang('dataverse.FooterCustomizationFile');
+					$menu[PATH.MODULE.'dataverse/customize/Languages'] = lang('dataverse.customize_language');
+					$menu[PATH.MODULE.'dataverse/customize/googleanalytics'] = lang('dataverse.customize_GoogleAnalytics');
+					$menu[PATH.MODULE.'dataverse/customize/sitemap'] = lang('dataverse.customize_sitemap');
+					$menu[PATH.MODULE.'dataverse/customize/css'] = lang('dataverse.customize_css');
+					$menu[PATH.MODULE.'dataverse/customize/copyright'] = lang('dataverse.customize_FooterCopyright');
 					//:NavbarAboutUrl
 					//:NavbarGuidesUrl
 					//:GuidesBaseUrl
@@ -316,18 +312,47 @@ class Customize extends Model
 
 			}
 
-		function homepage()
+			function HeaderCustomizationFile ()
 			{
 				$sx = '';
-						$sx .= 'mkdir /var/www/dataverse/'.cr();
-						$sx .= 'mkdir /var/www/dataverse/branding/'.cr();
-						$sx .= 'echo "See sample <a href="https://guides.dataverse.org/en/latest/_downloads/0f28d7fe1a9937d9ef47ae3f8b51403e/custom-homepage.html">homepage"</a>'.cr();
-						$sx .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-homepage.html\' http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
-						$sx .= cr();
-						$sx .= 'echo "Remove Custom Page"'.cr();
-						$sx .= 'curl -X DELETE http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
-						$PATH = '/var/www/dataverse/branding/';
+				$sx .= '<p>Para incluir personalizações no &lt;header> das páginas.</p>';
+				$sx .= '<pre>';
+				$sx .= 'mkdir /var/www/dataverse/'.cr();
+				$sx .= 'mkdir /var/www/dataverse/branding/'.cr();
+				$sx .= '</pre>';
+				$sx .= '<p>Crie uma página com o conteúdo em /var/www/dataverse/branding/custom-header.html</p><br>';
+				$sx .= '<tt>nano /var/www/dataverse/branding/custom-header.html</tt><br>';
+				$sx .= 'echo "See sample <a href="https://guides.dataverse.org/en/latest/_downloads/0f28d7fe1a9937d9ef47ae3f8b51403e/custom-homepage.html">homepage"</a>'.cr();
+				$sx .= "<tt>curl -X PUT -d '/var/www/dataverse/branding/custom-header.html' http://localhost:8080/api/admin/settings/:HeaderCustomizationFile</tt>".cr();
+				$sx .= '</pre>';
+				$sx .= cr();
+				$sx .= 'echo "Remove Custom Page"'.cr();
+				$sx .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-header.html\' http://localhost:8080/api/admin/settings/:HeaderCustomizationFile'.cr();
+				$PATH = '/var/www/dataverse/branding/';
+				return $sx;
+			}			
 
+		function FooterCustomizationFile ()
+			{
+				$sx = '';
+				$sx .= '<pre>';
+				$sx .= 'mkdir /var/www/dataverse/'.cr();
+				$sx .= 'mkdir /var/www/dataverse/branding/'.cr();
+				$sx .= '</pre>';
+				$sx .= '<p>Crie uma página com o conteúdo em /var/www/dataverse/branding/custom-footer.html</p><br>';
+				$sx .= '<tt>nano /var/www/dataverse/branding/custom-footer.html</tt><br>';
+				$sx .= 'echo "See sample <a href="https://guides.dataverse.org/en/latest/_downloads/0f28d7fe1a9937d9ef47ae3f8b51403e/custom-homepage.html">homepage"</a>'.cr();
+				$sx .= "<tt>curl -X PUT -d '/var/www/dataverse/branding/custom-footer.html' http://localhost:8080/api/admin/settings/:FooterCustomizationFile</tt>".cr();
+				$sx .= '</pre>';
+				$sx .= cr();
+				$sx .= 'echo "Remove Custom Page"'.cr();
+				$sx .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-footer.html\' http://localhost:8080/api/admin/settings/:FooterCustomizationFile'.cr();
+				$PATH = '/var/www/dataverse/branding/';
+				return $sx;
+			}
+
+		function homepage()
+			{
 				$sx = '';
 				$sx .= h('dataverse.HomePage');
 				$sx .= form_open_multipart();
@@ -355,7 +380,70 @@ class Customize extends Model
 								$sx .= bsmessage('File not HTML - ['.$type.']',3);
 							}
 					}
-				$sx .= '<pre>'.$sx.'</pre>';
+				$sx = '<pre>'.$sx.'</pre>';
+
+				$sx .= '<pre>';
+				$sx .= 'mkdir /var/www/dataverse/'.cr();
+				$sx .= 'mkdir /var/www/dataverse/branding/'.cr();
+				$sx .= 'echo "See sample <a href="https://guides.dataverse.org/en/latest/_downloads/0f28d7fe1a9937d9ef47ae3f8b51403e/custom-homepage.html">homepage"</a>'.cr();
+				$sx .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-homepage.html\' http://localhost:8080/api/admin/settings/:HomePageCustomizationFile'.cr();
+				$sx .= '</pre>';
+				$sx .= cr();
+				$sx .= 'echo "Remove Custom Page"'.cr();
+				$sx .= '<tt>curl -X DELETE http://localhost:8080/api/admin/settings/:HomePageCustomizationFile</tt>'.cr();
+				$PATH = '/var/www/dataverse/branding/';
+
+				return $sx;
+			}
+
+		function NavbarAboutUrl()
+			{
+				$sx = h(lang('dataverse.NavbarAboutUrl'));
+				$sx .= '<p>Criação de uma página persolalizada sobre o Repositório Dataverse</p>';
+				$cmd = '';
+				$cmd .= 'mkdir /var/www/dataverse//branding'.cr();
+				$cmd .= 'cd /var/www/dataverse//branding'.cr();
+				$cmd .= 'cp &lt;diretório+pagina> about.html'.cr();
+				$cmd .= 'curl -X PUT -d http://'.URL.'dvn/about/ http://localhost:8080/api/admin/settings/:NavbarAboutUrl'.cr();
+				$sx .= '<pre>'.$cmd.'</pre>';
+
+				$sx .= 'echo "Configurando o Apache para /drv/';
+				$sx .= 'Criar o arquivo /etc/apache2/sites-available/dvn.conf com o comando:';
+				$sx .= '<tt>nano /etc/apache2/sites-available/dvn.conf</tt><br>';
+				$sx .= 'com o conteúdo:<br>';
+				$sx .= '<pre>';
+				$sx .= '&lt;VirtualHost *:88>'.cr();
+				$sx .= 'ServerName localhost'.cr();
+				$sx .= 'DocumentRoot /var/www/dataverse/branding'.cr();
+				$sx .= '&lt;/VirtualHost>'.cr();
+				$sx .= '</pre>'.cr();
+				$sx .= 'Habilita o site no Apache:<br>';
+				$sx .= '<tt>a2ensite dvn</tt>';
+
+				$sx .= '<br>';
+				$sx .= 'Redirecionar o Proxy no Apache:<br>';
+				$sx .= 'Edite o arquivo (ou seu equivalente) /etc/apache2/sites-enabled/000-default.conf com o comando:<br>';
+				$sx .= 'Incluindo as linhas:<br>';
+				$sx .= '<pre>';
+				$sx .= '&lt;Location "/dvn">'.cr();
+                $sx .= '	Order Allow,Deny'.cr();
+                $sx .= '	Allow from all'.cr();
+                $sx .= '	ProxyPass http://127.0.0.1:88'.cr();
+                $sx .= '	SetEnv force-proxy-request-1.0 1'.cr();
+                $sx .= '	SetEnv proxy-nokeepalive 1'.cr();
+				$sx .= '&lt;/Location>'.cr();
+				$sx .= '</pre>';
+
+				$sx .= '<br>';
+				$sx .= 'Edite o arquivo /etc/apache2/ports.conf com o comando:<br>';
+				$sx .= '<tt>nano /etc/apache2/ports.conf</tt><br>';
+				$sx .= 'com o conteúdo:<br>';
+				$sx .= '<tt>Listen 88</tt> (em uma linha nova abaixo de Listen 80)<br>';
+
+				$sx .= '<br>';
+				$sx .= 'Reiniciar o Apache:<br>';
+				$sx .= '<tt>service apache2 restart</tt>';
+
 
 				return $sx;
 			}
