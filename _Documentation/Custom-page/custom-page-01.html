@@ -6,21 +6,30 @@
 <style>
     .containerX {
         margin-top: 50px;
-        //background-image: url("https://github.com/lattesdata-ibict/LattesData/blob/main/PHP/public/img/banner/fabric-homepage-background.jpg?raw=true;");
-        //background-image: url("https://github.com/lattesdata-ibict/LattesData/blob/main/PHP/public/img/banner/homepage-background.jpg?raw=true;");
-        background-image: url("https://github.com/lattesdata-ibict/LattesData/blob/main/PHP/public/img/banner/homepage-background.png?raw=true;");
-        
+        background-image: url("https://github.com/lattesdata-ibict/LattesData/blob/main/PHP/public/img/banner/homepage-background.png?raw=true");
+        background-position: right;
         background-repeat: no-repeat;
+        background-color:#1C3339;
         color: white;
-        min-height: 800px;
-        width: 100%;
-        background-size: 100%;
+        min-height: 400px;
     }
 </style>
-<div class="container  containerX">
+<div class="container-fluid containerX">
     <div class="row">
-        <div class="col-md-12">
-            <h1>Custom Page 01</h1>
+        <div class="col-md-3 text-end mt-5">
+            <h1 class="mb-3">Dados de Pesquisa</h1>
+            <a href="" class="btn btn-outline-light">Explore Dataverse</a>
         </div>
+
+        <div class="col-md-2 mt-5 text-end" style="font-size: 150%;">
+                <div class="btn-outline-light mb-3"><b>1.232</b></div>
+                <div class="btn-outline-light mb-3"><b>4.324</b></div>
+                <div class="btn-outline-light mb-3"><b>142.324</b></div>
+        </div>
+        <div class="col-md-2 mt-5 text-start" style="font-size: 150%;">
+                <div class="btn-outline-light mb-3">Dataverses</div>
+                <div class="btn-outline-light mb-3">Datasets</div>
+                <div class="btn-outline-light mb-3">Files</div>
+        </div>        
     </div>
 </div>
