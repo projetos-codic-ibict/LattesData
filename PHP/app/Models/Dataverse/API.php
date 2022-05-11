@@ -77,6 +77,9 @@ class API extends Model
 
 			$rsp['msg'] .= $cmd;
 
+			echo $cmd;
+			pre($dt);
+
 			$txt = shell_exec($cmd);
 			$rsp['json'] = $txt;
 		}

@@ -7,7 +7,7 @@ helper(['boostrap', 'url', 'graphs',
         'database']);
 define("URL", getenv('app.baseURL'));
 define("PATH", getenv('app.baseURL').'index.php/');
-define("MODULE", 'home/');
+define("MODULE", 'cnpq/');
 
 $this->session = \Config\Services::session();
 $language = \Config\Services::language();
@@ -27,7 +27,9 @@ class Cnpq extends BaseController
                     bsc('',3)
                     ;
             $sx .= bs(bsc('<div class="mb-5"></div>',12));
-            $sx .= bs(bsc('<h2 class="text-center text-danger">Under Construction</h2>',12));
+            $sx .= '<center>';
+            $sx .= '<a href="'.PATH.MODULE.'inport" class="btn btn-primary">'.msg('Create Dataset - CNPq').'</a>';
+            $sx .= '</center>';
             $sx .= '<div style="position: absolute; bottom: 0; left: 5;">';
             $sx .= '<a href="'.PATH.MODULE.'dataverse" style="text-decoration: none;"><span style="color: white;" class="ms-2">tt</span></a>';
             $sx .= '</div>';

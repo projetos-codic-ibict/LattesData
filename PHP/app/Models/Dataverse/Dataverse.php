@@ -45,6 +45,48 @@ class Dataverse extends Model
 	var $url = 'http://200.130.0.214:8080/';
 	var $apiKey = 'b8fb20a6-15ed-40b1-87e1-a1da20a82c1b';
 
+	function CreateDataverse($dd,$PARENT='')
+		{
+			$API = new \App\Models\Dataverse\API();
+			$file = '.tmp/dataverse/dataverse-'.$dd['alias'].'.json';
+			$url = getenv("DATAVERSE_URL");
+
+			$dd['AUTH'] = true;
+			$dd['POST'] = true;
+			$dd['FILE'] = $file;
+			$dd['url'] = $url;
+			$dd['api'] = 'api/dataverses/'.$PARENT;
+			$dd['apikey'] = $this->apiKey;
+			$dd['FILE'] = $file;
+
+			$rsp = $API->curlExec($dd);
+			/******************************** Retorno */
+			$msg = (string)$rsp['json'];
+			$msg = (array)json_decode($msg);
+
+			if (!isset($msg['status']))
+				{
+					return lang('Response empty');
+				}
+			$sta = trim((string)$msg['status']);
+			switch($sta)
+				{
+					case 'OK':
+						$sx = 'OK';
+					break;
+					
+					case 'ERROR':
+						$sx = '<pre style="color: red;">'; 
+						$sx .= $msg['message'];	
+						$sx .= '<br>Dataverse Name: <b>'.$alias.'</b>';
+						$sx .= '<br><a href="'.$this->url.'dataverse/'.$PARENT.'" target="_blank">'.$url.'/'.$PARENT.'</a>';
+						$sx .= '</pre>';
+						echo $sx;
+						break;
+				}
+			return $sx;
+		}	
+
 
 /**********************************************************************
  * TESTED *************************************************************
@@ -102,59 +144,5 @@ class Dataverse extends Model
 		exit;
 		}
 
-	function CreateDataverse($PARENT,$name,$alias,$contact,$affiliation,$descript,$type)	
-		{
-			$API = new \App\Models\Dataverse\API();
-			$file = '.tmp/dataverse/dataverse-'.$alias.'.json';
-			$url = $this->url;
 
-			/* Preparae */
-			if (!is_array($contact)) { $contact = array($contact); }
-
-			$DV = array();
-			$DV['name'] = $name;
-			$DV['alias'] = $alias;
-			$DV['dataverseContacts'] = $contact;
-			$DV['affiliation'] = $affiliation;
-			$DV['description'] = $descript;
-			$DV['type'] = $type;
-			$json = json_encode($DV, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
-
-			file_put_contents($file, $json);
-
-			$dd['AUTH'] = true;
-			$dd['POST'] = true;
-			$dd['FILE'] = $file;
-			$dd['url'] = $url;
-			$dd['api'] = 'api/dataverses/'.$PARENT;
-			$dd['apikey'] = $this->apiKey;
-			$dd['FILE'] = $file;
-
-			$rsp = $API->curlExec($dd);
-			/******************************** Retorno */
-			$msg = (string)$rsp['json'];
-			$msg = (array)json_decode($msg);
-
-			if (!isset($msg['status']))
-				{
-					return lang('Response empty');
-				}
-			$sta = trim((string)$msg['status']);
-			switch($sta)
-				{
-					case 'OK':
-						$sx = 'OK';
-					break;
-					
-					case 'ERROR':
-						$sx = '<pre style="color: red;">'; 
-						$sx .= $msg['message'];	
-						$sx .= '<br>Dataverse Name: <b>'.$alias.'</b>';
-						$sx .= '<br><a href="'.$this->url.'dataverse/'.$PARENT.'" target="_blank">'.$url.'/'.$PARENT.'</a>';
-						$sx .= '</pre>';
-						echo $sx;
-						break;
-				}
-			return $sx;
-		}
 }

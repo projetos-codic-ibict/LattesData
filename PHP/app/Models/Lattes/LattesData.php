@@ -72,14 +72,16 @@ class LattesData extends Model
 		return $file;
 	}
 
-	function cachedAPI($dt='')
-	{
-		
+	function cachedAPI($id='')
+	{		
 		dircheck('.tmp');
 		dircheck('.tmp/LattesData');
-		$id = $dt[0];
 		
 		$file = '.tmp/LattesData/' . $id . '.json';
+
+		$check = true;
+		if (ENVIRONMENT == 'development') { $check = false; };
+
 		if (!file_exists($file)) {
 			$file = '../../Datasets/processos_pq1a/' . $id . '.json';
 			if (!file_exists($file)) {
@@ -89,8 +91,9 @@ class LattesData extends Model
 				}
 			}
 		}
+
 		/******************** Verificar Validade do arquivo */
-		if ($file != '') {
+		if (($file != '') and ($check)) {
 			$dt = filemtime($file);
 			$date1 = date_create(date("Y-m-d"));
 			$date2 = date_create(date("Y-m-d", $dt));
@@ -98,7 +101,7 @@ class LattesData extends Model
 			$dias = $diff->format("%a");
 
 			if ($dias > $this->FileDayValid) {
-				$file = '';
+				//$file = '';
 			}
 		}
 		return $file;
@@ -175,13 +178,193 @@ class LattesData extends Model
 					$erro = 2;
 				}
             return array($p,$erro);
-        }	
+        }
+
+	function getUser($dt)
+		{
+			$du = $dt['identificadoresPessoa'];
+            if (!isset($du['nomePessoa'])) 
+                {
+                    $nome = 'sem nome da silva';
+                } else {
+                    $nome = $du['nomePessoa'];
+                }
+            $nomep = nbr_author($nome,1);
+     
+            $firstname = mb_strtolower(substr($nomep,strpos($nomep,',')+1,strlen($nomep)));
+            $lastname = mb_strtolower(substr($nomep,0,strpos($nomep,',')));
+            $firstname = nbr_author($firstname,7);
+            $lastname = nbr_author($lastname,7);
+
+            $email = $dt['emailContato'];
+
+            /***************** AFILIAÇÃO */
+            $aff = (array)$dt['instituicoes'];
+            if (isset($aff[0]))
+                {
+                    $affn = (array)$aff[0];
+                    $sigla = $affn['siglaMacro'];
+                    $inst = $affn['nomeMacro'];
+                    if ($inst == '')
+                        {
+                            $sigla = $affn['sigla'];
+                            $inst = $affn['nome'];
+                        }
+                } else {
+                    $sigla = '';
+                    $inst = '';
+                }
+            /**************** Identificadores */
+            $aff = (array)$dt['identificadoresPessoa'];
+            $ids = array();
+            for ($r=0;$r < count($aff);$r++)
+                {
+                    $affn = (array)$aff[$r];
+                    $idp_type = $affn['tipo'];
+                    $idp_value = $affn['identificador'];
+                    $ids[$idp_type] = $idp_value;
+                }
+
+            $dv['firstName'] = $firstname;
+            $dv['lastName'] = $lastname;
+            $dv['userName'] = troca($email,'@','-');
+            $dv['affiliation'] = $inst;
+            $dv['position'] = 'Research';
+            $dv['email'] = $email;
+
+			return $dv;
+		}
+
+	function getChamada($dt,$user)
+		{
+			$chamada = (array)$dt['chamada'];			
+			$DV['alias'] = troca($chamada['sigla'],' ','');
+			$DV['name'] = $chamada['nome'];
+
+			$contact[0]['contactEmail'] = $user['email'];
+
+			$DV['dataverseContacts'] = $contact;
+			$DV['affiliation'] = $user['affiliation'];
+			$DV['description'] = $chamada['nome'].' - '.$chamada['sigla'];
+			$DV['dataverseType'] = "LABORATORY";
+
+			return $DV;			
+		}
+
+	function getProjeto($dt,$user)
+		{
+			
+			$projeto = (array)$dt['projeto'];
+			$nome = $projeto['titulo'];
+			$desciption = $projeto['resumo'];
+			$alias = trim($dt['numeroProcesso']);
+			$pre1 = substr($alias,0,strpos($alias,'/'));
+			$pre2 = substr($alias,strpos($alias,'/')+1,4);
+			$alias = $pre2.$pre1;
+
+			$DV['alias'] = $alias;
+			$DV['name'] = $nome;
+
+			$contact[0]['contactEmail'] = $user['email'];
+
+			$DV['dataverseContacts'] = $contact;
+			$DV['affiliation'] = $user['affiliation'];
+			$DV['description'] = $desciption;
+			$DV['dataverseType'] = "LABORATORY";
+
+			return $DV;			
+		}	
+
+	function getDataset($dt,$user)
+		{
+			$DV = array();
+
+			$projeto = (array)$dt['projeto'];
+
+			/* Licence */
+			$DV['datasetVersion']['license']['name'] = 'CC BY';
+			$DV['datasetVersion']['license']['uri'] = 'http://creativecommons.org/licenses/by/4.0/';
+
+			$DV['protocol'] = 'doi';
+			$DV['authority'] = getenv('DOI');
+			$DV['identifier'] = troca($dt['numeroProcesso'],'/','');
+			$DV['identifier'] = substr($DV['identifier'],0,strpos($DV['identifier'],'-'));		
+
+			/* Citation */
+			$fld = array();
+
+			/*************** Title */
+			$title = $projeto['titulo'];
+			$fields = array('typeName'=>'title','multiple'=>'false','value'=>$title,'typeClass'=>'primitive');
+			array_push($fld,$fields);
+
+			/*************** productionDate */
+			$productionDate = $dt['dataInicioVigencia'];
+			$productionDate = substr($productionDate,6,4).'-'.substr($productionDate,3,2).'-'.substr($productionDate,0,2);
+			$fields = array('typeName'=>'productionDate','multiple'=>'false','value'=>$productionDate,'typeClass'=>'primitive');
+			array_push($fld,$fields);
+
+			/*************** dsDescription */
+			$value = $projeto['resumo'];
+			$fields = array('typeName'=>'dsDescription','multiple'=>'false','value'=>$value,'typeClass'=>'primitive');
+			array_push($fld,$fields);
+
+			/********************* subject */
+			$key = $dt['palavrasChave'];
+			$key = troca($key,';',',');
+			$key = troca($key,'.',',');
+			$fields = array('typeName'=>'subject','multiple'=>'false','value'=>$value,'typeClass'=>'primitive');
+			array_push($fld,$fields);
+						
+			$DV['metadataBlocks']['citation']['fields'] = $fld;
+
+			echo '<pre>';
+			print_r($DV);
+			echo '</pre>';
+			echo '<hr>';
+			pre($dt);
+
+		}	
+
+	function recoverPQ($dt,$id)
+		{
+				$Users = new \App\Models\Dataverse\Users();
+				$Dataset = new \App\Models\Dataverse\Datasets();
+				$Dataverse = new \App\Models\Dataverse\Dataverse();
+				//$sx .= $this->modPQ($dt,$id);
+				$dd = $this->modPQ($dt, $id);
+
+				/****************************************** USER */
+				$user = $this->getUser($dt);	
+
+				/***************************** CHAMADA DATAVERSE */
+				$chamada = $this->getChamada($dt,$user);
+				$Dataverse->CreateDataverse($chamada,'beneficiarios');
+
+				/***************************** PROJETO DATAVERSE */
+				$chamada = $this->getProjeto($dt,$user);				
+
+				/******************************* PROJETO DATASET */
+				$dataset = $this->getDataset($dt,$user);
+
+				pre($user);
+
+				$sx = '';
+				$sx .= $Dataverse->CreateDataverse($dd,'beneficiarios');
+				exit;
+				$sx .= $Dataset->CreateDatasets($dd);
+				/* ENVIA e-MAIL */
+				$msg = 'Dataset processado ' . $id;
+				$sx .= bsmessage($msg, 1);
+			return $sx;
+		}
 
 	function Process($dt = array('20113023806',0))
 	{
 		$sx = '';
 		$id = $dt[0];
 		$file = $this->cachedAPI($id);
+
 		/************************************ GET API CNPq */
 		if ($file == '') 
 		{
@@ -204,54 +387,8 @@ class LattesData extends Model
 
 		switch ($MOD) {
 			case 'PQ':
-				$Dataset = new \App\Models\Dataverse\Datasets();
-				$Dataverse = new \App\Models\Dataverse\Dataverse();
-				//$sx .= $this->modPQ($dt,$id);
-				$dd = $this->modPQ($dt, $id);
-				
-
-				/* ETAPAS */
-				$PARENT = 'beneficiarios';
-				$dv = $dd['datasetVersion'];
-				$metadataBlocks = $dv['metadataBlocks'];
-				$citation = $metadataBlocks['citation'];
-				$fields = $citation['fields'];
-				$title = 'no_title';
-				$key = '';
-				$desc = '';
-
-				for ($r=0;$r < count($fields);$r++)
-					{
-						$f = $fields[$r];
-						if ($f['typeName'] == 'title')
-							{
-								$title = $f['value'];
-								echo h($title);
-							}
-						if ($f['typeName'] == 'subject')
-							{
-								print_r($f);
-								echo '<hr>';
-							}	
-						if ($f['typeName'] == 'dsDescription')
-							{
-								$desc = $f['value'][0];
-								$desc = $desc['dsDescriptionValue']['value'];
-							}													
-					}
-
-				echo h($title);
-
-				pre($dd);
-				//CreateDataverse($PARENT,$name,$alias,$contact,$affiliation,$descript,$type)
-				$sx = '';
-				$sx .= $Dataverse->CreateDataverse($dd);
-				$sx .= $Dataset->CreateDatasets($dd);
-				/* ENVIA e-MAIL */
-				$msg = 'Dataset processado ' . $id;
-				$sx .= bsmessage($msg, 1);
+				$this->recoverPQ($dt,$id);
 				break;
-
 			case 'AI':
 				echo "INCT";
 				exit;
