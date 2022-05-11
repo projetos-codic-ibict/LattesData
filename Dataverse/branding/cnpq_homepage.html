@@ -1,0 +1,270 @@
+<script>
+    //JFLF: Validacion de URL's para esconder/mostrar el navbar-icon al hacer scroll
+    var navbar = document.getElementById("navbar-icon");
+    var sticky = navbar.offsetTop;
+
+    URL = window.location.pathname;
+
+    $(document).ready(function () {
+        if ((URL == "/") || ((URL.indexOf("dataverse.xhtml") != -1)
+            || (URL.indexOf("dataset.xhtml") != -1)
+            || (URL.indexOf("file.xhtml") != -1)
+            || (URL.indexOf("editdatafiles.xhtml") != -1)
+            || (URL.indexOf("dataverse-") != -1)
+            || (URL.indexOf("/dataverse/") != -1))) {
+
+            window.onscroll = function () {
+                var prevScrollpos = window.pageYOffset;
+                if (prevScrollpos > 100) {
+                    navbar.classList.remove("hidden-logo");
+                } else {
+                    navbar.classList.add("hidden-logo");
+                }
+
+            }
+        } else {
+            navbar.classList.remove("hidden-logo");
+        }
+    })
+</script>
+
+
+<div class="row-fluid">
+  <div class="col">
+    <h1>LattesData</h1>
+    <p class="text-intro">O LattesData tem como objetivo de reunir, armazenar e divulgar os conjuntos de dados científicos dos projetos desenvolvidos com recurso total ou parcial do Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq)</p>
+  </div>
+</div>
+<form class="form mt-4">
+  <div class="input-group input-group-lg">
+    <input type="text" class="form-control" id="inputDataverseSearch" onkeydown="if (event.keyCode == 13) document.getElementById('btnDataverseSearch').click();" placeholder="Digite sua pesquisa">
+    <div class="input-group-btn">
+      <button class="btn btn-default" id="btnDataverseSearch" type="submit" onclick="window.location = '/dataverse/lattesdata?q=' + document.getElementById('inputDataverseSearch').value;return false;"><i class="glyphicon glyphicon-search"></i></button>
+    </div>
+  </div>
+</form>
+<div class="row mt-4">
+  <div class="col-sm-3 mt-2">
+    <button type="button" class="btn btn-primary btn-lg btn-block"> <span class="badge badge-light">189</span> Pesquisadores </button>
+  </div>
+  <div class="col-sm-4 mt-2">
+    <button type="button" class="btn btn-primary btn-lg btn-block"> <span class="badge badge-light">225</span> Conjunto de Dados (DataVerse) </button>
+  </div>
+  <div class="col-sm-3 mt-2">
+    <button type="button" class="btn btn-primary btn-lg btn-block"> <span class="badge badge-light">800</span> Grupos de Pesquisa </button>
+  </div>
+  <div class="col-sm-2 mt-2">
+    <button type="button" class="btn btn-primary btn-lg btn-block"> <span class="badge badge-light">500</span> Projetos </button>
+  </div>
+</div>
+<div class="row-fluid mt-4">
+  <div class="col">
+    <button type="button" class="btn btn-primary btn-lg btn-block" onClick="window.location.href='/dataverse/lattesdata'">Explorar</button>
+  </div>
+</div>
+
+<!-- <hr class="heavy-rule" /> --> 
+
+<!-- SEARCH + BROWSE + RECENT -->
+<div class="row hmpg-browse-block"> 
+  
+  <!-- SEARCH --> 
+  <!-- 
+            NOTE: The alias of the root dataverse will need to be configured in this URL 
+            --> 
+  
+  <!-- BROWSE SUBJECT -->
+  <div id="browseBySubject" class="col-xs-12"> 
+    <!-- <p class="text-muted margin-bottom">Browse by subject</p> -->
+    <div class="row margin-bottom"> 
+      <!-- SUBJECTS -->
+      <div id="dataversesBySubject" class="col-xs-12"> </div>
+      
+      <!-- VIEW ALL --> 
+      <!-- 
+                    NOTE: The alias of the root dataverse will need to be configured in this URL 
+                    --> 
+      <!-- <div class="col-xs-12 margin-top">
+                    <p class="browse-subjects small text-muted"><a href="/dataverse/lattesdata">ALL DATA</a> <span
+                            class="glyphicon glyphicon-chevron-right"></span></p>
+                </div> --> 
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+        //<![CDATA[
+
+        //switch baseUrl to point to a different server than the local box
+        var baseUrl = "";
+
+        // NOTE: REMOVED THUMBNAILS
+        // var thumbBaseURL = baseUrl + "/api/datasets/:persistentId/thumbnail" + "?persistentId=";
+        var metricBaseUrl = baseUrl + "/api/info/metrics/";
+        var simpleCatSearch = baseUrl + "/api/search?q=*&type=dataset&sort=dateSort&order=desc&fq=categoryOfDataverse:";
+        var simpleCatSearchDataverse = baseUrl + "/api/search?q=*&type=dataverse&sort=dateSort&order=desc&fq=dvCategory:";
+        var simpleCatSearchInvestigador = baseUrl + "api/search?q=*&type=dataset&sort=dateSort&order=desc&per_page=1000";
+        //http://ec2-52-91-47-172.compute-1.amazonaws.com:8080/dataverse/lattesdata?q=&fq1=dvCategory%3A%22Research+Project%22&fq0=dvObjectType%3A%28dataverses+OR+datasets%29&types=dataverses%3Adatasets&sort=dateSort&order=
+        function writeRecentDatasetsInDataverses(fqString, resultCount, elm) {
+            $.get(simpleCatSearch + fqString + "&per_page=" + resultCount, function (jData) {
+                var resultHtml = "";
+                jData.data.items.forEach(function (item) {
+                    var options = { year: 'numeric', month: 'short', day: 'numeric' };
+                    var date = new Date(item.published_at).toLocaleString('en-US', options);
+                    resultHtml += "<div class=\"hmpg-recent-block clearfix\">";
+                    // NOTE: REMOVED THUMBNAILS
+                    // resultHtml += "<div class=\"col-xs-2 text-center hmpg-recent-thumb\"><a href=\"/dataset.xhtml?persistentId=" + item.global_id + "\">";
+                    // resultHtml += "<object data=\"" + thumbBaseURL + item.global_id + "\" type=\"image/png\"/><span class=\"icon-dataset\"></span></object>";
+                    // resultHtml += "</a></div>";
+                    // NOTE: REMOVED THUMBNAILS... in next line, change grid layout class to `col-xs-9 col-md-10`
+                    resultHtml += "<div class=\"col-xs-12 hmpg-recent-metadata\"><p><a href=\"/dataset.xhtml?persistentId=" + item.global_id + "\">" + item.name + "</a></p><p class=\"small text-muted\"><a href=\"/dataverse/" + item.identifier_of_dataverse + "\" class=\"highlightBold\">" + item.name_of_dataverse + "</a> " + date + "</p></div>";
+                    resultHtml += "</div>";
+                });
+                document.getElementById(elm).innerHTML = resultHtml;
+            });
+        }
+
+        function proyectosInvestigacion(fqString, resultCount, elm) {
+            $.get(simpleCatSearchDataverse + fqString + "&per_page=" + resultCount, function (jData) {
+                console.log(jData.data.total_count);
+                document.getElementById(elm).innerHTML = jData.data.total_count + "";
+
+            });
+        }
+
+        function investigadores(fqString, resultCount, elm) {
+            $.get(simpleCatSearchInvestigador + fqString + "&per_page=" + resultCount, function (jData) {
+                let authorCount = [];
+                jData.data.items.forEach(function (item) {
+                    item.authors.forEach(author => {
+                        if (!authorCount.includes(author)) {
+                            authorCount.push(author)
+                        }
+                    });
+
+                });
+                document.getElementById(elm).innerHTML = authorCount.length + "";
+
+            });
+        }
+
+        //For metrics that return simple json with a count
+        //Can take a single element or an array of elements
+        function queryMetricSimple(metricRelPath, month, elm) {
+            $.get(metricBaseUrl + metricRelPath + month, function (jData) {
+                var resultCount = jData.data.count;
+                if (Array.isArray(elm)) {
+                    elm.forEach(function (e) {
+                        document.getElementById(e).innerHTML = resultCount.toLocaleString('en');
+                    });
+                } else {
+                    document.getElementById(elm).innerHTML = resultCount.toLocaleString('en');
+                }
+            });
+        }
+
+        function queryMetricSearch(metricRelPath, month) {
+            $.get(metricBaseUrl + metricRelPath + month, function (jData) {
+                var resultCount = jData.data.count;
+                var roundedDatasetCount = Math.floor(resultCount / 100) * 100;
+                var dynamicSearchPlaceholder = "Search over " + roundedDatasetCount.toLocaleString('en') + " datasets...";
+                $("#inputDataverseSearch").attr({ "placeholder": dynamicSearchPlaceholder });
+            });
+        }
+
+        function querySubjectDataverseDataset(elm) {
+            var dvArray = [];
+            var fullArray = [];
+            $.get(metricBaseUrl + "dataverses/bySubject", function (jData) {
+                jData.data.forEach(function (item) {
+                    if (item.subject !== "N/A" && item.subject !== "Other") {
+                        dvArray.push([item.subject, item.count]);
+                    }
+                });
+                $.get(metricBaseUrl + "datasets/bySubject?dataLocation=all", function (jData) {
+                    var resultHtml = "";
+                    jData.data.forEach(function (item) {
+                        if (item.subject !== "N/A" && item.subject !== "Other") {
+                            var dvCount = 0;
+                            for (var dvi = 0; dvi < dvArray.length; dvi++) {
+                                if (item.subject === dvArray[dvi][0]) {
+                                    dvCount = dvArray[dvi][1];
+                                    break;
+                                }
+                            }
+                            fullArray.push([item.subject, (item.count + dvCount - 1).toLocaleString('en')]); //subtract 1 to remove root dv from counts
+                        }
+                    });
+                    fullArray.sort();
+                    fullArray.forEach(function (subject) {
+                        // NOTE: The alias of the root dataverse will need to be configured in this URL 
+                        // resultHtml += "<p class=\"browse-subjects\"><a href=\"/dataverse/lattesdata?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + "</a> <span class=\"text-muted\">" + subject[1] + "</span></p>";
+                        resultHtml += "<a class=\"browse-subjects\" href=\"/dataverse/lattesdata?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + " " + subject[1] + "</a>";
+                    });
+                    document.getElementById(elm).innerHTML = resultHtml;
+                });
+            });
+        }
+
+
+        function querySubjectDataset(elm) {
+            var dvArray = [];
+            var fullArray = [];
+            // $.get(metricBaseUrl + "dataverses/bySubject", function (jData) {
+            //     jData.data.forEach(function (item) {
+            //         if (item.subject !== "N/A" && item.subject !== "Other") {
+            //             dvArray.push([item.subject, item.count]);
+            //         }
+            //     });
+
+            // });
+
+            $.get(metricBaseUrl + "datasets/bySubject?dataLocation=all", function (jData) {
+                var resultHtml = "";
+                jData.data.forEach(function (item) {
+                    if (item.subject !== "N/A" && item.subject !== "Other") {
+                        var dvCount = 0;
+                        for (var dvi = 0; dvi < dvArray.length; dvi++) {
+                            if (item.subject === dvArray[dvi][0]) {
+                                dvCount = dvArray[dvi][1];
+                                break;
+                            }
+                        }
+                        fullArray.push([item.subject, (item.count + dvCount).toLocaleString('en')]); //subtract 1 to remove root dv from counts
+                    }
+                });
+                fullArray.sort();
+                fullArray.forEach(function (subject) {
+                    // NOTE: The alias of the root dataverse will need to be configured in this URL 
+                    // resultHtml += "<p class=\"browse-subjects\"><a href=\"/dataverse/lattesdata?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + "</a> <span class=\"text-muted\">" + subject[1] + "</span></p>";
+                    resultHtml += "<a class=\"browse-subjects\" href=\"/dataverse/lattesdata?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=datasets&sort=dateSort&order=desc\"><span>" + subject[0] + " " + subject[1] + "</span></a>";
+                    // console.log(subject[0]+" - "+subject[1]);
+                });
+                document.getElementById(elm).innerHTML = resultHtml;
+            });
+        }
+
+        queryMetricSimple("datasets", "?dataLocation=all", "headAllTimeAllDatasetsValue");
+        queryMetricSimple("downloads", "", "headAllTimeAllDownloadsValue");
+        queryMetricSimple("dataverses", "", "headAllTimeAllDataversesValue");
+
+        // writeRecentDatasetsInDataverses("(Journal)", 3, "journals");
+        // writeRecentDatasetsInDataverses("(\"Research+Project\"%20OR%20Researcher%20OR%20\"Research+Group\")", 6, "researchers");
+
+        proyectosInvestigacion("(\"Research+Project\")", 6, "proyectos_inv");
+        investigadores("", 0, "investigadores");
+
+        // queryMetricSimple("datasets/pastDays", "/30?dataLocation=all", "activity30DaysAllDatasetsValue");
+        // queryMetricSimple("datasets", "?dataLocation=local", "activityAllTimeDepositedDatasetsValue");
+        // queryMetricSimple("datasets/pastDays", "/30?dataLocation=local", "activity30DaysDepositedDatasetsValue");
+        // queryMetricSimple("datasets", "?dataLocation=remote", "activityAllTimeHarvestedDatasetsValue");
+        // queryMetricSimple("datasets/pastDays", "/30?dataLocation=remote", "activity30DaysHarvestedDatasetsValue");
+
+        // queryMetricSimple("downloads/pastDays", "/30", "activity30DaysAllDownloadsValue");
+        queryMetricSimple("files", "", "activityAllTimeDepositedFilesValue");
+        // queryMetricSimple("files/pastDays", "/30", "activity30DaysDepositedFilesValue");
+
+        // querySubjectDataverseDataset("dataversesBySubject");
+        querySubjectDataset("dataversesBySubject");
+        // queryMetricSearch("datasets", "?dataLocation=all");
+    //]]>
+    </script> 

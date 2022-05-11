@@ -1,0 +1,30 @@
+#dataverseHeader {
+	background: url("http://172.16.16.68/dvn/img/header-lattes-data.jpg")  no-repeat right top !important;
+	margin-top: 4rem;
+	/*-webkit-box-shadow: 0px 0px 17px -7px #000000; 
+	box-shadow: 0px 0px 17px -7px #000000;*/
+}
+div#content {
+	/*-webkit-box-shadow: 0px 0px 17px -7px #000000; 
+	box-shadow: 0px 0px 17px -7px #000000;*/
+}
+.mt-4 {
+	margin-top: 4rem;
+}
+.btn-outline-success {
+	background: none;
+	color: #007bff;
+    border-color: #007bff;
+}
+
+.dataverseHeaderLogo {
+    padding: 3rem 0 0 2rem;
+	width: 236px;
+	height: 49px;
+	max-width: 50%;
+	background: none !important;
+}
+
+.dataverseHeaderDataverseName H1 {
+	display: none;
+}
