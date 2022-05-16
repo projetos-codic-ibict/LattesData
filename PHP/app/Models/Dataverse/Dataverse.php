@@ -42,8 +42,14 @@ class Dataverse extends Model
 	protected $afterDelete          = [];
 
 	//var $url = 'https://vitrinedadosabertos.inep.rnp.br/';
-	var $url = 'http://200.130.0.214:8080/';
-	var $apiKey = 'b8fb20a6-15ed-40b1-87e1-a1da20a82c1b';
+	var $url = '';
+	var $apiKey = '';
+
+	function __construct()
+	{
+		$this->apiKey = getenv('DATAVERSE_APIKEY');
+		$this->url = getenv('DATAVERSE_URL');
+	}
 
 	function CreateDataverse($dd,$PARENT='')
 		{
