@@ -344,10 +344,8 @@ class LattesData extends Model
 				$Dataverse->CreateDataverse($projeto,$parent);
 
 				/******************************* PROJETO DATASET */
-				$dataset = $this->getDataset($dt,$user);
-				$Dataverse->CreateDataverse($projeto,$parent);
-
-				$sx .= $Dataset->CreateDatasets($dd);
+				$dataset = $this->getDataset($dt,$user);				
+				$sx .= $Dataset->CreateDatasets($dd,$dataset,$parent);
 				echo $sx;
 				
 				/* ENVIA e-MAIL */
@@ -478,8 +476,7 @@ class LattesData extends Model
 			exit;
 		}
 		$dv['url'] = $_ENV['DATAVERSE_URL'];
-		$dv['apikey'] = $_ENV['DATAVERSE_APIKEY'];
-		$dv['api'] = 'api/dataverses/$alias/datasets';
+		$dv['apikey'] = $_ENV['DATAVERSE_APIKEY'];		
 
 		return $dv;
 
