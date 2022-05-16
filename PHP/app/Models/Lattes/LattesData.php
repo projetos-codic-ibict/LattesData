@@ -479,7 +479,7 @@ class LattesData extends Model
 		}
 		$dv['url'] = $_ENV['DATAVERSE_URL'];
 		$dv['apikey'] = $_ENV['DATAVERSE_APIKEY'];
-		$dv['api'] = 'api/dataverses/produtividadePQ1A/datasets';
+		$dv['api'] = 'api/dataverses/$alias/datasets';
 
 		return $dv;
 
