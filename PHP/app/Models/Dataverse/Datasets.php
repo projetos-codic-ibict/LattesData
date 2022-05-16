@@ -40,15 +40,13 @@ class Datasets extends Model
 	protected $beforeDelete         = [];
 	protected $afterDelete          = [];
 
-	function CreateDatasets($dd='')	
+	function CreateDatasets($dd='',$parent='')	
 		{
 			$sx ='???';
 			$DataverseAPI = new \App\Models\Dataverse\API();
 
-			pre($dd);
-	
-			$url = $this->url.'api/dataverses/produtividadePQ1A/datasets';
-			$id = $dd['numeroProcesso'];
+			$url = $this->url.'api/dataverses/'.$parent.'/datasets';
+			$id = $dd['id'];
 	
 			$json = json_encode($dd, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 			$file = '.tmp/datasets/dataset_'.$id.'.json';
@@ -60,8 +58,7 @@ class Datasets extends Model
 			$dd['POST'] = true;
 			$dd['FILE'] = $file;
 
-			pre($dd);	
-	
+
 			$rst = $DataverseAPI->curlExec($dd);
 
 			print_r($rst);
