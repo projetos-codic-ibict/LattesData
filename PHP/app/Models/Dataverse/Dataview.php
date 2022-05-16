@@ -43,6 +43,7 @@ class Dataview extends Model
     function apache_dataview()
         {
             $sx = '<pre>
+            nano /etc/apache2/sites-available/dataview.conf
             <VirtualHost *:8010>
                 ServerName localhost
                 DocumentRoot /var/www/dataverse/branding

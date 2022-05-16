@@ -50,6 +50,14 @@ class Home extends BaseController
             return $sx;
         }
 
+    function footer()
+        {
+            $sx = '<hr>';
+            $sx .= '<img src="'.URL.'img/logos/rnp_logo.png" style="height: 60px;">';
+            $sx = bs(bsc($sx,12));
+            return $sx;
+        }
+
     function cab($tp='')
         {
             $sx = '';
@@ -71,7 +79,8 @@ class Home extends BaseController
 		$Dataverse = new \App\Models\Dataverse\Index();
 		$tela = $this->cab();		
 		$tela .= bs($Dataverse->index($d1,$d2,$d3,$d4));
-		$tela .= $this->cab("footer");		
+		$tela .= $this->cab("footer");	
+        $tela .= $this->footer();	
 		return $tela;
 	}
 

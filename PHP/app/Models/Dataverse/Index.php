@@ -237,7 +237,8 @@ class Index extends Model
 						$sx .= $this->settings($d1,$d2,$d3,$d4);
 						break;
 					case 'apache':
-						$sx .= $this->apache($d1,$d2,$d3,$d4);
+						$Apache = new \App\Models\Dataverse\Apache();
+						$sx .= $Apache->apache($d1,$d2,$d3,$d4);
 						break;
 					case 'email':
 						$sx .= $this->email($d1,$d2,$d3,$d4);
@@ -262,7 +263,10 @@ class Index extends Model
 			$sx = '';
 			$sx .= '<ul style="list-style:none;">';
 			$sx .= '<li>/var/www/dataverse/</li>';
-			$sx .= '<li>/var/www/dataverse/build</li>';
+			$sx .= '<li>/var/www/dataverse/branding</li>';
+			$sx .= '<li>/var/www/dataverse/langBundles</li>';
+			$sx .= '<li>/var/www/dataverse/langTmp</li>';
+			
 			$sx .= '</ul>';
 			return $sx;
 		}
@@ -446,49 +450,7 @@ class Index extends Model
 			return $sx;
 		}
 
-		function apache($d1,$d2,$d3)
-		{
-			$sx = h('dataverse.Apache2',1);
-			$sx .= 'PROXY para apache';
-			
-			$code = '
-			<Location />
-					ProxyPass http://localhost:8080/
-					SetEnv force-proxy-request-1.0 1
-					SetEnv proxy-nokeepalive 1
-			</Location>
-
-			<Location /config>
-					ProxyPass http://localhost:81
-					SetEnv force-proxy-request-1.0 1
-					SetEnv proxy-nokeepalive 1
-			</Location>';
-
-			$code .= cr();
-			$code .= '
-			<VirtualHost *:81>
-				ServerAdmin renefgj@gmail.com
-				ServerName pocdadosabertos.inep.rnp.br
-				ServerAlias 20.197.236.31
-				DocumentRoot /data/LattesData/PHP/public
-				<Directory "/data/LattesData/PHP/public">
-					Require all granted
-				</Directory>
-			</VirtualHost>
-			';
-			$code = troca($code,'<','&lt;');
-			$code = troca($code,chr(13),'<br>');
-			$sx .= '<tt>'.$code.'</tt>';
-
-			$sx .= '<pre>
-			# Example commands that demonstrate how to run Payara Server on the "special" ports < 1024
-			#
-			# iptables -t nat -A PREROUTING -p tcp -m tcp --dport 80 -j REDIRECT --to-ports 8080
-			# iptables -t nat -A PREROUTING -p udp -m udp --dport 80 -j REDIRECT --to-ports 8080
-			</pre>';
-			
-			return $sx;
-		}		
+		
 
 	function solr($d1,$d2,$d3)
 		{
