@@ -344,7 +344,7 @@ class LattesData extends Model
 
 				/***************************** PROJETO DATAVERSE */
 				$projeto = $this->getProjeto($dt,$user);			
-				$Dataverse->CreateDataverse($chamada,$parent);
+				$Dataverse->CreateDataverse($projeto,$parent);
 
 				/******************************* PROJETO DATASET */
 				$dataset = $this->getDataset($dt,$user);
