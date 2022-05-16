@@ -345,8 +345,8 @@ class LattesData extends Model
 
 				/******************************* PROJETO DATASET */
 				$dataset = $this->getDataset($dt,$user);	
-				pre($dd);			
-				$sx .= $Dataset->CreateDatasets($dt,$dataset,$parent);
+				$dd['api'] = 'api/dataverses/'.$parent.'/datasets';
+				$sx .= $Dataset->CreateDatasets($dd,$dataset,$parent);
 				echo $sx;
 				
 				/* ENVIA e-MAIL */
