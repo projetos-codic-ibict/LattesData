@@ -286,9 +286,9 @@ class LattesData extends Model
 			$DV['datasetVersion']['license']['uri'] = 'http://creativecommons.org/licenses/by/4.0/';
 
 			$DV['protocol'] = 'doi';
-			$DV['authority'] = getenv('DOI');
-			$DV['identifier'] = troca($dt['numeroProcesso'],'/','');
-			$DV['identifier'] = substr($DV['identifier'],0,strpos($DV['identifier'],'-'));		
+			//$DV['authority'] = getenv('DOI');
+			//$DV['identifier'] = troca($dt['numeroProcesso'],'/','');
+			//$DV['identifier'] = substr($DV['identifier'],0,strpos($DV['identifier'],'-'));		
 
 			/* Citation */
 			$fld = array();
@@ -299,31 +299,39 @@ class LattesData extends Model
 			array_push($fld,$fields);
 
 			/*************** productionDate */
-			$productionDate = $dt['dataInicioVigencia'];
+			$productionDate = sonumero($dt['dataInicioVigencia']);
 			$productionDate = substr($productionDate,6,4).'-'.substr($productionDate,3,2).'-'.substr($productionDate,0,2);
 			$fields = array('typeName'=>'productionDate','multiple'=>'false','value'=>$productionDate,'typeClass'=>'primitive');
 			array_push($fld,$fields);
 
 			/*************** dsDescription */
 			$value = $projeto['resumo'];
-			$fields = array('typeName'=>'dsDescription','multiple'=>'false','value'=>$value,'typeClass'=>'primitive');
+			$fields = array('typeName'=>'dsDescription','multiple'=>'true','value'=>$value,'typeClass'=>'compound');
 			array_push($fld,$fields);
 
 			/********************* subject */
 			$key = $dt['palavrasChave'];
 			$key = troca($key,';',',');
 			$key = troca($key,'.',',');
-			$fields = array('typeName'=>'subject','multiple'=>'false','value'=>$value,'typeClass'=>'primitive');
+			$value = 'Medicine, Health and Life Sciences';
+			$fields = array('typeName'=>'subject','multiple'=>'false','value'=>$value,'typeClass'=>'controlledVocabulary');
 			array_push($fld,$fields);
 
-			pre($dt);
 			/********************* subject */
-			$key = $dt['palavrasChave'];
-			$key = troca($key,';',',');
-			$key = troca($key,'.',',');
-			$fields = array('typeName'=>'subject','multiple'=>'false','value'=>$value,'typeClass'=>'primitive');
-			array_push($fld,$fields);			
-						
+			$name = $dt['nomePessoa'];
+			$email = $dt['emailContato'];
+			$author = array();
+			$aff = 'Desconhecida';			
+			
+			array_push($author,array('typeName'=>'authorAffiliation','multiple'=>'false','value'=>$aff,'typeClass'=>'primitive'));
+			array_push($author,array('typeName'=>'authorName','multiple'=>'false','value'=>$name,'typeClass'=>'primitive'));			
+
+			$contact = array('typeName'=>'datasetContactEmail','multiple'=>'false','value'=>$email,'typeClass'=>'primitive');
+			array_push($author,array('typeName'=>'datasetContact','multiple'=>'true','value'=>$contact,'typeClass'=>'compound'));
+		
+			$fields = array('typeName'=>'author','multiple'=>'true','value'=>$author,'typeClass'=>'primitive');			
+			array_push($fld,$fields);
+
 			$DV['metadataBlocks']['citation']['fields'] = $fld;
 			return $DV;
 
@@ -352,7 +360,8 @@ class LattesData extends Model
 				$Dataverse->CreateDataverse($projeto,$parent);
 
 				/******************************* PROJETO DATASET */
-				$dataset = $this->getDataset($dt,$user);	
+				$dataset = $this->getDataset($dt,$user);
+				
 				$dd['api'] = 'api/dataverses/'.$parent.'/datasets';
 				$sx .= $Dataset->CreateDatasets($dd,$dataset,$parent);
 				echo $sx;
@@ -476,6 +485,7 @@ class LattesData extends Model
 		array_push($auth, $this->primitive('authorName', 'Fulando de Tal'));
 		/* CITATION */
 		array_push($ci, $this->compound('author', $auth));
+		$mb['citation']['fields'] = $ci;
 
 		/* Metada Block */
 		$dv['datasetVersion']['metadataBlocks'] = $mb;
@@ -486,6 +496,7 @@ class LattesData extends Model
 		}
 		$dv['url'] = $_ENV['DATAVERSE_URL'];
 		$dv['apikey'] = $_ENV['DATAVERSE_APIKEY'];		
+
 
 		return $dv;
 
