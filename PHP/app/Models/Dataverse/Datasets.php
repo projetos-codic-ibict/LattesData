@@ -55,6 +55,8 @@ class Datasets extends Model
 			$dd['AUTH'] = true;
 			$dd['POST'] = true;
 			$dd['FILE'] = $file;
+
+			pre($dd);	
 	
 			$rst = $DataverseAPI->curlExec($dd);
 
