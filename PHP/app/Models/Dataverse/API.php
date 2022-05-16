@@ -76,17 +76,8 @@ class API extends Model
 			}
 
 			$txt = shell_exec($cmd);
-			echo $txt;
-
-			$rsp['msg'] .= $cmd;
-
-			echo $cmd;
-			pre($dt);
-
-			//$txt = shell_exec($cmd);
-			//$rsp['json'] = $txt;
-			$rsp = '';
+			return $txt;
 		}
-		return $rsp;
+		return 'ops - invalid parametes API.php';
 	}
 }

@@ -241,10 +241,10 @@ class LattesData extends Model
 			$DV['alias'] = troca($chamada['sigla'],' ','');
 			$DV['name'] = $chamada['nome'];
 
-			$contact[0]['contactEmail'] = $user['email'];
+			$contact[0]['contactEmail'] = 'lattesdata@cnpq.br';
 
 			$DV['dataverseContacts'] = $contact;
-			$DV['affiliation'] = $user['affiliation'];
+			$DV['affiliation'] = 'CNPq';
 			$DV['description'] = $chamada['nome'].' - '.$chamada['sigla'];
 			$DV['dataverseType'] = "LABORATORY";
 
@@ -340,9 +340,13 @@ class LattesData extends Model
 				/***************************** CHAMADA DATAVERSE */
 				$chamada = $this->getChamada($dt,$user);
 				$Dataverse->CreateDataverse($chamada,'beneficiarios');
+				$parent = $dt['alias'];
+
+				
 
 				/***************************** PROJETO DATAVERSE */
-				$chamada = $this->getProjeto($dt,$user);				
+				$projeto = $this->getProjeto($dt,$user);				
+				pre($projeto);
 
 				/******************************* PROJETO DATASET */
 				$dataset = $this->getDataset($dt,$user);
