@@ -328,6 +328,8 @@ class LattesData extends Model
 
 	function recoverPQ($dt,$id)
 		{
+			$sx = '';
+
 				$Users = new \App\Models\Dataverse\Users();
 				$Dataset = new \App\Models\Dataverse\Datasets();
 				$Dataverse = new \App\Models\Dataverse\Dataverse();
@@ -351,7 +353,7 @@ class LattesData extends Model
 				$Dataverse->CreateDataverse($projeto,$parent);
 
 				$sx .= $Dataset->CreateDatasets($dd);
-				exit;
+				echo $sx;
 				
 				/* ENVIA e-MAIL */
 				$msg = 'Dataset processado ' . $id;
