@@ -345,7 +345,7 @@ class LattesData extends Model
 
 				/******************************* PROJETO DATASET */
 				$dataset = $this->getDataset($dt,$user);	
-				pre($dt);			
+				pre($dd);			
 				$sx .= $Dataset->CreateDatasets($dt,$dataset,$parent);
 				echo $sx;
 				
