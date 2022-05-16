@@ -257,7 +257,7 @@ class LattesData extends Model
 			$projeto = (array)$dt['projeto'];
 			$nome = $projeto['titulo'];
 			$desciption = $projeto['resumo'];
-			$alias = trim($dt['numeroProcesso']);
+			$alias = 'CNPq'.trim($dt['numeroProcesso']);
 			$pre1 = substr($alias,0,strpos($alias,'/'));
 			$pre2 = substr($alias,strpos($alias,'/')+1,4);
 			$alias = $pre2.$pre1;
