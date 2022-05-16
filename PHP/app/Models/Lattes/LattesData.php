@@ -317,12 +317,7 @@ class LattesData extends Model
 			array_push($fld,$fields);
 						
 			$DV['metadataBlocks']['citation']['fields'] = $fld;
-
-			echo '<pre>';
-			print_r($DV);
-			echo '</pre>';
-			echo '<hr>';
-			pre($dt);
+			return $DV;
 
 		}	
 

@@ -121,8 +121,6 @@ class Dataverse extends Model
 							echo "OK";
 							$txt = file_get_contents($file);
 							$txt = json_decode($txt);
-							echo '<pre>';
-							print_r($txt);
 						} else {
 							echo " - NOT FOUND";
 						}
