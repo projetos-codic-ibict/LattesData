@@ -1,5 +1,6 @@
-body
-        {
-        background-color: #FFEEFF;
-        font-color: #00EE00;
-        }
+k4tfQWdsXVLeqbg591QLwqYenzeAJ9W1RCYLNaZfW5E=
+
+
+CREATE USER 'authuser'@'localhost' IDENTIFIED BY 'nrrE#36TeVNChJwg%rsshN!!K6b*E#u&46*Uj9hvs^DeYD3VtX';
+GRANT ALL PRIVILEGES ON `auth` . * TO 'authuser'@'localhost';
+FLUSH PRIVILEGES;
