@@ -107,60 +107,60 @@
                     "/graph/type=skos:ConceptScheme/uri"
                 ]
             }
+        }
+    },
+    {
+        "field-name": "cnpqAreas",
+        "term-uri-field": "cnpqAreasTermURI",
+        "cvoc-url": "http://172.16.16.68/thesa/index.php/thesa/",
+        "js-url": "http://172.16.16.68/thesa/js/skosmos.js",
+        "protocol": "skosmos",
+        "retrieval-uri": "http://172.16.16.68/thesa/index.php/thesa/rest/v1/data?uri={0}",
+        "term-parent-uri": "",
+        "allow-free-text": false,
+        "languages": "en, br",
+        "vocabs": {
+            "areas_cnpq": {
+                "vocabularyUri": "http://172.16.16.68/thesa/index.php/thesa/th/1",
+                "uriSpace": "http://172.16.16.68/thesa/index.php/thesa/"
+            }
         },
-        {
-            "field-name": "cnpqAreas",
-            "term-uri-field": "cnpqAreasTermURI",
-            "cvoc-url": "http://172.16.16.68/thesa/index.php/thesa/",
-            "js-url": "http://172.16.16.68/thesa/js/skosmos.js",
-            "protocol": "skosmos",
-            "retrieval-uri": "http://172.16.16.68/thesa/index.php/thesa/rest/v1/data?uri={0}",
-            "term-parent-uri": "",
-            "allow-free-text": false,
-            "languages": "en, br",
-            "vocabs": {
-                "areas_cnpq": {
-                    "vocabularyUri": "http://172.16.16.68/thesa/index.php/thesa/th/1",
-                    "uriSpace": "http://172.16.16.68/thesa/index.php/thesa/"
-                }
+        "managed-fields": {
+            "vocabularyName": "cnpqAreasVocabulary",
+            "termName": "cnpqAreasTerm",
+            "vocabularyUri": "cnpqAreasVocabularyURI"
+        },
+        "retrieval-filtering": {
+            "@context": {
+                "termName": "https://schema.org/name",
+                "vocabularyName": "https://dataverse.org/schema/vocabularyName",
+                "vocabularyUri": "https://dataverse.org/schema/vocabularyUri",
+                "lang": "@language",
+                "value": "@value"
             },
-            "managed-fields": {
-                "vocabularyName": "cnpqAreasVocabulary",
-                "termName": "cnpqAreasTerm",
-                "vocabularyUri": "cnpqAreasVocabularyURI"
+            "@id": {
+                "pattern": "{0}",
+                "params": [
+                    "@id"
+                ]
             },
-            "retrieval-filtering": {
-                "@context": {
-                    "termName": "https://schema.org/name",
-                    "vocabularyName": "https://dataverse.org/schema/vocabularyName",
-                    "vocabularyUri": "https://dataverse.org/schema/vocabularyUri",
-                    "lang": "@language",
-                    "value": "@value"
-                },
-                "@id": {
-                    "pattern": "{0}",
-                    "params": [
-                        "@id"
-                    ]
-                },
-                "termName": {
-                    "pattern": "{0}",
-                    "params": [
-                        "/graph/uri=@id/prefLabel"
-                    ]
-                },
-                "vocabularyName": {
-                    "pattern": "{0}",
-                    "params": [
-                        "/graph/type=skos:ConceptScheme/prefLabel"
-                    ]
-                },
-                "vocabularyUri": {
-                    "pattern": "{0}",
-                    "params": [
-                        "/graph/type=skos:ConceptScheme/uri"
-                    ]
-                }
+            "termName": {
+                "pattern": "{0}",
+                "params": [
+                    "/graph/uri=@id/prefLabel"
+                ]
+            },
+            "vocabularyName": {
+                "pattern": "{0}",
+                "params": [
+                    "/graph/type=skos:ConceptScheme/prefLabel"
+                ]
+            },
+            "vocabularyUri": {
+                "pattern": "{0}",
+                "params": [
+                    "/graph/type=skos:ConceptScheme/uri"
+                ]
             }
         }
     }
