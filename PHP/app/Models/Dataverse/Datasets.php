@@ -46,11 +46,13 @@ class Datasets extends Model
 			$DataverseAPI = new \App\Models\Dataverse\API();
 	
 			$url = $this->url.'api/dataverses/produtividadePQ1A/datasets';
-			$id = $dd['id'];
+			$id = $dd['numeroProcesso'];
 	
 			$json = json_encode($dd, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 			$file = '.tmp/datasets/dataset_'.$id.'.json';
 			file_put_contents($file, $json);
+
+			echo h($file);
 
 			$dd['AUTH'] = true;
 			$dd['POST'] = true;
