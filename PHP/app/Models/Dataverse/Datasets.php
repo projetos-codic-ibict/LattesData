@@ -44,6 +44,8 @@ class Datasets extends Model
 		{
 			$sx ='???';
 			$DataverseAPI = new \App\Models\Dataverse\API();
+
+			pre($dd);
 	
 			$url = $this->url.'api/dataverses/produtividadePQ1A/datasets';
 			$id = $dd['numeroProcesso'];
