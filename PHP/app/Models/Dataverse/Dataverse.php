@@ -68,7 +68,7 @@ class Dataverse extends Model
 			$dd['FILE'] = $file;
 
 			$rsp = $API->curlExec($dd);
-			exit;
+
 			/******************************** Retorno */
 			$msg = (string)$rsp['json'];
 			$msg = (array)json_decode($msg);
