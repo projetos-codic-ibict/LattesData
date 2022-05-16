@@ -315,6 +315,14 @@ class LattesData extends Model
 			$key = troca($key,'.',',');
 			$fields = array('typeName'=>'subject','multiple'=>'false','value'=>$value,'typeClass'=>'primitive');
 			array_push($fld,$fields);
+
+			pre($dt);
+			/********************* subject */
+			$key = $dt['palavrasChave'];
+			$key = troca($key,';',',');
+			$key = troca($key,'.',',');
+			$fields = array('typeName'=>'subject','multiple'=>'false','value'=>$value,'typeClass'=>'primitive');
+			array_push($fld,$fields);			
 						
 			$DV['metadataBlocks']['citation']['fields'] = $fld;
 			return $DV;
