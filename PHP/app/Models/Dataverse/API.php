@@ -50,6 +50,7 @@ class API extends Model
 		if ((!isset($dt['url'])) or (!isset($dt['api'])) or (!isset($dt['apikey']))) {
 			$sx = "Error: Missing URL, API or API Key";
 			$rsp['msg'] = $sx;
+			return "OK";
 		} else {
 			$url = $dt['url'] . $dt['api'];
 			$apiKey = $dt['apikey'];
