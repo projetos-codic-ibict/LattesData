@@ -348,13 +348,11 @@ class LattesData extends Model
 
 				/******************************* PROJETO DATASET */
 				$dataset = $this->getDataset($dt,$user);
+				$Dataverse->CreateDataverse($projeto,$parent);
 
-				pre($dataset);
-
-				$sx = '';
-				$sx .= $Dataverse->CreateDataverse($dd,'beneficiarios');
-				exit;
 				$sx .= $Dataset->CreateDatasets($dd);
+				exit;
+				
 				/* ENVIA e-MAIL */
 				$msg = 'Dataset processado ' . $id;
 				$sx .= bsmessage($msg, 1);
