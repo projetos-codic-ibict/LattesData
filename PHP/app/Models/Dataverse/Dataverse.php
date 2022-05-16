@@ -49,8 +49,10 @@ class Dataverse extends Model
 		{
 			$API = new \App\Models\Dataverse\API();
 			$file = '.tmp/dataverse/dataverse-'.$dd['alias'].'.json';
+			file_put_contents($file, json_encode($dd, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 			$url = getenv("DATAVERSE_URL");
 
+			
 			$dd['AUTH'] = true;
 			$dd['POST'] = true;
 			$dd['FILE'] = $file;
@@ -60,6 +62,7 @@ class Dataverse extends Model
 			$dd['FILE'] = $file;
 
 			$rsp = $API->curlExec($dd);
+			exit;
 			/******************************** Retorno */
 			$msg = (string)$rsp['json'];
 			$msg = (array)json_decode($msg);
