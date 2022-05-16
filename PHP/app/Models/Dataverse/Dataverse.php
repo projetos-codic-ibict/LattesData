@@ -70,6 +70,8 @@ class Dataverse extends Model
 			$rsp = $API->curlExec($dd);
 
 			/******************************** Retorno */
+			pre($rsp);
+			return "";
 			$msg = (string)$rsp['json'];
 			$msg = (array)json_decode($msg);
 
