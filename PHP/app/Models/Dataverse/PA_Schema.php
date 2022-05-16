@@ -57,12 +57,15 @@ class PA_Schema extends Model
                     case 'edit_field':
                         $PA_Field = new \App\Models\Dataverse\PA_Field();
                         $sx .= $PA_Field->editar($d2,$d3);
-                        break;
-                        
+                        break;                        
                     case 'vocabulary':
                         $PA_Vocabulary = new \App\Models\Dataverse\PA_Vocabulary();
                         $sx .= $PA_Vocabulary->index($d2,$d3,$d4);
                         break;
+                    case 'proprieties':
+                        $PA_Proprieties = new \App\Models\Dataverse\PA_Proprieties();
+                        $sx .= $PA_Proprieties->index($d2,$d3,$d4);
+                        break;                        
                     case 'change_field':
                         $PA_Field = new \App\Models\Dataverse\PA_Field();
                         echo $PA_Field->change($d2,$d3);
@@ -341,6 +344,8 @@ class PA_Schema extends Model
             $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/export/'.$id.'">'.lang('dataverse.export').'</a>';
             $sx .= ' | ';
             $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/api_send_schema/'.$id.'">'.lang('dataverse.api_send').'</a>';            
+            $sx .= ' | ';
+            $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/proprieties/'.$id.'">'.lang('dataverse.proprieties').'</a>';            
             $sx .= ' | ';
             $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/import/'.$id.'">'.lang('dataverse.import').'</a>';
             $sx .= ' | ';
