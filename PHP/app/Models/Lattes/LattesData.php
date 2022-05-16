@@ -340,7 +340,7 @@ class LattesData extends Model
 				/***************************** CHAMADA DATAVERSE */
 				$chamada = $this->getChamada($dt,$user);
 				$Dataverse->CreateDataverse($chamada,'beneficiarios');
-				pre($dt);
+				pre($chamada);
 				$parent = $dt['alias'];				
 
 				/***************************** PROJETO DATAVERSE */
