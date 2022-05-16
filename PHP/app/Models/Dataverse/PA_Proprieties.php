@@ -73,7 +73,7 @@ class PA_Proprieties extends Model
         dircheck('.tmp/');
         dircheck('.tmp/dataverse/');
         dircheck('.tmp/dataverse/proprieties');
-        $filename = '.tmp/dataverse/proprieties/'.$dt['mt_name'];
+        $filename = '.tmp/dataverse/proprieties/'.$dt['mt_name'].'_br.properties';
         file_put_contents($filename, $sx);
         $sx = '<a href="'.URL.$filename.'">'.$filename.'</a>';
         return $sx;
