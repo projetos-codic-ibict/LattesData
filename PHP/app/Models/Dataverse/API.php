@@ -76,6 +76,7 @@ class API extends Model
 			}
 
 			$txt = shell_exec($cmd);
+			echo $txt;
 			return $txt;
 		}
 		return 'ops - invalid parametes API.php';
