@@ -352,6 +352,7 @@ class LattesData extends Model
 				$dataset = $this->getDataset($dt,$user);
 				$Dataverse->CreateDataverse($projeto,$parent);
 
+				echo h("XXXXXXXXXXXXXX");
 				$sx .= $Dataset->CreateDatasets($dd);
 				echo $sx;
 				
