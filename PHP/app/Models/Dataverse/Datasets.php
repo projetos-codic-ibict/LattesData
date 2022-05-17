@@ -58,14 +58,10 @@ class Datasets extends Model
 			$dv['api'] = 'api/dataverses/'.$parent.'/datasets';
 
 			$rst = $DataverseAPI->curlExec($dd);
+			$rsp = json_decode($rst,true);
 
-			print_r($rst);
-			exit;
-			$rsp = json_decode($rst['json'],true);
-
-			echo '<pre>';
-			print_r($rsp);
-			echo '</pre>';
+			$sx = bsmessage(h($rsp['status']).$rsp['message'],1);
+			echo $sx;
 			exit;
 			
 			$sta = $rsp['status'];

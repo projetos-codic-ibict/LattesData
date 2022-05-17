@@ -74,7 +74,7 @@ class API extends Model
 				//		$cmd .= '-H "Content-Type: application/json" ';
 				$cmd .= '--upload-file ' . realpath($dt['FILE']) . ' ';
 			}
-			echo '<pre>'.$cmd.'</pre>';
+			echo '<tt>'.$cmd.'</tt>';
 			echo '<hr>';
 			$txt = shell_exec($cmd);
 			return $txt;
