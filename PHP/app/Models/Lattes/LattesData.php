@@ -55,7 +55,7 @@ class LattesData extends Model
 			'headers' => [
 				'auth-token' => $token
 			], 
-			'verify' => $ssl,
+			'verify' => false,
 			'timeout' => 10,
 			'http_errors' => false
 		]);
