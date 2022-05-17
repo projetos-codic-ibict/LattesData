@@ -42,7 +42,7 @@ class Datasets extends Model
 
 	function CreateDatasets($dd='',$dataset='',$parent)	
 		{
-			$sx ='???';
+			$sx = h(lang('dataverse.carlos_chagas_cnpq'));
 			$DataverseAPI = new \App\Models\Dataverse\API();
 
 			$url = $this->url.'api/dataverses/'.$parent.'/datasets';
@@ -62,12 +62,18 @@ class Datasets extends Model
 
 			if (isset($rsp['status']))
 				{
-					$sx = $rsp['data']['persistentId'];
+					$email = $dd['user']['email'];
+					$nome = $dd['user']['firstName'].' '.$dd['user']['lastName'];
+					$DOI = $rsp['data']['persistentId'];
+					$sx .= 'Prezado(a) '.$nome;
+					$sx .= '<p>Foram enviadas instruções para o e-mail '.$$email.'</p>';					
+					$url = getenv("DATAVERSE_URL").'/dataset.xhtml?persistentId=doi:'.$DOI.'&version=DRAFT';
+					$sx .= 'Link para acesso <a href="'.$url.'">'.$url.'</a>';
 					return $sx;
 				} 
 			else
 				{
-					$sx = 'ERRO: ???';
+					$sx = 'ERRO: FALHA NA CONEXÃO COM O DATAVERSE';
 					return $sx;
 				}
 			if (!isset($rsp['status'])) { return ""; }

@@ -419,11 +419,14 @@ class LattesData extends Model
 				$parent = $chamada['alias'];				
 
 				/***************************** PROJETO DATAVERSE */
-				$projeto = $this->getProjeto($dt,$user);			
+				$projeto = $this->getProjeto($dt,$user);
+				$projeto['user'] = $user;
+				pre($projeto);
 				$Dataverse->CreateDataverse($projeto,$parent);
 
 				/******************************* PROJETO DATASET */
 				$dataset = $this->getDataset($dt,$user);
+				$parent = $projeto['alias'];
 				
 				$dd['api'] = 'api/dataverses/'.$parent.'/datasets';
 				$sx .= $Dataset->CreateDatasets($dd,$dataset,$parent);
