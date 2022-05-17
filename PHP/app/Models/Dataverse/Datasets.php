@@ -61,7 +61,7 @@ class Datasets extends Model
 			$rsp = json_decode($rst,true);
 
 			print_r($rsp);
-
+			if (!$rsp['status']) { return ""; }
 			$sx = bsmessage(h($rsp['status']).$rsp['message'],1);
 			echo $sx;
 			exit;
