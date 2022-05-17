@@ -60,38 +60,22 @@ class Datasets extends Model
 			$rst = $DataverseAPI->curlExec($dd);
 			$rsp = json_decode($rst,true);
 
-			print_r($rsp);
+			if (isset($rsp['status']))
+				{
+					$sx = $rsp['data']['persistentId'];
+					return $sx;
+				} 
+			else
+				{
+					$sx = 'ERRO: ???';
+					return $sx;
+				}
 			if (!isset($rsp['status'])) { return ""; }
 			$sx = bsmessage(h($rsp['status']).$rsp['message'],1);
-			echo $sx;
+			return $sx;
 			exit;
 			
-			$sta = $rsp['status'];
-			switch($sta)
-				{
-					case 'OK':
-						$sx = '';
-						$DATAVERSE_URL = $_SERVER['DATAVERSE_URL'];
-
-						$titulo = $dd['datasetVersion']['metadataBlocks']['citation']['fields'][0]['value'];
-						$DOI = $rsp['data']['persistentId'];
-						$link = $DATAVERSE_URL.'dataset.xhtml?persistentId='.$DOI.'&version=DRAFT';
-						$link = '<a href="'.($link).'" target="_blank">'.$DOI.'</a>';
-						
-						$sx .= '<h4>'.$titulo.'</h4>';
-						$sx .= '<p>Persistent ID: '.$link.'</p>';
-					break;
-
-					case 'ERROR':
-						$sx = '<pre style="color: red;">'; 
-						$sx .= $rsp['message'];	
-						echo '<pre>';
-						print_r($dd);
-						//$sx .= '<br>Dataverse Name: <b>'.$dd['alias'].'</b>';
-						//$sx .= '<br><a href="'.$this->url.'dataverse/'.$dd['alias'].'" target="_blank">'.$url.'/'.$dd['alias'].'</a>';
-						$sx .= '</pre>';
-						break;
-				}
+			$sta = $rsp['status'];			
 			return $sx;
 			}
 }

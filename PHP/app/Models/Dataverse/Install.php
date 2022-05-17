@@ -65,6 +65,13 @@ class Install extends Model
 						$sx .= '<h1>Tools</h1>';
 						$sx .= anchor(PATH.MODULE.'dataverse/system',msg('dataverse.system_facilities'));
 						break;
+					case 'domain':
+						$sx .= '<h1>Edit Domain.xml</h1>';
+						$sx .= '<pre>nano /usr/local/payara5/glassfish/domains/domain1/config/domain.xml</pre>';
+						$sx .= '<pre>&lt;jvm-options>-Ddataverse.siteUrl=http://${dataverse.fqdn}:8080&lt;/jvm-options></pre>';
+						$sx .= 'para<br>&nbsp;';
+						$sx .= '<pre>&lt;jvm-options>-Ddataverse.siteUrl=http://seudominio.com.br&lt;/jvm-options></pre>';
+						break;
 					case 'access':
 						$sx .= '<code>
 						URL: http://localhost:8080<br>
@@ -116,6 +123,8 @@ class Install extends Model
 						$menu[PATH.MODULE.'dataverse/install/tools'] = lang('dataverse.DataverseTools');
 						$menu[PATH.MODULE.'dataverse/install/dvnapp'] = lang('dataverse.DataverseDvnapp');						
 						$menu[PATH.MODULE.'dataverse/install/access'] = lang('dataverse.DataverseAccess');
+						$menu[PATH.MODULE.'dataverse/install/domain'] = lang('dataverse.DataverseDomain');
+						
 						$sx .= menu($menu);
 				}
 			return $sx;

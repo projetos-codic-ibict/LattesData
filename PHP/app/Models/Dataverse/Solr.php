@@ -52,6 +52,10 @@ class Solr extends Model
 				$sx = $this->readSchema($d2, $d3);
 				break;
 
+			case 'restart':
+				$sx = $this->restart($d2, $d3);
+				break;				
+
 			case 'solrDV':
 				$sx = $this->readDVSchema($d2, $d3);
 				break;
@@ -65,10 +69,26 @@ class Solr extends Model
 				$menu[PATH . MODULE . 'dataverse/solr/schema_export'] = 'dataverse.Solr.Schema.Export';
 				$menu[PATH . MODULE . 'dataverse/solr/solrDV'] = 'dataverse.SolrDV';
 				$menu[PATH . MODULE . 'dataverse/solr'] = 'dataverse.Solr';
+				$menu[PATH . MODULE . 'dataverse/solr/restart'] = 'dataverse.SolrRestart';
 				$sx .= menu($menu);
 		}
 		return $sx;
 	}
+
+	function restart()
+		{
+			$sx = '
+			<pre>
+			curl http://localhost:8080/api/admin/index/status<br>
+			curl http://localhost:8080/api/admin/index/clear-orphans<br>
+			curl http://localhost:8080/api/admin/index/clear<br>
+			curl http://localhost:8080/api/admin/index<br>
+			curl -X DELETE http://localhost:8080/api/admin/index/timestamps<br>
+			curl http://localhost:8080/api/admin/index/continue<br>
+			</pre>
+			';
+			return $sx;
+		}
 
 	function installSolr()
 		{
