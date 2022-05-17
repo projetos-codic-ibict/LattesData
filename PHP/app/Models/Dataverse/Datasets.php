@@ -62,11 +62,11 @@ class Datasets extends Model
 
 			if (isset($rsp['status']))
 				{
-					$email = $dd['user']['email'];
-					$nome = $dd['user']['firstName'].' '.$dataset['user']['lastName'];
+					//$email = $dd['user']['email'];
+					//$nome = $dd['user']['firstName'].' '.$dataset['user']['lastName'];
 					$DOI = $rsp['data']['persistentId'];
-					$sx .= 'Prezado(a) '.$nome;
-					$sx .= '<p>Foram enviadas instruções para o e-mail '.$$email.'</p>';					
+					//$sx .= 'Prezado(a) '.$nome;
+					//$sx .= '<p>Foram enviadas instruções para o e-mail '.$$email.'</p>';					
 					$url = getenv("DATAVERSE_URL").'/dataset.xhtml?persistentId=doi:'.$DOI.'&version=DRAFT';
 					$sx .= 'Link para acesso <a href="'.$url.'">'.$url.'</a>';
 					return $sx;
