@@ -60,6 +60,8 @@ class Datasets extends Model
 			$rst = $DataverseAPI->curlExec($dd);
 			$rsp = json_decode($rst,true);
 
+			print_r($rsp);
+
 			$sx = bsmessage(h($rsp['status']).$rsp['message'],1);
 			echo $sx;
 			exit;
