@@ -155,6 +155,7 @@ class Customize extends Model
 						$sx .= cr();
 						$sx .= 'echo "FIM DA ATUALIZAÇÂO"'.cr();
 						$sx .= cr();
+						$sx = '<pre>'.$sx.'</pre>';
 						break;
 					case 'sitemap':
 						$sx .= 'curl -X POST http://localhost:8080/api/admin/sitemap';
