@@ -453,6 +453,8 @@ class Customize extends Model
 			{
 				$sx = '';
 				$sx .= h('dataverse.StyleCSS');
+				$sx .= '<pre>curl -X PUT -d \'/var/www/dataverse/branding/custom-stylesheet.css\' http://localhost:8080/api/admin/settings/:StyleCustomizationFile</pre>';
+				$sx .= '<hr>';
 				$sx .= form_open_multipart();
 				$sx .= form_upload('userfile');
 				$sx .= form_submit(array('name'=>'submit','value'=>lang('dataverse.upload')));
