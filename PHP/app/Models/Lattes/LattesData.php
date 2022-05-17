@@ -309,6 +309,7 @@ class LattesData extends Model
 			array_push($fld,$fields);
 
 			/********************* Authors */
+			pre($dt);
 			$name = $dt['nomePessoa'];
 			$email = $dt['emailContato'];
 			$author = array();
