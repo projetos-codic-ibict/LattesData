@@ -105,7 +105,7 @@ class Customize extends Model
 								echo cr();
 								$sx .= "======================== Copy files =".$langs[$r].cr();
 								$n_subdir = $subdir[$r];
-								if ($langs[$r] == 'en')
+								if ($langs[$r] == 'br')
 									{
 										$dir = '/var/www/dataverse/langTmp/pt_BR/dataverse-language-packs-develop/'.$n_subdir;
 										$out = '/var/www/dataverse/langTmp/';
