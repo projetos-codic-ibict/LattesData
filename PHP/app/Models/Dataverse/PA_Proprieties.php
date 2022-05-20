@@ -40,17 +40,6 @@ class PA_Proprieties extends Model
     protected $beforeDelete   = [];
     protected $afterDelete    = [];
 
-    function download($d1,$d2,$d3,$d4)
-        {
-            dircheck('.tmp/');
-            dircheck('.tmp/dataverse/');
-            dircheck('.tmp/dataverse/proprieties');
-            $filename = '.tmp/dataverse/proprieties/'.$d1.'_br.properties';
-            $short = $d1.'_br.properties';
-            $txt = file_get_contents($filename);
-            pre($txt);
-        }
-
     function index($d1 = '', $d2 = '', $d3 = '', $d4 = '')
     {
         $PA_Field = new \App\Models\Dataverse\PA_Field();
@@ -85,13 +74,15 @@ class PA_Proprieties extends Model
         dircheck('.tmp/dataverse/');
         dircheck('.tmp/dataverse/proprieties');
         $filename = '.tmp/dataverse/proprieties/'.$dt['mt_name'].'_br.properties';
-        $short = $dt['mt_name'].'';
         file_put_contents($filename, $sx);
         
+        $sx = '<a href="'.URL.$filename.'">'.$filename.'</a>';
+
         $filename = '/var/www/dataverse/langBundles/'.$dt['mt_name'].'_br.properties';
         file_put_contents($filename, $sx);
-
-        $sx = '<a href="'.PATH.MODULE.'pa/download_lang/'.$short.'">'.$short.'</a>';
+        $filename = '/var/www/dataverse/langBundles/'.$dt['mt_name'].'.properties';
+        file_put_contents($filename, $sx);
+ 
         return $sx;
     }
 }
