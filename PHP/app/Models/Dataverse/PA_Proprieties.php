@@ -80,9 +80,9 @@ class PA_Proprieties extends Model
         $sx = '<a href="'.URL.$filename.'">'.$filename.'</a>';
 
         $filename = '/var/www/dataverse/langBundles/'.$dt['mt_name'].'_br.properties';
-        file_put_contents($filename, $vc);
+        //file_put_contents($filename, $vc);
         $filename = '/var/www/dataverse/langBundles/'.$dt['mt_name'].'.properties';
-        file_put_contents($filename, $vc);
+        //file_put_contents($filename, $vc);
  
         return $sx;
     }
