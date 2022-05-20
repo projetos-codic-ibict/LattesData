@@ -69,19 +69,20 @@ class PA_Proprieties extends Model
         }
 
         $sx .= $vc;
+        $vc = $sx;
 
         dircheck('.tmp/');
         dircheck('.tmp/dataverse/');
         dircheck('.tmp/dataverse/proprieties');
         $filename = '.tmp/dataverse/proprieties/'.$dt['mt_name'].'_br.properties';
-        file_put_contents($filename, $sx);
+        file_put_contents($filename, $vc);
         
         $sx = '<a href="'.URL.$filename.'">'.$filename.'</a>';
 
         $filename = '/var/www/dataverse/langBundles/'.$dt['mt_name'].'_br.properties';
-        file_put_contents($filename, $sx);
+        file_put_contents($filename, $vc);
         $filename = '/var/www/dataverse/langBundles/'.$dt['mt_name'].'.properties';
-        file_put_contents($filename, $sx);
+        file_put_contents($filename, $vc);
  
         return $sx;
     }
