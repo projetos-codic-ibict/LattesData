@@ -62,6 +62,10 @@ class PA_Schema extends Model
                         $PA_Vocabulary = new \App\Models\Dataverse\PA_Vocabulary();
                         $sx .= $PA_Vocabulary->index($d2,$d3,$d4);
                         break;
+                    case 'download_lang':
+                        $PA_Proprieties = new \App\Models\Dataverse\PA_Proprieties();
+                        $sx .= $PA_Proprieties->download($d2,$d3,$d4);
+                        break;
                     case 'proprieties':
                         $PA_Proprieties = new \App\Models\Dataverse\PA_Proprieties();
                         $sx .= $PA_Proprieties->index($d2,$d3,$d4);
