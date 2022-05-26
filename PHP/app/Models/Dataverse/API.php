@@ -58,7 +58,7 @@ class API extends Model
 			$cmd = 'curl ';
 			/* APIKEY */
 			if (isset($dt['AUTH'])) {
-				$cmd .= '-H X-Dataverse-key:' . $apiKey . ' ';
+				$cmd .= '-H X-Dataverse-key:' . $apiKey . ' -H Content-type:application/json ';
 			}
 
 			/* POST */
@@ -74,8 +74,7 @@ class API extends Model
 				//		$cmd .= '-H "Content-Type: application/json" ';
 				$cmd .= '--upload-file ' . realpath($dt['FILE']) . ' ';
 			}
-			echo '<pre>'.$cmd.'</pre>';
-			echo '<hr>';
+			consoleJS($cmd);
 			$txt = shell_exec($cmd);
 			return $txt;
 		}

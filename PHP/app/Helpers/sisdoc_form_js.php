@@ -1,4 +1,9 @@
 <?php
+function consoleJS($txt)
+{
+    echo '<script>console.log("'.date("Y-m-d H:i:s") .' - ' . $txt . '");</script>';
+}
+
 function onclick($url,$x=800,$y=800,$class="")
 {
     $a = '<a href="#" ';

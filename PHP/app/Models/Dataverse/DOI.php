@@ -66,7 +66,24 @@ class DOI extends Model
 						break;
 					case 'authority':
 						$cmd .= 'curl -X PUT -d 10.80102 http://localhost:8080/api/admin/settings/:Authority';
-						break;						
+						break;	
+					case 'domain':
+						$cmd .= 'nano /usr/local/payara5/glassfish/domains/domain1/config/domain.xml';
+						$cmd .= '<hr>';
+						$cmd .= '<h5>Prefix: 10.80102 - DOI Fabrica Test</h5>';
+						$cmd .= '&lt;jvm-options>-Ddoi.username=GDCC.RNP-TEST&lt;/jvm-options><br>';
+				        $cmd .= '&lt;jvm-options>-Ddoi.password=$senha$&lt;/jvm-options><br>';
+        				$cmd .= '&lt;jvm-options>-Ddoi.baseurlstring=https://mds.test.datacite.org&lt;/jvm-options><br>';
+        				$cmd .= '&lt;jvm-options>-Ddoi.dataciterestapiurlstring=https://api.test.datacite.org&lt;/jvm-options><br>';
+
+						$cmd .= '<hr>';
+						$cmd .= '<h5>Prefix: 10.80102 - DOI Fabrica</h5>';
+						$cmd .= '&lt;jvm-options>-Ddoi.username=GDCC.RNP-TEST&lt;/jvm-options><br>';
+				        $cmd .= '&lt;jvm-options>-Ddoi.password=$senha$&lt;/jvm-options><br>';
+        				$cmd .= '&lt;jvm-options>-Ddoi.baseurlstring=https://mds.datacite.org&lt;/jvm-options><br>';
+        				$cmd .= '&lt;jvm-options>-Ddoi.dataciterestapiurlstring=https://api.datacite.org&lt;/jvm-options><br>';
+
+						break;											
 					case 'fake':
 						$cmd = 'curl http://localhost:8080/api/admin/settings/:DoiProvider -X PUT -d FAKE_DOI_PROVIDER=true';						
 						break;
@@ -76,6 +93,7 @@ class DOI extends Model
 					$menu[PATH.MODULE.'dataverse/doi/doi_FilePID'] = 'dataverse.doi_dataset';
 					$menu[PATH.MODULE.'dataverse/doi/protocol'] = 'dataverse.protocol';
 					$menu[PATH.MODULE.'dataverse/doi/authority'] = 'dataverse.authority';
+					$menu[PATH.MODULE.'dataverse/doi/domain'] = 'dataverse.domain.xml';
 					
 					
 					$sx .= menu($menu);

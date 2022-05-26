@@ -1,0 +1,525 @@
+<head>
+    <script type="text/javascript" src="/javax.faces.resource/jquery/jquery.js.xhtml?ln=primefaces&amp;v=10.0.0"></script><script type="text/javascript" src="/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&amp;v=10.0.0"></script><script type="text/javascript" src="/javax.faces.resource/core.js.xhtml?ln=primefaces&amp;v=10.0.0"></script><script type="text/javascript" src="/javax.faces.resource/components.js.xhtml?ln=primefaces&amp;v=10.0.0"></script><link type="text/css" rel="stylesheet" href="/javax.faces.resource/components.css.xhtml?ln=primefaces&amp;v=10.0.0" /><script type="text/javascript">if(window.PrimeFaces){PrimeFaces.settings.locale='en';PrimeFaces.settings.viewId='/dataverse_homepage.xhtml';PrimeFaces.settings.contextPath='';PrimeFaces.settings.cookiesSecure=false;}</script>
+        <link rel="apple-touch-icon" sizes="180x180" href="/javax.faces.resource/images/fav/apple-touch-icon.png.xhtml" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/javax.faces.resource/images/fav/favicon-16x16.png.xhtml" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/javax.faces.resource/images/fav/favicon-32x32.png.xhtml" />
+        <link rel="manifest" href="/javax.faces.resource/images/fav/site.webmanifest.xhtml" />
+        <link rel="mask-icon" href="/javax.faces.resource/images/fav/safari-pinned-tab.svg.xhtml" color="#da532c" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+        <link type="image/png" rel="image_src" href="/javax.faces.resource/images/dataverseproject.png.xhtml" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/bs/css/bootstrap.min.css.xhtml?version=5.10" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/bs/css/bootstrap-theme.min.css.xhtml?version=5.10" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/ie-compat.css.xhtml?version=5.10" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/owl.carousel.css.xhtml?version=5.10" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/fontcustom.css.xhtml?version=5.10" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/socicon.css.xhtml?version=5.10" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/structure.css.xhtml?version=5.10" />
+            <script>
+                // Break out of iframe
+                if (window !== top) top.location = window.location;
+            </script>
+            <style>
+                /* Custom CSS */
+                #dataverseHeader {
+  background: url("http://172.16.16.68/dvn/img/header-lattes-data.jpg") no-repeat right top !important;
+  margin-top: 4rem;
+  /*-webkit-box-shadow: 0px 0px 17px -7px #000000; 
+	box-shadow: 0px 0px 17px -7px #000000;*/
+}
+div#content {
+  /*-webkit-box-shadow: 0px 0px 17px -7px #000000; 
+	box-shadow: 0px 0px 17px -7px #000000;*/
+}
+.mt-4 {
+  margin-top: 4rem;
+}
+.btn-outline-success {
+  background: none;
+  color: #007bff;
+  border-color: #007bff;
+}
+.dataverseHeaderLogo {
+  padding: 3rem 0 0 2rem;
+  width: 236px;
+  height: 49px;
+  max-width: 50%;
+  background: none !important;
+}
+.dataverseHeaderDataverseName H1 {
+  display: none;
+}
+#dvfooter {
+  background: #005195;
+  padding-top: 2rem;
+}
+#dvfooter p {
+  color: #fff;
+}
+.poweredbylogo {
+  color: #fff;
+}
+
+#dataverseHeader .dataverseHeaderCell {
+    display: block;
+}
+
+#dataverseHeader .dataverseHeaderCell.dataverseHeaderLogo img {
+    max-width: none;
+    max-height: none;
+}
+
+            </style></head><body>
+	<a href="#content" class="sr-only">Skip to main content</a>
+
+    <nav id="dataverse-header-block"><div id="navbarFixed" class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar" aria-pressed="false">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/"><img src="/logos/navbar/logo_lattesdata.png" alt="LattesData homepage" class="navbar-brand custom-logo" />
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="topNavBar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Search <b class="caret"></b></a>
+                            <ul class="dropdown-menu navbar-search">
+                                <li>
+                                    <form class="form-inline" role="search">
+                                        <label id="searchNavLabel" class="sr-only" for="navbarsearch">Search</label>
+                                        <div class="input-group">
+                                            <input id="navbarsearch" type="text" class="form-control" size="28" value="" placeholder="Search all dataverses..." />
+                                            <span class="input-group-btn">
+                                                <button type="submit" title="Find" class="btn btn-default bootstrap-button-tooltip" aria-labelledby="searchNavLabel" onclick="window.location='/dataverse/lattesdata?q=' + document.getElementById('navbarsearch').value;return false;">
+                                                    <span class="glyphicon glyphicon-search no-text"></span>
+                                                </button>
+                                            </span>
+                                        </div>
+                                    </form>
+                                </li>
+                            </ul>
+                        </li><li><a href="http://172.16.16.68/dvn/about/" rel="noopener" target="_blank">About</a></li>
+                        <li><a href="https://guides.dataverse.org/en/5.10/user" rel="noopener" target="_blank">User Guide</a>
+                        </li>
+                            <li>
+<form id="j_idt49" name="j_idt49" method="post" action="/" class="navbar-form navbar-left navbar-form-link" enctype="application/x-www-form-urlencoded" data-partialsubmit="true">
+<input type="hidden" name="j_idt49" value="j_idt49" />
+<a id="j_idt49:headerSupportLink" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;j_idt49:headerSupportLink&quot;,f:&quot;j_idt49&quot;,u:&quot;contactDialog&quot;,onco:function(xhr,status,args,data){PF('contactForm').show();}});return false;">Support</a><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:0" value="-8244940968180027773:4038119653972930701" autocomplete="off" />
+</form>
+                            </li><li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Language">English <b class="caret"></b></a>
+                            <ul class="dropdown-menu navbar-language">
+<form id="j_idt54" name="j_idt54" method="post" action="/" class="form-inline" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt54" value="j_idt54" />
+
+                                        <li class="active"><script type="text/javascript" src="/javax.faces.resource/jsf.js.xhtml?ln=javax.faces"></script><a href="#" onclick="mojarra.jsfcljs(document.getElementById('j_idt54'),{'j_idt54:j_idt55:0:j_idt57':'j_idt54:j_idt55:0:j_idt57'},'');return false" class="language-menu-link">English</a>
+                                        </li>
+                                        <li><a href="#" onclick="mojarra.jsfcljs(document.getElementById('j_idt54'),{'j_idt54:j_idt55:1:j_idt57':'j_idt54:j_idt55:1:j_idt57'},'');return false" class="language-menu-link">Português</a>
+                                        </li><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:1" value="-8244940968180027773:4038119653972930701" autocomplete="off" />
+</form>
+                            </ul></li>
+                            <li><a href="/dataverseuser.xhtml?editMode=CREATE&amp;redirectPage=%2Fdataverse_homepage.xhtml">
+                                    Sign Up
+                                </a>
+                            </li>
+                            <li><a href="/loginpage.xhtml?redirectPage=%2Fdataverse_homepage.xhtml">
+                                    Log In
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div></div>
+        
+        <noscript>
+            <div id="noscript-alert" class="bg-danger">
+                <div class="alert container text-danger no-margin-bottom">Please enable JavaScript in your browser. It is required to use most of the features of Dataverse.
+                </div>
+            </div>
+        </noscript>
+<form id="j_idt103" name="j_idt103" method="post" action="/" class="form-inline" enctype="application/x-www-form-urlencoded" data-partialsubmit="true">
+<input type="hidden" name="j_idt103" value="j_idt103" />
+<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:2" value="-8244940968180027773:4038119653972930701" autocomplete="off" />
+</form><div style="background:#FFFFFF;" id="dataverseHeader" class="container bg-muted">
+            <div class="dataverseHeaderBlock"><div class="dataverseHeaderCell dataverseHeaderLogo">
+                    <img src="/logos/1/logo.png" alt="LattesData logo" /></div><div class="dataverseHeaderCell dataverseHeaderName">
+                    <a href="/dataverse/lattesdata" class="dataverseHeaderDataverseName" style="color:#428BCA;"><h1>LattesData</h1></a></div>
+            </div></div><div id="messagePanel">
+            <div class="container messagePanel">
+            </div></div>
+    </nav>
+        <div class="container" id="content" role="main"><script>
+    //JFLF: Validacion de URL's para esconder/mostrar el navbar-icon al hacer scroll
+    var navbar = document.getElementById("navbar-icon");
+    var sticky = navbar.offsetTop;
+
+    URL = window.location.pathname;
+
+    $(document).ready(function () {
+        if ((URL == "/") || ((URL.indexOf("dataverse.xhtml") != -1)
+            || (URL.indexOf("dataset.xhtml") != -1)
+            || (URL.indexOf("file.xhtml") != -1)
+            || (URL.indexOf("editdatafiles.xhtml") != -1)
+            || (URL.indexOf("dataverse-") != -1)
+            || (URL.indexOf("/dataverse/") != -1))) {
+
+            window.onscroll = function () {
+                var prevScrollpos = window.pageYOffset;
+                if (prevScrollpos > 100) {
+                    navbar.classList.remove("hidden-logo");
+                } else {
+                    navbar.classList.add("hidden-logo");
+                }
+
+            }
+        } else {
+            navbar.classList.remove("hidden-logo");
+        }
+    })
+</script>
+
+
+<div class="row-fluid">
+  <div class="col">
+    <h1>LattesData</h1>
+    <p class="text-intro">O repositório LattesData tem como objetivo  reunir, armazenar e divulgar os conjuntos de dados científicos de pesquisadores beneficiários do Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq). Futuramente, será também disponível para depósito de dados de pesquisa oriundos de pesquisadores não financiadas pelo CNPq, mediante acordos celebrados com suas instituições no âmbito do Consórcio Nacional para Ciência Aberta (CoNCienciA). </p>
+  </div>
+</div>
+<form class="form mt-4">
+  <div class="input-group input-group-lg">
+    <input type="text" class="form-control" id="inputDataverseSearch" onkeydown="if (event.keyCode == 13) document.getElementById('btnDataverseSearch').click();" placeholder="Digite sua pesquisa">
+    <div class="input-group-btn">
+      <button class="btn btn-default" id="btnDataverseSearch" type="submit" onclick="window.location = '/dataverse/lattesdata?q=' + document.getElementById('inputDataverseSearch').value;return false;"><i class="glyphicon glyphicon-search"></i></button>
+    </div>
+  </div>
+</form>
+<div class="row mt-4">
+  <div class="col-sm-3 mt-2">
+    <button type="button" class="btn btn-primary btn-lg btn-block"> <span class="badge badge-light" id="ID_pesquisador">0</span> Pesquisadores </button>
+  </div>
+  <div class="col-sm-4 mt-2">
+    <button type="button" class="btn btn-primary btn-lg btn-block"> <span class="badge badge-light" id="ID_dataverse">0</span> Conjunto de Dados (DataVerse) </button>
+  </div>
+  <div class="col-sm-3 mt-2">
+    <button type="button" class="btn btn-primary btn-lg btn-block"> <span class="badge badge-light" id="ID_grupos">0</span> Grupos de Pesquisa </button>
+  </div>
+  <div class="col-sm-2 mt-2">
+    <button type="button" class="btn btn-primary btn-lg btn-block"> <span class="badge badge-light" id="ID_projetos">0</span> Projetos </button>
+  </div>
+</div>
+<div class="row-fluid mt-4">
+  <div class="col">
+    <button type="button" class="btn btn-primary btn-lg btn-block" onClick="window.location.href='/dataverse/lattesdata'">Explorar</button>
+  </div>
+</div>
+
+<!-- <hr class="heavy-rule" /> --> 
+
+<!-- SEARCH + BROWSE + RECENT -->
+<div class="row hmpg-browse-block"> 
+  
+  <!-- SEARCH --> 
+  <!-- 
+            NOTE: The alias of the root dataverse will need to be configured in this URL 
+            --> 
+  
+  <!-- BROWSE SUBJECT -->
+  <div id="browseBySubject" class="col-xs-12"> 
+    <!-- <p class="text-muted margin-bottom">Browse by subject</p> -->
+    <div class="row margin-bottom"> 
+      <!-- SUBJECTS -->
+      <div id="dataversesBySubject" class="col-xs-12"> </div>
+      
+      <!-- VIEW ALL --> 
+      <!-- 
+                    NOTE: The alias of the root dataverse will need to be configured in this URL 
+                    --> 
+      <!-- <div class="col-xs-12 margin-top">
+                    <p class="browse-subjects small text-muted"><a href="/dataverse/lattesdata">ALL DATA</a> <span
+                            class="glyphicon glyphicon-chevron-right"></span></p>
+                </div> --> 
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+        //<![CDATA[
+
+        //switch baseUrl to point to a different server than the local box
+        var baseUrl = "";
+
+        // NOTE: REMOVED THUMBNAILS
+        // var thumbBaseURL = baseUrl + "/api/datasets/:persistentId/thumbnail" + "?persistentId=";
+        var metricBaseUrl = baseUrl + "/api/info/metrics/";
+        var simpleCatSearch = baseUrl + "/api/search?q=*&type=dataset&sort=dateSort&order=desc&fq=categoryOfDataverse:";
+        var simpleCatSearchDataverse = baseUrl + "/api/search?q=*&type=dataverse&sort=dateSort&order=desc&fq=dvCategory:";
+        var simpleCatSearchInvestigador = baseUrl + "api/search?q=*&type=dataset&sort=dateSort&order=desc&per_page=1000";
+        //http://ec2-52-91-47-172.compute-1.amazonaws.com:8080/dataverse/lattesdata?q=&fq1=dvCategory%3A%22Research+Project%22&fq0=dvObjectType%3A%28dataverses+OR+datasets%29&types=dataverses%3Adatasets&sort=dateSort&order=
+        function writeRecentDatasetsInDataverses(fqString, resultCount, elm) {
+            $.get(simpleCatSearch + fqString + "&per_page=" + resultCount, function (jData) {
+                var resultHtml = "";
+                jData.data.items.forEach(function (item) {
+                    var options = { year: 'numeric', month: 'short', day: 'numeric' };
+                    var date = new Date(item.published_at).toLocaleString('en-US', options);
+                    resultHtml += "<div class=\"hmpg-recent-block clearfix\">";
+                    // NOTE: REMOVED THUMBNAILS
+                    // resultHtml += "<div class=\"col-xs-2 text-center hmpg-recent-thumb\"><a href=\"/dataset.xhtml?persistentId=" + item.global_id + "\">";
+                    // resultHtml += "<object data=\"" + thumbBaseURL + item.global_id + "\" type=\"image/png\"/><span class=\"icon-dataset\"></span></object>";
+                    // resultHtml += "</a></div>";
+                    // NOTE: REMOVED THUMBNAILS... in next line, change grid layout class to `col-xs-9 col-md-10`
+                    resultHtml += "<div class=\"col-xs-12 hmpg-recent-metadata\"><p><a href=\"/dataset.xhtml?persistentId=" + item.global_id + "\">" + item.name + "</a></p><p class=\"small text-muted\"><a href=\"/dataverse/" + item.identifier_of_dataverse + "\" class=\"highlightBold\">" + item.name_of_dataverse + "</a> " + date + "</p></div>";
+                    resultHtml += "</div>";
+                });
+                document.getElementById(elm).innerHTML = resultHtml;
+            });
+        }
+
+        function proyectosInvestigacion(fqString, resultCount, elm) {
+            $.get(simpleCatSearchDataverse + fqString + "&per_page=" + resultCount, function (jData) {
+                console.log(jData.data.total_count);
+                document.getElementById(elm).innerHTML = jData.data.total_count + "";
+
+            });
+        }
+
+        function investigadores(fqString, resultCount, elm) {
+            $.get(simpleCatSearchInvestigador + fqString + "&per_page=" + resultCount, function (jData) {
+                let authorCount = [];
+                jData.data.items.forEach(function (item) {
+                    item.authors.forEach(author => {
+                        if (!authorCount.includes(author)) {
+                            authorCount.push(author)
+                        }
+                    });
+
+                });
+                document.getElementById(elm).innerHTML = authorCount.length + "";
+
+            });
+        }
+
+        //For metrics that return simple json with a count
+        //Can take a single element or an array of elements
+        function queryMetricSimple(metricRelPath, month, elm) {
+            $.get(metricBaseUrl + metricRelPath + month, function (jData) {
+                var resultCount = jData.data.count;
+                if (Array.isArray(elm)) {
+                    elm.forEach(function (e) {
+                        document.getElementById(e).innerHTML = resultCount.toLocaleString('en');
+                    });
+                } else {
+                    document.getElementById(elm).innerHTML = resultCount.toLocaleString('en');
+                }
+            });
+        }
+
+        function queryMetricSearch(metricRelPath, month) {
+            $.get(metricBaseUrl + metricRelPath + month, function (jData) {
+                var resultCount = jData.data.count;
+                var roundedDatasetCount = Math.floor(resultCount / 100) * 100;
+                var dynamicSearchPlaceholder = "Search over " + roundedDatasetCount.toLocaleString('en') + " datasets...";
+                $("#inputDataverseSearch").attr({ "placeholder": dynamicSearchPlaceholder });
+            });
+        }
+
+        function querySubjectDataverseDataset(elm) {
+            var dvArray = [];
+            var fullArray = [];
+            $.get(metricBaseUrl + "dataverses/bySubject", function (jData) {
+                jData.data.forEach(function (item) {
+                    if (item.subject !== "N/A" && item.subject !== "Other") {
+                        dvArray.push([item.subject, item.count]);
+                    }
+                });
+                $.get(metricBaseUrl + "datasets/bySubject?dataLocation=all", function (jData) {
+                    var resultHtml = "";
+                    jData.data.forEach(function (item) {
+                        if (item.subject !== "N/A" && item.subject !== "Other") {
+                            var dvCount = 0;
+                            for (var dvi = 0; dvi < dvArray.length; dvi++) {
+                                if (item.subject === dvArray[dvi][0]) {
+                                    dvCount = dvArray[dvi][1];
+                                    break;
+                                }
+                            }
+                            fullArray.push([item.subject, (item.count + dvCount - 1).toLocaleString('en')]); //subtract 1 to remove root dv from counts
+                        }
+                    });
+                    fullArray.sort();
+                    fullArray.forEach(function (subject) {
+                        // NOTE: The alias of the root dataverse will need to be configured in this URL 
+                        // resultHtml += "<p class=\"browse-subjects\"><a href=\"/dataverse/lattesdata?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + "</a> <span class=\"text-muted\">" + subject[1] + "</span></p>";
+                        resultHtml += "<a class=\"browse-subjects\" href=\"/dataverse/lattesdata?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + " " + subject[1] + "</a>";
+                    });
+                    document.getElementById(elm).innerHTML = resultHtml;
+                });
+            });
+        }
+
+
+        function querySubjectDataset(elm) {
+            var dvArray = [];
+            var fullArray = [];
+            // $.get(metricBaseUrl + "dataverses/bySubject", function (jData) {
+            //     jData.data.forEach(function (item) {
+            //         if (item.subject !== "N/A" && item.subject !== "Other") {
+            //             dvArray.push([item.subject, item.count]);
+            //         }
+            //     });
+
+            // });
+
+            $.get(metricBaseUrl + "datasets/bySubject?dataLocation=all", function (jData) {
+                var resultHtml = "";
+                jData.data.forEach(function (item) {
+                    if (item.subject !== "N/A" && item.subject !== "Other") {
+                        var dvCount = 0;
+                        for (var dvi = 0; dvi < dvArray.length; dvi++) {
+                            if (item.subject === dvArray[dvi][0]) {
+                                dvCount = dvArray[dvi][1];
+                                break;
+                            }
+                        }
+                        fullArray.push([item.subject, (item.count + dvCount).toLocaleString('en')]); //subtract 1 to remove root dv from counts
+                    }
+                });
+                fullArray.sort();
+                fullArray.forEach(function (subject) {
+                    // NOTE: The alias of the root dataverse will need to be configured in this URL 
+                    // resultHtml += "<p class=\"browse-subjects\"><a href=\"/dataverse/lattesdata?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + "</a> <span class=\"text-muted\">" + subject[1] + "</span></p>";
+                    resultHtml += "<a class=\"browse-subjects\" href=\"/dataverse/lattesdata?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=datasets&sort=dateSort&order=desc\"><span>" + subject[0] + " " + subject[1] + "</span></a>";
+                    // console.log(subject[0]+" - "+subject[1]);
+                });
+                document.getElementById(elm).innerHTML = resultHtml;
+            });
+        }
+
+        queryMetricSimple("datasets", "?dataLocation=all", "headAllTimeAllDatasetsValue");
+        queryMetricSimple("downloads", "", "headAllTimeAllDownloadsValue");
+        queryMetricSimple("dataverses", "", "headAllTimeAllDataversesValue");
+
+        // writeRecentDatasetsInDataverses("(Journal)", 3, "journals");
+        // writeRecentDatasetsInDataverses("(\"Research+Project\"%20OR%20Researcher%20OR%20\"Research+Group\")", 6, "researchers");
+
+        proyectosInvestigacion("(\"Research+Project\")", 6, "proyectos_inv");
+        investigadores("", 0, "investigadores");
+
+        // queryMetricSimple("datasets/pastDays", "/30?dataLocation=all", "activity30DaysAllDatasetsValue");
+        // queryMetricSimple("datasets", "?dataLocation=local", "activityAllTimeDepositedDatasetsValue");
+        // queryMetricSimple("datasets/pastDays", "/30?dataLocation=local", "activity30DaysDepositedDatasetsValue");
+        // queryMetricSimple("datasets", "?dataLocation=remote", "activityAllTimeHarvestedDatasetsValue");
+        // queryMetricSimple("datasets/pastDays", "/30?dataLocation=remote", "activity30DaysHarvestedDatasetsValue");
+
+        // queryMetricSimple("downloads/pastDays", "/30", "activity30DaysAllDownloadsValue");
+        queryMetricSimple("files", "", "activityAllTimeDepositedFilesValue");
+        // queryMetricSimple("files/pastDays", "/30", "activity30DaysDepositedFilesValue");
+
+        // querySubjectDataverseDataset("dataversesBySubject");
+        querySubjectDataset("dataversesBySubject");
+        // queryMetricSearch("datasets", "?dataLocation=all");
+    //]]>
+    </script> 
+
+        </div>
+    <footer>
+        <div id="dvfooter">
+            <div class="container">
+                <div class="row"><div class="col-sm-8 small">
+                        <p>Copyright &#169; 2022
+                        </p></div>
+                    <div class="col-sm-4 text-right">
+                        <div class="poweredbylogo">
+                            <span>Powered by</span>
+                            <a href="http://dataverse.org/" title="The Dataverse Project" target="_blank" rel="noopener"><img src="/resources/images/dataverse_project_logo.svg" width="118" height="40" onerror="this.src='/resources/images/dataverseproject_logo.png'" alt="The Dataverse Project logo" /></a><span class="version">v. 5.10 build 870-a57ce53</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer><div id="ajaxStatusPanel"><div id="ajaxStatusPanel_start" style="display:none"><img src="/resources/images/ajax-loading.gif" alt="Loading..." /></div></div><script id="ajaxStatusPanel_s" type="text/javascript">$(function(){PrimeFaces.cw("AjaxStatus","widget_ajaxStatusPanel",{id:"ajaxStatusPanel",delay:0});});</script><div id="contactDialog" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="contactDialog_title" class="ui-dialog-title">Contact LattesData Support</span><a href="#" class="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" aria-label="Close"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-dialog-content ui-widget-content" id="contactDialog_content"><div id="j_idt218">
+<form id="emailForm" name="emailForm" method="post" action="/" class="form-horizontal" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="emailForm" value="emailForm" />
+<span id="emailForm:j_idt219"></span><script type="text/javascript">$(function(){PrimeFaces.focus(null, 'contactDialog');});</script>
+                
+                <div class="form-group">
+                    <label for="messageTo" class="col-sm-3 control-label">To</label>
+                    <div class="col-sm-9">
+                        <p id="messageTo" class="form-control-static">LattesData Support</p>
+                    </div>
+                </div>
+                
+                    <div class="form-group"><label for="emailForm:userEmail" class="col-sm-3 control-label">From <span class="glyphicon glyphicon-asterisk text-danger" title="Required field"></span></label>
+                        <div class="col-sm-9"><input id="emailForm:userEmail" name="emailForm:userEmail" type="text" value="" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control" size="30" /><script id="emailForm:userEmail_s" type="text/javascript">$(function(){PrimeFaces.cw("InputText","widget_emailForm_userEmail",{id:"emailForm:userEmail"});});</script>
+                        </div>
+                    </div>
+                
+                <div class="form-group"><label for="emailForm:messageSubject" class="col-sm-3 control-label">Subject <span class="glyphicon glyphicon-asterisk text-danger" title="Required field"></span></label>
+                    <div class="col-sm-9"><input id="emailForm:messageSubject" name="emailForm:messageSubject" type="text" value="" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control" /><script id="emailForm:messageSubject_s" type="text/javascript">$(function(){PrimeFaces.cw("InputText","widget_emailForm_messageSubject",{id:"emailForm:messageSubject"});});</script>
+                    </div>
+                </div>   
+                
+                <div class="form-group"><label for="emailForm:userMessage" class="col-sm-3 control-label">Message <span class="glyphicon glyphicon-asterisk text-danger" title="Required field"></span></label>
+                    <div class="col-sm-9"><textarea id="emailForm:userMessage" name="emailForm:userMessage" class="ui-inputfield ui-inputtextarea ui-widget ui-state-default ui-corner-all form-control" cols="20" rows="10" title="Message" maxlength="2147483647"></textarea><script id="emailForm:userMessage_s" type="text/javascript">$(function(){PrimeFaces.cw("InputTextarea","widget_emailForm_userMessage",{id:"emailForm:userMessage",autoResize:false});});</script>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <p><span class="highlightBold">Please fill this out to prove you are not a robot.</span> <span class="glyphicon glyphicon-asterisk text-danger" title="Required field"></span>
+                        </p>
+                        <label for="emailForm:messageSum"> +  = 
+                        </label><input id="emailForm:messageSum" name="emailForm:messageSum" type="text" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all " size="4" title="Human Access Validation Answer" /><script id="emailForm:messageSum_s" type="text/javascript">$(function(){PrimeFaces.cw("InputText","widget_emailForm_messageSum",{id:"emailForm:messageSum"});});</script>
+                    </div>
+                </div>
+                
+                <div class="button-block"><button id="emailForm:j_idt247" name="emailForm:j_idt247" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only btn btn-default" onclick="PrimeFaces.ab({s:&quot;emailForm:j_idt247&quot;,f:&quot;emailForm&quot;,u:&quot;emailForm&quot;,onco:function(xhr,status,args,data){if (args &amp;&amp; !args.validationFailed) PF('contactForm').hide();;},pa:[{name:&quot;DO_VALIDATION&quot;,value:&quot;true&quot;}],fi:&quot;j_idt218&quot;});return false;" type="submit"><span class="ui-button-text ui-c">Send Message</span></button><script id="emailForm:j_idt247_s" type="text/javascript">$(function(){PrimeFaces.cw("CommandButton","widget_emailForm_j_idt247",{id:"emailForm:j_idt247"});});</script>
+                    <button class="btn btn-link" onclick="PF('contactForm').hide()" type="button">
+                        Cancel
+                    </button>
+                </div><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:3" value="-8244940968180027773:4038119653972930701" autocomplete="off" />
+</form></div></div></div><script id="contactDialog_s" type="text/javascript">$(function(){PrimeFaces.cw("Dialog","contactForm",{id:"contactDialog",modal:true});});</script>
+        <script src="/javax.faces.resource/js/dv_rebind_bootstrap_ui.js.xhtml?version=5.10"></script>
+        <script defer="defer" src="/javax.faces.resource/bs/js/bootstrap.min.js.xhtml?version=5.10"></script>
+        <script defer="defer" src="/javax.faces.resource/js/ie-compat.js.xhtml?version=5.10"></script>
+        <script defer="defer" src="/javax.faces.resource/js/owl.carousel.js.xhtml?version=5.10"></script>
+        <script defer="defer" src="/javax.faces.resource/js/jquery.matchHeight.js.xhtml?version=5.10"></script>
+        <script defer="defer" src="/javax.faces.resource/js/jquery.sharrre.js.xhtml?version=5.10"></script>
+        <script defer="defer" src="/javax.faces.resource/js/clipboard.min.js.xhtml?version=5.10"></script> 
+        
+        <script>
+            //<![CDATA[
+            $(document).ready(function () {
+                // Navbar Search Toggle
+                $(document).on('click', '#navbar-search-toggle', function (e) {
+                    $(this).parent("li").hide();
+                    $("form.navbar-form[role='search']").show();
+                });
+                $('body').click(function (e) {
+                    if (!$(e.target).closest("form.navbar-form[role='search']").length) {
+                        $("form.navbar-form[role='search']").hide();
+                        $("#navbar-search-toggle").parent("li").show();
+                    }
+                    ;
+                });
+                
+                // Rebind bootstrap UI components
+                bind_bsui_components();
+            });
+            function clickSupportLink() {
+                $("[id$='headerSupportLink']").click();
+            }
+            //]]>
+        </script></body>
+</html>
+</head>
+
+http://172.16.16.68/
+
+<div id="ID_pesquisador">---</div>
+
+<script>
+    alert("OK");
+</script>

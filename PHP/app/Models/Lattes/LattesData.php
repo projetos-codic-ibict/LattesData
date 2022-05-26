@@ -55,7 +55,7 @@ class LattesData extends Model
 			'headers' => [
 				'auth-token' => $token
 			], 
-			'verify' => $ssl,
+			'verify' => false,
 			'timeout' => 10,
 			'http_errors' => false
 		]);
@@ -278,61 +278,125 @@ class LattesData extends Model
 	function getDataset($dt,$user)
 		{
 			$DV = array();
+			/* Protocolo */
+			$DV['protocol'] = 'doi';
+			$DV['authority'] = getenv('DOI');
+			$DV['publisher'] = 'CNPq LattesData';
+
+			$DV['publicationDate'] = date("Y-m-d");			
+			$DV['metadataLanguage'] = "undefined";
 
 			$projeto = (array)$dt['projeto'];
 
 			/* Licence */
-			$DV['datasetVersion']['license']['name'] = 'CC BY';
-			$DV['datasetVersion']['license']['uri'] = 'http://creativecommons.org/licenses/by/4.0/';
+			//$DV['datasetVersion']['license']['name'] = 'CC BY';
+			$DV['datasetVersion']['license']['name'] = 'CC BY 4.0';			
+			$DV['datasetVersion']['license']['uri'] = 'http://creativecommons.org/licenses/by/4.0';
 
-			$DV['protocol'] = 'doi';
+			
 			//$DV['authority'] = getenv('DOI');
 			//$DV['identifier'] = troca($dt['numeroProcesso'],'/','');
-			//$DV['identifier'] = substr($DV['identifier'],0,strpos($DV['identifier'],'-'));		
+			//$DV['identifier'] = substr($DV['identifier'],0,strpos($DV['identifier'],'-'));	
+
+			$DV['datasetVersion']['fileAccessRequest'] = false;	
 
 			/* Citation */
 			$fld = array();
 
 			/*************** Title */
 			$title = $projeto['titulo'];
-			$fields = array('typeName'=>'title','multiple'=>'false','value'=>$title,'typeClass'=>'primitive');
+			$fields = array('typeName'=>'title','multiple'=>false,'value'=>$title,'typeClass'=>'primitive');
 			array_push($fld,$fields);
 
-			/*************** productionDate */
-			$productionDate = sonumero($dt['dataInicioVigencia']);
-			$productionDate = substr($productionDate,6,4).'-'.substr($productionDate,3,2).'-'.substr($productionDate,0,2);
-			$fields = array('typeName'=>'productionDate','multiple'=>'false','value'=>$productionDate,'typeClass'=>'primitive');
+			/********************* Authors */
+			pre($dt);
+			$name = $dt['nomePessoa'];
+			$email = $dt['emailContato'];
+			$author = array();
+			$aff = 'Desconhecida';	
+			$auth = array();
+			$auth['authorName']['typeName'] = 'authorName';
+			$auth['authorName']['multiple'] = false;
+			$auth['authorName']['typeClass'] = 'primitive';
+			$auth['authorName']['value'] = $name;
+			$auth['authorAffiliation']['typeName'] = 'authorAffiliation';
+			$auth['authorAffiliation']['multiple'] = false;
+			$auth['authorAffiliation']['typeClass'] = 'primitive';
+			$auth['authorAffiliation']['value'] = $aff;			
+			$auth3 = array($auth);
+			$fields = array('typeName'=>'author','multiple'=>true,'typeClass'=>'compound','value'=>$auth3);
 			array_push($fld,$fields);
+
+			/********************** Contact */
+			$auth = array();
+			$auth['datasetContactName']['typeName'] = 'datasetContactName';
+			$auth['datasetContactName']['multiple'] = false;
+			$auth['datasetContactName']['typeClass'] = 'primitive';
+			$auth['datasetContactName']['value'] = $name;
+
+			$auth['datasetContactAffiliation']['typeName'] = 'datasetContactAffiliation';
+			$auth['datasetContactAffiliation']['multiple'] = false;
+			$auth['datasetContactAffiliation']['typeClass'] = 'primitive';
+			$auth['datasetContactAffiliation']['value'] = $aff;			
+
+			$auth['datasetContactEmail']['typeName'] = 'datasetContactEmail';
+			$auth['datasetContactEmail']['multiple'] = false;
+			$auth['datasetContactEmail']['typeClass'] = 'primitive';
+			$auth['datasetContactEmail']['value'] = $email;	
+
+			$auth3 = array($auth);	
+			$fields = array('typeName'=>'datasetContact','multiple'=>true,'typeClass'=>'compound','value'=>$auth3);
+			array_push($fld,$fields);	
 
 			/*************** dsDescription */
-			$value = $projeto['resumo'];
-			$fields = array('typeName'=>'dsDescription','multiple'=>'true','value'=>$value,'typeClass'=>'compound');
+			$resumo = $projeto['resumo'];
+			$abstact = array();
+			$abstact['dsDescriptionValue']['typeName'] = 'dsDescriptionValue';
+			$abstact['dsDescriptionValue']['multiple'] = false;
+			$abstact['dsDescriptionValue']['typeClass'] = 'primitive';
+			$abstact['dsDescriptionValue']['value'] = $resumo;
+
+			$auth3 = array($abstact);
+			$fields = array('typeName'=>'dsDescription','multiple'=>true,'typeClass'=>'compound','value'=>$auth3);
+			array_push($fld,$fields);			
+			/*
+			$abs3['dsDescriptionValue'] = array($abstact);	
+			$fields = array('typeName'=>'dsDescription','multiple'=>true,'typeClass'=>'compound','value'=>$abs3);
+			array_push($fld,$fields);					
+			*/
+
+			
+			/*************** productionDate */
+			/*
+			$productionDate = sonumero($dt['dataInicioVigencia']);
+			$productionDate = substr($productionDate,6,4).'-'.substr($productionDate,3,2).'-'.substr($productionDate,0,2);
+			$fields = array('typeName'=>'productionDate','multiple'=>false,'value'=>$productionDate,'typeClass'=>'primitive');
 			array_push($fld,$fields);
+			*/
+
 
 			/********************* subject */
 			$key = $dt['palavrasChave'];
 			$key = troca($key,';',',');
 			$key = troca($key,'.',',');
-			$value = 'Medicine, Health and Life Sciences';
-			$fields = array('typeName'=>'subject','multiple'=>'false','value'=>$value,'typeClass'=>'controlledVocabulary');
+			$value = array('Medicine, Health and Life Sciences');
+			$fields = array('typeName'=>'subject','multiple'=>true,'typeClass'=>'controlledVocabulary','value'=>$value);
 			array_push($fld,$fields);
 
-			/********************* subject */
-			$name = $dt['nomePessoa'];
-			$email = $dt['emailContato'];
-			$author = array();
-			$aff = 'Desconhecida';			
-			
-			array_push($author,array('typeName'=>'authorAffiliation','multiple'=>'false','value'=>$aff,'typeClass'=>'primitive'));
-			array_push($author,array('typeName'=>'authorName','multiple'=>'false','value'=>$name,'typeClass'=>'primitive'));			
-
-			$contact = array('typeName'=>'datasetContactEmail','multiple'=>'false','value'=>$email,'typeClass'=>'primitive');
-			array_push($author,array('typeName'=>'datasetContact','multiple'=>'true','value'=>$contact,'typeClass'=>'compound'));
-		
-			$fields = array('typeName'=>'author','multiple'=>'true','value'=>$author,'typeClass'=>'primitive');			
+			/* Depositor */
+			$fields = array('typeName'=>'depositor','multiple'=>false,'typeClass'=>'primitive','value'=>$name);
 			array_push($fld,$fields);
 
-			$DV['metadataBlocks']['citation']['fields'] = $fld;
+			/* Depositor */
+			$date = date("Y-m-d");
+			$fields = array('typeName'=>'dateOfDeposit','multiple'=>false,'typeClass'=>'primitive','value'=>$date);
+			array_push($fld,$fields);
+
+			$DV['datasetVersion']['metadataBlocks']['citation']['displayName'] ="Citation Metadata";
+			$DV['datasetVersion']['metadataBlocks']['citation']['name'] ="citation";
+			$DV['datasetVersion']['metadataBlocks']['citation']['fields'] = $fld;
+
+
 			return $DV;
 
 		}	
@@ -356,15 +420,16 @@ class LattesData extends Model
 				$parent = $chamada['alias'];				
 
 				/***************************** PROJETO DATAVERSE */
-				$projeto = $this->getProjeto($dt,$user);			
+				$projeto = $this->getProjeto($dt,$user);
 				$Dataverse->CreateDataverse($projeto,$parent);
 
-				/******************************* PROJETO DATASET */
+				/******************************* PROJETO DATASET */				
 				$dataset = $this->getDataset($dt,$user);
+				$parent = $projeto['alias'];
 				
 				$dd['api'] = 'api/dataverses/'.$parent.'/datasets';
+				$dd['user'] = $user;
 				$sx .= $Dataset->CreateDatasets($dd,$dataset,$parent);
-				echo $sx;
 				
 				/* ENVIA e-MAIL */
 				$msg = 'Dataset processado ' . $id;
@@ -400,7 +465,7 @@ class LattesData extends Model
 
 		switch ($MOD) {
 			case 'PQ':
-				$this->recoverPQ($dt,$id);
+				$sx .= $this->recoverPQ($dt,$id);
 				break;
 			case 'AI':
 				echo "INCT";

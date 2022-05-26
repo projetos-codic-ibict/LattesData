@@ -42,7 +42,7 @@ class Datasets extends Model
 
 	function CreateDatasets($dd='',$dataset='',$parent)	
 		{
-			$sx ='???';
+			$sx = h(lang('dataverse.carlos_chagas_cnpq'));
 			$DataverseAPI = new \App\Models\Dataverse\API();
 
 			$url = $this->url.'api/dataverses/'.$parent.'/datasets';
@@ -58,42 +58,30 @@ class Datasets extends Model
 			$dv['api'] = 'api/dataverses/'.$parent.'/datasets';
 
 			$rst = $DataverseAPI->curlExec($dd);
+			$rsp = json_decode($rst,true);
 
-			print_r($rst);
-			exit;
-			$rsp = json_decode($rst['json'],true);
-
-			echo '<pre>';
-			print_r($rsp);
-			echo '</pre>';
+			if (isset($rsp['status']))
+				{
+					//$email = $dd['user']['email'];
+					//$nome = $dd['user']['firstName'].' '.$dataset['user']['lastName'];
+					$DOI = $rsp['data']['persistentId'];
+					//$sx .= 'Prezado(a) '.$nome;
+					//$sx .= '<p>Foram enviadas instruções para o e-mail '.$$email.'</p>';					
+					$url = getenv("DATAVERSE_URL").'/dataset.xhtml?persistentId=doi:'.$DOI.'&version=DRAFT';
+					$sx .= 'Link para acesso <a href="'.$url.'">'.$url.'</a>';
+					return $sx;
+				} 
+			else
+				{
+					$sx = 'ERRO: FALHA NA CONEXÃO COM O DATAVERSE';
+					return $sx;
+				}
+			if (!isset($rsp['status'])) { return ""; }
+			$sx = bsmessage(h($rsp['status']).$rsp['message'],1);
+			return $sx;
 			exit;
 			
-			$sta = $rsp['status'];
-			switch($sta)
-				{
-					case 'OK':
-						$sx = '';
-						$DATAVERSE_URL = $_SERVER['DATAVERSE_URL'];
-
-						$titulo = $dd['datasetVersion']['metadataBlocks']['citation']['fields'][0]['value'];
-						$DOI = $rsp['data']['persistentId'];
-						$link = $DATAVERSE_URL.'dataset.xhtml?persistentId='.$DOI.'&version=DRAFT';
-						$link = '<a href="'.($link).'" target="_blank">'.$DOI.'</a>';
-						
-						$sx .= '<h4>'.$titulo.'</h4>';
-						$sx .= '<p>Persistent ID: '.$link.'</p>';
-					break;
-
-					case 'ERROR':
-						$sx = '<pre style="color: red;">'; 
-						$sx .= $rsp['message'];	
-						echo '<pre>';
-						print_r($dd);
-						//$sx .= '<br>Dataverse Name: <b>'.$dd['alias'].'</b>';
-						//$sx .= '<br><a href="'.$this->url.'dataverse/'.$dd['alias'].'" target="_blank">'.$url.'/'.$dd['alias'].'</a>';
-						$sx .= '</pre>';
-						break;
-				}
+			$sta = $rsp['status'];			
 			return $sx;
 			}
 }

@@ -63,7 +63,7 @@ class Customize extends Model
 						$subdir = array('en_US','pt_BR','es','fr','de','it','pt','ru','zh');
 						$lang_n = array('English','Português','Espanhol','Frances','Alemão','Italiano','Português','Russo','Chinês');
 						$langs = array('en','br');
-						$default = 'br';
+						$default = 'en';
 						$sx = '';
 						$sx .= 'mkdir /var/www/dataverse/'.cr();
 						$sx .= 'mkdir /var/www/dataverse/langBundles/'.cr();
@@ -118,7 +118,7 @@ class Customize extends Model
 								for ($f=0;$f < count($files);$f++)
 									{	
 										$xlang = $langs[$r];							
-										if (($xlang == $default))
+										if (($xlang == 'en'))
 										{
 											$xlang = '';
 										} else {
@@ -155,6 +155,7 @@ class Customize extends Model
 						$sx .= cr();
 						$sx .= 'echo "FIM DA ATUALIZAÇÂO"'.cr();
 						$sx .= cr();
+						$sx = '<pre>'.$sx.'</pre>';
 						break;
 					case 'sitemap':
 						$sx .= 'curl -X POST http://localhost:8080/api/admin/sitemap';
@@ -452,6 +453,8 @@ class Customize extends Model
 			{
 				$sx = '';
 				$sx .= h('dataverse.StyleCSS');
+				$sx .= '<pre>curl -X PUT -d \'/var/www/dataverse/branding/custom-stylesheet.css\' http://localhost:8080/api/admin/settings/:StyleCustomizationFile</pre>';
+				$sx .= '<hr>';
 				$sx .= form_open_multipart();
 				$sx .= form_upload('userfile');
 				$sx .= form_submit(array('name'=>'submit','value'=>lang('dataverse.upload')));
