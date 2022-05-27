@@ -47,7 +47,7 @@ class LattesData extends Model
 			//$token = '1bff0ead-c76f-371e-8f47-e56d6b0a024c';
 			//$url = "https://api.cnpq.br/lattes-data/v1/processos/".$id;
 			$token = getenv('token_lattes');
-			$url = "https://cnpqapi-fomento.cnpq.br/v1/lattesdata/processos/" . $id;
+			$url = getenv('url_lattes');
 			$filename = 'lattesData' . $id . '.zip';
 			$dir = '.tmp';			
 			dircheck($dir);
