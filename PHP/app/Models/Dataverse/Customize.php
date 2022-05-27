@@ -63,7 +63,7 @@ class Customize extends Model
 						$subdir = array('en_US','pt_BR','es','fr','de','it','pt','ru','zh');
 						$lang_n = array('English','Português','Espanhol','Frances','Alemão','Italiano','Português','Russo','Chinês');
 						$langs = array('en','br');
-						$default = 'br';
+						$default = 'en';
 						$sx = '';
 						$sx .= 'mkdir /var/www/dataverse/'.cr();
 						$sx .= 'mkdir /var/www/dataverse/langBundles/'.cr();
@@ -118,7 +118,7 @@ class Customize extends Model
 								for ($f=0;$f < count($files);$f++)
 									{	
 										$xlang = $langs[$r];							
-										if (($xlang == $default))
+										if (($xlang == 'en'))
 										{
 											$xlang = '';
 										} else {
