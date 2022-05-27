@@ -1,6 +1,6 @@
 
 /************************************************************* Total - Script */
-url_metrics = 'https://dadosdepesquisa-beta.fiocruz.br/api/info/metrics/';
+url_metrics = '/api/info/metrics/';
 function getvals(url, div, expr, param) {
     fetch(url)
         .then((response) => { return response.json(); })
