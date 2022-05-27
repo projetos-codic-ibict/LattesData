@@ -6,6 +6,8 @@ namespace App\Models;
 use CodeIgniter\Model;
 use \app\Model\MainModel;
 
+use function App\Models\AI\Authority\check;
+
 class Socials extends Model
 {
 	protected $DBGroup              = 'default';
@@ -108,12 +110,38 @@ class Socials extends Model
 		}
 
 		switch ($cmd) {
+			case 'session':
+				if ($_SERVER['CI_ENVIRONMENT'] == 'development') {
+				$id = 1;
+				echo '<pre>';
+				print_r($_SESSION);
+				echo '</pre>';
+				$newdata = [
+					'id'  => $id,
+					'email'     => 'Usuário Test (ADMIN)',
+					'access' => $this->putPerfil(array(0 => '#ADM'), $id),
+					'time' => time()
+				];
+				$session = session();
+				$session->set($newdata);
+
+				echo '<pre>';
+				print_r($_SESSION);
+				echo '</pre>';
+
+				}
+				break;
 			case 'test':
 				if ($_SERVER['CI_ENVIRONMENT'] == 'development') {
 					$id = 1;
-					$_SESSION['id'] = $id;
-					$_SESSION['email'] = 'Usuário Test (ADMIN)';
-					$_SESSION['access'] = $this->putPerfil(array(0 => '#ADM'), $id);
+
+					$newdata = [
+						'id'  => $id,
+						'email'     => 'Usuário Test (ADMIN)',
+						'access' => $this->putPerfil(array(0 => '#ADM'), $id)
+					];
+					$session = session();
+					$session->set($newdata);
 					$this->log_insert($id);
 					echo metarefresh(PATH);
 					exit;
@@ -800,6 +828,7 @@ class Socials extends Model
 				$_SESSION['email'] = $dt[0]['us_email'];
 				$_SESSION['access'] = substr(md5('#ADMIN'), 6, 6);
 				$_SESSION['check'] = substr($_SESSION['id'] . $_SESSION['id'], 0, 10);
+
 				$sx .= '<h2>' . lang('social.success') . '<h2>';
 				$sx .= '<meta http-equiv="refresh" content="2;URL=\'' . PATH . MODULE . '\'">';
 				$this->log_insert($dt[0]['id_us']);
@@ -814,7 +843,7 @@ class Socials extends Model
 		return $sx;
 	}
 
-	function signup()
+	function signup_xx()
 	{
 		$sx = '';
 		$user = get("signup_email");
@@ -834,10 +863,41 @@ class Socials extends Model
 		return $sx;
 	}
 
-	function user_add($user, $pw1)
+	function signup()
 	{
+		$sx = '';
+		$user = get("signup_email");
+		$name = get("signup_name");
+		$inst = get("signup_institution");	
+
+		if (!check_email($user)) {
+			$sx .= '<h2>' . lang('social.email_invalid') . '<h2>';
+			$sx .= '<span class="singin" onclick="showLogin()">' . lang('social.return') . '</span>';
+			return $sx;
+		}
+
+		$dt = $this->user_exists($user);
+
+		if (!isset($dt[0])) {
+			$this->user_add($user, $name, $inst);
+			$sx .= '<h2>' . lang('social.social_user_add_success') . '<h2>';
+			$sx .= '<hr>';
+			$sx .= '<h2>' . lang('social.social_check_you_email') . '<h2>';
+			$sx .= '<span class="singin" onclick="showLogin()">' . lang('social.return') . '</span>';
+		} else {
+			$sx .= '<h2>' . lang('social.user_already') . '<h2>';
+			$sx .= '<span class="singin" onclick="showLogin()">' . lang('social.return') . '</span>';
+		}
+		return $sx;
+	}
+
+	function user_add($user, $name, $inst)
+	{
+		$pw1 = substr(md5($user), 0, 6);
 		$data = [
 			'us_email' => $user,
+			'us_nome' => $name,
+			'us_affiliation' => $inst,
 			'us_password'  => md5($pw1),
 			'us_password_method' => 'MD5'
 		];
@@ -859,8 +919,9 @@ class Socials extends Model
 		$session = \Config\Services::session();
 		$url = \Config\Services::url();
 		$session->destroy();
-
-		return (redirect()->to('/'));
+		helper('url');
+		//redirect(PATH.MODULE, 'refresh');
+		return redirect()->to('/');
 	}
 
 	function nav_user()
@@ -1197,19 +1258,19 @@ class Socials extends Model
 			  <div class="content">
 				<h2>' . lang('social.social_sign_up') . '</h2>				
 				  <div class="field-wrapper">
-					<input type="text" id="signup_email" placeholder="email">
-					<label>e-mail</label>
+					<input type="text" id="signup_name" placeholder="name">
+					<label>' . lang('social.user_name') . '</label>
 				  </div>
 				  <div class="field-wrapper">
-					<input type="password" id="signup_password" placeholder="password" autocomplete="new-password">
-					<label>' . lang('social.social_type_password') . '</label>
+					<input type="text" id="signup_email" placeholder="name">
+					<label>' . lang('social.signup_email') . '</label>
+				  </div>
+				 <div class="field-wrapper">
+					<input type="text" id="signup_institution" placeholder="name">
+					<label>' . lang('social.signup_institution') . '</label>
 				  </div>
 				  <div class="field-wrapper">
-					<input type="password" id="signup_retype_password" placeholder="password" autocomplete="new-password">
-					<label>' . lang('social.social_retype_password') . '</label>
-				  </div>
-				  <div class="field-wrapper">
-					<button class="btn btn-primary" style="width: 100%;" onclick="action_ajax(\'signup\');">' . lang('social.enter') . '</button>
+					<button class="btn btn-primary" style="width: 100%;" onclick="action_ajax(\'signup\');">' . lang('social.signup') . '</button>
 				  </div>
 				  <span class="singin" onclick="showLogin()">' . lang('social.social_alread_user') . '  ' . lang('social.social_sign_in') . '</span>
 			  </div>
@@ -1249,8 +1310,6 @@ class Socials extends Model
 			</div>
 		  </div>
 		</div>
-		<script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-8216c69d01441f36c0ea791ae2d4469f0f8ff5326f00ae2d00e4bb7d20e24edb.js"></script>
-		
 		  
 		<script id="rendered-js" >
 		let prism = document.querySelector(".rec-prism");
@@ -1275,8 +1334,8 @@ class Socials extends Model
 			if (cmd == "signup")
 				{
 					data.append("signup_email", document.getElementById("signup_email").value);
-					data.append("signup_password", document.getElementById("signup_password").value);
-					data.append("signup_retype_password", document.getElementById("signup_retype_password").value);
+					data.append("signup_name", document.getElementById("signup_name").value);
+					data.append("signup_institution", document.getElementById("signup_institution").value);
 				}
 
             var url = "' . PATH . MODULE . 'social/ajax/"+cmd;
