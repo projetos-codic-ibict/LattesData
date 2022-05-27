@@ -43,6 +43,7 @@ class LattesData extends Model
 
 	function API_getFileCnpq($id)
 	{
+		echo 'ID:'.$id;
 		if (strlen($id) == 11) {
 			//$token = '1bff0ead-c76f-371e-8f47-e56d6b0a024c';
 			//$url = "https://api.cnpq.br/lattes-data/v1/processos/".$id;
