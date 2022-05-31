@@ -386,7 +386,10 @@ class Index extends Model
 				{
 					case 'sendnotification':
 						$sx .= '<p>Habilita notificações por e-mail</p>';
-						$sx .= '<code>e>curl -X PUT -d true http://localhost:8080/api/admin/settings/:SendNotificationOnDatasetCreation</code>';
+						$sx .= '<h4>Habilita notificações</h4>';
+						$sx .= '<code>curl -X PUT -d true http://localhost:8080/api/admin/settings/:SendNotificationOnDatasetCreation</code>';
+						$sx .= '<h4>Desabilita notificações</h4>';
+						$sx .= '<code>curl -X PUT -d false http://localhost:8080/api/admin/settings/:SendNotificationOnDatasetCreation</code>';
 						break;
 					case 'system_email':
 						$sx .= '<p>Para nomear o Replay do e-mail.</p>';
