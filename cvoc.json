@@ -1,0 +1,44 @@
+[
+    {
+      "field-name": "internationalAreas",
+      "term-uri-field": "internationalAreasTermURI",
+      "js-url": "http://172.16.16.64:8081/skos.js.1",
+      "protocol": "skosmos",
+      "cvoc-url": "http://200.130.0.214/",
+      "retrieval-uri": "http://200.130.0.214/thesa/index.php/thesa/rest/v1/search/areas_cnpq?query={0}",
+      "allow-free-text": true,
+      "languages": "",
+      "vocabs": {
+	    "areas_internacionais": {
+                "vocabularyUri": "http://200.130.0.214/thesa/index.php/thesa/th/3"
+            }
+        },
+      "managed-fields": {
+            "vocabularyName": "internationalAreasVocabulary",
+            "termName": "internationalAreasTerm",
+            "vocabularyUri": "internationalAreasVocabularyURI"
+      },
+      "retrieval-filtering": {}
+    },
+{
+      "field-name": "cnpqAreasClass",
+      "term-uri-field": "cnpqAreasTermURI",
+      "js-url": "http://172.16.16.64:8081/skos.js.1",
+      "protocol": "skosmos",
+      "cvoc-url": "http://200.130.0.214/",
+      "retrieval-uri": "http://200.130.0.214/thesa/index.php/thesa/rest/v1/search/areas_cnpq?query={0}",
+      "allow-free-text": true,
+      "languages": "",
+      "vocabs": {
+            "areas_cnpq": {
+                "vocabularyUri": "http://200.130.0.214/thesa/index.php/thesa/th/1"
+            }
+        },
+      "managed-fields": {
+            "vocabularyName": "cnpqAreasVocabulary",
+            "termName": "cnpqAreasTerm",
+            "vocabularyUri": "cnpqAreasVocabularyURI"
+      },
+      "retrieval-filtering": {}
+}
+  ]
