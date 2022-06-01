@@ -58,6 +58,10 @@ class Customize extends Model
 						$sx .= '<code>curl -X PUT -d ", CNPq/Ibict" http://localhost:8080/api/admin/settings/:FooterCopyright</code>';
 						break;
 
+					case 'homePageJS':
+						$sx .= $this->js();
+						break;						
+
 					case 'Languages':
 						$tlang = '';
 						$subdir = array('en_US','pt_BR','es','fr','de','it','pt','ru','zh');
@@ -203,6 +207,7 @@ class Customize extends Model
 					default:				
 					$menu[PATH.MODULE.'dataverse/customize/logo'] = lang('dataverse.customize_logo');
 					$menu[PATH.MODULE.'dataverse/customize/homePage'] = lang('dataverse.customize_homepage');
+					$menu[PATH.MODULE.'dataverse/customize/homePageJS'] = '<ul><li>'.lang('dataverse.customize_homepageJS').'</li></ul>';
 					$menu[PATH.MODULE.'dataverse/customize/NavbarAboutUrl'] = lang('dataverse.NavbarAboutUrl');
 					$menu[PATH.MODULE.'dataverse/customize/HeaderCustomizationFile'] = lang('dataverse.HeaderCustomizationFile');
 					$menu[PATH.MODULE.'dataverse/customize/FooterCustomizationFile'] = lang('dataverse.FooterCustomizationFile');
@@ -211,6 +216,7 @@ class Customize extends Model
 					$menu[PATH.MODULE.'dataverse/customize/sitemap'] = lang('dataverse.customize_sitemap');
 					$menu[PATH.MODULE.'dataverse/customize/css'] = lang('dataverse.customize_css');
 					$menu[PATH.MODULE.'dataverse/customize/copyright'] = lang('dataverse.customize_FooterCopyright');
+					
 					//:NavbarAboutUrl
 					//:NavbarGuidesUrl
 					//:GuidesBaseUrl
@@ -261,6 +267,73 @@ class Customize extends Model
 			//$sx = troca($sx,chr(10),'<br>');
 			return $sx;
 		}	
+
+		function js()
+			{
+				$Dataverse = new \App\Models\Dataverse\Index();
+				$url = $Dataverse->server();				
+
+				$cmd = get("action");
+				$sx = h('dataverse.customize_homepageJS');
+				switch($cmd)
+					{
+						case 'dataverses':
+							$url .= '/api/info/metrics/dataverses';
+							echo $url;
+							exit;
+							$txt = file_get_contents($url);
+
+							$sx .= 'Dataverses: <div id="total_dataverses">0</div>'.cr();
+							$sx .= h($url,4);
+							$sx .= '<script>'.cr();
+							$sx .= 'console.log("Iniciando");'.cr();
+							$sx .= 'function getAPI(url) {
+									fetch(url)
+									.then(function(response) {
+										return response.text();
+									})
+									.then(function(body) {
+										const obj = JSON.parse(body);
+										alert(body);
+										return body;										
+									});
+									}'.cr();
+
+							$sx .= 'function getAPI2(url,div) {
+									fetch(url)
+									.then(function(response) {
+										return response.text();
+									})
+									.then(function(body) {
+										const obj = JSON.parse(body);
+										alert(body);
+										return body;										
+									});
+									}'.cr();
+
+							//$sx .= 'document.getElementById("total_dataverses").innerHTML = obj.data[1].count;'.cr();
+							$sx .= 'obj = getAPI2(\''.$url.'\');'.cr();
+							$sx .= 'console.log(obj)'.cr();
+							$sx .= 'document.getElementById("total_dataverses").innerHTML = obj.data.count;'.cr();
+							$sx .= '</script>'.cr();
+							return $sx;
+							
+
+						break;
+
+						default:
+							$opt = array('dataverses','tree');
+							for ($r=0;$r < count($opt);$r++)
+								{
+									$menu[PATH.MODULE.'dataverse/customize/homePageJS?action='.$opt[$r]] = lang('dataverse.customize_homepageJS_'.$opt[$r]);
+								}
+							
+							$sx .= menu($menu);
+						break;							
+					}
+
+				return $sx;
+			}
 
 		function logo()
 			{

@@ -1,0 +1,25 @@
+<h1>Wellcome JS Dataverse</h1>
+<div id="div1">0</div>
+<div id="div2">0</div>
+<div id="div3">0</div>
+<div id="div4">0</div>
+<script>
+    /************************************************************* Total - Script */
+    url_metrics = 'https://dadosdepesquisa-beta.fiocruz.br/api/info/metrics/';      
+    function getvals(url,div,expr,param) {
+        fetch(url)
+            .then((response) => { return response.json(); })
+            .then((myJson) => {
+                switch (expr) 
+                    {
+                         case 'Total':
+                            document.getElementById(div).innerHTML = myJson.data.count;
+                            break; 
+                    }
+            });
+    }
+    getvals(url_metrics+'dataverses','div1','Total');
+    getvals(url_metrics+'datasets','div2','Total');
+    getvals(url_metrics+'files','div3','Total');
+    getvals(url_metrics+'downloads','div4','Total');
+</script>

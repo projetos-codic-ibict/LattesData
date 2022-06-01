@@ -30,6 +30,7 @@ token_lattes = 'API KEY LATTES';
 # app.forceGlobalSecureRequests = false
 app.baseURL = 'http://lattesdata/'
 url_lattes = 'https://brapci.inf.br/ws/api/?verb=lattesdata&q='
+# "https://cnpqapi-fomento.cnpq.br/v1/lattesdata/processos/" . $id;
 
 # app.sessionDriver = 'CodeIgniter\Session\Handlers\FileHandler'
 # app.sessionCookieName = 'ci_session'
