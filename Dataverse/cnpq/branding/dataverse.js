@@ -12,7 +12,7 @@ function getvals(url, div, expr, param) {
             }
         });
 }
-getvals(url_metrics + 'dataverses', 'div1', 'Total');
-getvals(url_metrics + 'datasets', 'div2', 'Total');
-getvals(url_metrics + 'files', 'div3', 'Total');
-getvals(url_metrics + 'downloads', 'div4', 'Total');
+getvals(url_metrics + 'dataverses', 'ID_dataverse', 'Total');
+getvals(url_metrics + 'datasets', 'ID_grupos', 'Total');
+//getvals(url_metrics + 'files', 'div3', 'Total');
+//getvals(url_metrics + 'downloads', 'div4', 'Total');
