@@ -23,6 +23,10 @@
 	body {
 		font-family: "Roboto", "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";	
 		font-weight: 500;
-	}    	
+	}   
+	a {
+		text-decoration: none;
+		color: gray;
+	} 	
 </style>
 <body>

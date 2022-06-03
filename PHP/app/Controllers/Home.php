@@ -22,17 +22,16 @@ class Home extends BaseController
             $sx .= bs(bsc('<div class="mb-5"></div>',12));
             $sx .= bs(bsc('<div class="mb-5"></div>',12));
             $sx .= bs(
-                    bsc('',3).
-                    bsc('<img src="'.URL.'/img/logo_lattesdata.png" width="100%" class="img-fluid">',6)).
-                    bsc('',3)
+                    bsc(h(lang('dataverse.Custom_mode')),12,'text-center'))
                     ;
             $sx .= bs(bsc('<div class="mb-5"></div>',12));
             $sx .= bs(bsc('<h2 class="text-center text-danger">Under Construction</h2>',12));
             $sx .= '<div style="position: absolute; bottom: 0; left: 5;">';
-            $sx .= '<a href="'.PATH.MODULE.'dataverse" style="text-decoration: none;"><span style="color: white;" class="ms-2">tt</span></a>';
+            $sx .= '<a href="'.PATH.MODULE.'dataverse" style="text-decoration: none;"><span style="color: grey;" class="ms-2">config</span></a>';
             $sx .= ' &nbsp; ';
-            $sx .= '<a href="'.PATH.'cnpq/inport/" style="text-decoration: none;"><span style="color: grey;" class="ms-2">cnpq</span></a>';
+            $sx .= '<a href="'.PATH.'cnpq/inport/" style="text-decoration: none;"><span style="color: grey;" class="ms-2">cnpq</span></a>';            
             $sx .= '</div>';
+            $sx .= '<span style="position: fixed; top: 0; right: 5; font-size: 50%;">v0.22.06.08</span>';
             return $sx;
         }
 

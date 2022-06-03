@@ -56,7 +56,7 @@ return[
         'customize_homepage'=>'Personalizar a página inicial do Dataverse',
         'customize_logo'=>'Alterar o logo no top da página do Dataverse',
         'proprieties'=>'Traduções',
-        ''=>'',
+        'Custom_mode'=>'Customizador do Dataverse',
         ''=>'',
         ''=>'',
         ''=>'',
