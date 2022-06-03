@@ -13,7 +13,7 @@
   margin-top: 0.5em;
 }
 #dataverseHeader {
-  background: url("http://172.16.16.68/dvn/img/header-lattes-data.jpg") no-repeat right top !important;
+  background: url("/dvn/img/header-lattes-data.jpg") no-repeat right top !important;
   margin-top: 10rem;
   /*-webkit-box-shadow: 0px 0px 17px -7px #000000; 
 	box-shadow: 0px 0px 17px -7px #000000;*/
@@ -40,13 +40,7 @@ div#content {
 .dataverseHeaderDataverseName H1 {
   display: none;
 }
-#dvfooter {
-  background: #00538f;
-  padding-top: 2rem;
-}
-#dvfooter p {
-  color: #fff;
-}
+
 .poweredbylogo {
   color: #fff;
 }
@@ -56,6 +50,16 @@ div#content {
 #dataverseHeader .dataverseHeaderCell.dataverseHeaderLogo img {
   max-width: none;
   max-height: none;
+}
+/*
+Estilos footer
+*/
+#dvfooter {
+  background: #00538f;
+  padding-top: 2rem;
+}
+#dvfooter p {
+  color: #fff;
 }
 /*
 Estilos da lista de resultado
