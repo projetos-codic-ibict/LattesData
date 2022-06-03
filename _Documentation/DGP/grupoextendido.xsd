@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<xs:schema xmlns="http://www.cnpq.br/lmpl/2002/XSD/GrupoEstendido" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.cnpq.br/lmpl/2002/XSD/GrupoEstendido" elementFormDefault="qualified">
+  <xs:element name="GRUPO-DE-PESQUISA">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="PESQUISADORES" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="PESQUISADOR" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="DOCENTE-PROGRAMAS" minOccurs="0">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="DOCENTE-PROGRAMA" maxOccurs="unbounded" minOccurs="0">
+                            <xs:complexType>
+                              <xs:simpleContent>
+                                <xs:extension base="xs:string">
+                                  <xs:attribute type="xs:string" name="CODIGO-PROGRAMA"/>
+                                  <xs:attribute type="xs:string" name="NOME-PROGRAMA"/>
+                                  <xs:attribute type="xs:string" name="GRANDE-AREA-PROGRAMA"/>
+                                  <xs:attribute type="xs:string" name="AREA-PROGRAMA"/>
+                                  <xs:attribute type="xs:byte" name="CONCEITO-CAPES"/>
+                                </xs:extension>
+                              </xs:simpleContent>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                  <xs:attribute type="xs:string"   name="BOLSA-CATEGORIA" use="optional"/>
+                  <xs:attribute type="xs:string"   name="BOLSA-NIVEL" use="optional"/>
+                  <xs:attribute type="xs:string"   name="SEXO" use="optional"/>
+                  <xs:attribute type="xs:string"   name="TITULACAO-MAXIMA" use="optional"/>
+                  <xs:attribute type="nro-id-cnpq" name="NRO-ID-CNPQ" use="optional"/>
+                  <xs:attribute type="xs:string"   name="STA-ORIENTADOR-IC" use="optional"/>
+                  <xs:attribute type="xs:string"   name="STA-ORIENTADOR-PIBIC" use="optional"/>
+                  <xs:attribute type="xs:string"   name="STA-ORIENTADOR-MESTRADO" use="optional"/>
+                  <xs:attribute type="xs:string"   name="STA-ORIENTADOR-DOUTORADO" use="optional"/>
+                  <xs:attribute type="xs:string"   name="NOME-COMPLETO" use="optional"/>
+                  <xs:attribute type="string11"    name="CPF" use="optional"/>
+                  <xs:attribute type="xs:string"   name="DATA-DE-NASCIMENTO" use="optional"/>
+                  <xs:attribute type="xs:string"   name="PAIS-DE-NASCIMENTO" use="optional"/>
+                  <xs:attribute type="xs:string"   name="NACIONALIDADE" use="optional"/>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="ESTUDANTES" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ESTUDANTE" maxOccurs="unbounded" minOccurs="0">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string"   name="BOLSA-CATEGORIA" use="optional"/>
+                      <xs:attribute type="xs:string"   name="BOLSA-NIVEL" use="optional"/>
+                      <xs:attribute type="xs:string"   name="SEXO" use="optional"/>
+                      <xs:attribute type="xs:string"   name="NIVEL-DE-TREINAMENTO" use="optional"/>
+                      <xs:attribute type="nro-id-cnpq" name="NRO-ID-CNPQ" use="optional"/>
+                      <xs:attribute type="xs:string"   name="NOME-COMPLETO" use="optional"/>
+                      <xs:attribute type="string11"    name="CPF" use="optional"/>
+                      <xs:attribute type="xs:string"   name="DATA-DE-NASCIMENTO" use="optional"/>
+                      <xs:attribute type="xs:string"   name="PAIS-DE-NASCIMENTO" use="optional"/>
+                      <xs:attribute type="xs:string"   name="NACIONALIDADE" use="optional"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="EMPRESAS" minOccurs="0">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="EMPRESA" maxOccurs="unbounded">
+                <xs:complexType>
+                  <xs:simpleContent>
+                    <xs:extension base="xs:string">
+                      <xs:attribute type="xs:string" name="NOME-DA-EMPRESA"/>
+                      <xs:attribute type="xs:string" name="NATUREZA-JURIDICA"/>
+                      <xs:attribute type="xs:string" name="FAIXA-FUNCIONARIOS"/>
+                      <xs:attribute type="string18" name="CNPJ"/>
+                    </xs:extension>
+                  </xs:simpleContent>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+      <xs:attribute type="xs:string" name="ESTRATIFICACAO"/>
+      <xs:attribute type="xs:string" name="ANO-CENSO"/>
+      <xs:attribute type="xs:string" name="NRO-ID-GRUPO"/>
+    </xs:complexType>
+  </xs:element>
+  <!-- TIPOS -->
+  <xs:simpleType name="string11">
+    <xs:annotation>
+      <xs:documentation>Tipo pertencente a biblioteca de tipos (Texto com 11 caracteres)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="11"/>
+    </xs:restriction>
+  </xs:simpleType>
+   <xs:simpleType name="string18">
+    <xs:annotation>
+      <xs:documentation>Tipo pertencente a biblioteca de tipos (Texto com 18 caracteres)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="18"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="TipoANO">
+    <xs:annotation>
+      <xs:documentation>Tipo pertencente a biblioteca de tipos (ano)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:gYear">
+      <xs:minInclusive value="1900"/>
+      <xs:maxInclusive value="3000"/>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="nro-id-cnpq">
+    <xs:annotation>
+      <xs:documentation>Código do NRO-ID-CNPQ (16 caracteres)</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:pattern value="\d{16}"/>
+    </xs:restriction>
+  </xs:simpleType>
+</xs:schema>
+

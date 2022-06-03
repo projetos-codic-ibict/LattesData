@@ -136,7 +136,7 @@ class Licences extends Model
 						
 						$FILE = $F[count($F)-1];
 						$FILE = '@'.$FILE;
-
+						$cmd .= '<br>';
 						$cmd .= 'echo \'************************** Remove json files\'';
 						$cmd .= '<br>';
 						$cmd .= 'rm *.json -f';
