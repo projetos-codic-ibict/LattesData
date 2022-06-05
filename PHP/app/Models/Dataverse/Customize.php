@@ -184,24 +184,27 @@ class Customize extends Model
 						break;
 					case 'googleanalytics':
 						$sx .= h('dataverse.GoogleAnalytics');
+						$sx .= '<p>Crie uma página anlytics-cod.html com o conteúdo:</p>';
+						$sx .= '<pre>nano /var/www/dataverse/branding/analytics-code.html</pre>';
+						$sx .= '<p>Preencha com o código do analytics</p>';
 						$sc = '<!-- Global Site Tag (gtag.js) - Google Analytics -->
-								<script async="async" src="https://www.googletagmanager.com/gtag/js?id=<b>G-GMQKC98HPT</b>"></script>
-								<script>
-									//<![CDATA[
-									window.dataLayer = window.dataLayer || [];
-									function gtag(){dataLayer.push(arguments);}
-									gtag(\'js\', new Date());
+<script async="async" src="https://www.googletagmanager.com/gtag/js?id=G-GMQKC98HPT"></script>
+<script>
+	//<![CDATA[
+	window.dataLayer = window.dataLayer || [];
+	function gtag(){dataLayer.push(arguments);}
+	gtag(\'js\', new Date());
 
-									gtag(\'config\', \'<b>G-GMQKC98HPT</b>\');
-									//]]>
-								</script>';
+	gtag(\'config\', \'G-GMQKC98HPT\');
+	//]]>
+</script>';
 					
 						$sc = troca($sc,'<','&lt;');
 						//$sc = troca($sc,chr(10),'<br>');
 						$sx .= '<pre>'.$sc.'</pre>';
-
-						$sx .= 'curl -X PUT -d \'/var/www/dataverse/branding/analytics-code.html\' http://localhost:8080/api/admin/settings/:WebAnalyticsCode';
-
+						$sx .= '<p>Parametrize o Dataverse para chamar este código</p>';
+						$sx .= '<pre>curl -X PUT -d \'/var/www/dataverse/branding/analytics-code.html\' http://localhost:8080/api/admin/settings/:WebAnalyticsCode</pre>';
+						$sx .= '<p>Para mais informações, acesse:</p>';
 						$sx .= 'https://guides.dataverse.org/en/latest/installation/config.html?highlight=google%20analytics';
 						break;
 						
