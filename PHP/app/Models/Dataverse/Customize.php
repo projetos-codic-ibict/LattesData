@@ -63,26 +63,32 @@ class Customize extends Model
 						break;						
 
 					case 'Languages':
+					// Locale - Problemas de idioma
+					// https://www.linhadecomando.com/so-linux/linux-instalando-o-locale-pt_br-utf-8
+					// Checar o log - BundleUtil
 						$tlang = '';
+						$tlang .= '{"locale":"en","title":"Idoma Padrão"}';
 						$subdir = array('en_US','pt_BR','es','fr','de','it','pt','ru','zh');
 						$lang_n = array('English','Português','Espanhol','Frances','Alemão','Italiano','Português','Russo','Chinês');
-						$langs = array('en','br');
-						$default = 'en';
+						$langs = array('us','br');
+						//$default_language = 'en';
+						$default_language = 'br';
 						$sx = '';
 						$sx .= 'mkdir /var/www/dataverse/'.cr();
 						$sx .= 'mkdir /var/www/dataverse/langBundles/'.cr();
 						$sx .= 'mkdir /var/www/dataverse/langTmp/'.cr();
-						$sx .= 'mkdir /var/www/dataverse/langTmp/pt_BR'.cr();
-						$sx .= 'mkdir /var/www/dataverse/langTmp/source'.cr();
+						$sx .= 'mkdir /var/www/dataverse/langTmp/sources/'.cr();
+						$sx .= 'mkdir /var/www/dataverse/langTmp/sources/pt_BR'.cr();
+						$sx .= 'mkdir /var/www/dataverse/langTmp/sources/All'.cr();
 						$sx .= 'echo "Baixando atualizações"'.cr();
 						$sx .= 'echo "==>Portugues"'.cr();
-						$sx .= 'cd /var/www/dataverse/langTmp/pt_BR/'.cr();
+						$sx .= 'cd /var/www/dataverse/langTmp/sources/pt_BR/'.cr();
 						$sx .= 'rm * -r'.cr();
 						$sx .= 'wget https://github.com/RNP-dadosabertos/dataverse-language-packs/archive/develop.zip'.cr();;
 						$sx .= 'unzip develop.zip'.cr();
 						
 						$sx .= 'echo "==>Outros Idiomas"'.cr();
-						$sx .= 'cd /var/www/dataverse/langTmp/source/'.cr();
+						$sx .= 'cd /var/www/dataverse/langTmp/sources/All/'.cr();
 						$sx .= 'rm * -r'.cr();
 						$sx .= 'wget https://github.com/GlobalDataverseCommunityConsortium/dataverse-language-packs/archive/refs/heads/develop.zip'.cr();
 						$sx .= 'unzip develop.zip'.cr();
@@ -104,28 +110,29 @@ class Customize extends Model
 								'socialscience$lg.properties',
 								'ValidationMessages$lg.properties',
 						);
+						$sd = '';
 						for ($r=0;$r < count($langs);$r++)
 							{
-								echo cr();
-								$sx .= "======================== Copy files =".$langs[$r].cr();
 								$n_subdir = $subdir[$r];
+								$sx .= 'echo "======================== Copy files ='.$langs[$r].'--'.$n_subdir.'"'.cr();
+								$out = '/var/www/dataverse/langTmp/';
 								if ($langs[$r] == 'br')
 									{
-										$dir = '/var/www/dataverse/langTmp/pt_BR/dataverse-language-packs-develop/'.$n_subdir;
-										$out = '/var/www/dataverse/langTmp/';
+										$dir = '/var/www/dataverse/langTmp/sources/pt_BR/dataverse-language-packs-develop/'.$n_subdir;
 									} else {
-										$dir = '/var/www/dataverse/langTmp/source/dataverse-language-packs-develop/'.$n_subdir;
-										$out = '/var/www/dataverse/langTmp/';
+										$dir = '/var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/'.$n_subdir;
 									}
 								if (strlen($tlang) > 0) { $tlang .= ', ';}
 								$tlang .= '{"locale":"'.$langs[$r].'","title":"'.$lang_n[$r].'"}';
 								for ($f=0;$f < count($files);$f++)
 									{	
 										$xlang = $langs[$r];							
-										if (($xlang == 'en'))
+										if (($xlang == $default_language))
 										{
-											$xlang = '';
+											$default = true;
+											$xlang = '_'.$xlang;
 										} else {
+											$default = false;
 											$xlang = '_'.$xlang;
 										}
 
@@ -133,11 +140,25 @@ class Customize extends Model
 										$ori = troca($ori,'$lg',$xlang);
 
 										$des = $out .$files[$f];										
+										$des2 = troca($des,'$lg','_en');
 										$des = troca($des,'$lg',$xlang);
 
+										if ($xlang = 'en_US')
+											{
+												$ori = troca($ori,'_us','');
+											}
+
+
 										$sx .= "cp $ori $des".cr();
+
+										if ($default)
+											{
+												$sd .= "cp $ori $des2".cr();
+											}
 									}
 							}
+						$sx .= 'echo "======================== Copy default files ="'.cr();
+						$sx .= $sd;
 						$sx .=  cr();
 						$sx .= 'echo "===>Preparing ZIP FILE"'.cr();
 						$sx .= 'cd /var/www/dataverse/langTmp/'.cr();
@@ -149,15 +170,10 @@ class Customize extends Model
 						$sx .= '$PAYARA/bin/asadmin start-domain'.cr();
 						$sx .= 'curl http://localhost:8080/api/admin/datasetfield/loadpropertyfiles -X POST --upload-file languages.zip -H "Content-Type: application/zip"';
 						$sx .= cr();
+
+						$sx .= 'echo "===>Definindo so idomas do Dataverse e suas extensões"'.cr();
 						$sx .= 'curl http://localhost:8080/api/admin/settings/:Languages -X PUT -d \'['.$tlang.']\''.cr();
 
-						$sx .= 'echo "===>Definindo o idoma principal do Dataverse"'.cr();
-						$sx .= 'cd /var/www/dataverse/langBundles'.cr();
-						$sx .= 'cp *.properties /usr/local/payara5/glassfish/domains/domain1/applications/dataverse/WEB-INF/classes/propertyFiles/.'.cr();
-						$sx .= '$PAYARA/bin/asadmin stop-domain'.cr();
-						$sx .= '$PAYARA/bin/asadmin start-domain'.cr();
-						$sx .= cr();
-						$sx .= 'echo "FIM DA ATUALIZAÇÂO"'.cr();
 						$sx .= cr();
 						$sx = '<pre>'.$sx.'</pre>';
 						break;
@@ -167,7 +183,26 @@ class Customize extends Model
 						$sx .= '/usr/local/payara5/glassfish/domains/domain1/docroot/sitemap/sitemap.xml';
 						break;
 					case 'googleanalytics':
-						$sx = 'https://guides.dataverse.org/en/latest/installation/config.html?highlight=google%20analytics';
+						$sx .= h('dataverse.GoogleAnalytics');
+						$sc = '<!-- Global Site Tag (gtag.js) - Google Analytics -->
+								<script async="async" src="https://www.googletagmanager.com/gtag/js?id=<b>G-GMQKC98HPT</b>"></script>
+								<script>
+									//<![CDATA[
+									window.dataLayer = window.dataLayer || [];
+									function gtag(){dataLayer.push(arguments);}
+									gtag(\'js\', new Date());
+
+									gtag(\'config\', \'<b>G-GMQKC98HPT</b>\');
+									//]]>
+								</script>';
+					
+						$sc = troca($sc,'<','&lt;');
+						//$sc = troca($sc,chr(10),'<br>');
+						$sx .= '<pre>'.$sc.'</pre>';
+
+						$sx .= 'curl -X PUT -d \'/var/www/dataverse/branding/analytics-code.html\' http://localhost:8080/api/admin/settings/:WebAnalyticsCode';
+
+						$sx .= 'https://guides.dataverse.org/en/latest/installation/config.html?highlight=google%20analytics';
 						break;
 						
 					case 'homePage':
