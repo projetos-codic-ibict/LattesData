@@ -1,0 +1,50 @@
+<style>
+    .containerX {
+        margin-top: 0px;
+        background-image: url("https://github.com/lattesdata-ibict/LattesData/blob/main/PHP/public/img/banner/homepage-background.png?raw=true");
+        background-position: right;
+        background-repeat: no-repeat;
+        background-color:#1C3339;
+        color: white;
+        min-height: 150px;
+    }
+    .Metrics, a.Metrics, a.Metrics:hover
+        {
+                color: white;
+                text-decoration: none;
+        }
+</style>
+</div>
+<div class="container-fluid containerX">
+    <div class="row">
+        <div class="col-md-3 text-end" style="margin-top: 10px;">
+            <h1 class="mb-3">Dados de Pesquisa</h1>
+            <a href="/dataverse/vitrine" style="color: white; font-size: 150%;">Explore nossas Coleções Dataverse</a>
+        </div>
+
+        <div class="col-md-4 text-end" style="font-size: 150%; margin-top: 10px;">
+                <div class="btn-outline-light mb-3"><span id="div1">...</span>
+                        <a class="Metrics" href="/dataverse/vitrine?q=&types=dataverses&sort=dateSort&order=desc&page=1">
+                        Coleções Dataverses</a>
+                </div>
+                <div class="btn-outline-light mb-3"><span id="div2">...</span>
+                        <a class="Metrics" href="/dataverse/vitrine?q=&types=datasets&sort=dateSort&order=desc&page=1">
+                        Conjunto de dados</a>
+                </div>
+                <div class="btn-outline-light mb-3"><span id="div3">...</span>
+                        <a class="Metrics" href="/dataverse/vitrine?q=&types=files&sort=dateSort&order=desc&page=1">
+                        Arquivos</a>
+                </div>
+                <div class="btn-outline-light mb-3"><span id="div4">...</span>
+                        <a class="Metrics" href="#">
+                        Downloads</a>
+                </div>
+        </div>
+    </div>
+</div>
+<script>
+getvals(url_metrics + 'dataverses', 'ID_dataverse', 'Total');
+getvals(url_metrics + 'datasets', 'ID_grupos', 'Total');
+getvals(url_metrics + 'files', 'div3', 'Total');
+getvals(url_metrics + 'downloads', 'div4', 'Total');
+</script>
