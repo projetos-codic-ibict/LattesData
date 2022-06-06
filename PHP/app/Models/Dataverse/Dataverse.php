@@ -54,7 +54,7 @@ class Dataverse extends Model
 	function CreateDataverse($dd,$PARENT='')
 		{
 			$API = new \App\Models\Dataverse\API();
-			$file = '.tmp/dataverse/dataverse-'.$dd['alias'].'.json';
+			$file = '.tmp/dataverse/dataverse-'.troca($dd['alias'],'/','-').'.json';
 			file_put_contents($file, json_encode($dd, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 			$url = getenv("DATAVERSE_URL");
 

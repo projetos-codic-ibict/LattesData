@@ -39,8 +39,10 @@ class Cnpq extends BaseController
     public function inport()
     {
         $sx = '';
+        $header = new \App\Models\Cnpq\Header();
         $sx .= view('header/head');
-        $sx .= view('header/navbar');
+        $sx .= $header->header();
+                
         if (isset($_GET['process'])) {
             $id = $_GET['process'];
             $LattesData = new \App\Models\Lattes\LattesData();
@@ -60,13 +62,19 @@ class Cnpq extends BaseController
                 $data['erro'] = $erro;
                 $txt = view('welcome_message',$data);
             } else {
+                echo "Processo: ".$did[0];
+                /* Validador OK */
+                /* [did]
+                    [0] => 20085735304
+                    [1] => 0
+                */
                 $txt = '<div class="container"><div class="col-12">' . $LattesData->process($did) . '</div></div>';
             }
         } else {
             $txt = view('welcome_message');
         }
         $sx .= $txt;
-        $sx .= view('header/footer');
+        $sx .= $header->footer();
         return $sx;
     }
 

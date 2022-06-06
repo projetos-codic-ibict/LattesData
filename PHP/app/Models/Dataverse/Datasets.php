@@ -55,7 +55,10 @@ class Datasets extends Model
 			$dd['AUTH'] = true;
 			$dd['POST'] = true;
 			$dd['FILE'] = $file;
-			$dv['api'] = 'api/dataverses/'.$parent.'/datasets';
+			$dd['api'] = 'api/dataverses/'.$parent.'/datasets';
+			$dd['url'] = $_ENV['DATAVERSE_URL'];
+			$dd['apikey'] = $_ENV['DATAVERSE_APIKEY'];
+
 
 			$rst = $DataverseAPI->curlExec($dd);
 			$rsp = json_decode($rst,true);
@@ -64,11 +67,18 @@ class Datasets extends Model
 				{
 					//$email = $dd['user']['email'];
 					//$nome = $dd['user']['firstName'].' '.$dataset['user']['lastName'];
-					$DOI = $rsp['data']['persistentId'];
-					//$sx .= 'Prezado(a) '.$nome;
-					//$sx .= '<p>Foram enviadas instruções para o e-mail '.$$email.'</p>';					
-					$url = getenv("DATAVERSE_URL").'/dataset.xhtml?persistentId=doi:'.$DOI.'&version=DRAFT';
-					$sx .= 'Link para acesso <a href="'.$url.'">'.$url.'</a>';
+					if (isset($rsp['data']['persistentId']))
+					{
+						$DOI = $rsp['data']['persistentId'];
+						//$sx .= 'Prezado(a) '.$nome;
+						//$sx .= '<p>Foram enviadas instruções para o e-mail '.$$email.'</p>';					
+						$url = getenv("DATAVERSE_URL").'/dataset.xhtml?persistentId=doi:'.$DOI.'&version=DRAFT';
+						$sx .= 'Link para acesso <a href="'.$url.'">'.$url.'</a>';
+					} else {
+						pre($rsp);
+						$sx .= "ERRO: ".$rsp;
+					}
+					echo $sx;
 					return $sx;
 				} 
 			else

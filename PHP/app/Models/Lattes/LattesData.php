@@ -48,75 +48,59 @@ class LattesData extends Model
 			//$url = "https://api.cnpq.br/lattes-data/v1/processos/".$id;
 			$token = getenv('token_lattes');
 			$url = getenv('url_lattes');
-			$filename = 'lattesData' . $id . '.zip';
-			$dir = '.tmp';			
-			dircheck($dir);
-			$dir = '.tmp/LattesData/';			
-			dircheck($dir);
-			$file = $dir . $id . '.json';
 
-			if (!file_exists(($file))) {
-				/********************************************************* CURL */
-				$ch = curl_init($url);
-				curl_setopt_array($ch, [
-					// Equivalente ao -X:
-					CURLOPT_CUSTOMREQUEST => 'GET',
-					// Equivalente ao -H:
-					CURLOPT_HTTPHEADER => [
-						'auth-token: 150c6a3d-a5aa-440c-871c-ce81453c0a5d'
-					],
-					// Permite obter o resultado
-					CURLOPT_RETURNTRANSFER => 1,
-				]);
-
-				$data = curl_exec($ch);
-				curl_close($ch);
-
-				pre($data);
-				//file_put_contents($file,$data);
-			} else {
-				$data = file_get_contents($file);				
-			}
-			return $file;
+			/*********************************** BRAPCI */
+			if (strpos($url,'brapci'))
+				{
+					/***************** Brapci */
+					$BrapciAPI = new \App\Models\Lattes\BrapciAPI();
+					jslog('Extrator: LattesExtrator');
+					$js = $BrapciAPI->get($id);
+					if (strlen($js) > 0)
+						{
+							$file = $this->temp_file($id);
+							file_put_contents($file, $js);
+							jslog('Saved: '.$file);
+						} else {
+							jslog('Erro save file: '.$id);
+						}
+				} else {
+					/***************** CNPQ */
+					$LattesExtrator = new \App\Models\Lattes\LattesExtrator();
+					jslog('Extrator: Brapci');
+				}
+			return true;
+		} else {
+			return false;
 		}
-		return "";
 	}
+
+	function temp_file($id='')
+		{
+		dircheck('.tmp');
+		dircheck('.tmp/LattesData');
+		$file = '.tmp/LattesData/' . $id . '.json';
+		return $file;
+		}
 
 	function cachedAPI($id = '')
 	{
-		dircheck('.tmp');
-		dircheck('.tmp/LattesData');
+		$file = $this->temp_file($id);
 
-		$file = '.tmp/LattesData/' . $id . '.json';
-
-		$check = true;
-		if (ENVIRONMENT == 'development') {
-			$check = false;
-		};
-
-		if (!file_exists($file)) {
-			$file = '../../Datasets/processos_pq1a/' . $id . '.json';
-			if (!file_exists($file)) {
-				$file = '../../Datasets/processos_incts/' . $id . '.json';
-				if (!file_exists($file)) {
-					$file = '';
-				}
-			}
-		}
-
-		/******************** Verificar Validade do arquivo */
-		if (($file != '') and ($check)) {
+		if (file_exists($file))
+			{
 			$dt = filemtime($file);
 			$date1 = date_create(date("Y-m-d"));
 			$date2 = date_create(date("Y-m-d", $dt));
 			$diff = date_diff($date1, $date2);
 			$dias = $diff->format("%a");
 
-			if ($dias > $this->FileDayValid) {
-				//$file = '';
+				if ($dias > $this->FileDayValid) {
+					return false;
+				}
+			return true;
 			}
-		}
-		return $file;
+		return false;
 	}
 
 	function dv($p = '')
@@ -185,275 +169,34 @@ class LattesData extends Model
 			$erro = 2;
 		}
 		return array($p, $erro);
-	}
-
-	function getUser($dt)
-	{
-		$du = $dt['identificadoresPessoa'];
-		if (!isset($du['nomePessoa'])) {
-			$nome = 'sem nome da silva';
-		} else {
-			$nome = $du['nomePessoa'];
-		}
-		$nomep = nbr_author($nome, 1);
-
-		$firstname = mb_strtolower(substr($nomep, strpos($nomep, ',') + 1, strlen($nomep)));
-		$lastname = mb_strtolower(substr($nomep, 0, strpos($nomep, ',')));
-		$firstname = nbr_author($firstname, 7);
-		$lastname = nbr_author($lastname, 7);
-
-		$email = $dt['emailContato'];
-
-		/***************** AFILIAÇÃO */
-		$aff = (array)$dt['instituicoes'];
-		if (isset($aff[0])) {
-			$affn = (array)$aff[0];
-			$sigla = $affn['siglaMacro'];
-			$inst = $affn['nomeMacro'];
-			if ($inst == '') {
-				$sigla = $affn['sigla'];
-				$inst = $affn['nome'];
-			}
-		} else {
-			$sigla = '';
-			$inst = '';
-		}
-		/**************** Identificadores */
-		$aff = (array)$dt['identificadoresPessoa'];
-		$ids = array();
-		for ($r = 0; $r < count($aff); $r++) {
-			$affn = (array)$aff[$r];
-			$idp_type = $affn['tipo'];
-			$idp_value = $affn['identificador'];
-			$ids[$idp_type] = $idp_value;
-		}
-
-		$dv['firstName'] = $firstname;
-		$dv['lastName'] = $lastname;
-		$dv['userName'] = troca($email, '@', '-');
-		$dv['affiliation'] = $inst;
-		$dv['position'] = 'Research';
-		$dv['email'] = $email;
-
-		return $dv;
-	}
-
-	function getChamada($dt, $user)
-	{
-		$chamada = (array)$dt['chamada'];
-		$DV['alias'] = troca($chamada['sigla'], ' ', '');
-		$DV['name'] = $chamada['nome'];
-
-		$contact[0]['contactEmail'] = 'lattesdata@cnpq.br';
-
-		$DV['dataverseContacts'] = $contact;
-		$DV['affiliation'] = 'CNPq';
-		$DV['description'] = $chamada['nome'] . ' - ' . $chamada['sigla'];
-		$DV['dataverseType'] = "LABORATORY";
-
-		return $DV;
-	}
-
-	function getProjeto($dt, $user)
-	{
-
-		$projeto = (array)$dt['projeto'];
-		$nome = $projeto['titulo'];
-		$desciption = $projeto['resumo'];
-		$alias = 'CNPq' . trim($dt['numeroProcesso']);
-		$pre1 = substr($alias, 0, strpos($alias, '/'));
-		$pre2 = substr($alias, strpos($alias, '/') + 1, 4);
-		$alias = $pre2 . $pre1;
-
-		$DV['alias'] = $alias;
-		$DV['name'] = $nome;
-
-		$contact[0]['contactEmail'] = $user['email'];
-
-		$DV['dataverseContacts'] = $contact;
-		$DV['affiliation'] = $user['affiliation'];
-		$DV['description'] = $desciption;
-		$DV['dataverseType'] = "LABORATORY";
-
-		return $DV;
-	}
-
-	function getDataset($dt, $user)
-	{
-		$DV = array();
-		/* Protocolo */
-		$DV['protocol'] = 'doi';
-		$DV['authority'] = getenv('DOI');
-		$DV['publisher'] = 'CNPq LattesData';
-
-		$DV['publicationDate'] = date("Y-m-d");
-		$DV['metadataLanguage'] = "undefined";
-
-		$projeto = (array)$dt['projeto'];
-
-		/* Licence */
-		//$DV['datasetVersion']['license']['name'] = 'CC BY';
-		$DV['datasetVersion']['license']['name'] = 'CC BY 4.0';
-		$DV['datasetVersion']['license']['uri'] = 'http://creativecommons.org/licenses/by/4.0';
-
-
-		//$DV['authority'] = getenv('DOI');
-		//$DV['identifier'] = troca($dt['numeroProcesso'],'/','');
-		//$DV['identifier'] = substr($DV['identifier'],0,strpos($DV['identifier'],'-'));	
-
-		$DV['datasetVersion']['fileAccessRequest'] = false;
-
-		/* Citation */
-		$fld = array();
-
-		/*************** Title */
-		$title = $projeto['titulo'];
-		$fields = array('typeName' => 'title', 'multiple' => false, 'value' => $title, 'typeClass' => 'primitive');
-		array_push($fld, $fields);
-
-		/********************* Authors */
-		pre($dt);
-		$name = $dt['nomePessoa'];
-		$email = $dt['emailContato'];
-		$author = array();
-		$aff = 'Desconhecida';
-		$auth = array();
-		$auth['authorName']['typeName'] = 'authorName';
-		$auth['authorName']['multiple'] = false;
-		$auth['authorName']['typeClass'] = 'primitive';
-		$auth['authorName']['value'] = $name;
-		$auth['authorAffiliation']['typeName'] = 'authorAffiliation';
-		$auth['authorAffiliation']['multiple'] = false;
-		$auth['authorAffiliation']['typeClass'] = 'primitive';
-		$auth['authorAffiliation']['value'] = $aff;
-		$auth3 = array($auth);
-		$fields = array('typeName' => 'author', 'multiple' => true, 'typeClass' => 'compound', 'value' => $auth3);
-		array_push($fld, $fields);
-
-		/********************** Contact */
-		$auth = array();
-		$auth['datasetContactName']['typeName'] = 'datasetContactName';
-		$auth['datasetContactName']['multiple'] = false;
-		$auth['datasetContactName']['typeClass'] = 'primitive';
-		$auth['datasetContactName']['value'] = $name;
-
-		$auth['datasetContactAffiliation']['typeName'] = 'datasetContactAffiliation';
-		$auth['datasetContactAffiliation']['multiple'] = false;
-		$auth['datasetContactAffiliation']['typeClass'] = 'primitive';
-		$auth['datasetContactAffiliation']['value'] = $aff;
-
-		$auth['datasetContactEmail']['typeName'] = 'datasetContactEmail';
-		$auth['datasetContactEmail']['multiple'] = false;
-		$auth['datasetContactEmail']['typeClass'] = 'primitive';
-		$auth['datasetContactEmail']['value'] = $email;
-
-		$auth3 = array($auth);
-		$fields = array('typeName' => 'datasetContact', 'multiple' => true, 'typeClass' => 'compound', 'value' => $auth3);
-		array_push($fld, $fields);
-
-		/*************** dsDescription */
-		$resumo = $projeto['resumo'];
-		$abstact = array();
-		$abstact['dsDescriptionValue']['typeName'] = 'dsDescriptionValue';
-		$abstact['dsDescriptionValue']['multiple'] = false;
-		$abstact['dsDescriptionValue']['typeClass'] = 'primitive';
-		$abstact['dsDescriptionValue']['value'] = $resumo;
-
-		$auth3 = array($abstact);
-		$fields = array('typeName' => 'dsDescription', 'multiple' => true, 'typeClass' => 'compound', 'value' => $auth3);
-		array_push($fld, $fields);
-		/*
-			$abs3['dsDescriptionValue'] = array($abstact);	
-			$fields = array('typeName'=>'dsDescription','multiple'=>true,'typeClass'=>'compound','value'=>$abs3);
-			array_push($fld,$fields);					
-			*/
-
-
-		/*************** productionDate */
-		/*
-			$productionDate = sonumero($dt['dataInicioVigencia']);
-			$productionDate = substr($productionDate,6,4).'-'.substr($productionDate,3,2).'-'.substr($productionDate,0,2);
-			$fields = array('typeName'=>'productionDate','multiple'=>false,'value'=>$productionDate,'typeClass'=>'primitive');
-			array_push($fld,$fields);
-			*/
-
-
-		/********************* subject */
-		$key = $dt['palavrasChave'];
-		$key = troca($key, ';', ',');
-		$key = troca($key, '.', ',');
-		$value = array('Medicine, Health and Life Sciences');
-		$fields = array('typeName' => 'subject', 'multiple' => true, 'typeClass' => 'controlledVocabulary', 'value' => $value);
-		array_push($fld, $fields);
-
-		/* Depositor */
-		$fields = array('typeName' => 'depositor', 'multiple' => false, 'typeClass' => 'primitive', 'value' => $name);
-		array_push($fld, $fields);
-
-		/* Depositor */
-		$date = date("Y-m-d");
-		$fields = array('typeName' => 'dateOfDeposit', 'multiple' => false, 'typeClass' => 'primitive', 'value' => $date);
-		array_push($fld, $fields);
-
-		$DV['datasetVersion']['metadataBlocks']['citation']['displayName'] = "Citation Metadata";
-		$DV['datasetVersion']['metadataBlocks']['citation']['name'] = "citation";
-		$DV['datasetVersion']['metadataBlocks']['citation']['fields'] = $fld;
-
-
-		return $DV;
-	}
-
-	function recoverPQ($dt, $id)
-	{
-		$sx = '';
-
-		$Users = new \App\Models\Dataverse\Users();
-		$Dataset = new \App\Models\Dataverse\Datasets();
-		$Dataverse = new \App\Models\Dataverse\Dataverse();
-		//$sx .= $this->modPQ($dt,$id);
-		$dd = $this->modPQ($dt, $id);
-
-		/****************************************** USER */
-		$user = $this->getUser($dt);
-
-		/***************************** CHAMADA DATAVERSE */
-		$chamada = $this->getChamada($dt, $user);
-		$Dataverse->CreateDataverse($chamada, 'beneficiarios');
-		$parent = $chamada['alias'];
-
-		/***************************** PROJETO DATAVERSE */
-		$projeto = $this->getProjeto($dt, $user);
-		$Dataverse->CreateDataverse($projeto, $parent);
-
-		/******************************* PROJETO DATASET */
-		$dataset = $this->getDataset($dt, $user);
-		$parent = $projeto['alias'];
-
-		$dd['api'] = 'api/dataverses/' . $parent . '/datasets';
-		$dd['user'] = $user;
-		$sx .= $Dataset->CreateDatasets($dd, $dataset, $parent);
-
-		/* ENVIA e-MAIL */
-		$msg = 'Dataset processado ' . $id;
-		$sx .= bsmessage($msg, 1);
-		return $sx;
-	}
+	}	
 
 	function Process($dt = array('20113023806', 0))
 	{
 		$sx = '';
 		$id = $dt[0];
-		$file = $this->cachedAPI($id);
+		/******************** Recupera nome do arquivo */
+		$cached = $this->cachedAPI($id);
 
 		/************************************ GET API CNPq */
-		if ($file == '') {
-			$sx = bsmessage('Coletando arquivo CNPQ ' . $id);
+		if (!$cached) {
+			jslog('API CNPq ' . $id);
 			$file = $this->API_getFileCnpq($id);
 		} else {
-			$sx = bsmessage('Coletando arquivo do Cache ' . $id);
+			jslog('Cache CNPq ' . $id);
 		}
 
+		/********************************** Fase de Processamento */
+		$file = $this->temp_file($id);
+		if (!file_exists($file))
+			{
+				$sx = 'Erro de importação';
+				return $sx;
+			}
+
 		/*********************** read metadata */
+		jslog('File: '.$file);
+
 		$dt = file_get_contents($file);
 		$dt = (array)json_decode($dt);
 
@@ -463,27 +206,18 @@ class LattesData extends Model
 			$MOD = (array)$dt['modalidade'];
 			$MOD = (string)$MOD['codigo'];
 		}
-
+		jslog('Project Type ' . $MOD);
 		switch ($MOD) {
 			case 'PQ':
-				$sx .= $this->recoverPQ($dt, $id);
+				$js = new \App\Models\Lattes\LattesDataPQ();
+				$sx .= $js->register($dt, $id);
 				break;
 			case 'AI':
-				echo "INCT";
-				exit;
-				$sx .= $this->modAI($dt, $id);
-				break;
-
-			case 'APQ':
-				$sx .= h("INCT-APQ", 3);
-				//$sx .= $this->modAI($dt, $id);
-				break;
-			case 'X':
-				$sx .= h('Erro Lattes ID', 1);
-				$sx .= '<p>' . file_get_contents($file) . '</p>';
+				$js = new \App\Models\Lattes\LattesDataINCT();
+				$sx .= $js->register($dt, $id);
 				break;
 			default:
-				$sx .= 'OPS ' . $MOD . ' not implemented';
+				$sx .= 'OPS ' . $MOD . ' not implemented - '.$id;
 				return $sx;
 		}
 		return $sx;
@@ -493,122 +227,5 @@ class LattesData extends Model
 	{
 		$file = ".tmp/datasets/dataset_" . $process . '.json';
 		return $file;
-	}
-	function modPQ($dt, $id)
-	{
-		$projeto = (array)$dt['projeto'];
-		$titulo = (string)$projeto['titulo'];
-		$titulo = nbr_author($titulo, 7);
-		$dti = brtos($dt['dataInicioVigencia']);
-		$dtf = brtos($dt['dataTerminoVigencia']);
-
-		$processo = (string)$dt['numeroProcesso'];
-
-		$abs = (string)$projeto['resumo'];
-
-		/**************************************************/
-		$key = (string)$dt['palavrasChave'];
-		$key = troca($key, ', ', ';');
-		$key = troca($key, '. ', ';');
-		$key = explode(';', $key);
-		$keys = '<ul>';
-		foreach ($key as $word) {
-			$word = nbr_author($word, 7);
-			$keys .= '<li>' . $word . '</li>';
-		}
-		$keys .= '</ul>';
-
-		$dv = array();
-		$dv['datasetVersion'] = array();
-		$dv['datasetVersion']['termsOfUse'] = 'CC0 Waiver';
-		$dv['datasetVersion']['license'] = 'CC0';
-
-		/********************** metadataBlocks */
-
-		/********************************************** Citation */
-		$ci = array();
-		array_push($ci, $this->primitive('title', $titulo));
-		array_push($ci, $this->primitive('productionDate', $this->date($dti)));
-
-		/********************************************** Description */
-		$desc = array();
-		array_push($desc, $this->primitive('dsDescriptionValue', $abs));
-		/* CITATION */
-		array_push($ci, $this->compound('dsDescription', $desc, 'dsDescriptionValue'));
-
-
-		/** Subject */
-		array_push($ci, $this->controlledVocabulary('subject', array('Genetica')));
-
-		$mb['citation']['fields'] = $ci;
-
-		/* Display Name */
-		$mb['citation']['displayName'] = "Display Name Metadata";
-
-		/** Author */
-		$auth = array();
-		array_push($auth, $this->primitive('authorAffiliation', 'CNPq'));
-		array_push($auth, $this->primitive('authorName', 'Fulando de Tal'));
-		/* CITATION */
-		array_push($ci, $this->compound('author', $auth));
-		$mb['citation']['fields'] = $ci;
-
-		/* Metada Block */
-		$dv['datasetVersion']['metadataBlocks'] = $mb;
-		$dv['id'] = $id;
-		if ((!isset($_ENV['DATAVERSE_URL'])) or (!isset($_ENV['DATAVERSE_APIKEY']))) {
-			echo "ERRO: defina a variavel DATAVERSE_URL e DATAVERSE_APIKEY no .env";
-			exit;
-		}
-		$dv['url'] = $_ENV['DATAVERSE_URL'];
-		$dv['apikey'] = $_ENV['DATAVERSE_APIKEY'];
-
-
-		return $dv;
-
-		//$json = json_encode($dv,JSON_PRETTY_PRINT);
-		//$file = $this->filename($id);
-		//file_put_contents($file,$json);
-	}
-
-	function primitive($field, $value)
-	{
-		$primitive = array('typeName' => $field, 'multiple' => false, 'value' => $value, 'typeClass' => 'primitive');
-		return $primitive;
-	}
-	function controlledVocabulary($field, $value)
-	{
-		if (is_array($value)) {
-			$primitive = array('typeName' => $field, 'multiple' => true, 'value' => $value, 'typeClass' => 'controlledVocabulary');
-		} else {
-			$primitive = array('typeName' => $field, 'multiple' => false, 'value' => $value, 'typeClass' => 'controlledVocabulary');
-		}
-		return $primitive;
-	}
-
-	function compound($field, $value, $subfield = '')
-	{
-		$dt = array();
-		if (strlen($subfield) > 0) {
-			$dt[$subfield] = $value[0];
-			$dt = array($dt);
-		} else {
-			$dt = $value;
-		}
-
-
-		$compound = array('typeName' => $field, 'multiple' => true, 'value' => $dt, 'typeClass' => 'compound');
-
-		//				echo '<pre>';
-		//print_r($compound);
-		//exit;
-
-		return $compound;
-	}
-	function date($dt)
-	{
-		$dt = sonumero($dt);
-		$dt = substr($dt, 0, 4) . '-' . substr($dt, 4, 2) . '-' . substr($dt, 6, 2);
-		return $dt;
 	}
 }

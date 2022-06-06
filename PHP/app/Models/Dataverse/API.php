@@ -49,6 +49,8 @@ class API extends Model
 
 		if ((!isset($dt['url'])) or (!isset($dt['api'])) or (!isset($dt['apikey']))) {
 			$sx = "Error: Missing URL, API or API Key";
+			pre($dt);
+			$sx .= '<br>url='.$dt['url'];
 			$rsp['msg'] = $sx;
 		} else {
 			$url = $dt['url'] . $dt['api'];
@@ -72,12 +74,13 @@ class API extends Model
 					$rsp['msg'] .= bsmessage('File not found - ' . $dt['FILE'], 3);
 				}
 				//		$cmd .= '-H "Content-Type: application/json" ';
-				$cmd .= '--upload-file ' . realpath($dt['FILE']) . ' ';
+				$cmd .= '--upload-file "' . ($dt['FILE']) . '" ';
 			}
-			consoleJS($cmd);
+			jslog($cmd);
 			$txt = shell_exec($cmd);
+			jslog($txt);
 			return $txt;
 		}
-		return 'ops - invalid parametes API.php';
+		return $sx;
 	}
 }
