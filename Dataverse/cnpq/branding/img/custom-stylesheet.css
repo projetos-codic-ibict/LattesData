@@ -13,9 +13,8 @@
   margin-top: 0.5em;
 }
 #dataverseHeader {
-  background: url("/dvn/img/header-lattes-data2.jpg") no-repeat right top !important;
+  background: url("/dvn/img/header-lattes-data.jpg") no-repeat right top !important;
   margin-top: 10rem;
-
   /*-webkit-box-shadow: 0px 0px 17px -7px #000000; 
 	box-shadow: 0px 0px 17px -7px #000000;*/
 }
@@ -41,6 +40,7 @@ div#content {
 .dataverseHeaderDataverseName H1 {
   display: none;
 }
+
 .poweredbylogo {
   color: #fff;
 }
@@ -55,33 +55,11 @@ div#content {
 Estilos footer
 */
 #dvfooter {
-  background: #012F51;
-  padding-top: 3rem;
-  padding-bottom: 5em;
+  background: #00538f;
+  padding-top: 2rem;
 }
 #dvfooter p {
   color: #fff;
-}
-.custom-footer {
-  background: #00538f;
-  padding-top: 2em;
-  padding-bottom: 2em;
-  margin-top: 5em;
-  margin-bottom: -6em
-}
-.custom-footer {
-  color: #fff;
-}
-.custom-footer h6 {
-  font-size: 18px;
-  font-weight: bold;
-  text-transform: uppercase;
-	padding-bottom: 1.5em;
-}
-.custom-footer li {
-	
-	padding-bottom: 0.5em;
-	
 }
 /*
 Estilos da lista de resultado
@@ -111,6 +89,7 @@ table[id$='resultsTable'] td > div.fileResult {
   border: 0;
   border-radius: 5px !important;
 }
+
 .datasetResult a {
   color: #568bb7;
 }
@@ -119,12 +98,4 @@ table[id$='resultsTable'] td > div.fileResult {
 }
 .fileResult a {
   color: #55b79b;
-}
-
-/*
-Estilos da FAQ
-*/
-.faq-question {
-	padding: 0.5em 0;
-	font-size: 18px;
 }
