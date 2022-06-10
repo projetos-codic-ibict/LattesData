@@ -218,6 +218,7 @@ class LattesData extends Model
 				break;
 			default:
 				$sx .= 'OPS ' . $MOD . ' not implemented - '.$id;
+				print_r($dt);
 				return $sx;
 		}
 		return $sx;
