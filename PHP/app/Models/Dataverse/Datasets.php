@@ -72,8 +72,10 @@ class Datasets extends Model
 						$DOI = $rsp['data']['persistentId'];
 						//$sx .= 'Prezado(a) '.$nome;
 						//$sx .= '<p>Foram enviadas instruções para o e-mail '.$$email.'</p>';					
-						$url = getenv("DATAVERSE_URL").'/dataset.xhtml?persistentId=doi:'.$DOI.'&version=DRAFT';
-						$sx .= 'Link para acesso <a href="'.$url.'">'.$url.'</a>';
+						$url = getenv("DATAVERSE_URL").'/dataset.xhtml?persistentId='.$DOI.'&version=DRAFT';
+						$sx .= 'Link para acesso <a href="'.$url.'"><tt>'.$url.'</tt></a>';
+						echo '<pre>';
+						print_r($rsp);
 					} else {
 						pre($rsp);
 						$sx .= "ERRO: ".$rsp;
