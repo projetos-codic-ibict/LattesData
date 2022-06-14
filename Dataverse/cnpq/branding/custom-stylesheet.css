@@ -70,11 +70,11 @@ Estilos footer
 */
 #dvfooter {
   background: #012F51;
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 #dvfooter p {
   color: #fff;
-  padding-top: 1em;
-  padding-bottom: 1em;
 }
 .custom-footer {
   background: #00538f;
