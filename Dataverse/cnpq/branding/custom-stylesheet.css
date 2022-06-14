@@ -15,7 +15,6 @@
 #dataverseHeader {
   background: url("/dvn/img/header-lattes-data2.jpg") no-repeat right top !important;
   margin-top: 10rem;
-
   /*-webkit-box-shadow: 0px 0px 17px -7px #000000; 
 	box-shadow: 0px 0px 17px -7px #000000;*/
 }
@@ -51,6 +50,21 @@ div#content {
   max-width: none;
   max-height: none;
 }
+.deposite  {
+    padding-top: 15px;
+}
+.deposite a {
+    color: #fff;
+    margin-top: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    
+}
+
+.deposite i {
+    margin-right: 5px;
+}
+
 /*
 Estilos footer
 */
@@ -76,12 +90,23 @@ Estilos footer
   font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
-	padding-bottom: 1.5em;
+  padding-bottom: 1.0em;
 }
 .custom-footer li {
-	
-	padding-bottom: 0.5em;
-	
+  padding-bottom: 0.4em;
+}
+.custom-footer ul {
+  padding-bottom: 0.5em;
+}
+.custom-footer li a {
+  color: #fff;
+}
+.row-social {
+  background: #014B82;
+}
+.custom-footer i {
+  color: #fff;
+  margin-left: 10px
 }
 /*
 Estilos da lista de resultado
@@ -120,11 +145,16 @@ table[id$='resultsTable'] td > div.fileResult {
 .fileResult a {
   color: #55b79b;
 }
-
 /*
 Estilos da FAQ
 */
 .faq-question {
-	padding: 0.5em 0;
-	font-size: 18px;
+  padding: 0.5em 0;
+  font-size: 18px;
+}
+/*
+Chamada
+*/
+.dataverseHeaderName {
+  margin-left: 130px;
 }
