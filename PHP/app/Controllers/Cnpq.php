@@ -14,18 +14,13 @@ $language = \Config\Services::language();
 
 class Cnpq extends BaseController
 {
+
     public function index()
         {
             $sx = '';
-            $sx .= view('header/head');
-            $sx .= view('header/navbar');
-            $sx .= bs(bsc('<div class="mb-5"></div>',12));
-            $sx .= bs(bsc('<div class="mb-5"></div>',12));
-            $sx .= bs(
-                    bsc('',3).
-                    bsc('<img src="'.URL.'/img/logo_lattesdata.png" width="100%" class="img-fluid">',6)).
-                    bsc('',3)
-                    ;
+            $header = new \App\Models\Cnpq\Header();
+            $sx .= $header->header();
+
             $sx .= bs(bsc('<div class="mb-5"></div>',12));
             $sx .= '<center>';
             $sx .= '<a href="'.PATH.MODULE.'inport" class="btn btn-primary">'.msg('Create Dataset - CNPq').'</a>';
@@ -39,11 +34,13 @@ class Cnpq extends BaseController
     public function inport()
     {
         $sx = '';
+        $COL1 = '';
         $header = new \App\Models\Cnpq\Header();
         $sx .= view('header/head');
         $sx .= $header->header();
                 
         if (isset($_GET['process'])) {
+            $txt = '';
             $id = $_GET['process'];
             $LattesData = new \App\Models\Lattes\LattesData();
             $did = $LattesData->padroniza_processo($id);
@@ -60,7 +57,6 @@ class Cnpq extends BaseController
                             break;
                     }
                 $data['erro'] = $erro;
-                $txt = view('welcome_message',$data);
             } else {
                 echo "Processo: ".$did[0];
                 /* Validador OK */
@@ -71,35 +67,25 @@ class Cnpq extends BaseController
                 $txt = '<div class="container"><div class="col-12">' . $LattesData->process($did) . '</div></div>';
             }
         } else {
-            $txt = view('welcome_message');
+            
         }
+        $txt = view('CNPq/deposito');
+        $DEPOSITO = view("CNPq/import_form");            
+        $txt = troca($txt,'$COL1',$COL1);
+        $txt = troca($txt,'$DEPOSITO',$DEPOSITO);
+        $txt = str_replace('$DEPOSITO',$DEPOSITO,$txt);
+
         $sx .= $txt;
         $sx .= $header->footer();
         return $sx;
     }
-
-    function cab($tp='')
-        {
-            $sx = '';
-            switch($tp)
-                {
-                    case 'footer':
-                        $sx = '';
-                        break;
-                    default:
-                        $sx .= view('header/head');
-                        $sx .= view('header/navbar');
-                        break;        
-                }
-            return $sx;
-        }
 
     function about()
     {
         $sx = '';
         $sx .= view('header/head');
         $sx .= view('header/navbar');
-        //$sx .= view('welcome_message');
+        
         $sx .= view('header/footer');
         return $sx;
     }

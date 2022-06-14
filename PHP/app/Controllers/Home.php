@@ -99,7 +99,7 @@ class Home extends BaseController
         $sx = '';
         $sx .= view('header/head');
         $sx .= view('header/navbar');
-        //$sx .= view('welcome_message');
+        
         $sx .= view('header/footer');
         return $sx;
     }

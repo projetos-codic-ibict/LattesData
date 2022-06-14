@@ -43,18 +43,10 @@ class Header extends Model
 
     function header()
         {
-            $file = '/var/www/dataverse/branding/custom-header.html';
-            if (file_exists($file)) {
-                $header = file_get_contents($file);
-            } else {
-                $file = '../../Dataverse/cnpq/branding/custom-header.html';
-                if (file_exists($file)) {
-                    $header = file_get_contents($file); 
-                } else {
-                    $header = 'HEADER NOT FOUND';
-                }
-            }
-            return $header;
+            $sx = '';
+            $sx .= view('header/head');
+            $sx .= '<body>';
+            return $sx;
         }
 
     function footer()

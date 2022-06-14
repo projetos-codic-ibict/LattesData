@@ -124,7 +124,7 @@ class LattesData extends Model
 
 		/**************** Campos inválidos */
 		if (strlen($p) != 11) {
-			echo '<br>ERRO:' . $p;
+			//echo '<br>ERRO:' . $p;
 			return false;
 		}
 
