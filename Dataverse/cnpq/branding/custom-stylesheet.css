@@ -80,8 +80,10 @@ Estilos footer
   background: #00538f;
   padding-top: 2em;
   padding-bottom: 2em;
+  /*
   margin-top: 5em;
   margin-bottom: -6em
+  */
 }
 .custom-footer {
   color: #fff;
