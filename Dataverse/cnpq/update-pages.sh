@@ -1,1 +1,1 @@
-cp branding/* /var/www/html/dataverse/branding/* -R
+cp branding/* /var/www/dataverse/branding/* -R
