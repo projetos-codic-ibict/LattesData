@@ -1,0 +1,1 @@
+cp branding/* /var/www/html/dataverse/branding/* -R
