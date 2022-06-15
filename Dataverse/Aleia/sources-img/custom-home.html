@@ -1,0 +1,387 @@
+
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head id="j_idt5">
+            <title>Aleia</title>
+	    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1" />
+            <meta http-equiv="X-UA-Compatible" content="IE=edge" /><link type="text/css" rel="stylesheet" href="/javax.faces.resource/theme.css.xhtml?ln=primefaces-bootstrap" /><script type="text/javascript" src="/javax.faces.resource/jquery/jquery.js.xhtml;jsessionid=c148eaafbd1a9e680f2c2879705e?ln=primefaces&amp;v=7.0"></script><script type="text/javascript" src="/javax.faces.resource/jquery/jquery-plugins.js.xhtml;jsessionid=c148eaafbd1a9e680f2c2879705e?ln=primefaces&amp;v=7.0"></script><script type="text/javascript" src="/javax.faces.resource/core.js.xhtml;jsessionid=c148eaafbd1a9e680f2c2879705e?ln=primefaces&amp;v=7.0"></script><script type="text/javascript" src="/javax.faces.resource/components.js.xhtml;jsessionid=c148eaafbd1a9e680f2c2879705e?ln=primefaces&amp;v=7.0"></script><link type="text/css" rel="stylesheet" href="/javax.faces.resource/components.css.xhtml;jsessionid=c148eaafbd1a9e680f2c2879705e?ln=primefaces&amp;v=7.0" /><script type="text/javascript">if(window.PrimeFaces){PrimeFaces.settings.locale='en';}</script>
+        <link rel="apple-touch-icon" sizes="180x180" href="/javax.faces.resource/images/fav/apple-touch-icon.png.xhtml" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/javax.faces.resource/images/fav/favicon-32x32.png.xhtml" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/javax.faces.resource/images/fav/favicon-16x16.png.xhtml" />
+        <link rel="manifest" href="/javax.faces.resource/images/fav/site.webmanifest.xhtml" />
+        <link rel="mask-icon" href="/javax.faces.resource/images/fav/safari-pinned-tab.svg.xhtml" color="#da532c" />
+        <meta name="msapplication-TileColor" content="#da532c" />
+        <meta name="theme-color" content="#ffffff" />
+        <link type="image/png" rel="image_src" href="/javax.faces.resource/images/dataverseproject.png.xhtml" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/bs/css/bootstrap.min.css.xhtml?version=4.20" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/bs/css/bootstrap-theme.min.css.xhtml?version=4.20" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/ie-compat.css.xhtml?version=4.20" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/owl.carousel.css.xhtml?version=4.20" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/fontcustom.css.xhtml?version=4.20" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/socicon.css.xhtml?version=4.20" />
+        <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/structure.css.xhtml?version=4.20" />
+            <script>
+                // Break out of iframe
+                if (window !== top) top.location = window.location;
+            </script>
+            <style>
+                /* Custom CSS */
+                            table[id$='resultsTable'] td > div.dataverseResult {
+               border-width: medium;
+            }
+
+            table[id$='resultsTable'] td > div.datasetResult {
+                border-width: medium;
+            }            
+
+            .rowMargin {
+                margin-top: 15px;
+                margin-bottom: 15px;
+            }
+            .leadContent .customWell {
+                background-image: none;
+                background-color: #fbfbfb;
+            }
+            .leadContent h2 {
+                color: #eb5f0c;
+                margin-top: 0px;
+            }
+            .leadContent a {
+                text-decoration: underline;
+            }
+
+            .leadContent .collapsedData {
+                padding-left: 18px;
+            }
+
+            .uvaSearch .searchContainer {
+                margin: 15px 0;
+                padding: 30px;
+                border-top: 1px solid #DADADA;
+                border-bottom: 1px solid #DADADA;
+            }
+
+            .nouvaSearch .searchContainer {
+                margin: -50px 0;
+                padding: 30px;
+                border-bottom: 1px solid #DADADA;
+            }
+            
+            .featuredDataverses {
+                margin: 50px 0;
+            }
+
+            </style></head><body>
+	<a href="#content" class="sr-only">Ir para o conteúdo principal</a>    <style>
+        /* NOTE: You can use the custom CSS configuration to move this CSS your own stylesheet... */
+
+        /* Overwrite default navbar styles to make room at the top of the browser page for our custom header... */
+        .navbar-fixed-top {
+            top:50px !important;
+        }
+        #dataverse-header-block {
+            padding-top: 100px;
+        }
+
+	/* Place narrow custom header at the top of the page... */
+        #custom-header {
+            background: #414141;
+            min-height: 44px;
+            position: fixed;
+            right: 0;
+            left: 0;
+            z-index: 930;
+            padding-top: 8px;
+        }
+        #custom-header a.cst-hdr-link {
+            line-height: 32px;
+            color: #BAC5C6;
+            font-weight: bold;
+        }
+    </style>
+    <body>
+    <div class="custom-header">
+	<div id="barra-brasil" style="background:#7F7F7F; height: 20px; padding:0 0 0 10px;top:0;">
+	<ul id="menu-barra-temp" style="list-style:none;">
+	<li style="display:inline; float:left;padding-right:10px; margin-right:10px; borderright:1px solid #EDEDED"><a href="http://brasil.gov.br" style="font-family:sans,sans-serif; text- Portal Padrão Barra de Identidade Visual do Governo Federal na Internet - APLICAÇÃO right:1px solid #EDEDED"><a href="http://brasil.gov.br" style="font-family:sans,sans-serif; text- decoration:none; color:white;">Portal do Governo Brasileiro</a></li>
+	<li><a style="font-family:sans,sans-serif; text-decoration:none; color:white;" href="http://epwg.governoeletronico.gov.br/barra/atualize.html">Atualize sua Barra de Governo</a></li>
+	</ul>
+	</div>
+	</div>
+	
+	<script src="//barra.brasil.gov.br/barra.js" type="text/javascript"></script>
+	</body>
+
+    <div id="dataverse-header-block"><nav id="navbarFixed" class="navbar navbar-default navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar" aria-pressed="false">
+                        <span class="sr-only">Alternar navegação</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="/"><img src="/logos/navbar/logo.png;jsessionid=c148eaafbd1a9e680f2c2879705e" alt="Aleia homepage" class="navbar-brand custom-logo" />
+                    </a>
+                </div>
+                <div class="collapse navbar-collapse" id="topNavBar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Adicionar dados <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/dataverse.xhtml;jsessionid=c148eaafbd1a9e680f2c2879705e?ownerId=1">Nova Comunidade</a>
+                                </li>
+                                <li><a href="/dataset.xhtml;jsessionid=c148eaafbd1a9e680f2c2879705e?ownerId=1">Novo conjunto de dados</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pesquisa <b class="caret"></b></a>
+                            <ul class="dropdown-menu navbar-search">
+                                <form class="form-inline" role="search">
+                                    <label class="sr-only" for="navbarsearch">Pesquisa</label>
+                                    <div class="input-group">
+                                        <input id="navbarsearch" type="text" class="form-control" size="28" value="" placeholder="Pesquisa de todos os dataverses ..." />
+                                        <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-default" onclick="window.location = '/dataverse/aleia?q=' + document.getElementById('navbarsearch').value;                                                     return false;">
+                                                <span class="glyphicon glyphicon-search"></span> Localizar
+                                            </button>
+                                        </span>
+                                    </div>
+                                </form>
+                            </ul>
+                        </li>
+                        <li><a href="http://guides.dataverse.org/en/4.20/user" rel="noopener" target="_blank">Guia do usuário</a>
+                        </li>
+<form id="j_idt44" name="j_idt44" method="post" action="/dataverse_homepage.xhtml;jsessionid=c148eaafbd1a9e680f2c2879705e" class="navbar-form navbar-left navbar-form-link">
+<input type="hidden" name="j_idt44" value="j_idt44" />
+<a id="j_idt44:headerSupportLink" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;j_idt44:headerSupportLink&quot;,f:&quot;j_idt44&quot;,u:&quot;contactDialog&quot;,onco:function(xhr,status,args){PF('contactForm').show();}});return false;">Suporte</a><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:0" value="-2426856921648154548:-2607090112559985491" autocomplete="off" />
+</form><li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Idioma">English <b class="caret"></b></a>
+                            <ul class="dropdown-menu navbar-language">
+<form id="j_idt48" name="j_idt48" method="post" action="/;jsessionid=c148eaafbd1a9e680f2c2879705e" class="form-inline" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="j_idt48" value="j_idt48" />
+
+                                        <li>
+<script type="text/javascript" src="/javax.faces.resource/jsf.js.xhtml?ln=javax.faces"></script>
+<a href="#" onclick="mojarra.jsfcljs(document.getElementById('j_idt48'),{'j_idt48:j_idt49:0:j_idt51':'j_idt48:j_idt49:0:j_idt51'},'');return false" class="language-menu-link">Português</a>
+                                        </li>
+                                        <li class="active"><a href="#" onclick="mojarra.jsfcljs(document.getElementById('j_idt48'),{'j_idt48:j_idt49:1:j_idt51':'j_idt48:j_idt49:1:j_idt51'},'');return false" class="language-menu-link">English</a>
+                                        </li><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:0" value="-2426856921648154548:-2607090112559985491" autocomplete="off" />
+</form>
+                            </ul></li>
+                            <li><a href="/dataverseuser.xhtml;jsessionid=c148eaafbd1a9e680f2c2879705e?editMode=CREATE&amp;redirectPage=%2Fdataverse_homepage.xhtml">
+                                    Inscreva-se
+                                </a>
+                            </li>
+                            <li><a href="/loginpage.xhtml;jsessionid=c148eaafbd1a9e680f2c2879705e?redirectPage=%2Fdataverse_homepage.xhtml">
+                                    Iniciar sessão
+                                </a>
+                            </li>
+                    </ul>
+                </div>
+            </div></nav>
+        
+        <noscript>
+            <div id="noscript-alert" class="bg-danger">
+                <div class="alert container text-danger no-margin-bottom">Ative o JavaScript no seu navegador. É necessário usar a maioria dos recursos do Dataverse.
+                </div>
+            </div>
+        </noscript>
+<form id="j_idt97" name="j_idt97" method="post" action="/;jsessionid=c148eaafbd1a9e680f2c2879705e" class="form-inline">
+<input type="hidden" name="j_idt97" value="j_idt97" />
+<input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:0" value="-2426856921648154548:-2607090112559985491" autocomplete="off" />
+</form><div id="messagePanel">
+            <div class="container messagePanel">
+            </div></div>
+    </div>
+        <div class="container" id="content">    
+    <style>
+	.center {
+  	display: flex;
+  	justify-content: center;
+  	align-items: center;
+	}
+	
+	.meio{
+	width: 300px;
+  	height: 300px;
+  	position: absolute;
+  	left: 50%;
+  	top: 50%;
+  	transform: translate(-50%, -50%);}
+
+    
+    </style>
+
+    <div class="col-xs-12">   
+            <div style='position:absolute; top:12%;left:50%'>
+		<div class="center">
+	    		<img src="/logos/navbar/ALEIA/Imagens/ALEIA_logotipo.svg" alt="Aleia"  href="/dataverse/ALEIA">
+		</div>
+	    </div>	
+		<div class="center">
+	    	<img src="/logos/navbar/ALEIA/Imagens/ALEIA_alameda.png" width="1100" height="450" alt="Aleia"  href="/dataverse/ALEIA">
+		</div>
+        <div style='position:absolute; top:73%;left:15%; justify-content: center;'>
+            <div class="row" >
+		<div class="col-lg-10 col-md-9 col-sm-6 col-xs-11">
+                    <div class="search-widget input-group">
+                        <input id="inputDataverseSearch" class="form-control" type="text" placeholder="" onkeydown="if (event.keyCode == 13) document.getElementById('btnDataverseSearch').click();">
+                        <span class="input-group-btn">
+                            <button id="btnDataverseSearch" class="btn btn-default" type="button" onclick="window.location = '/dataverse/ALEIA?q=' + document.getElementById('inputDataverseSearch').value;return false;"><span class="glyphicon glyphicon-search"></span> Pesquisar</button>
+                        </span>
+                    </div>
+	        </div>
+	</div>	
+    </div>	
+
+
+
+    <div class="row hmpg-action-block center ">
+        <div class="col-sm-7 col-xs-12">
+            <div class="h4 lite-header">Deposite e compartilhe seu conjunto de dados no Repositório Aleia</div>
+            <a class="btn btn-default btn-harvard margin-top margin-bottom" href="/dataset.xhtml?ownerId=1">
+                Adicione seu Dados <span class="glyphicon glyphicon-plus text-muted"></span>
+            </a>
+        </div>
+    </div>
+
+
+
+
+
+        </div>
+    <div id="footer">
+        <div class="container">
+            <div class="row"><div class="col-sm-8 small">
+                    <p>Copyright &#169; 2022
+                    </p></div>
+                <div class="col-sm-4 text-right">
+                    <div class="poweredbylogo">
+                        <span>Desenvolvido por</span>
+                        <a href="http://dataverse.org/" title="O Projeto Dataverse" target="_blank" rel="noopener"><img src="/resources/images/dataverse_project_logo.svg" width="118" height="40" onerror="this.src='/resources/images/dataverseproject_logo.png'" alt="O Projeto Dataverse logo" /></a><span class="version">v. 4.20 build 413-4e07b62</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>    <style>
+    	/* NOTE: You can use the custom CSS configuration to move this CSS your own stylesheet. */
+
+    	/* Overwrite default footer styles to make room at the bottom of the browser page for our custom footer... */
+    	html, body {
+            height: 100%;
+        }
+        #content.container {
+            min-height: calc(100% - 210px);
+            margin-bottom: -142px; 
+        }
+        #content.container:after {
+            content: "";
+            display: block;
+        }
+        #footer {
+                color: #a9a9a9; margin-top:0px; padding-bottom:0px; bottom:-130px; position: relative;
+        }
+        
+        /* Place custom footer just above default footer at the bottom of the page... */
+        #custom-footer, #content.container:after {
+            height: 142px; 
+        }
+        #custom-footer {
+            background: #ffffff; color: #a9a9a9; min-height: 100px; padding: 1.25em 0 100px 0;
+        }
+        #custom-footer a {
+            color: #ffffff;
+        }
+
+	#footer-logo {
+	margin-right:100px;
+	width: 100px;
+	height: 100px;
+	}
+	#footer-posi {
+    	position:absolute;
+    	bottom:0;
+    	width:100%;
+	}
+
+    </style>
+<div class='container'>	
+    <div class="footer-posi">
+			<img src="/logos/navbar/rodape.png" class="footer-logo" alt="IBICT/MCTIC" style="float:right">
+		</div>
+		</div>
+<div id="ajaxStatusPanel"><div id="ajaxStatusPanel_start" style="display:none"><img src="/resources/images/ajax-loading.gif;jsessionid=c148eaafbd1a9e680f2c2879705e" alt="Carregando...." /></div></div><script id="ajaxStatusPanel_s" type="text/javascript">$(function(){PrimeFaces.cw("AjaxStatus","widget_ajaxStatusPanel",{id:"ajaxStatusPanel"});});</script><div id="contactDialog" class="ui-dialog ui-widget ui-widget-content ui-corner-all ui-shadow ui-hidden-container"><div class="ui-dialog-titlebar ui-widget-header ui-helper-clearfix ui-corner-top"><span id="contactDialog_title" class="ui-dialog-title">Contato Aleia Suporte</span><a href="#" class="ui-dialog-titlebar-icon ui-dialog-titlebar-close ui-corner-all" aria-label="Close"><span class="ui-icon ui-icon-closethick"></span></a></div><div class="ui-dialog-content ui-widget-content" id="contactDialog_content"><div id="j_idt210">
+<form id="emailForm" name="emailForm" method="post" action="/;jsessionid=c148eaafbd1a9e680f2c2879705e" class="form-horizontal" enctype="application/x-www-form-urlencoded">
+<input type="hidden" name="emailForm" value="emailForm" />
+<span id="emailForm:j_idt211"></span><script type="text/javascript">$(function(){PrimeFaces.focus(null, 'contactDialog');});</script>
+                
+                <div class="form-group">
+                    <label for="messageTo" class="col-sm-3 control-label">Para</label>
+                    <div class="col-sm-9">
+                        <p id="messageTo" class="form-control-static">Aleia Suporte</p>
+                    </div>
+                </div>
+                
+                    <div class="form-group"><label for="emailForm:userEmail" class="col-sm-3 control-label">De <span class="glyphicon glyphicon-asterisk text-danger" title="Campo obrigatório"></span></label>
+                        <div class="col-sm-9"><input id="emailForm:userEmail" name="emailForm:userEmail" type="text" value="" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control" size="30" /><script id="emailForm:userEmail_s" type="text/javascript">$(function(){PrimeFaces.cw("InputText","widget_emailForm_userEmail",{id:"emailForm:userEmail",maxlength:-2147483648});});</script>
+                        </div>
+                    </div>
+                
+                <div class="form-group"><label for="emailForm:messageSubject" class="col-sm-3 control-label">Assunto <span class="glyphicon glyphicon-asterisk text-danger" title="Campo obrigatório"></span></label>
+                    <div class="col-sm-9"><input id="emailForm:messageSubject" name="emailForm:messageSubject" type="text" value="" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all form-control" /><script id="emailForm:messageSubject_s" type="text/javascript">$(function(){PrimeFaces.cw("InputText","widget_emailForm_messageSubject",{id:"emailForm:messageSubject",maxlength:-2147483648});});</script>
+                    </div>
+                </div>   
+                
+                <div class="form-group"><label for="emailForm:userMessage" class="col-sm-3 control-label">Mensagem <span class="glyphicon glyphicon-asterisk text-danger" title="Campo obrigatório"></span></label>
+                    <div class="col-sm-9"><textarea id="emailForm:userMessage" name="emailForm:userMessage" class="ui-inputfield ui-inputtextarea ui-widget ui-state-default ui-corner-all form-control" cols="20" rows="10" maxlength="2147483647"></textarea><script id="emailForm:userMessage_s" type="text/javascript">$(function(){PrimeFaces.cw("InputTextarea","widget_emailForm_userMessage",{id:"emailForm:userMessage",autoResize:false});});</script>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <div class="col-sm-offset-3 col-sm-9">
+                        <p><span class="highlightBold">Por favor, preencha isso para provar que você não é um robô.</span> <span class="glyphicon glyphicon-asterisk text-danger" title="Campo obrigatório"></span>
+                        </p> +  = <input id="emailForm:messageSum" name="emailForm:messageSum" type="text" class="ui-inputfield ui-inputtext ui-widget ui-state-default ui-corner-all" size="4" /><script id="emailForm:messageSum_s" type="text/javascript">$(function(){PrimeFaces.cw("InputText","widget_emailForm_messageSum",{id:"emailForm:messageSum",maxlength:-2147483648});});</script>
+                    </div>
+                </div>
+                
+                <div class="button-block"><button id="emailForm:j_idt238" name="emailForm:j_idt238" class="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only btn btn-default" onclick="PrimeFaces.ab({s:&quot;emailForm:j_idt238&quot;,f:&quot;emailForm&quot;,u:&quot;emailForm&quot;,onco:function(xhr,status,args){if (args &amp;&amp; !args.validationFailed) PF('contactForm').hide();;},pa:[{name:&quot;DO_VALIDATION&quot;,value:&quot;true&quot;}],fi:&quot;j_idt210&quot;});return false;" type="submit"><span class="ui-button-text ui-c">Enviar mensagem</span></button><script id="emailForm:j_idt238_s" type="text/javascript">$(function(){PrimeFaces.cw("CommandButton","widget_emailForm_j_idt238",{id:"emailForm:j_idt238"});});</script>
+                    <button class="btn btn-link" onclick="PF('contactForm').hide()" type="button">
+                        Cancelar
+                    </button>
+                </div><input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:0" value="-2426856921648154548:-2607090112559985491" autocomplete="off" />
+</form></div></div></div><script id="contactDialog_s" type="text/javascript">$(function(){PrimeFaces.cw("Dialog","contactForm",{id:"contactDialog",modal:true});});</script>
+        <script defer="defer" src="/javax.faces.resource/bs/js/bootstrap.min.js.xhtml?version=4.20"></script>
+        <script defer="defer" src="/javax.faces.resource/js/ie-compat.js.xhtml?version=4.20"></script>
+        <script defer="defer" src="/javax.faces.resource/js/dv_rebind_bootstrap_ui.js.xhtml?version=4.20"></script>
+        <script defer="defer" src="/javax.faces.resource/js/owl.carousel.js.xhtml?version=4.20"></script>
+        <script defer="defer" src="/javax.faces.resource/js/jquery.matchHeight.js.xhtml?version=4.20"></script>
+        <script defer="defer" src="/javax.faces.resource/js/jquery.sharrre.js.xhtml?version=4.20"></script>  
+        <script defer="defer" src="/javax.faces.resource/js/clipboard.min.js.xhtml?version=4.20"></script>
+        <script>
+            //<![CDATA[
+            $(document).ready(function () {
+                // Navbar Search Toggle
+                $(document).on('click', '#navbar-search-toggle', function (e) {
+                    $(this).parent("li").hide();
+                    $("form.navbar-form[role='search']").show();
+                });
+                $('body').click(function (e) {
+                    if (!$(e.target).closest("form.navbar-form[role='search']").length) {
+                        $("form.navbar-form[role='search']").hide();
+                        $("#navbar-search-toggle").parent("li").show();
+                    }
+                    ;
+                });
+
+                // Rebind bootstrap UI components
+                bind_bsui_components();
+            });            
+            function clickSupportLink() {
+                $("[id$='headerSupportLink']").click();
+            }            
+            //]]>
+        </script></body>
+</html>
