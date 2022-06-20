@@ -168,3 +168,10 @@ Chamada
 .dataverseHeaderName {
   margin-left: 130px;
 }
+/*
+Espaço no reenvio de senha
+*/
+#messagePanel
+{
+  margin-top: 80px;
+}

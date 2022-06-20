@@ -171,6 +171,11 @@ class LattesData extends Model
 		return array($p, $erro);
 	}	
 
+	function show_metadata($dt)
+		{
+			echo h($dt);
+		}
+
 	function Process($dt = array('20113023806', 0))
 	{
 		$sx = '';
@@ -192,13 +197,24 @@ class LattesData extends Model
 			{
 				$sx = 'Erro de importação';
 				return $sx;
-			}
+			}			
 
 		/*********************** read metadata */
 		jslog('File: '.$file);
 
 		$dt = file_get_contents($file);
 		$dt = (array)json_decode($dt);
+
+		/********************************************** CONFIRM */				
+		$confirm = false;
+		if ($confirm == false)
+			{
+				return $sx;
+			} else {
+				//20123033642
+			}
+		echo "OPS";
+		exit;
 
 		/********************************************** MODALIDADE */
 		$MOD = 'X';
