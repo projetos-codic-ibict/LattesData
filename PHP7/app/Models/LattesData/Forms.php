@@ -108,6 +108,7 @@ function welcome()
               ';
             $sx .= form_open(URL);
             //$sx .= '<form method="post" accept-charset="utf-8">';
+            $sx .= 'Informe o número do processo no CNPq para iniciar o depósito.';
             $sx .= form_input('process', '', 'class="form-control" placeholder="Número do processo"');
             $sx .= 'Ex: 123456/2022-2';
             $info = 'O número do processo do CNPQ é composto por seis dígitos, '.chr(13)

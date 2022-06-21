@@ -8,3 +8,10 @@ PHP/writable/session\*
 PHP\writable\session\ci_session*
 PHP\.tmp
 PHP/writable/session/*
+
+PHP7/writable/*
+PHP7/public/.tmp/*
+PHP7/writable/session\*
+PHP7\writable\session\ci_session*
+PHP7\.tmp
+PHP7/writable/session/*
