@@ -55,10 +55,14 @@ class Headers extends Model
             $ff = $files[$r];
             $file = '/var/www/dataverse/branding/' . $ff;
             if (file_exists($file)) {
-                $sx .= file_get_contents($file);
+                
+                if (strpos($ff, '.css') > 0) {
+                    $sx .= '<style>' . chr(13) . chr(10) . file_get_contents($file) . chr(13) . chr(10) . '</style>' . chr(13) . chr(10);
+                } else {
+                    $sx .= file_get_contents($file);
+                }
             } else {
                 $file = '../../Dataverse/cnpq/branding/' . $ff;
-                echo h($file);
                 if (file_exists($file)) {
                     if (strpos($ff, '.css') > 0) {
                         $sx .= '<style>' . chr(13) . chr(10) . file_get_contents($file) . chr(13) . chr(10) . '</style>' . chr(13) . chr(10);
