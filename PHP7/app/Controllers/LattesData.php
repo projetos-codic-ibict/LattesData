@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-helper(['boostrap', 'url', 'form', 'nbr', 'sessions','sisdoc_forms']);
+helper(['boostrap', 'url', 'form', 'nbr', 'sessions','sisdoc_forms','dataverse']);
 
 use App\Controllers\BaseController;
 define("URL", getenv("app.baseURL"));

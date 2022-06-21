@@ -41,28 +41,133 @@ class LattesData extends Model
 	protected $afterDelete          = [];
 	var $FileDayValid = 3;
 	var $status = 0;
+	var $alias = '';
 
-	function create_user()
-		{
-			$sx = bsicone('process').' Criando usuário';
-			return $sx;
+	function create_user($proto, $dt)
+	{
+		$sx = bsicone('process') . ' Criando usuário';
+		$du = $dt['identificadoresPessoa'];
+		if (!isset($dt['nomePessoa'])) {
+			$nome = 'sem nome da silva';
+		} else {
+			$nome = $dt['nomePessoa'];
 		}
-	function create_dataverse()
-		{
-			$sx = bsicone('process').' Criando Comunidade Dataverse';
-			$this->status = '200';
-			return $sx;
+		$nomep = nbr_author($nome, 1);
+
+		$firstname = mb_strtolower(substr($nomep, strpos($nomep, ',') + 1, strlen($nomep)));
+		$lastname = mb_strtolower(substr($nomep, 0, strpos($nomep, ',')));
+		$firstname = nbr_author($firstname, 7);
+		$lastname = nbr_author($lastname, 7);
+
+		$email = $dt['emailContato'];
+
+		/***************** AFILIAÇÃO */
+		$aff = (array)$dt['instituicoes'];
+		if (isset($aff[0])) {
+			$affn = (array)$aff[0];
+			$sigla = $affn['siglaMacro'];
+			$inst = $affn['nomeMacro'];
+			if ($inst == '') {
+				$sigla = $affn['sigla'];
+				$inst = $affn['nome'];
+			}
+		} else {
+			$sigla = '';
+			$inst = '';
 		}
+		/**************** Identificadores */
+		$aff = (array)$dt['identificadoresPessoa'];
+		$ids = array();
+		for ($r = 0; $r < count($aff); $r++) {
+			$affn = (array)$aff[$r];
+			$idp_type = $affn['tipo'];
+			$idp_value = $affn['identificador'];
+			$ids[$idp_type] = $idp_value;
+		}
+
+		$dv['firstName'] = $firstname;
+		$dv['lastName'] = $lastname;
+		$dv['userName'] = troca($email, '@', '-');
+		$dv['affiliation'] = $inst;
+		$dv['position'] = 'Research';
+		$dv['email'] = $email;
+		$sx = CreateUser($dv);
+		return $sx;
+	}
+
+	function getContent($dt, $name)
+	{
+		$value = '';
+		foreach ($dt as $field => $value) {
+			if (is_array($value)) {
+				$value = $this->getContent($value, $name);
+				if ($value != '') {
+					return $value;
+				}
+			} else {
+				if (trim((string)$field) == trim($name)) {
+					return $value;
+				}
+			}
+		}
+		return '';
+	}
+	/*************************************** CRIAR DATAVERSE */
+	function create_dataverse_provinience($proc, $parent, $dt)
+	{
+		$parent = 'beneficiarios';
+		/* *********************/
+		$chamada = $dt['chamada']['sigla'];
+		$chamada_nome = $dt['chamada']['nome'];
+		$alias = troca($chamada, ' ', '');
+		switch ($chamada) {
+			default:
+				$chamada .= ' - ' . $chamada_nome;
+		}
+		$dd['alias'] = $alias;
+		$dd['name'] = $chamada;
+		$contact[0]['contactEmail'] = 'lattesdata@cnpq.br';
+		$dd['dataverseContacts'] = $contact;
+		$dd['affiliation'] = 'CNPq';
+		$dd['description'] = $chamada;
+		$dd['dataverseType'] = 'LABORATORY';
+		$sx = '<div>' . CreateDataverse($dd, $parent) . '</div>';
+		$this->alias = $dd['alias'];
+		return $sx;
+	}
+
+
+	/*************************************** CRIAR DATAVERSE */
+	function create_dataverse($proc, $parent, $dt)
+	{
+		$procX = substr($proc, 0, 4) . 'CNPq' . substr($proc, 4, strlen($proc));
+		$PROTO = $this->getContent($dt, 'numeroProcesso');
+		$dd['alias'] = $procX;
+		$dd['name'] = $this->getContent($dt, 'titulo') . ' (' . $PROTO . ')';
+		$contact[0]['contactEmail'] = $this->getContent($dt, 'emailContato');
+		$dd['dataverseContacts'] = $contact;
+		$dd['affiliation'] = $this->getContent($dt['instituicoes'], 'nome');
+		$dd['description'] = $this->getContent($dt['projeto'], 'resumo');
+		$dd['dataverseType'] = 'LABORATORY';
+
+		$sx = bsicone('process') . ' Criando Comunidade Dataverse';
+		$dt = array();
+		echo h($parent);
+		$sx .= '<div>' . CreateDataverse($dd, $parent) . '</div>';
+		$this->status = '200';
+		return $sx;
+	}
 	function create_dataset()
-		{
-			$sx = bsicone('process').' Criando Conjunto de Dados';
-			return $sx;
-		}		
+	{
+		$sx = bsicone('process') . ' Criando Conjunto de Dados';
+		return $sx;
+	}
+
 	function sendemail_user()
-		{
-			$sx = bsicone('process').' Enviando e-mail para usuário';
-			return $sx;
-		}
+	{
+		$sx = bsicone('process') . ' Enviando e-mail para usuário';
+		return $sx;
+	}
 
 	function API_getFileCnpq($id)
 	{
@@ -205,86 +310,81 @@ class LattesData extends Model
 			jslog('Cache CNPq ' . $proto);
 		}
 		$file = $this->temp_file($proto);
-		if (file_exists($file))
-			{
-				$dt = file_get_contents($file);
-				$dt = json_decode($dt, true);
-				$dt = (array)$dt;
-			} else {
-				echo "OPS - Arquivo não encontrado";
-				echo '<br>'.$file;
-				exit;
-			}
+		if (file_exists($file)) {
+			$dt = file_get_contents($file);
+			$dt = json_decode($dt, true);
+			$dt = (array)$dt;
+		} else {
+			echo "OPS - Arquivo não encontrado";
+			echo '<br>' . $file;
+			exit;
+		}
 
 		/************ Processo */
-		$sx = '<span>Processo</span>'.chr(13);
-		$sx .= '<p style="font-size: 150%"><b>'.$dt['numeroProcesso'].'</b></p>'.chr(13);			
+		$sx = '<span>Processo</span>' . chr(13);
+		$sx .= '<p style="font-size: 150%"><b>' . $dt['numeroProcesso'] . '</b></p>' . chr(13);
 
 		/************ Metadados */
-		$sx .= '<span>Título do projeto</span>'.chr(13);
-		$sx .= '<p style="font-size: 150%"><b>'.$dt['projeto']['titulo'].'</b></p>'.chr(13);
+		$sx .= '<span>Título do projeto</span>' . chr(13);
+		$sx .= '<p style="font-size: 150%"><b>' . $dt['projeto']['titulo'] . '</b></p>' . chr(13);
 
 		/************** Modalidade */
-		$sx .= '<span>Modalidade</span>'.chr(13);
-		$sx .= '<p style="font-size: 130%">'.$dt['modalidade']['codigo'].' - '.$dt['modalidade']['nome'].'</p>'.chr(13);
+		$sx .= '<span>Modalidade</span>' . chr(13);
+		$sx .= '<p style="font-size: 130%">' . $dt['modalidade']['codigo'] . ' - ' . $dt['modalidade']['nome'] . '</p>' . chr(13);
 
 		/************** Chamda */
-		$sx .= '<span>Chamada</span>'.chr(13);
-		$sx .= '<p style="font-size: 130%">'.$dt['chamada']['sigla'].' - '.$dt['chamada']['nome'].'</p>'.chr(13);
-		
+		$sx .= '<span>Chamada</span>' . chr(13);
+		$sx .= '<p style="font-size: 130%">' . $dt['chamada']['sigla'] . ' - ' . $dt['chamada']['nome'] . '</p>' . chr(13);
+
 		/************** Chamada */
 		$email = $dt['emailContato'];
-		$email_mask = substr($email,0,strpos($email,'@'));
-		$email_mask = substr($email,0,strlen($email_mask)/2).str_repeat('*',strlen($email_mask)/2);
-		$email_domi = '@'.substr($email,strlen($email_mask)+1);
+		$email_mask = substr($email, 0, strpos($email, '@'));
+		$email_mask = substr($email, 0, strlen($email_mask) / 2) . str_repeat('*', strlen($email_mask) / 2);
+		$email_domi = '@' . substr($email, strlen($email_mask) + 1);
 		//$email_mask = str_repeat('*',strlen($email_mask));
-		$sx .= '<span>Pesquisador Responsável</span>'.chr(13);
-		$sx .= '<p style="font-size: 130%">'.$dt['nomePessoa'].'<br/>'.chr(13);
-		$sx .= 'e-mail: '.$email_mask.$email_domi.'</p>'.chr(13);
+		$sx .= '<span>Pesquisador Responsável</span>' . chr(13);
+		$sx .= '<p style="font-size: 130%">' . $dt['nomePessoa'] . '<br/>' . chr(13);
+		$sx .= 'e-mail: ' . $email_mask . $email_domi . '</p>' . chr(13);
 
 		/************** Instituições */
-		$sx .= '<span>Vinculo(s) institucional(is)</span>'.chr(13);
+		$sx .= '<span>Vinculo(s) institucional(is)</span>' . chr(13);
 		$inst = array();
-		for ($r=0;$r < count($dt['instituicoes']);$r++)
-			{
-				$line = $dt['instituicoes'][$r];
-				$inst_name = $line['nome'];
-				if (strlen($line['sigla']) > 0)
-					{
-						$inst_name = $inst_name.' ('.$line['sigla'].')';
-					}
-				$inst[$inst_name] = 1;
+		for ($r = 0; $r < count($dt['instituicoes']); $r++) {
+			$line = $dt['instituicoes'][$r];
+			$inst_name = $line['nome'];
+			if (strlen($line['sigla']) > 0) {
+				$inst_name = $inst_name . ' (' . $line['sigla'] . ')';
 			}
-		foreach($inst as $nome=>$ok)
-		$sx .= '<p style="font-size: 130%">'.$nome.'</p>'.chr(13);
-		
-		$sx .= '<br/><br/>'.chr(13);
+			$inst[$inst_name] = 1;
+		}
+		foreach ($inst as $nome => $ok)
+			$sx .= '<p style="font-size: 130%">' . $nome . '</p>' . chr(13);
 
-		$chk = md5($proto.date("Ymd"));
-		if (isset($_POST['confirm']))		
-			{
-				$sx .= '<div style="font-size: 130%">';
-				$sx .= $this->create_dataverse($proto).'<br>';
-				switch($this->status)
-					{
-						case '200':
-						$sx .= $this->create_user($proto).'<br>';
-						$sx .= $this->create_dataset($proto).'<br>';
-						$sx .= $this->sendemail_user($proto).'<br>';
-						break;
-					}				
-				$sx .= '</div>';
-				
-			} else {
-				$sx .= form_open(URL);
-				$sx .= form_hidden('process', $proto);
-				$sx .= form_hidden('confirm', $chk);
-				$sx .= form_submit('action', 'Confirmar criação do Dataset para depósito (Dataverse)','class="btn btn-primary"');
-				$sx .= form_close();
+		$sx .= '<br/><br/>' . chr(13);
+
+		$chk = md5($proto . date("Ymd"));
+		$parent = 'lattesdata';
+		if (isset($_POST['confirm'])) {
+			$sx .= '<div style="font-size: 130%">';
+			$sx .= $this->create_dataverse_provinience($proto, '', $dt) . '<br>';
+			$sx .= $this->create_dataverse($proto, $this->alias, $dt) . '<br>';
+			switch ($this->status) {
+				case '200':
+					$sx .= $this->create_user($proto, $dt) . '<br>';
+					$sx .= $this->create_dataset($proto) . '<br>';
+					$sx .= $this->sendemail_user($proto) . '<br>';
+					break;
 			}
+			$sx .= '</div>';
+		} else {
+			$sx .= form_open(URL);
+			$sx .= form_hidden('process', $proto);
+			$sx .= form_hidden('confirm', $chk);
+			$sx .= form_submit('action', 'Confirmar criação do Dataset para depósito (Dataverse)', 'class="btn btn-primary"');
+			$sx .= form_close();
+		}
 
-
-		$sx .= '<br/><br/>'.chr(13);
+		$sx .= '<br/><br/>' . chr(13);
 
 		return $sx;
 	}

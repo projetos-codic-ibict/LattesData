@@ -66,11 +66,11 @@ function welcome()
     {
         $sx = '';
         $sx = h('Deposite seus dados');
-        $sx .= '<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse ac rhoncus mi. Maecenas luctus sapien velit. Etiam eget dolor mollis, porta leo eu, dignissim ligula. Vestibulum porttitor tempus consequat. Ut tellus urna, convallis et risus nec, tincidunt placerat dui. Curabitur non lectus aliquam, iaculis erat vel, molestie nisl. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras vel mollis augue, in imperdiet ipsum. Donec maximus efficitur ex, vel laoreet massa euismod ut. Aliquam porttitor mollis odio dapibus auctor. Donec at dui et justo eleifend tincidunt. Duis at finibus mi, ac lacinia felis. Mauris et ultrices nulla. Aenean nec luctus elit. Nulla facilisi.</p>';
-        $sx .= '<p>Sed placerat lacus id sagittis consectetur. Ut vitae sodales mi. Donec vel quam sed elit mattis elementum. Nunc feugiat odio a sem rhoncus, at consequat enim interdum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquam ultrices erat ac pharetra. Phasellus dictum nisi quis nunc euismod, sit amet blandit elit condimentum.</p>';
-        $sx .= '<p>Donec eleifend ante eu fringilla lacinia. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum mattis ac orci vitae faucibus. Fusce cursus, ex et scelerisque commodo, tellus dui euismod felis, eu vestibulum ipsum libero eu libero. Cras in lacus et felis molestie cursus. Maecenas tempus nisl ac lacus interdum dignissim non ut velit. Suspendisse pellentesque metus arcu. Nulla facilisi. Quisque ac porta leo, sit amet porta sem. Vivamus aliquet, lacus non commodo efficitur, lacus nulla rhoncus quam, ac lobortis enim leo eu diam. Aenean accumsan ullamcorper fringilla. Nulla dapibus id quam ut condimentum. In tincidunt orci et eleifend varius.</p>';
-        $sx .= '<div style="height: 200px;"></div>';
-        $sx .= '<p>20203121198</p>';
+        $sx .= '<p>Seja bem-vindo ao Repositório LattesData!</p>';
+        $sx .= '<p>Este espaço é destinado para que pesquisadores possam realizar o depósito dos seus conjuntos de dados que tiveram suas pesquisas financiadas totalmente ou parcialmente pelo CNPq.</p>';
+        $sx .= '<p>Para iniciar a submissão preencha o campo a direita da tela com número do processo no CNPq, depois clique em “Depositar”.</p>';
+        $sx .= '<p>Após essa etapa inicial, será direcionado para o formulário de depósito dos conjuntos de dados. Caso tenha alguma dúvida no acesso ou preenchimento dos metadados, entre em contato com o seguinte e-mail: lattesdata@cnpq.br.</p>';
+        $sx .= '<div style="height: 100px"></div>';
         return $sx;
     }
 

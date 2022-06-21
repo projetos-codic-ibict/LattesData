@@ -15,6 +15,19 @@
 #--------------------------------------------------------------------
 
 # CI_ENVIRONMENT = production
+# CI_ENVIRONMENT = production
+CI_ENVIRONMENT = development
+
+DATAVERSE_URL = 'http://172.16.16.68:8080/'
+DATAVERSE_APIKEY = 'XXXXXXXXXXXXXXXXXXXXXXXX'
+# BuiltinUsers.KEY
+# Definir a senha secreta para criação de usuários
+# curl -X PUT -d builtInS3kretKey http://localhost:8080/api/admin/settings/BuiltinUsers.KEY
+BUILTIN_USERS_KEY = 'XXXXXXXXXXXXXXXXXXXXXXX'
+
+token_lattes = 'XXXXXXXXXXXXXXXXXXXXXXXXXX'
+#url_lattes = 'https://cnpqapi-fomento.cnpq.br/v1/lattesdata/processos/'
+url_lattes = 'https://brapci.inf.br/ws/api/?verb=lattesdata&q='
 
 #--------------------------------------------------------------------
 # APP
