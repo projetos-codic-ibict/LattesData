@@ -120,6 +120,8 @@ class LattesData extends Model
 		$chamada = $dt['chamada']['sigla'];
 		$chamada_nome = $dt['chamada']['nome'];
 		$alias = troca($chamada, ' ', '');
+		$alias = troca($alias, '-', '');
+
 		switch ($chamada) {
 			default:
 				$chamada .= ' - ' . $chamada_nome;
