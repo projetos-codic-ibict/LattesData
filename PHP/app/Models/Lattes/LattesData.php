@@ -50,56 +50,53 @@ class LattesData extends Model
 			$url = getenv('url_lattes');
 
 			/*********************************** BRAPCI */
-			if (strpos($url,'brapci'))
-				{
-					/***************** Brapci */
-					$BrapciAPI = new \App\Models\Lattes\BrapciAPI();
-					jslog('Extrator: LattesExtrator');
-					$js = $BrapciAPI->get($id);
-					if (strlen($js) > 0)
-						{
-							$file = $this->temp_file($id);
-							file_put_contents($file, $js);
-							jslog('Saved: '.$file);
-						} else {
-							jslog('Erro save file: '.$id);
-						}
+			if (strpos($url, 'brapci')) {
+				/***************** Brapci */
+				$BrapciAPI = new \App\Models\Lattes\BrapciAPI();
+				jslog('Extrator: LattesExtrator');
+				$js = $BrapciAPI->get($id);
+				if (strlen($js) > 0) {
+					$file = $this->temp_file($id);
+					file_put_contents($file, $js);
+					jslog('Saved: ' . $file);
 				} else {
-					/***************** CNPQ */
-					$LattesExtrator = new \App\Models\Lattes\LattesExtrator();
-					jslog('Extrator: Brapci');
+					jslog('Erro save file: ' . $id);
 				}
+			} else {
+				/***************** CNPQ */
+				$LattesExtrator = new \App\Models\Lattes\LattesExtrator();
+				jslog('Extrator: Brapci');
+			}
 			return true;
 		} else {
 			return false;
 		}
 	}
 
-	function temp_file($id='')
-		{
+	function temp_file($id = '')
+	{
 		dircheck('.tmp');
 		dircheck('.tmp/LattesData');
 		$file = '.tmp/LattesData/' . $id . '.json';
 		return $file;
-		}
+	}
 
 	function cachedAPI($id = '')
 	{
 		$file = $this->temp_file($id);
 
-		if (file_exists($file))
-			{
+		if (file_exists($file)) {
 			$dt = filemtime($file);
 			$date1 = date_create(date("Y-m-d"));
 			$date2 = date_create(date("Y-m-d", $dt));
 			$diff = date_diff($date1, $date2);
 			$dias = $diff->format("%a");
 
-				if ($dias > $this->FileDayValid) {
-					return false;
-				}
-			return true;
+			if ($dias > $this->FileDayValid) {
+				return false;
 			}
+			return true;
+		}
 		return false;
 	}
 
@@ -169,50 +166,112 @@ class LattesData extends Model
 			$erro = 2;
 		}
 		return array($p, $erro);
-	}	
+	}
 
-	function show_metadata($dt)
-		{
-			echo h($dt);
+	function show_metadate($proc)
+	{
+		$proto = $proc[0];
+		/******************** Recupera nome do arquivo */
+		$cached = $this->cachedAPI($proto);
+
+		/************************************ GET API CNPq */
+		if (!$cached) {
+			jslog('API CNPq ' . $proto);
+			$file = $this->API_getFileCnpq($proto);
+		} else {
+			jslog('Cache CNPq ' . $proto);
 		}
+		$file = $this->temp_file($proto);
+		if (file_exists($file))
+			{
+				$dt = file_get_contents($file);
+				$dt = json_decode($dt, true);
+				$dt = (array)$dt;
+			} else {
+				echo "OPS";
+				exit;
+			}
+
+		/************ Processo */
+		$sx = '<span>Processo</span>'.chr(13);
+		$sx .= '<p style="font-size: 150%"><b>'.$dt['numeroProcesso'].'</b></p>'.chr(13);			
+
+		/************ Metadados */
+		$sx .= '<span>Título do projeto</span>'.chr(13);
+		$sx .= '<p style="font-size: 150%"><b>'.$dt['projeto']['titulo'].'</b></p>'.chr(13);
+
+		/************** Modalidade */
+		$sx .= '<span>Modalidade</span>'.chr(13);
+		$sx .= '<p style="font-size: 130%">'.$dt['modalidade']['codigo'].' - '.$dt['modalidade']['nome'].'</p>'.chr(13);
+
+		/************** Chamda */
+		$sx .= '<span>Chamada</span>'.chr(13);
+		$sx .= '<p style="font-size: 130%">'.$dt['chamada']['sigla'].' - '.$dt['chamada']['nome'].'</p>'.chr(13);
+		
+		/************** Chamada */
+		$email = $dt['emailContato'];
+		$email_mask = substr($email,0,strpos($email,'@'));
+		$email_mask = substr($email,0,strlen($email_mask)/2).str_repeat('*',strlen($email_mask)/2);
+		$email_domi = '@'.substr($email,strlen($email_mask)+1);
+		//$email_mask = str_repeat('*',strlen($email_mask));
+		$sx .= '<span>Pesquisador Responsável</span>'.chr(13);
+		$sx .= '<p style="font-size: 130%">'.$dt['nomePessoa'].'<br/>'.chr(13);
+		$sx .= 'e-mail: '.$email_mask.$email_domi.'</p>'.chr(13);
+
+		/************** Instituições */
+		$sx .= '<span>Vinculo(s) institucional(is)</span>'.chr(13);
+		$inst = array();
+		for ($r=0;$r < count($dt['instituicoes']);$r++)
+			{
+				$line = $dt['instituicoes'][$r];
+				$inst_name = $line['nome'];
+				if (strlen($line['sigla']) > 0)
+					{
+						$inst_name = $inst_name.' ('.$line['sigla'].')';
+					}
+				$inst[$inst_name] = 1;
+			}
+		foreach($inst as $nome=>$ok)
+		$sx .= '<p style="font-size: 130%">'.$nome.'</p>'.chr(13);
+		
+		$sx .= '<br/><br/>'.chr(13);
+
+		$sx .= form_open();
+		$sx .= form_hidden('process', $proto);
+		$sx .= form_submit('action', 'Confirmar criação do Dataset para depósito (Dataverse)','class="btn btn-primary"');
+		$sx .= form_close();
+
+		$sx .= '<br/><br/>'.chr(13);
+
+		return $sx;
+	}
 
 	function Process($dt = array('20113023806', 0))
 	{
 		$sx = '';
 		$id = $dt[0];
-		/******************** Recupera nome do arquivo */
-		$cached = $this->cachedAPI($id);
 
-		/************************************ GET API CNPq */
-		if (!$cached) {
-			jslog('API CNPq ' . $id);
-			$file = $this->API_getFileCnpq($id);
-		} else {
-			jslog('Cache CNPq ' . $id);
-		}
 
 		/********************************** Fase de Processamento */
 		$file = $this->temp_file($id);
-		if (!file_exists($file))
-			{
-				$sx = 'Erro de importação';
-				return $sx;
-			}			
+		if (!file_exists($file)) {
+			$sx = 'Erro de importação';
+			return $sx;
+		}
 
 		/*********************** read metadata */
-		jslog('File: '.$file);
+		jslog('File: ' . $file);
 
 		$dt = file_get_contents($file);
 		$dt = (array)json_decode($dt);
 
-		/********************************************** CONFIRM */				
+		/********************************************** CONFIRM */
 		$confirm = false;
-		if ($confirm == false)
-			{
-				return $sx;
-			} else {
-				//20123033642
-			}
+		if ($confirm == false) {
+			return $sx;
+		} else {
+			//20123033642
+		}
 		echo "OPS";
 		exit;
 
@@ -233,7 +292,7 @@ class LattesData extends Model
 				$sx .= $js->register($dt, $id);
 				break;
 			default:
-				$sx .= 'OPS ' . $MOD . ' not implemented - '.$id;
+				$sx .= 'OPS ' . $MOD . ' not implemented - ' . $id;
 				print_r($dt);
 				return $sx;
 		}

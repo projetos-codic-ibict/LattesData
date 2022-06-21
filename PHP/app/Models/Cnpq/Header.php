@@ -45,22 +45,21 @@ class Header extends Model
             $erro = '';
             $LattesData = new \App\Models\Lattes\LattesData();
             $proc = '';
-            if (isset($_POST['process']))
+            if (isset($_POST['process']) and (strlen($_POST['process']) > 0))
                 {
                     $proc = $_POST['process'];
                     $proc = $LattesData->padroniza_processo($proc); 
-                    
+
                     switch ($proc[1])
                         {
                             case '0':
                                 $proc = $proc[0];
                                 break;
                             case '2':
-                                $erro = 'ERRO - '.$proc[1];
+                                $erro = 'ERRO - '.$proc[0].' - '.$proc[1];
                                 $proc = '';
                                 break;
                             default:
-                                $erro = 'ERRO - '.$proc[1];
                                 $proc = '';
                                 break;
                         }
