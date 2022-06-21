@@ -6,7 +6,7 @@ helper(['boostrap', 'url', 'graphs',
         'sisdoc_forms', 'form', 'nbr', 'sessions',
         'database']);
 define("URL", getenv('app.baseURL'));
-define("PATH", getenv('app.baseURL').'index.php/');
+define("PATH", getenv('app.baseURL'));
 define("MODULE", 'cnpq/');
 
 $this->session = \Config\Services::session();
