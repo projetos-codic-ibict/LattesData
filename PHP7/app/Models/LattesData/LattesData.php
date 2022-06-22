@@ -157,9 +157,22 @@ class LattesData extends Model
 
 		$sx = bsicone('process') . ' Criando Comunidade Dataverse';
 		$dt = array();
-		$sx .= '<br>' . CreateDataverse($dd, $parent);
-		$this->alias = $dd['alias'];
-		$this->status = '200';
+		$rsp = CreateDataverse($dd, $parent);
+		$sx .= '<br>' . $rsp;
+		if (strpos($rsp,'already exists'))
+			{
+				$link = 'https://lattesdata.cnpq.br';
+				$sx .= '<div class="alert alert-danger" role="alert">Conjunto de Dados (Dataset) já existe!<br>';
+				$sx .= 'Acesse o LattesData com seu login e senha, caso tenha esquecido solicite reenvio de senha</p>';
+				$sx .= '<a href="'.$link.'">'.$link.'</a>';
+				$sx .= '</div>';
+				$this->alias = $dd['alias'];
+				$this->status = '100';		
+			} else {
+				$this->alias = $dd['alias'];
+				$this->status = '200';		
+			}
+		
 		return $sx;
 	}
 	function create_dataset($dt,$parent)
@@ -291,9 +304,8 @@ function getDataset($dt, $user=0)
    		array_push($fld, $fields);
 
 		/* Vigência */
-
 		$vg_ini = sonumero($dt['dataInicioVigencia']);
-		$vg_fim = sonumero($dt['dataInicioVigencia']);
+		$vg_fim = sonumero($dt['dataTerminoVigencia']);
 		$vg_ini = substr($vg_ini,4,4).substr($vg_ini,2,2).substr($vg_ini,0,2);
 		$vg_fim = substr($vg_fim,4,4).substr($vg_fim,2,2).substr($vg_fim,0,2);
         $fields = array('typeName' => 'timePeriodCoveredStart', 'multiple' => false, 'typeClass' => 'primitive', 'value' => $date);
