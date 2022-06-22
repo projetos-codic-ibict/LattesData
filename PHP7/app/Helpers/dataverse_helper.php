@@ -24,6 +24,8 @@ function CreateUser($dd)
         jslog($cmd);
         $txt = shell_exec($cmd);
         jslog($txt);
+        $sx = '<span class="text-success">Usuário criado</span>';
+        return $sx;
     }        
 
 /******************************************************************************************* Trata ERRO */    
@@ -39,7 +41,7 @@ function dataverseError($rsp)
                             $sx = '<span class="text-danger">'.$rsp['message'].'</span>';
                             break;
                         default:
-                            $sx .= 'OK';
+                            $sx .= '<span class="text-success">Sucesso na criação</span>';
                     }
             }
         return $sx;
@@ -81,30 +83,6 @@ function CreateDataverse($dd,$PARENT='')
         $rsp = (array)json_decode($rsp);
         $sx = dataverseError($rsp);
         return $sx;
-
-        $msg = (string)$rsp['json'];
-        $msg = (array)json_decode($msg);
-
-        if (!isset($msg['status']))
-            {
-                return lang('Response empty');
-            }
-        $sta = trim((string)$msg['status']);
-        switch($sta)
-            {
-                case 'OK':
-                    $sx = 'OK';
-                break;
-                
-                case 'ERROR':
-                    $sx = '<pre style="color: red;">'; 
-                    $sx .= $msg['message'];	
-                    $sx .= '<br>Dataverse Name: <b>'.$dd['alias'].'</b>';
-                    $sx .= '<br><a href="'.'dataverse/'.$PARENT.'" target="_blank">'.$url.'/'.$PARENT.'</a>';
-                    $sx .= '</pre>';
-                    break;
-            }
-        return $sx;
     } 
 
 /*********************************************************************************** Create Dataverse */    
@@ -143,7 +121,7 @@ function CreateDataset($dd,$PARENT='')
         switch($sta)
             {
                 case 'OK':
-                    $sx = 'OK';
+                    $sx = '<span class="color: green">Conjunto de dados '.$dd['alias'].'criado</span>';
                 break;
                 
                 case 'ERROR':
@@ -192,7 +170,6 @@ function CreateDataset($dd,$PARENT='')
 				//		$cmd .= '-H "Content-Type: application/json" ';
 				$cmd .= '--upload-file "' . ($dt['FILE']) . '" ';
 			}
-            echo '<pre>'.$cmd.'</pre>';
 			jslog($cmd);
 			$txt = shell_exec($cmd);
 			jslog($txt);

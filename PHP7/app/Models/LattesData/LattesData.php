@@ -91,7 +91,8 @@ class LattesData extends Model
 		$dv['affiliation'] = $inst;
 		$dv['position'] = 'Research';
 		$dv['email'] = $email;
-		$sx = CreateUser($dv);
+		$sx = bsicone('process') . ' Criando Usuário Dataverse<br>';
+		$sx .= CreateUser($dv);	
 		return $sx;
 	}
 
@@ -121,6 +122,7 @@ class LattesData extends Model
 		$chamada_nome = $dt['chamada']['nome'];
 		$alias = troca($chamada, ' ', '');
 		$alias = troca($alias, '-', '');
+		$alias = troca($alias, '/', '_');
 
 		switch ($chamada) {
 			default:
@@ -133,7 +135,8 @@ class LattesData extends Model
 		$dd['affiliation'] = 'CNPq';
 		$dd['description'] = $chamada;
 		$dd['dataverseType'] = 'LABORATORY';
-		$sx = '<div>' . CreateDataverse($dd, $parent) . '</div>';
+		$sx = bsicone('process') . ' Criando Edital Dataverse';
+		$sx .= '<br>' . CreateDataverse($dd, $parent);
 		$this->alias = $dd['alias'];
 		return $sx;
 	}
@@ -154,7 +157,7 @@ class LattesData extends Model
 
 		$sx = bsicone('process') . ' Criando Comunidade Dataverse';
 		$dt = array();
-		$sx .= '<div>' . CreateDataverse($dd, $parent) . '</div>';
+		$sx .= '<br>' . CreateDataverse($dd, $parent);
 		$this->alias = $dd['alias'];
 		$this->status = '200';
 		return $sx;
@@ -164,7 +167,7 @@ class LattesData extends Model
 		$DV = $this->getDataset($dt);	
 		$DV['alias'] = $dt['numeroProcesso'];
 		
-		$sx = bsicone('process') . ' Criando Conjunto de Dados';
+		$sx = bsicone('process') . ' Criando Conjunto de Dados<br>';
 		$sx .= CreateDataset($DV,$this->alias);
 		return $sx;
 	}
@@ -349,7 +352,8 @@ function getDataset($dt, $user=0)
 
 	function sendemail_user()
 	{
-		$sx = bsicone('process') . ' Enviando e-mail para usuário';
+		$sx = bsicone('process') . ' Enviando e-mail para usuário<br>';
+		$sx .= '<font class="text-danger">Falha no envio (SMTP Erro)</font>';
 		return $sx;
 	}
 
@@ -525,6 +529,7 @@ function getDataset($dt, $user=0)
 		$email_mask = substr($email, 0, strpos($email, '@'));
 		$email_mask = substr($email, 0, strlen($email_mask) / 2) . str_repeat('*', strlen($email_mask) / 2);
 		$email_domi = '@' . substr($email, strlen($email_mask) + 1);
+		$email_domi = troca($email_domi,'@@','@');
 		//$email_mask = str_repeat('*',strlen($email_mask));
 		$sx .= '<span>Pesquisador Responsável</span>' . chr(13);
 		$sx .= '<p style="font-size: 130%">' . $dt['nomePessoa'] . '<br/>' . chr(13);

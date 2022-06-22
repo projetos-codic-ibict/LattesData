@@ -58,7 +58,7 @@ class Forms extends Model
                 } else {
                     $sx .= $this->welcome();
                 }        
-        $sx .= '20113023806';
+        //$sx .= '20113023806';
         return $sx;
     }
 
@@ -90,7 +90,7 @@ function welcome()
                                 $proc = $proc[0];
                                 break;
                             case '2':
-                                $erro = 'ERRO - '.$proc[0].' - '.$proc[1];
+                                $erro = 'Número do processo inválido - '.$proc[0];
                                 $proc = '';
                                 break;
                             default:

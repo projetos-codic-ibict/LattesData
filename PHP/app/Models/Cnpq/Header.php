@@ -56,7 +56,7 @@ class Header extends Model
                                 $proc = $proc[0];
                                 break;
                             case '2':
-                                $erro = 'ERRO - '.$proc[0].' - '.$proc[1];
+                                $erro = 'Processo inválido - '.$proc[0];
                                 $proc = '';
                                 break;
                             default:
