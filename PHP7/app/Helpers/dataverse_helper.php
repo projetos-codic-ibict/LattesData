@@ -10,8 +10,8 @@ function CreateUser($dd)
         $SERVER_URL = getenv("DATAVERSE_URL");
         $NEWUSER_PASSWORD = substr(md5($dd['firstName'].$dd['lastName'].date("Ymd")),0,10);
         dircheck('.tmp');
-        dircheck('.tmp/dataverse');
-        $file = '.tmp/dataverse/user-'.troca($dd['userName'],'/','-').'.json';
+        dircheck('.tmp/users');
+        $file = '.tmp/users/user-'.troca($dd['userName'],'/','-').'.json';
         file_put_contents($file, json_encode($dd, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         $url = getenv("DATAVERSE_URL");
 
@@ -21,7 +21,9 @@ function CreateUser($dd)
         $cmd .= 'password='.$NEWUSER_PASSWORD;
         $cmd .= '&key='.getenv('BUILTIN_USERS_KEY');
 
-        echo $cmd;
+        jslog($cmd);
+        $txt = shell_exec($cmd);
+        jslog($txt);
     }        
 
 /******************************************************************************************* Trata ERRO */    
@@ -100,11 +102,60 @@ function CreateDataverse($dd,$PARENT='')
                     $sx .= '<br>Dataverse Name: <b>'.$dd['alias'].'</b>';
                     $sx .= '<br><a href="'.'dataverse/'.$PARENT.'" target="_blank">'.$url.'/'.$PARENT.'</a>';
                     $sx .= '</pre>';
-                    echo $sx;
                     break;
             }
         return $sx;
     } 
+
+/*********************************************************************************** Create Dataverse */    
+function CreateDataset($dd,$PARENT='')
+    {
+        dircheck('.tmp');
+        dircheck('.tmp/dataset');
+        $file = '.tmp/dataset/dataset-'.troca($dd['alias'],'/','-').'.json';
+        file_put_contents($file, json_encode($dd, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        $url = getenv("DATAVERSE_URL");
+        
+        $dd['AUTH'] = true;
+        $dd['POST'] = true;
+        $dd['FILE'] = $file;
+        $dd['url'] = $url;
+        $dd['api'] = 'api/dataverses/'.$PARENT.'/datasets';
+        $dd['apikey'] = getenv('DATAVERSE_APIKEY');
+        $dd['FILE'] = $file;
+
+
+        $rsp = DataverseCurlExec($dd);
+
+        /******************************** Retorno */
+        $rsp = (array)json_decode($rsp);
+        $sx = dataverseError($rsp);
+        return $sx;
+
+        $msg = (string)$rsp['json'];
+        $msg = (array)json_decode($msg);
+
+        if (!isset($msg['status']))
+            {
+                return lang('Response empty');
+            }
+        $sta = trim((string)$msg['status']);
+        switch($sta)
+            {
+                case 'OK':
+                    $sx = 'OK';
+                break;
+                
+                case 'ERROR':
+                    $sx = '<pre style="color: red;">'; 
+                    $sx .= $msg['message'];	
+                    $sx .= '<br>Dataverse Name: <b>'.$dd['alias'].'</b>';
+                    $sx .= '<br><a href="'.'dataverse/'.$PARENT.'" target="_blank">'.$url.'/'.$PARENT.'</a>';
+                    $sx .= '</pre>';
+                    break;
+            }
+        return $sx;
+    }
 
     /******************************************************************************************* Execute CURL */    
     function DataverseCurlExec($dt)
