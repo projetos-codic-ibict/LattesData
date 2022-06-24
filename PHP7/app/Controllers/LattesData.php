@@ -21,6 +21,8 @@ class LattesData extends BaseController
         $sa = $Forms->home();
         $sb = $Forms->form();
 
+        $this->util();
+
         $sx .= bs(bsc($sa,8).bsc($sb,4));
 
         $sx .= $Header->footer();
@@ -38,7 +40,7 @@ class LattesData extends BaseController
                 {
                     $act = $_GET['act'];
                 } else {
-                    $act = '';
+                    $act = 'email';
                 }
             
 
@@ -51,7 +53,7 @@ class LattesData extends BaseController
                         $email = \Config\Services::email();
                         $config['mailType']       = 'html';
                         $email->initialize($config);
-                        $email->setFrom('renefgj@gmail.com');
+                        $email->setFrom('lattesdata@app.ibict.br');
                         $email->setTo('renefgj@gmail.com');
                         $email->setSubject('Formulário de contato');                        
                         $email->send();
