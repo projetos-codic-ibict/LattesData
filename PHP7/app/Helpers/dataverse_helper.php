@@ -6,7 +6,37 @@
 
 function role($user,$dataverse,$role)
     {
-        
+
+    }
+function CreateGroup($alias='',$dd=array())
+    {
+        $nome = "Fulano de Tal";
+        //description
+        //displayName
+        //aliasInOwner
+        $alias = '2020CNPq3121198';
+        $dd['description'] = 'Grupo de Pesquisa - Lider '.$nome;
+        $dd['displayName'] = 'DVGR '.$nome;
+        $dd['aliasInOwner'] = 'renefjg';
+
+        dircheck('.tmp');
+        dircheck('.tmp/group');
+        $file = '.tmp/group/geoup-'.troca($dd['userName'],'/','-').'.json';
+        file_put_contents($file, json_encode($dd, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
+        $SERVER_URL = getenv("DATAVERSE_URL");
+
+        $cmd = 'curl -X POST -d '.$file.' ';
+        $cmd .= ' -H "Content-type:application/json" ';
+        $cmd .= $SERVER_URL.'/api/dataverses/'.alias.'/groups';
+        $cmd .= '&key='.getenv('BUILTIN_USERS_KEY');
+
+        jslog($cmd);
+        $txt = shell_exec($cmd);
+        jslog($txt);
+        $sx = '<span class="text-success">Usuário criado</span>';
+        return $sx;                
+
+
     }
 
 /*********************************************************************************** Create Dataverse */    

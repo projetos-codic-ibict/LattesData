@@ -46,6 +46,9 @@ class LattesData extends BaseController
 
             switch($act)
                 {
+                    case 'group':
+                        $sx = CreateGroup(1,1);
+                        break;
                     case 'email':
                         $LattesEmail = new \App\Models\LattesData\LattesEmail();
                         $sx = $LattesEmail->email_cadastro();
@@ -73,6 +76,7 @@ class LattesData extends BaseController
                     $sx .= '<ul>';
                     $sx .= '<li>'.anchor(URL.'/util/?act=role').'</li>';
                     $sx .= '<li>'.anchor(URL.'/util/?act=email').'</li>';
+                    $sx .= '<li>'.anchor(URL.'/util/?act=group','Criar grupo').'</li>';
                     $sx .= '</ul>';
                 }
 
