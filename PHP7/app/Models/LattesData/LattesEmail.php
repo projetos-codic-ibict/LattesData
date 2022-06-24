@@ -57,6 +57,7 @@ class LattesEmail extends Model
             $sx .= '<p>Senha de acesso</p>';
             $sx .= '</div>';
             $sx .= '</div>';
+            $sx .= '</center>';
             return $sx;
         }
 
