@@ -28,7 +28,7 @@ function CreateGroup($alias='',$dd=array())
 
         $cmd = 'curl -X POST -d '.$file.' ';
         $cmd .= ' -H "Content-type:application/json" ';
-        $cmd .= $SERVER_URL.'/api/dataverses/'.alias.'/groups';
+        $cmd .= $SERVER_URL.'/api/dataverses/'.$alias.'/groups';
         $cmd .= '&key='.getenv('BUILTIN_USERS_KEY');
 
         jslog($cmd);
