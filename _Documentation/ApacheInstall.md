@@ -7,7 +7,13 @@
 sudo apt-get update
 sudo apt-get install apache2 php libapache2-mod-php
 sudo apt-get install php-soap php-xml php-curl php-opcache php-gd php-sqlite3 php-mbstring php-intl
-sudo apt install php php-json
+sudo apt install php php-json php-curl
+
+sudo apt install mariadb-server
+sudo systemctl enable --now mariadb
+systemctl status mariadb
+sudo mysql_secure_installation
+
 
 [root] 
 apt install php-intl php-mbstring php-xml php-curl

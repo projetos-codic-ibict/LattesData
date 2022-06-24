@@ -1,0 +1,3 @@
+echo "Restarting Payara...."
+/home/dataverse/stop
+/home/dataverse/start

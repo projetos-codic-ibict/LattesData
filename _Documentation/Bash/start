@@ -1,0 +1,3 @@
+export PAYARA=/usr/local/payara5/glassfish
+echo "Starting Payara 5..."
+$PAYARA/bin/asadmin start-domain

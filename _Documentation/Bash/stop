@@ -1,0 +1,3 @@
+export PAYARA=/usr/local/payara5/glassfish
+echo "PAYARA Stoping..."
+$PAYARA/bin/asadmin stop-domain
