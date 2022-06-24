@@ -22,7 +22,7 @@ function CreateGroup($alias='',$dd=array())
 
         dircheck('.tmp');
         dircheck('.tmp/group');
-        $file = '.tmp/group/geoup-'.troca($dd['userName'],'/','-').'.json';
+        $file = '.tmp/group/group-'.troca($dd['displayName'],'/','-').'.json';
         file_put_contents($file, json_encode($dd, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         $SERVER_URL = getenv("DATAVERSE_URL");
 
