@@ -56,7 +56,7 @@ class LattesData extends BaseController
                         //$email->attach('img/logo.jpg', 'logo_ref');
                         //$email->setAttachmentCID('img/logo.jpg', 'logo_ref');
                         //$email->setFrom('lattesdata@cnpq.br','LattesData CNPq', 'lattesdata@cnpq.br');
-                        $email->setFrom('lattesdata@ibict.br','LattesData CNPq', 'lattesdata@cnpq.br');
+                        $email->setFrom('lattesdata@ibict.br','LattesData CNPq');
                         $email->setTo('renefgj@gmail.com');
                         $email->setBCC('renefgj@gmail.com');
                         $email->setSubject('Formulário de contato');
