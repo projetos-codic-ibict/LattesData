@@ -2,6 +2,7 @@
 
 function jslog($txt)
 {
+    $txt = troca($txt,'"','´´');
     echo '<script> console.log("'.$txt.'"); </script>';
     return "";
 }
