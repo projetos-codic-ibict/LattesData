@@ -16,42 +16,42 @@ Aquivo /etc/apache2/sites-avaliable/dvn.conf
 <tt>mkdir /var/www/dataverse/branding</tt>
 <pre>
 
-<VirtualHost *:81>
+&lt;VirtualHost *:81>
        ServerAdmin renefgj@gmail.com
        ServerName pocdadosabertos.inep.rnp.br
        ## ServerAlias 20.197.236.31
        DocumentRoot /var/www/dataverse/branding
-       <Directory "/var/www/dataverse/brandingx">
+       &lt;Directory "/var/www/dataverse/brandingx">
            Require all granted
-       </Directory>
-</VirtualHost>
+       &lt;/Directory>
+&lt;/VirtualHost>
 
 Aquivo /etc/apache2/sites-avaliable/configuration.conf
 <tt>pico /etc/apache2/sites-available/configuration.conf</tt>
 <pre>
-<VirtualHost *:84>
+&lt;VirtualHost *:84>
        ServerAdmin renefgj@gmail.com
        ServerName pocdadosabertos.inep.rnp.br
        ## ServerAlias 20.197.236.31
        DocumentRoot /data/LattesData/PHP/public/
-       <Directory "/data/LattesData/PHP/public">
+       &lt;Directory "/data/LattesData/PHP/public">
            Require all granted
-       </Directory>
-</VirtualHost>
+       &lt;/Directory>
+&lt;/VirtualHost>
 </pre>
 
 Aquivo /etc/apache2/sites-avaliable/deposito.conf
 <tt>pico /etc/apache2/sites-available/deposito.conf</tt>
 <pre>
-<VirtualHost *:82>
+&lt;VirtualHost *:82>
        ServerAdmin renefgj@gmail.com
        ServerName pocdadosabertos.inep.rnp.br
        ## ServerAlias 20.197.236.31
        DocumentRoot /data/LattesData/PHP7/public/
-       <Directory "/data/LattesData/PHP7/public">
+       &lt;Directory "/data/LattesData/PHP7/public">
            Require all granted
-       </Directory>
-</VirtualHost>
+       &lt;/Directory>
+&lt;/VirtualHost>
 </pre>
 
 <tt>a2ensite configuration.conf</tt><br>
