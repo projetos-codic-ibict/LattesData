@@ -10,7 +10,6 @@ $routes = Services::routes();
 if (file_exists(SYSTEMPATH . 'Config/Routes.php')) {
     require SYSTEMPATH . 'Config/Routes.php';
 }
-
 /*
  * --------------------------------------------------------------------
  * Router Setup
