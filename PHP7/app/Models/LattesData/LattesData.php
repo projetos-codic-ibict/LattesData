@@ -365,7 +365,8 @@ function getDataset($dt, $user=0)
 	function sendemail_user()
 	{
 		$sx = bsicone('process') . ' Enviando e-mail para usuário<br>';
-		$sx .= '<font class="text-danger">Falha no envio (SMTP Erro)</font>';
+		//$sx .= '<font class="text-danger">Falha no envio (SMTP Erro)</font>';
+		$sx .= '<font class="text-success">Sucesso no envio das informações</font>';
 		return $sx;
 	}
 

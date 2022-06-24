@@ -1,0 +1,55 @@
+#metadataBlock	name	dataverseAlias	displayName	blockURI	
+	lattesDataCustom6	lattesDataCustom6	Metadados do Projeto (CNPq)		
+#datasetField	name	title	description	watermark	fieldType	displayOrder	displayFormat	advancedSearchField	allowControlledVocabulary	allowmultiples	facetable	displayoncreate	required	parent	metadatablock_id	termURI	
+	TítuloDoProjeto	Título do projeto	Informe o nome do projeto	Informe o nome do projeto	text	1	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	FALSE	Project	lattesDataCustom6	
+	Project	Sobre o projeto	ProjectTitle		none	1		FALSE	FALSE	FALSE	FALSE	FALSE	FALSE		lattesDataCustom6	
+	ChamadaDoProjeto	Chamada do projeto	Informe, por extenso, o nome da Chamada	Informe, por extenso, o nome da Chamada	text	2	#VALUE	TRUE	FALSE	FALSE	TRUE	TRUE	FALSE	Project	lattesDataCustom6	
+	IdentificadorDoProcesso	Identificador do processo	Informe o número do processo	Informe o número do processo	text	3	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	FALSE	Project	lattesDataCustom6	
+	ResumoDoProjeto	Resumo do projeto	Descreva sucintamente o projeto	Descreva sucintamente o projeto	textbox	4	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	FALSE	Project	lattesDataCustom6	
+	DGPGroup	Grupo de Pesquisa (DGP)	Nome do grupo de pesquisa registrado no DGP		none	5		FALSE	FALSE	TRUE	FALSE	TRUE	FALSE		lattesDataCustom6	
+	DGPGroupVocabulary	DGPGroupVocabulary			text	6	#VALUE	FALSE	FALSE	FALSE	FALSE	TRUE	FALSE	DGPGroup	lattesDataCustom6	
+	DGPGroupVocabularyURI	DGPGroupVocabularyURI			text	7	#VALUE	FALSE	FALSE	FALSE	FALSE	TRUE	FALSE	DGPGroup	lattesDataCustom6	
+	DGPGroupTerm	Nome do grupo de pesquisa (DGP)			text	8	#VALUE	TRUE	FALSE	TRUE	TRUE	TRUE	FALSE	DGPGroup	lattesDataCustom6	
+	DGPGroupTermURI	DGPGroupTermURI			text	9	#VALUE	FALSE	FALSE	FALSE	FALSE	TRUE	FALSE	DGPGroup	lattesDataCustom6	
+	ProjectCoordenador	Coordenação do Projeto	Informe o nome do coordenador do projeto		none	10		FALSE	FALSE	FALSE	FALSE	TRUE	FALSE		lattesDataCustom6	
+	NomeDoCoordenadorDoProjeto	Nome do coordenador do projeto	Informe o nome do coordenador do projeto	Informe o nome do coordenador do projeto	text	11	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	FALSE	ProjectCoordenador	lattesDataCustom6	
+	E-mailDoCoordenadorDoProjeto	E-mail do coordenador do projeto	Informe o e-mail do coordenador do projeto	Informe o e-mail do coordenador do projeto	email	12	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	FALSE	ProjectCoordenador	lattesDataCustom6	
+	IDLattesDoCoordenadorDoProjeto	ID Lattes do coordenador do projeto	Informe o número do identificador do currículo Lattes do coordenador	Número do identificador do currículo Lattes do coordenador	text	13	#VALUE	FALSE	FALSE	TRUE	FALSE	TRUE	FALSE	ProjectCoordenador	lattesDataCustom6	
+	VigenciaDoProjeto	Vigência do projeto	Insira a data de início e final do projeto de acordo com o modelo: ANO/ MÊS/ DIA		none	14		FALSE	FALSE	FALSE	FALSE	TRUE	FALSE		lattesDataCustom6	
+	VigenciaDoProjetoStart	Vigência do projeto início	Insira a data de início e final do projeto de acordo com o modelo: ANO/ MÊS/ DIA	ANO-MÊS-DIA	date	15	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	FALSE	VigenciaDoProjeto	lattesDataCustom6	
+	VigênciaDoProjetoEnd	Data final da vigência do projeto	Insira a data de final do projeto de acordo com o modelo: ANO/ MÊS/ DIA	ANO-MÊS-DIA	date	16	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	FALSE	VigenciaDoProjeto	lattesDataCustom6	
+	cnpqAreas	Áreas do conhecimento (CNPq)	Áreas do conhecimento conforme tabela do CNPq		none	17		FALSE	FALSE	TRUE	FALSE	FALSE	FALSE		lattesDataCustom6	
+	cnpqAreasVocabulary	cnpqAreasVocabulary			text	18	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	FALSE	cnpqAreas	lattesDataCustom6	
+	cnpqAreasVocabularyURI	cnpqAreasVocabularyURI			text	19	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	FALSE	cnpqAreas	lattesDataCustom6	
+	cnpqAreasTerm	cnpqAreasTerm			text	20	#VALUE	TRUE	FALSE	TRUE	TRUE	TRUE	FALSE	cnpqAreas	lattesDataCustom6	
+	cnpqAreasTermURI	cnpqAreasTermURI			text	21	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	FALSE	cnpqAreas	lattesDataCustom6	
+	internationalAreas	Classificação Internacional do conhecimento	Informe as áreas do conhecimento internacionais relacionadas ao projeto		none	22		TRUE	FALSE	TRUE	FALSE	TRUE	FALSE		lattesDataCustom6	
+	internationalAreasVocabulary	internationalAreasVocabulary	internationalAreasVocabulary		text	23	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	FALSE	internationalAreas	lattesDataCustom6	
+	internationalAreasVocabularyURI	internationalAreasVocabularyURI	internationalAreasVocabularyURI		text	24	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	FALSE	internationalAreas	lattesDataCustom6	
+	internationalAreasTerm	internationalAreasTerm	internationalAreasTerm		text	25	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	FALSE	internationalAreas	lattesDataCustom6	
+	internationalAreasTermURI	internationalAreasTermURI	internationalAreasTermURI		text	26	#VALUE	FALSE	FALSE	FALSE	FALSE	FALSE	FALSE	internationalAreas	lattesDataCustom6	
+	AreaDoConhecimentoInternacional	AreaDoConhecimentoInternacional			none	27		FALSE	FALSE	FALSE	FALSE	FALSE	FALSE		lattesDataCustom6	
+	TipoDeAcesso	Tipo de acesso	Selecione o tipo de acesso permitido ao conjunto de dados		text	28	#VALUE	FALSE	TRUE	FALSE	FALSE	TRUE	FALSE		lattesDataCustom6	
+	TipoDeArquivoDoConjuntoDeDados	Tipo de arquivo do conjunto de dados	Selecione o (s) tipo (s) do (s) recurso (s) utilizado para armazenar o dado científico		text	29	#VALUE	TRUE	TRUE	TRUE	FALSE	FALSE	FALSE		lattesDataCustom6	
+	IdentificadorAlternativoDoConjuntoDeDados	Identificador alternativo do conjunto de dados	Informe outro identificador persistente do conjunto de dados obtido de outra forma que não o principal utilizado no repositório LattesData. Identificador persistente é um identificador único de longa duração de um recurso na Internet que se mantém válido mesmo que a tecnologia de acesso ou a localização física do recurso identificado se modifique no tempo. Exemplos: DOI (Digital Object Identifier), Handle, URN, PURL, ARK, URL. Para indicar mais de uma resposta clique no botão “Mais”, que se encontra à direita do preenchimento		url	30	#VALUE	FALSE	FALSE	TRUE	FALSE	FALSE	FALSE		lattesDataCustom6	
+#controlledVocabulary	DatasetField	Value	identifier	displayOrder											
+	TipoDeAcesso	Acesso aberto	AA	1
+	TipoDeAcesso	Acesso restrito		2
+	TipoDeAcesso	Acesso embargado		3
+	TipoDeArquivoDoConjuntoDeDados	Aplicações de Software		0
+	TipoDeArquivoDoConjuntoDeDados	Apresentação		1
+	TipoDeArquivoDoConjuntoDeDados	Bancos de dados		2
+	TipoDeArquivoDoConjuntoDeDados	Código fonte		3
+	TipoDeArquivoDoConjuntoDeDados	Dados arquivados		4
+	TipoDeArquivoDoConjuntoDeDados	Dados audiovisuais		5
+	TipoDeArquivoDoConjuntoDeDados	Dados baseados em rede		6
+	TipoDeArquivoDoConjuntoDeDados	Dados de configuração		7
+	TipoDeArquivoDoConjuntoDeDados	Dados não tratados		8
+	TipoDeArquivoDoConjuntoDeDados	Documento de texto		9
+	TipoDeArquivoDoConjuntoDeDados	Formatos de dados científicos e estatísticos		10
+	TipoDeArquivoDoConjuntoDeDados	Gráficos estruturados		11
+	TipoDeArquivoDoConjuntoDeDados	Imagens		12
+	TipoDeArquivoDoConjuntoDeDados	Planilha		13
+	TipoDeArquivoDoConjuntoDeDados	Texto estruturado		14
+	TipoDeArquivoDoConjuntoDeDados	Texto simples		15
+	TipoDeArquivoDoConjuntoDeDados	Outros		16
