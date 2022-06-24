@@ -56,10 +56,13 @@ class LattesData extends BaseController
                         $email->setFrom('lattesdata@app.ibict.br');
                         $email->setTo('renefgj@gmail.com');
                         $email->setSubject('Formulário de contato');                      
-                        $filename = '/img/logo.jpg';
-                        $email->attach($filename);  
-                        $cid = $email->setAttachmentCID($filename);                   
-                        $sx = troca($sx,'$logo_ref',$cid);
+                        $filename = 'img/logo.jpg';
+                        if (file_exists($filename))
+                            {
+                                $email->attach($filename);  
+                                $cid = $email->setAttachmentCID($filename);                   
+                                $sx = troca($sx,'$logo_ref',$cid);
+                            } else { echo "Logo not found"; }
                         $email->setMessage($sx);
                         $email->send();
                         print_r($email->printDebugger());
