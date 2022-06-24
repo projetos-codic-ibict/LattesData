@@ -43,6 +43,7 @@ class LattesEmail extends Model
     function email_cadastro($email='',$dt=array())
         {
             $link = '';
+			$senha = '';
             $sx = '';
             $sx .= '<center>';
             $sx .= '<div style="width: 600px; border: 1px solid #555; padding: 10px; font-family: Tahoma, Arial">';
@@ -54,7 +55,7 @@ class LattesEmail extends Model
             $sx .= '<p>Com seu login e senha você pode inserir seus arquivos em seu conjunto de dados com o título ou número de seu projeto.</p>';
             $sx .= '<p>Acesso sua Comunidade e Dataset: '.$link.'</p>';
             $sx .= '<p>Usuário: '.$email.'</p>';
-            $sx .= '<p>Senha de acesso</p>';
+            $sx .= '<p>Senha de acesso: '.$senha.'</p>';
             $sx .= '</div>';
             $sx .= '</div>';
             $sx .= '</center>';

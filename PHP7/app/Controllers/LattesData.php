@@ -27,6 +27,8 @@ class LattesData extends BaseController
 
         $sx .= bs(bsc($sa,8).bsc($sb,4));
 
+        jslog("BYE");
+        
         $sx .= $Header->footer();
         return $sx;
     }
