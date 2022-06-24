@@ -3,10 +3,28 @@
 
 <h2>Installl PHP</h2>
 <pre>
+[root] 
 sudo apt-get update
 sudo apt-get install apache2 php libapache2-mod-php
 sudo apt-get install php-soap php-xml php-curl php-opcache php-gd php-sqlite3 php-mbstring php-intl
 sudo apt install php php-json
+
+[root] 
+apt install php-intl php-mbstring php-xml php-curl
+
+[root]
+mkdir /data
+cd /data
+git clone https://github.com/lattesdata-ibict/LattesData.git
+
+cd /data/LattesData/PHP7
+cp env .env
+
+cd /data/LattesData/PHP
+cp env .env
+
+chown www-data /data/LattesData/PHP7/ -R
+chown www-data /data/LattesData/PHP/ -R
 </pre>
 
 Configuração do arquivo 000-default.conf
@@ -89,4 +107,8 @@ a2ensite dvn.conf
 a2ensite deposito.conf
 
 service apache2 restart
+
+cd /data/LattesData/PHP7
+cp env .env
+
 </pre>
