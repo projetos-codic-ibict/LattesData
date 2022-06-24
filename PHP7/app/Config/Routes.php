@@ -38,6 +38,7 @@ $routes->set404Override();
 $routes->get('/', 'LattesData::index');
 $routes->post('/', 'LattesData::index');
 $routes->get('/util/', 'LattesData::util');
+$routes->get('/deposito/util/', 'LattesData::util');
 
 /*
  * --------------------------------------------------------------------
