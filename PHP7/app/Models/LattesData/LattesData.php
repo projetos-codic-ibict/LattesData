@@ -116,7 +116,7 @@ class LattesData extends Model
 	/*************************************** CRIAR DATAVERSE */
 	function create_dataverse_provinience($proc, $parent, $dt)
 	{
-		$parent = 'beneficiarios';
+		$parent = 'chamadasCNPQ';
 		/* *********************/
 		$chamada = $dt['chamada']['sigla'];
 		$chamada_nome = $dt['chamada']['nome'];

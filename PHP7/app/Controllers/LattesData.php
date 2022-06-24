@@ -23,7 +23,7 @@ class LattesData extends BaseController
 
         jslog("HELLO");
 
-        $this->util();
+        //$this->util();
 
         $sx .= bs(bsc($sa,8).bsc($sb,4));
 
