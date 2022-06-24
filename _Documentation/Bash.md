@@ -1,5 +1,5 @@
 <pre>
 cd /home/dataverse
-cp /data/LattesData/_Documenatntion/Bash/* /.
-chmmod 777 *
+cp /data/LattesData/_Documentation/Bash/* /.
+chmod 777 *
 </pre>
