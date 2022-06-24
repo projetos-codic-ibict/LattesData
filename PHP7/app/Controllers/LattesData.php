@@ -55,11 +55,10 @@ class LattesData extends BaseController
                         $email->initialize($config);
                         $email->setFrom('lattesdata@app.ibict.br');
                         $email->setTo('renefgj@gmail.com');
-                        $email->setSubject('Formulário de contato');                        
+                        $email->setSubject('Formulário de contato');
+                        $email->setMessage($sx);                        
                         $email->send();
                         $email->printDebugger();
-
-                        pre($email);
 
                     break;
 
