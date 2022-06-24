@@ -1,6 +1,35 @@
 <h1>Instalação do Apache/Proxy</h1>
 <tt>apt-get install apache2</tt>
 
+<h2>Installl PHP</h2>
+<code>
+sudo apt-get update
+sudo apt-get install apache2 php libapache2-mod-php
+sudo apt-get install php-soap php-xml php-curl php-opcache php-gd php-sqlite3 php-mbstring php-intl
+sudo apt install php php-json
+</code>
+
+Configuração do arquivo 000-default.conf
+
+<code>
+       &lt;Location /dvn>
+               ProxyPass http://143.54.112.86:81/
+               SetEnv force-proxy-request-1.0 1
+               SetEnv proxy-nokeepalive 1
+       &lt;/Location>
+       &lt;Location /config>
+               ProxyPass http://143.54.112.86:82/
+               SetEnv force-proxy-request-1.0 1
+               SetEnv proxy-nokeepalive 1
+       &lt;/Location>
+       &lt;Location /deposito>
+               ProxyPass http://143.54.112.86:81/
+               SetEnv force-proxy-request-1.0 1
+               SetEnv proxy-nokeepalive 1
+       &lt;/Location>
+
+</code>
+
 <h2>Habilitando os MODs do proxy</h2>
 <code>sudo a2enmod ssl</code>
 <code>sudo a2enmod proxy</code>
