@@ -37,6 +37,7 @@ $routes->set404Override();
 // route since we don't have to scan directories.
 $routes->get('/', 'LattesData::index');
 $routes->post('/', 'LattesData::index');
+$routes->get('/util/', 'LattesData::util');
 
 /*
  * --------------------------------------------------------------------

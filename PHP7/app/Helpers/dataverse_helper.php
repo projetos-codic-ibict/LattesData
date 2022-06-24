@@ -4,6 +4,11 @@
 @version: 0.22.06.21
 */
 
+function role($user,$dataverse,$role)
+    {
+        
+    }
+
 /*********************************************************************************** Create Dataverse */    
 function CreateUser($dd)
     {
