@@ -21,6 +21,8 @@ class LattesData extends BaseController
         $sa = $Forms->home();
         $sb = $Forms->form();
 
+        jslog("HELLO");
+
         $this->util();
 
         $sx .= bs(bsc($sa,8).bsc($sb,4));
