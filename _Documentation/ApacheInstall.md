@@ -83,6 +83,10 @@ Aquivo /etc/apache2/sites-avaliable/deposito.conf
 &lt;/VirtualHost>
 </pre>
 
-<tt>a2ensite configuration.conf</tt><br>
-<tt>a2ensite dvn.conf</tt>
-<tt>a2ensite deposito.conf</tt>
+<pre>
+a2ensite configuration.conf
+a2ensite dvn.conf
+a2ensite deposito.conf
+
+service apache2 restart
+</pre>
