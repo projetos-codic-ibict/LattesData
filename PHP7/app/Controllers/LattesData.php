@@ -64,7 +64,7 @@ class LattesData extends BaseController
                         $email->send();
                         $email->printDebugger();
 
-                        pre($email['debugMessage']);
+                        pre($email);
                         echo "..";
 
                     break;
