@@ -42,7 +42,7 @@ class LattesData extends BaseController
                 {
                     $act = $_GET['act'];
                 } else {
-                    $act = 'email';
+                    $act = 'group';
                 }
             
 
