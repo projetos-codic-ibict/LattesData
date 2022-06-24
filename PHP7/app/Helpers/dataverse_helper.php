@@ -15,6 +15,7 @@ function CreateGroup($alias='',$dd=array())
         //displayName
         //aliasInOwner
         $alias = '2020CNPq3121198';
+        $dd = array();
         $dd['description'] = 'Grupo de Pesquisa - Lider '.$nome;
         $dd['displayName'] = 'DVGR '.$nome;
         $dd['aliasInOwner'] = 'renefjg';
