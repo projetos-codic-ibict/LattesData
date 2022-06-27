@@ -263,7 +263,7 @@ class LattesEmail extends Model
                   <table width="100%" border="0" cellpadding="0" cellspacing="0" role="presentation">
                     <tbody>
                       <tr>
-                        <td background="images/bg-email-hL3.jpg" bgcolor="#1B1B1B" valign="top" style="background-color: #1B1B1B; background-image: url(\'images/bg-email-hL3.jpg\'); background-position: top center; background-size: cover; border-radius: 8px">
+                        <td background="$image1" bgcolor="#1B1B1B" valign="top" style="background-color: #1B1B1B; background-image: url(\'images/bg-email-hL3.jpg\'); background-position: top center; background-size: cover; border-radius: 8px">
                           <!--[if gte mso 9]>
             <v:rect xmlns:v="urn:schemas-microsoft-com:vml" fill="true" stroke="false" style="width: 600px;">
                 <v:fill type="frame" src="images/bg-email-hL3.jpg" color="#1B1B1B"></v:fill>
