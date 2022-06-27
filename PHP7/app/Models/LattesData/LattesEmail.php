@@ -48,11 +48,11 @@ class LattesEmail extends Model
             $sx .= '<center>';
             $sx .= '<div style="width: 600px; border: 1px solid #555; padding: 10px; font-family: Tahoma, Arial">';
             //$sx .= '<img src="https://lattesdata.cnpq.br/logos/1/logo_lattesdata_mini.png">';
-			$sx .= '<div style="background-image: $logo_ref" style="heigt: 300px; width: 300px;">';
+			$sx .= '<div style="background-image: $image1" style="heigt: 300px; width: 300px;">';
 			$sx .= 'HELLO';
 			$sx .= '</div>';
 
-            $sx .= '<img src="cid:$logo_ref">';
+            $sx .= '<img src="cid:$image1">';
             $sx .= '<div style="text-align: justify">';
             $sx .= '<p>Prezado pesquisador,</p>';
             $sx .= '<p>Seu projeto foi cadastrado no LattesData com sucesso no LattesData.</p>';
