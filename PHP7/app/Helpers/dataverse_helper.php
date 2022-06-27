@@ -18,11 +18,12 @@ function CreateGroup($alias='',$dd=array())
         $dd = array();
         $dd['description'] = 'Grupo de Pesquisa - Lider '.$nome;
         $dd['displayName'] = 'DVGR '.$nome;
-        $dd['aliasInOwner'] = 'renefjg';
+        $dd['aliasInOwner'] = '@renefjg';
+        $dd['containedRoleAssignees'] = array('@renefgj');
 
         dircheck('.tmp');
         dircheck('.tmp/group');
-        $file = '.tmp/group/group-'.troca($dd['displayName'],'/','-').'.json';
+        $file = '.tmp/group/group-'.troca($dd['displayName'],'/','-').'.json';        
         file_put_contents($file, json_encode($dd, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         $SERVER_URL = getenv("DATAVERSE_URL");
 

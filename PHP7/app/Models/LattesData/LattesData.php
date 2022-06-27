@@ -94,10 +94,12 @@ class LattesData extends Model
 		$dv['password'] = substr(md5($dv['firstName'].$dv['lastName'].'LattesData'),0,10);
 		$sx = bsicone('process') . ' Criando Usuário Dataverse<br>';
 		$sx .= CreateUser($dv);	
+
 		$LattesEmail = new \App\Models\LattesData\LattesEmail();
 		$txt = $LattesEmail->email_cadastro($dv);
 		$ass = '[LattesData] - Cadastro de Usuário';
 		$email = 'renefgj@gmail.com';
+
 		$sx .= $LattesEmail->enviar($email, $txt, $ass);
 		return $sx;
 	}
@@ -575,7 +577,6 @@ function getDataset($dt, $user=0)
 		if (isset($_POST['confirm'])) {
 			$sx .= '<div style="font-size: 130%">';
 			$sx .= $this->create_user($proto, $dt) . '<br>';
-			return '';
 			$sx .= $this->create_dataverse_provinience($proto, '', $dt) . '<br>';
 			$sx .= $this->create_dataverse($proto, $this->alias, $dt) . '<br>';
 			switch ($this->status) {

@@ -58,6 +58,7 @@ class LattesData extends BaseController
                     case 'group':
                         //$sx = CreateGroup(1,1);
                         break;
+                        
                     case 'email':
                         $LattesEmail = new \App\Models\LattesData\LattesEmail();
                         $sx = $LattesEmail->email_cadastro();
