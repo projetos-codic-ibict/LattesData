@@ -48,7 +48,7 @@ class LattesEmail extends Model
             $sx .= '<center>';
             $sx .= '<div style="width: 600px; border: 1px solid #555; padding: 10px; font-family: Tahoma, Arial">';
             //$sx .= '<img src="https://lattesdata.cnpq.br/logos/1/logo_lattesdata_mini.png">';
-			$sx .= '<div style="background-image: url($image1); heigth: 300px; width: 300px;">';
+			$sx .= '<div style="height: 300px; width: 300px; background-image: url(cid:$image1);">';
 			$sx .= 'HELLO';
 			$sx .= '</div>';
 
