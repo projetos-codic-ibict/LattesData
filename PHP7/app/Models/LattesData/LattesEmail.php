@@ -44,7 +44,7 @@ class LattesEmail extends Model
         {
             $link = '';
 			$senha = '';
-            $sx = '<style> .texto_lattesdata { font-size: 200%; } </style>';
+            //$sx = '<style> .texto_lattesdata { font-size: 200%; } </style>';
             $sx .= '<center>';
 			$sx .= '<div style="width: 100; background-color: #f4f4f4; padding: 40px 40px 100px 40px;">';
             $sx .= '<div style="width: 600px; border: 0px solid #555; padding: 10px; font-family: Tahoma, Arial; font-size: 24px;">';
