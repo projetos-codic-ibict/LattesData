@@ -69,13 +69,13 @@ class LattesEmail extends Model
 		return $sx;
 	}
 
-	function enviar($email, $txt, $ass)
+	function enviar($xemail, $txt, $ass)
 	{
 		$email = \Config\Services::email();
 		$config['mailType'] = 'html';
 		$email->initialize($config);
 		$email->setFrom('lattesdata@app.ibict.br', 'LattesData');
-		$email->setTo($email);
+		$email->setTo($xemail);
 		$email->setSubject('[LattesData] Cadastro de Dataset');
 		//                     
 		$filename = 'img/bg-email-hL3a.jpg';
