@@ -568,6 +568,8 @@ function getDataset($dt, $user=0)
 		$parent = 'lattesdata';
 		if (isset($_POST['confirm'])) {
 			$sx .= '<div style="font-size: 130%">';
+			$sx .= $this->create_user($proto, $dt) . '<br>';
+			return '';
 			$sx .= $this->create_dataverse_provinience($proto, '', $dt) . '<br>';
 			$sx .= $this->create_dataverse($proto, $this->alias, $dt) . '<br>';
 			switch ($this->status) {
