@@ -71,6 +71,7 @@ class LattesEmail extends Model
 
 	function enviar($xemail, $txt, $ass)
 	{
+		$sx = '';
 		$email = \Config\Services::email();
 		$config['mailType'] = 'html';
 		$email->initialize($config);
