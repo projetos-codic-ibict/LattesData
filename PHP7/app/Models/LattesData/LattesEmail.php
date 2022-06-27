@@ -45,7 +45,7 @@ class LattesEmail extends Model
             $link = '';
 			$senha = '';
             //$sx = '<style> .texto_lattesdata { font-size: 200%; } </style>';
-			$sx = ''/
+			$sx = '';
             $sx .= '<center>';
 			$sx .= '<div style="width: 100; background-color: #f4f4f4; padding: 40px 40px 100px 40px;">';
 			$sx .= '** Não responda esse e-mail **';
