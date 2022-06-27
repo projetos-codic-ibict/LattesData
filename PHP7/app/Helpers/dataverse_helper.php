@@ -51,7 +51,7 @@ function CreateUser($dd)
         file_put_contents($file, json_encode($dd, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         $url = getenv("DATAVERSE_URL");
 
-        $cmd = 'curl -d '.$file.' ';
+        $cmd = 'curl -d @'.$file.' ';
         $cmd .= ' -H "Content-type:application/json" ';
         $cmd .= $SERVER_URL.'api/builtin-users?';
         $cmd .= 'password='.$NEWUSER_PASSWORD;
