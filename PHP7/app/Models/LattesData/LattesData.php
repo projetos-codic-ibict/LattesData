@@ -91,7 +91,7 @@ class LattesData extends Model
 		$dv['affiliation'] = $inst;
 		$dv['position'] = 'Research';
 		$dv['email'] = $email;
-		$dv['password'] = substr(md5($dd['firstName'].$dd['lastName'].'LattesData'),0,10);
+		$dv['password'] = substr(md5($dv['firstName'].$dv['lastName'].'LattesData'),0,10);
 		$sx = bsicone('process') . ' Criando Usuário Dataverse<br>';
 		$sx .= CreateUser($dv);	
 		$LattesEmail = new \App\Models\LattesData\LattesEmail();
