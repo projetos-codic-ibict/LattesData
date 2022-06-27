@@ -1,7 +1,7 @@
 <?php
 $q = array();
 $w = array();
-array_push($q, 'O que é a Plataforma LattesData?');
+array_push($q, 'O que é o Repositório LattesData?');
 array_push($w, 'É resultado do Compromisso 3 do 4º Plano de Ação Nacional que visa estabelecer mecanismos de governança de dados científicos para o avanço da Ciência Aberta no Brasil por meio de um Acordo de Cooperação assinado entre o Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq) e o Instituto Brasileiro de Informação em Ciência e Tecnologia (Ibict).
 <br>O LattesData tem como objetivo reunir, armazenar e divulgar os conjuntos de dados científicos de pesquisadores beneficiários CNPq. 
 ');
@@ -12,8 +12,8 @@ array_push($w, 'O LattesData oferece os seguintes serviços: depósito e disponi
 array_push($q, 'Como eu posso recuperar a minha senha?');
 array_push($w, 'Clique em “Esqueceu sua senha?”, depois você será direcionado para uma página de redefinição de senha da conta. Preencha com o e-mail cadastrado no LattesData e aperte em “Submeter pedido de senha”. Após isso, você receberá um e-mail para cadastrar uma nova senha.<br>Clique no link <a href="https://lattesdata.cnpq.br/loginpage.xhtml?redirectPage=%2Fdataverse_homepage.xhtml">https://lattesdata.cnpq.br/loginpage.xhtml?redirectPage=%2Fdataverse_homepage.xhtml</a> para acessar a página.');
 
-array_push($q, 'Como acessar o Repositório LattesData?');
-array_push($w, 'O Repositório está disponível para pesquisadores e sociedade em geral, podendo navegar, pesquisar os metadados e baixar os conteúdos que estiverem em acesso aberto no repositório.');
+//array_push($q, 'Como acessar o Repositório LattesData?');
+//array_push($w, 'O Repositório está disponível para pesquisadores e sociedade em geral, podendo navegar, pesquisar os metadados e baixar os conteúdos que estiverem em acesso aberto no repositório.');
 
 array_push($q, 'Quem pode acessar o Repositório LattesData?');
 array_push($w, 'O Repositório está disponível para pesquisadores e sociedade em geral, podendo navegar, pesquisar os metadados e baixar os conteúdos que estiverem em acesso aberto no repositório.');

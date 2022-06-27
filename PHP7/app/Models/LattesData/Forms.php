@@ -66,10 +66,10 @@ function welcome()
     {
         $sx = '';
         $sx = h('Deposite seus dados');
-        $sx .= '<p>Seja bem-vindo ao Repositório LattesData!</p>';
+        $sx .= '<p>Bem-vindo(a) ao Repositório LattesData!</p>';
         $sx .= '<p>Este espaço é destinado para que pesquisadores possam realizar o depósito dos seus conjuntos de dados que tiveram suas pesquisas financiadas totalmente ou parcialmente pelo CNPq.</p>';
-        $sx .= '<p>Para iniciar a submissão preencha o campo a direita da tela com número do processo no CNPq, depois clique em “Depositar”.</p>';
-        $sx .= '<p>Após essa etapa inicial, será direcionado para o formulário de depósito dos conjuntos de dados. Caso tenha alguma dúvida no acesso ou preenchimento dos metadados, entre em contato com o seguinte e-mail: lattesdata@cnpq.br.</p>';
+        $sx .= '<p>Para iniciar a submissão, preencha o campo à direita da tela com número do processo no CNPq, depois clique em “Depositar”.</p>';
+        $sx .= '<p>Após essa etapa inicial, será encaminhado um e-mail confirmando o cadastro do projeto no LattesData. Caso tenha alguma dúvida no acesso ou preenchimento dos metadados, entre em contato com o seguinte e-mail: lattesdata@cnpq.br.</p>';
         $sx .= '<div style="height: 100px"></div>';
         return $sx;
     }
