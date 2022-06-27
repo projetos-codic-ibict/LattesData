@@ -1,0 +1,68 @@
+<div class="row-fluid">
+  <div class="col">
+    
+    <p class="text-intro">O repositório LattesData tem como objetivo reunir, armazenar e divulgar os conjuntos de dados científicos de pesquisadores beneficiários do Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq). Futuramente, será também disponível para depósito de dados de pesquisa oriundos de pesquisadores não financiadas pelo CNPq, mediante acordos celebrados com suas instituições no âmbito do Consórcio Nacional para Ciência Aberta (CoNCienciA). </p>
+  </div>
+</div>
+<form class="form mt-4">
+  <div class="input-group input-group-lg">
+    <input type="text" class="form-control" id="inputDataverseSearch" onkeydown="if (event.keyCode == 13) document.getElementById('btnDataverseSearch').click();" placeholder="Digite sua pesquisa">
+    <div class="input-group-btn">
+      <button class="btn btn-default" id="btnDataverseSearch" type="submit" onclick="window.location = '/dataverse/lattesdata?q=' + document.getElementById('inputDataverseSearch').value;return false;"><i class="glyphicon glyphicon-search"></i></button>
+    </div>
+  </div>
+</form>
+<div class="row mt-4">
+  <div class="col-sm-4 mt-2">
+    <a type="button" class="btn btn-primary btn-lg btn-block" href="/dataverse/lattesdata?q=&types=dataverses&sort=dateSort&order=desc&page=1"><span  class="badge badge-light" id="ID_dataverse">0</span> Conjunto de DataVerses </a>
+  </div>
+  <div class="col-sm-4 mt-2">
+    <a type="button" class="btn btn-primary btn-lg btn-block" href="/dataverse/lattesdata?q=&types=datasets&sort=dateSort&order=desc"> <span class="badge badge-light" id="ID_datasets">0</span> Conjunto de Dados (DataSets) </a>
+  </div>
+  <div class="col-sm-2 mt-2">
+    <a type="button" class="btn btn-primary btn-lg btn-block" href="/dataverse/lattesdata?q=&types=files&sort=dateSort&order=desc"> <span class="badge badge-light" id="ID_files">0</span> Arquivos </a>
+  </div>
+  <div class="col-sm-2 mt-2">
+    <a type="button" class="btn btn-primary btn-lg btn-block"> <span class="badge badge-light" id="ID_projetos">0</span> Projetos </a>
+  </div>
+</div>
+<div class="row-fluid mt-4">
+  <div class="col">
+    <button type="button" class="btn btn-primary btn-lg btn-block" onClick="window.location.href='/dataverse/lattesdata'">Explorar</button>
+  </div>
+</div>
+
+<!-- <hr class="heavy-rule" /> --> 
+
+<!-- SEARCH + BROWSE + RECENT -->
+<div class="row hmpg-browse-block"> 
+  
+  <!-- SEARCH --> 
+  <!-- 
+            NOTE: The alias of the root dataverse will need to be configured in this URL 
+            --> 
+  
+  <!-- BROWSE SUBJECT -->
+  <div id="browseBySubject" class="col-xs-12"> 
+    <!-- <p class="text-muted margin-bottom">Browse by subject</p> -->
+    <div class="row margin-bottom"> 
+      <!-- SUBJECTS -->
+      <div id="dataversesBySubject" class="col-xs-12"> </div>
+      
+      <!-- VIEW ALL --> 
+      <!-- 
+                    NOTE: The alias of the root dataverse will need to be configured in this URL 
+                    --> 
+      <!-- <div class="col-xs-12 margin-top">
+                    <p class="browse-subjects small text-muted"><a href="/dataverse/lattesdata">ALL DATA</a> <span
+                            class="glyphicon glyphicon-chevron-right"></span></p>
+                </div> --> 
+    </div>
+  </div>
+</div>
+<script>
+getvals(url_metrics + 'dataverses', 'ID_dataverse', 'Total');
+getvals(url_metrics + 'datasets', 'ID_datasets', 'Total');
+getvals(url_metrics + 'files', 'ID_files', 'Total');
+getvals(url_metrics + 'downloads', 'ID_projetos', 'Total');
+</script>

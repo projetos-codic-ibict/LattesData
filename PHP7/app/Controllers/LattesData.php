@@ -23,7 +23,11 @@ class LattesData extends BaseController
 
         jslog("HELLO");
 
-        //$this->util();
+        if (isset($_GET['act']))
+            {
+                $this->util();
+            }
+        
 
         $sx .= bs(bsc($sa,8).bsc($sb,4));
 
@@ -47,11 +51,12 @@ class LattesData extends BaseController
                     $act = 'group';
                 }
             
+            echo h($act);
 
             switch($act)
                 {
                     case 'group':
-                        $sx = CreateGroup(1,1);
+                        //$sx = CreateGroup(1,1);
                         break;
                     case 'email':
                         $LattesEmail = new \App\Models\LattesData\LattesEmail();

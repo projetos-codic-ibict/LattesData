@@ -24,55 +24,47 @@
 <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/fontcustom.css.xhtml?version=5.10" />
 <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/socicon.css.xhtml?version=5.10" />
 <link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/structure.css.xhtml?version=5.10" />
-<style>
-/* Custom CSS */
-#dataverseHeader {
-    background: url("/dvn/img/header-lattes-data.jpg") no-repeat right top !important;
-    margin-top: 4rem;/*-webkit-box-shadow: 0px 0px 17px -7px #000000; 
-	box-shadow: 0px 0px 17px -7px #000000;*/
-}
-div#content {
-/*-webkit-box-shadow: 0px 0px 17px -7px #000000; 
-	box-shadow: 0px 0px 17px -7px #000000;*/
-}
-.mt-4 {
-    margin-top: 4rem;
-}
-.btn-outline-success {
-    background: none;
-    color: #007bff;
-    border-color: #007bff;
-}
-.dataverseHeaderLogo {
-    padding: 3rem 0 0 2rem;
-    width: 236px;
-    height: 49px;
-    max-width: 50%;
-    background: none !important;
-}
-.dataverseHeaderDataverseName H1 {
-    display: none;
-}
-#dvfooter {
-    background: #005195;
-    padding-top: 2rem;
-}
-#dvfooter p {
-    color: #fff;
-}
-.poweredbylogo {
-    color: #fff;
-}
-</style>
+<link type="text/css" rel="stylesheet" href="../custom-stylesheet.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script> 
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" type="text/javascript"></script> 
+<script type="text/javascript">
+    $(document).ready(function () {
+
+            $('#myTab a').click(function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+            })
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                e.relatedTarget // previous tab
+            });
+        });
+</script>
+<script src="https://kit.fontawesome.com/b387d4989b.js" crossorigin="anonymous"></script>    
 </head>
 <body>
 <a href="#content" class="sr-only">Skip to main content</a>
+<div class="headerCustom" style="width: 100%; z-index: 100;">
+  <div class="container">
+  <div class="row justify-content-between">
+    <div class="col-xs-8">
+        <a href="https://www.gov.br/cnpq/pt-br" target="_blank">
+            <img src="/dvn/img/logo-cnpq-white.png" alt=""/>
+        </a>
+        <a href="/">
+            <img src="/dvn/img/logo-lattes-white.png" alt=""/>
+        </a> <a href="#"></a>
+      </div>
+    <div class="col-xs-4 offset-xs-4 text-right deposite"><a href="#"><i class="fa-solid fa-square-arrow-up-right fa-lg"></i>Deposite os seus conjuntos de dados</a></div>
+  </div>
+</div>
+</div>
 <nav id="dataverse-header-block">
   <div id="navbarFixed" class="navbar navbar-default navbar-fixed-top">
     <div class="container">
       <div class="navbar-header">
         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar" aria-pressed="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
-        <a href="/"><img src="/logos/navbar/logo_cnpq_cedrera.png;jsessionid=89465f8b9ae4a2399195b4c9e24b" alt="Lattes Data homepage" class="navbar-brand custom-logo"> </a> </div>
+      </div>
       <div class="collapse navbar-collapse" id="topNavBar">
         <ul class="nav navbar-nav navbar-right">
           <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pesquisa <b class="caret"></b></a>
@@ -89,7 +81,7 @@ div#content {
               </li>
             </ul>
           </li>
-          <li><a href="http://172.16.16.68/dvn/about/" rel="noopener" target="_blank">Sobre</a></li>
+          <li><a href="/dvn/about/" rel="noopener" target="_blank">Sobre</a></li>
           <li><a href="https://guides.dataverse.org/en/5.10/user" rel="noopener" target="_blank">Guia do usuário</a> </li>
           <li>
             <form id="j_idt49" name="j_idt49" method="post" action="/" class="navbar-form navbar-left navbar-form-link" enctype="application/x-www-form-urlencoded" data-partialsubmit="true">
@@ -124,7 +116,7 @@ div#content {
     <input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:2" value="-7893747309819969496:-2444764390170307798" autocomplete="off">
   </form>
   <div style="background:#000000;" id="dataverseHeader" class="container bg-muted">
-    <div style="text-align:LEFT;background:#FFFFFF;" class="dataverseHeaderLogo"> <img src="/logos/1/logo.png"></div>
+    <div style="text-align:LEFT;background:#FFFFFF;" class="dataverseHeaderLogo"> <img src="/dvn/img/logo_lattesdata_200.png"></div>
     <div class="dataverseHeaderBlock">
       <div class="dataverseHeaderCell dataverseHeaderName"> <a href="/dataverse/lattesdata" class="dataverseHeaderDataverseName" style="color:#428BCA;">
         <h1>Lattes Data</h1>
@@ -136,23 +128,29 @@ div#content {
   </div>
 </nav>
 <div class="container" id="content" role="main">
-  <div class="row">
-<ul class="nav nav-tabs" id="myTab" role="tablist">
-  <li class="nav-item" role="presentation">
-    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Home</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Profile</button>
-  </li>
-  <li class="nav-item" role="presentation">
-    <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Contact</button>
-  </li>
-</ul>
-<div class="tab-content" id="myTabContent">
-  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">...</div>
-  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">...</div>
-  <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">...</div>
-</div>
+  <div class="row-fluid">
+    <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+      <li role="presentation" class="active" > <a aria-controls="home" aria-expanded="true" data-toggle="tab" href="#home" id="home-tab" role="tab">Histórico</a> </li>
+      <li role="presentation" class=""> <a aria-controls="politica" aria-expanded="false" data-toggle="tab" href="#politica" id="politica-tab" role="tab" >Política do Repositório</a> </li>
+      <li role="presentation" class="" > <a aria-controls="faq" aria-expanded="false" data-toggle="tab" href="#faq" id="faq-tab" >FAQ</a> </li>
+      <li role="presentation" class="" > <a aria-controls="contato" aria-expanded="false" data-toggle="tab" href="#contato" id="contato-tab" >Contato</a> </li>
+    </ul>
+    <div class="col">
+      <div class="tab-content" id="myTabContent">
+        <div aria-labelledby="home-tab" class="tab-pane fade active in" id="home" role="tabpanel">
+          <?php require("historico.php");?>
+        </div>
+        <div aria-labelledby="politica-tab" class="tab-pane fade" id="politica" role="tabpanel">
+          <?php require("politica.php");?> 
+        </div>
+        <div aria-labelledby="faq-tab" class="tab-pane fade" id="faq" role="tabpanel">
+          <?php include("faq.php");?>
+        </div>
+        <div aria-labelledby="contato-tab" class="tab-pane fade" id="contato" role="tabpanel">
+          <?php require("contato.php");?>        
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 <footer>
@@ -163,11 +161,61 @@ div#content {
           <p>Copyright &#169; 2022, CNPq/Ibict </p>
         </div>
         <div class="col-sm-4 text-right">
-          <div class="poweredbylogo"> <span>Powered by</span> <a href="http://dataverse.org/" title="The Dataverse Project" target="_blank" rel="noopener"><img src="/resources/images/dataverse_project_logo.svg" width="118" height="40" alt="The Dataverse Project logo" /></a><span class="version">v. 5.10 build 870-a57ce53</span> </div>
+          <div class="poweredbylogo"> <span>Powered by</span> <a href="http://dataverse.org/" title="The Dataverse Project" target="_blank" rel="noopener"><img src="/resources/images/dataverse_project_logo.svg" width="118" height="40" alt="The Dataverse Project logo" /></a></div>
         </div>
       </div>
     </div>
   </div>
+  
+<div class="custom-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-3">
+        <h6> Assuntos </h6>
+        <ul class="list-unstyled">
+          <li><a href="https://www.gov.br/cnpq/pt-br/assuntos/noticias" target="_blank">Notícias</a></li>
+          <li><a href="https://www.gov.br/cnpq/pt-br/assuntos/popularizacao-da-ciencia" target="_blank">Popularização da ciência</a></li>
+          <li><a href="https://www.gov.br/cnpq/pt-br/assuntos/centro-de-memoria" target="_blank">Memória</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-3">
+        <h6> Acesso à Informação </h6>
+        <ul class="list-unstyled">
+          <li><a href="https://www.gov.br/cnpq/pt-br/acesso-a-informacao/institucional">Institucional</a></li>
+          <li><a href="https://www.gov.br/cnpq/pt-br/acesso-a-informacao/acoes-e-programas" target="_blank">Ações e Programas</a></li>
+          <li><a href="https://www.gov.br/cnpq/pt-br/acesso-a-informacao/bolsas-e-auxilios" target="_blank">Bolsas e Auxílios</a></li>
+          <li><a href="https://www.gov.br/cnpq/pt-br/acesso-a-informacao/dados-abertos" target="_blank">Dados Abertos</a></li>
+          <li><a href="http://memoria2.cnpq.br/web/guest/perguntas-frequentes1" target="_blank">Perguntas Frequentes</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-3">
+        <h6> Canais de Atendimento</h6>
+        <ul class="list-unstyled">
+          <li><a href="https://www.gov.br/cnpq/pt-br/canais_atendimento/fale-conosco" target="_blank">Central de atendimento</a></li>
+          <li>Contato </li>
+          <li>Suporte </li>
+        </ul>
+      </div>
+      <div class="col-sm-3">
+        <h6>Proteção de dados</h6>
+        <ul class="list-unstyled">
+          <li><a href="https://lattesdata.cnpq.br/dvn/about/#politica">Política do LattesData</a></li>
+          <li>Aviso de privacidade</li>
+        </ul>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 text-left">          
+          <a href="https://twitter.com/CNPq_Oficial" target="_blank"><i class="fa-brands fa-twitter fa-lg"></i></a>
+          <a href="https://www.youtube.com/CNPqOficial" target="_blank"><i class="fa-brands fa-youtube fa-lg"></i></a>
+          <a href="https://www.facebook.com/cnpqoficial" target="_blank"><i class="fa-brands fa-facebook fa-lg"></i></a>
+          <a href="https://www.instagram.com/cnpq_oficial/" target="_blank"> <i class="fa-brands fa-instagram fa-lg"></i></a>
+          <a href="https://www.flickr.com/photos/cnpqoficial" target="_blank"><i class="fa-brands fa-flickr fa-lg"></i></a>
+        </div>
+    </div>
+  </div>
+</div>
+
 </footer>
 </body>
 </html>

@@ -12,10 +12,6 @@
   margin-right: 1em;
   margin-top: 0.5em;
 }
-.element.style
-  {
-    z-index: 1111;
-  }
 #dataverseHeader {
   background: url("/dvn/img/header-lattes-data2.jpg") no-repeat right top !important;
   margin-top: 10rem;
@@ -172,10 +168,8 @@ Chamada
 .dataverseHeaderName {
   margin-left: 130px;
 }
-/*
-Espaço no reenvio de senha
-*/
+
 #messagePanel
 {
-  margin-top: 80px;
+	margin-top: 80px;
 }
