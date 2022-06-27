@@ -71,7 +71,6 @@ class LattesEmail extends Model
 
 	function enviar($xemail, $txt, $ass)
 	{
-		$sx = '';
 		$email = \Config\Services::email();
 		$config['mailType'] = 'html';
 		$email->initialize($config);
@@ -83,11 +82,11 @@ class LattesEmail extends Model
 		if (file_exists($filename)) {
 			$email->attach($filename);
 			$cid = $email->setAttachmentCID($filename);
-			$sx = troca($sx, '$image1', $cid);
+			$txt = troca($txt, '$image1', $cid);
 		} else {
 			echo "Logo not found";
 		}
-		$email->setMessage($sx);
+		$email->setMessage($txt);
 		$email->send();
 		print_r($email->printDebugger());
 	}
