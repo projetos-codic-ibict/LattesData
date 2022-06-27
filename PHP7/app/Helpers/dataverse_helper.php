@@ -55,7 +55,7 @@ function CreateUser($dd)
         $cmd .= ' -H "Content-type:application/json" ';
         $cmd .= $SERVER_URL.'api/builtin-users?';
         $cmd .= 'password='.$NEWUSER_PASSWORD;
-        $cmd .= '&key='.getenv('BUILTIN_USERS_KEY');
+        $cmd .= '"&"key='.getenv('BUILTIN_USERS_KEY');
 
         jslog($cmd);
         $txt = shell_exec($cmd);
