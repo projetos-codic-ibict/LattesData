@@ -44,7 +44,7 @@ function CreateGroup($alias='',$dd=array())
 function CreateUser($dd)
     {
         $SERVER_URL = getenv("DATAVERSE_URL");
-        $NEWUSER_PASSWORD = substr(md5($dd['firstName'].$dd['lastName'].date("Ymd")),0,10);
+        $NEWUSER_PASSWORD = $dd['password'];
         dircheck('.tmp');
         dircheck('.tmp/users');
         $file = '.tmp/users/user-'.troca($dd['userName'],'/','-').'.json';
