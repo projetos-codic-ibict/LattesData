@@ -69,7 +69,7 @@ class LattesData extends BaseController
                         $email->setTo('renefgj@gmail.com');
                         $email->setSubject('[LattesData] Cadastro de Dataset'); 
                         //                     
-                        $filename = 'img/bg-email-hL3.jpg';
+                        $filename = 'img/bg-email-hL3a.jpg';
                         if (file_exists($filename))
                             {
                                 $email->attach($filename);  
