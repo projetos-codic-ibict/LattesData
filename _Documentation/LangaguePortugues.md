@@ -68,6 +68,6 @@ $PAYARA/bin/asadmin create-jvm-options '-Ddataverse.lang.directory=/var/www/data
 $PAYARA/bin/asadmin stop-domain
 $PAYARA/bin/asadmin start-domain
 curl http://localhost:8080/api/admin/datasetfield/loadpropertyfiles -X POST --upload-file languages.zip -H "Content-Type: application/zip"
-echo "===>Definindo so idomas do Dataverse e suas extensões"
-curl http://localhost:8080/api/admin/settings/:Languages -X PUT -d '[{"locale":"en","title":"Idoma Padrão"}, {"locale":"us","title":"English"}, {"locale":"br","title":"Português"}]'
+echo "===>Definindo so idiomas do Dataverse e suas extensões"
+curl http://localhost:8080/api/admin/settings/:Languages -X PUT -d '[{"locale":"en","title":"Idioma Padrão"}, {"locale":"us","title":"English"}, {"locale":"br","title":"Português"}]'
 </pre>
