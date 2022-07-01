@@ -67,7 +67,7 @@ class Customize extends Model
 					// https://www.linhadecomando.com/so-linux/linux-instalando-o-locale-pt_br-utf-8
 					// Checar o log - BundleUtil
 						$tlang = '';
-						$tlang .= '{"locale":"en","title":"Idoma Padrão"}';
+						$tlang .= '{"locale":"en","title":"Idioma Padrão"}';
 						$subdir = array('en_US','pt_BR','es','fr','de','it','pt','ru','zh');
 						$lang_n = array('English','Português','Espanhol','Frances','Alemão','Italiano','Português','Russo','Chinês');
 						$langs = array('us','br');
@@ -169,9 +169,11 @@ class Customize extends Model
 						$sx .= '$PAYARA/bin/asadmin stop-domain'.cr();
 						$sx .= '$PAYARA/bin/asadmin start-domain'.cr();
 						$sx .= 'curl http://localhost:8080/api/admin/datasetfield/loadpropertyfiles -X POST --upload-file languages.zip -H "Content-Type: application/zip"';
+						$sx .= '$PAYARA/bin/asadmin stop-domain'.cr();
+						$sx .= '$PAYARA/bin/asadmin start-domain'.cr();						
 						$sx .= cr();
 
-						$sx .= 'echo "===>Definindo so idomas do Dataverse e suas extensões"'.cr();
+						$sx .= 'echo "===>Definindo so idiomas do Dataverse e suas extensões"'.cr();
 						$sx .= 'curl http://localhost:8080/api/admin/settings/:Languages -X PUT -d \'['.$tlang.']\''.cr();
 
 						$sx .= cr();
