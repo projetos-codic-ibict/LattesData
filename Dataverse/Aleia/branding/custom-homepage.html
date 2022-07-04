@@ -1,0 +1,22 @@
+<form class="form mt-4 bg-search">
+	<img src="/dvn/img/logo-aleia.jpg" alt="" class="mx-auto d-block"/>
+<p>Bem vindo ao repositório</br>
+  de dados científicos do Ibict</p>
+  <div class="input-group input-group-lg">
+    <input type="text" class="form-control" id="inputDataverseSearch" onkeydown="if (event.keyCode == 13) document.getElementById('btnDataverseSearch').click();" placeholder="Digite sua pesquisa">
+    <div class="input-group-btn">
+      <button class="btn btn-default" id="btnDataverseSearch" type="submit" onclick="window.location = '/dataverse/aleia?q=' + document.getElementById('inputDataverseSearch').value;return false;"><i class="glyphicon glyphicon-search"></i></button>
+    </div>
+  </div>
+</form>
+
+<!-- <hr class="heavy-rule" /> --> 
+
+<!-- SEARCH + BROWSE + RECENT -->
+
+<script>
+getvals(url_metrics + 'dataverses', 'ID_dataverse', 'Total');
+getvals(url_metrics + 'datasets', 'ID_datasets', 'Total');
+getvals(url_metrics + 'files', 'ID_files', 'Total');
+getvals(url_metrics + 'downloads', 'ID_projetos', 'Total');
+</script>

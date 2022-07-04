@@ -1,0 +1,210 @@
+@font-face {
+	font-family: 'BommerSlab-LightItalic';
+    src: url('/dvn/font/BommerSlab-LightItalic.otf');
+}
+
+.navbar-fixed-top {
+  top: 0;
+    padding: 10px 0;
+}
+.headerCustom {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background: #00538f;
+  min-height: 70px;
+}
+.headerCustom img {
+  margin-right: 1em;
+  margin-top: 0.5em;
+}
+#dataverseHeader {
+ /* background: url("/dvn/img/header-bg.png") no-repeat right top !important;
+  margin-top: 10rem;*/
+  /*-webkit-box-shadow: 0px 0px 17px -7px #000000; 
+	box-shadow: 0px 0px 17px -7px #000000;*/
+}
+div#content {
+  /*-webkit-box-shadow: 0px 0px 17px -7px #000000; 
+	box-shadow: 0px 0px 17px -7px #000000;*/
+}
+
+.bg-search {
+	
+	background: url("/dvn/img/bg-search-home.jpg") no-repeat center;
+	background-size: contain;
+	margin-top:5%;
+	text-align: center;
+	
+}
+
+.bg-search h1 {
+	text-align: center;
+	font-size: 3.8em;
+}
+
+.bg-search p {
+	
+	text-align: center;
+	margin-top: 9em;
+	font-family: BommerSlab-LightItalic;
+	font-size: 1.5em;
+	line-height: 1.5;
+}
+
+.bg-search img {
+	width: 25%;
+}
+
+#login-container{
+    
+    margin-top: 5em;
+}
+.mt-4 {
+  margin-top: 4rem;
+}
+.btn-outline-success {
+  background: none;
+  color: #007bff;
+  border-color: #007bff;
+}
+.dataverseHeaderLogo {
+  padding: 3rem 0 0 2rem;
+  width: 236px;
+  height: 49px;
+  max-width: 50%;
+  background: none !important;
+}
+.dataverseHeaderDataverseName H1 {
+  display: none;
+}
+.poweredbylogo {
+  color: #fff;
+}
+#dataverseHeader .dataverseHeaderCell {
+  display: block;
+}
+#dataverseHeader .dataverseHeaderCell.dataverseHeaderLogo img {
+  max-width: none;
+  max-height: none;
+}
+.deposite  {
+    padding-top: 15px;
+}
+.deposite a {
+    color: #fff;
+    margin-top: 15px;
+    text-decoration: none;
+    font-weight: bold;
+    
+}
+
+.deposite i {
+    margin-right: 5px;
+}
+
+.btn {
+    margin-bottom: 5px; 
+}
+
+/*
+Estilos footer
+*/
+#dvfooter {
+  background: #012F51;
+  padding-top: 2rem;
+  padding-bottom: 2em;
+  margin-top: 4em;
+}
+#dvfooter p {
+  color: #fff;
+}
+.custom-footer {
+  background: #00538f;
+  padding-top: 2em;
+  padding-bottom: 2em;
+/*  margin-top: 5em;*/
+  margin-bottom: -6em
+}
+.custom-footer {
+  color: #fff;
+}
+.custom-footer h6 {
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-bottom: 1.0em;
+}
+.custom-footer li {
+  padding-bottom: 0.4em;
+}
+.custom-footer ul {
+  padding-bottom: 0.5em;
+}
+.custom-footer li a {
+  color: #fff;
+}
+.row-social {
+  background: #014B82;
+}
+.custom-footer i {
+  color: #fff;
+  margin-left: 10px
+}
+/*
+Estilos da lista de resultado
+*/
+table[id$='resultsTable'] td > div {
+  border-radius: 5px;
+}
+[id$='resultsTable'] div[class*='Result'] > div.card-title-icon-block, [id$='resultsTable'] div[class*='Result'] > div.card-preview-icon-block, [id$='resultsTable'] div[class*='Result'] > div.file-tags-block {
+  font-size: 120%;
+  font-weight: bold;
+  margin: 1rem;
+}
+table[id$='resultsTable'] td > div.datasetResult {
+  background: #f0f7fc;
+  border: #bfc4c9 1px solid;
+}
+table[id$='resultsTable'] td > div.dataverseResult {
+  background: #f7f7f7;
+  border: #abafbb 1px solid;
+}
+table[id$='resultsTable'] td > div.fileResult {
+  background: #f8fcfb;
+  border: #b9c3c3 1px solid;
+}
+.bg-citation {
+  background: #FFF;
+  border: 0;
+  border-radius: 5px !important;
+}
+.datasetResult a {
+  color: #568bb7;
+}
+.dataverseResult a {
+  color: #5267b2;
+}
+.fileResult a {
+  color: #55b79b;
+}
+/*
+Estilos da FAQ
+*/
+.faq-question {
+  padding: 0.5em 0;
+  font-size: 18px;
+}
+/*
+Chamada
+*/
+.dataverseHeaderName {
+  margin-left: 130px;
+}
+/*
+Espaço no reenvio de senha
+*/
+#messagePanel
+{
+  margin-top: 80px;
+}
