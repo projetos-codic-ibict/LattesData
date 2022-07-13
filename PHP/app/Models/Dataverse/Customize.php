@@ -170,6 +170,9 @@ class Customize extends Model
 				$sx .= 'echo "===>Definindo so idiomas do Dataverse e suas extensões"' . cr();
 				$sx .= 'curl http://localhost:8080/api/admin/settings/:Languages -X PUT -d \'[' . $tlang . ']\'' . cr();
 
+				$sx .= '$PAYARA/bin/asadmin stop-domain' . cr();
+				$sx .= '$PAYARA/bin/asadmin start-domain' . cr();
+
 				$sx .= cr();
 				$sx = '<pre>' . $sx . '</pre>';
 				break;
