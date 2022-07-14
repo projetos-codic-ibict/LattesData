@@ -73,7 +73,7 @@ class Apache extends Model
         return $sx;
     }
 
-    function config()    
+    function config()
     {
 
         $sx  = '
@@ -96,7 +96,7 @@ class Apache extends Model
         <pre>a2ensite config.conf</pre>
         <br>
         <pre>service apache2 restart</pre>
-                    ';        
+                    ';
     }
 
 
@@ -106,13 +106,21 @@ class Apache extends Model
         $sx = h('dataverse.Apache2', 1);
         $sx .= 'PROXY para apache';
 
+        $sx .= '<code>
+        sudo a2enmod ssl
+        sudo a2enmod proxy
+        sudo a2enmod proxy_http
+        sudo a2enmod proxy_balancer
+        sudo a2enmod lbmethod_byrequests
+        </code>';
+
         $code = '
                     <Location />
                             ProxyPass http://localhost:8080/
                             SetEnv force-proxy-request-1.0 1
                             SetEnv proxy-nokeepalive 1
                     </Location>
-        
+
                     <Location /config>
                             ProxyPass http://localhost:81
                             SetEnv force-proxy-request-1.0 1
@@ -133,8 +141,9 @@ class Apache extends Model
                     ';
         $code = troca($code, '<', '&lt;');
         $code = troca($code, chr(13), '<br>');
-        $sx .= '<tt>' . $code . '</tt>';
+        $sx .= '<pre>' . $code . '</pre>';
 
+        $sx .= "Outra opção é direcionar a porta 80 para a 8080 diretamente pelo iptables";
         $sx .= '<pre>
                     # Example commands that demonstrate how to run Payara Server on the "special" ports < 1024
                     #
