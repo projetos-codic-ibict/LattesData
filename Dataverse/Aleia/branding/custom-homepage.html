@@ -1,5 +1,5 @@
 <form class="form mt-4 bg-search">
-	<img src="/dvn/img/logo-aleia.jpg" alt="" class="mx-auto d-block"/>
+    <h1>ALEIA</h1>
 <p>Bem vindo ao repositório</br>
   de dados científicos do Ibict</p>
   <div class="input-group input-group-lg">
@@ -10,9 +10,30 @@
   </div>
 </form>
 
-<!-- <hr class="heavy-rule" /> --> 
+<!-- <hr class="heavy-rule" /> -->
 
 <!-- SEARCH + BROWSE + RECENT -->
+
+<div class="row mt-4">
+  <div class="col-sm-4 mt-2">
+    <a type="button" class="btn btn-primary btn-lg btn-block" href="/dataverse/aleia?q=&types=dataverses&sort=dateSort&order=desc&page=1"><span  class="badge badge-light" id="ID_dataverse">0</span> Conjunto de DataVerses </a>
+  </div>
+  <div class="col-sm-4 mt-2">
+    <a type="button" class="btn btn-primary btn-lg btn-block" href="/dataverse/aleia?q=&types=datasets&sort=dateSort&order=desc"> <span class="badge badge-light" id="ID_datasets">0</span> Conjunto de Dados (DataSets) </a>
+  </div>
+  <div class="col-sm-2 mt-2">
+    <a type="button" class="btn btn-primary btn-lg btn-block" href="/dataverse/aleia?q=&types=files&sort=dateSort&order=desc"> <span class="badge badge-light" id="ID_files">0</span> Arquivos </a>
+  </div>
+  <div class="col-sm-2 mt-2">
+    <a type="button" class="btn btn-primary btn-lg btn-block"> <span class="badge badge-light" id="ID_projetos">0</span> Projetos </a>
+  </div>
+</div>
+
+<div class="row-fluid mt-4">
+  <div class="col">
+    <button type="button" class="btn btn-primary btn-lg btn-block" onClick="window.location.href='/dataverse/aleia'">Explorar</button>
+  </div>
+</div>
 
 <script>
 getvals(url_metrics + 'dataverses', 'ID_dataverse', 'Total');
