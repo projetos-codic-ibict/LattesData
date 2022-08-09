@@ -1,0 +1,293 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head id="j_idt5">
+<title>Lattes Data</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<link type="text/css" rel="stylesheet" href="/javax.faces.resource/theme.css.xhtml?ln=primefaces-bootstrap&amp;v=10.0.0" />
+<link type="text/css" rel="stylesheet" href="/javax.faces.resource/primeicons/primeicons.css.xhtml?ln=primefaces&amp;v=10.0.0" />
+<script type="text/javascript" src="/javax.faces.resource/omnifaces.js.xhtml?ln=omnifaces&amp;v=3.8"></script><script type="text/javascript" src="/javax.faces.resource/jquery/jquery.js.xhtml?ln=primefaces&amp;v=10.0.0"></script><script type="text/javascript" src="/javax.faces.resource/jquery/jquery-plugins.js.xhtml?ln=primefaces&amp;v=10.0.0"></script><script type="text/javascript" src="/javax.faces.resource/core.js.xhtml?ln=primefaces&amp;v=10.0.0"></script><script type="text/javascript" src="/javax.faces.resource/components.js.xhtml?ln=primefaces&amp;v=10.0.0"></script>
+<link rel="apple-touch-icon" sizes="180x180" href="/javax.faces.resource/images/fav/apple-touch-icon.png.xhtml" />
+<link rel="icon" type="image/png" sizes="16x16" href="/javax.faces.resource/images/fav/favicon-16x16.png.xhtml" />
+<link rel="icon" type="image/png" sizes="32x32" href="/javax.faces.resource/images/fav/favicon-32x32.png.xhtml" />
+<link rel="manifest" href="/javax.faces.resource/images/fav/site.webmanifest.xhtml" />
+<link rel="mask-icon" href="/javax.faces.resource/images/fav/safari-pinned-tab.svg.xhtml" color="#da532c" />
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta name="theme-color" content="#ffffff" />
+<link type="image/png" rel="image_src" href="/javax.faces.resource/images/dataverseproject.png.xhtml" />
+<link type="text/css" rel="stylesheet" href="/javax.faces.resource/bs/css/bootstrap.min.css.xhtml?version=5.10" />
+<link type="text/css" rel="stylesheet" href="/javax.faces.resource/bs/css/bootstrap.min.css.xhtml?version=5.10" />
+<link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/ie-compat.css.xhtml?version=5.10" />
+<link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/owl.carousel.css.xhtml?version=5.10" />
+<link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/fontcustom.css.xhtml?version=5.10" />
+<link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/socicon.css.xhtml?version=5.10" />
+<link type="text/css" rel="stylesheet" href="/javax.faces.resource/css/structure.css.xhtml?version=5.10" />
+<link type="text/css" rel="stylesheet" href="../custom-stylesheet.css" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script> 
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js" type="text/javascript"></script> 
+<script type="text/javascript">
+    $(document).ready(function () {
+
+            $('#myTab a').click(function (e) {
+                e.preventDefault()
+                $(this).tab('show')
+            })
+
+            $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+                e.relatedTarget // previous tab
+            });
+        });
+</script>
+<script src="https://kit.fontawesome.com/b387d4989b.js" crossorigin="anonymous"></script>    
+</head>
+<body>
+<a href="#content" class="sr-only">Skip to main content</a>
+<div class="headerCustom" style="width: 100%; z-index: 100;">
+  <div class="container">
+  <div class="row justify-content-between">
+    <div class="col-xs-8">
+        <a href="https://www.gov.br/cnpq/pt-br" target="_blank">
+            <img src="/dvn/img/logo-cnpq-white.png" alt=""/>
+        </a>
+        <a href="/">
+            <img src="/dvn/img/logo-lattes-white.png" alt=""/>
+        </a> <a href="#"></a>
+      </div>
+    <div class="col-xs-4 offset-xs-4 text-right deposite"><a href="#"><i class="fa-solid fa-square-arrow-up-right fa-lg"></i>Deposite os seus conjuntos de dados</a></div>
+  </div>
+</div>
+</div>
+<nav id="dataverse-header-block">
+  <div id="navbarFixed" class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#topNavBar" aria-pressed="false"> <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> </button>
+      </div>
+      <div class="collapse navbar-collapse" id="topNavBar">
+        <ul class="nav navbar-nav navbar-right">
+          <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pesquisa <b class="caret"></b></a>
+            <ul class="dropdown-menu navbar-search">
+              <li>
+                <form class="form-inline" role="search">
+                  <label id="searchNavLabel" class="sr-only" for="navbarsearch">Pesquisa</label>
+                  <div class="input-group">
+                    <input id="navbarsearch" type="text" class="form-control" size="28" value="" placeholder="Pesquisa de todos os dataverses ...">
+                    <span class="input-group-btn">
+                    <button type="submit" title="" class="btn btn-default bootstrap-button-tooltip" aria-labelledby="searchNavLabel" onclick="window.location='/dataverse/lattesdata?q=' + document.getElementById('navbarsearch').value;return false;" data-original-title="Localizar"> <span class="glyphicon glyphicon-search no-text"></span> </button>
+                    </span> </div>
+                </form>
+              </li>
+            </ul>
+          </li>
+          <li><a href="/dvn/about/" rel="noopener" target="_blank">Sobre</a></li>
+          <li><a href="https://guides.dataverse.org/en/5.10/user" rel="noopener" target="_blank">Guia do usuário</a> </li>
+          <li>
+            <form id="j_idt49" name="j_idt49" method="post" action="/" class="navbar-form navbar-left navbar-form-link" enctype="application/x-www-form-urlencoded" data-partialsubmit="true">
+              <input type="hidden" name="j_idt49" value="j_idt49">
+              <a id="j_idt49:headerSupportLink" href="#" class="ui-commandlink ui-widget" onclick="PrimeFaces.ab({s:&quot;j_idt49:headerSupportLink&quot;,f:&quot;j_idt49&quot;,u:&quot;contactDialog&quot;,onco:function(xhr,status,args,data){PF('contactForm').show();}});return false;">Suporte</a>
+              <input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:0" value="-7140079024628492041:1086366191930500317" autocomplete="off">
+            </form>
+          </li>
+          <li class="dropdown"> <a href="#" class="dropdown-toggle" data-toggle="dropdown" title="Idioma">Português <b class="caret"></b></a>
+            <ul class="dropdown-menu navbar-language">
+              <form id="j_idt54" name="j_idt54" method="post" action="/" class="form-inline" enctype="application/x-www-form-urlencoded">
+                <input type="hidden" name="j_idt54" value="j_idt54">
+                <li><script type="text/javascript" src="/javax.faces.resource/jsf.js.xhtml?ln=javax.faces"></script><a href="#" onclick="mojarra.jsfcljs(document.getElementById('j_idt54'),{'j_idt54:j_idt55:0:j_idt57':'j_idt54:j_idt55:0:j_idt57'},'');return false" class="language-menu-link">English</a> </li>
+                <li class="active"><a href="#" onclick="mojarra.jsfcljs(document.getElementById('j_idt54'),{'j_idt54:j_idt55:1:j_idt57':'j_idt54:j_idt55:1:j_idt57'},'');return false" class="language-menu-link">Português</a> </li>
+                <input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:1" value="-7140079024628492041:1086366191930500317" autocomplete="off">
+              </form>
+            </ul>
+          </li>
+          <li> </li>
+          <li><a href="/loginpage.xhtml?redirectPage=%2Fdataverse_homepage.xhtml"> Iniciar sessão </a> </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <noscript>
+  <div id="noscript-alert" class="bg-danger">
+    <div class="alert container text-danger no-margin-bottom">Please enable JavaScript in your browser. It is required to use most of the features of Dataverse. </div>
+  </div>
+  </noscript>
+  <form id="j_idt103" name="j_idt103" method="post" action="/;jsessionid=89465f8b9ae4a2399195b4c9e24b" class="form-inline" enctype="application/x-www-form-urlencoded" data-partialsubmit="true">
+    <input type="hidden" name="j_idt103" value="j_idt103">
+    <input type="hidden" name="javax.faces.ViewState" id="j_id1:javax.faces.ViewState:2" value="-7893747309819969496:-2444764390170307798" autocomplete="off">
+  </form>
+  <div id="messagePanel">
+    <div class="container messagePanel"> </div>
+  </div>
+</nav>
+<div class="container" id="content" role="main">
+  <div class="row-fluid">
+    <ul class="nav nav-tabs mt-4" id="myTab" role="tablist">
+      <li role="presentation" class="active" > <a aria-controls="home" aria-expanded="true" data-toggle="tab" href="#home" id="home-tab" role="tab">Histórico</a> </li>
+      <li role="presentation" class=""> <a aria-controls="politica" aria-expanded="false" data-toggle="tab" href="#politica" id="politica-tab" role="tab" >Política do Repositório</a> </li>
+      <li role="presentation" class="" > <a aria-controls="faq" aria-expanded="false" data-toggle="tab" href="#faq" id="faq-tab" >FAQ</a> </li>
+      <li role="presentation" class="" > <a aria-controls="contato" aria-expanded="false" data-toggle="tab" href="#contato" id="contato-tab" >Contato</a> </li>
+    </ul>
+    <div class="col">
+      <div class="tab-content" id="myTabContent">
+        <div aria-labelledby="home-tab" class="tab-pane fade active in" id="home" role="tabpanel">
+          <h2>SOBRE O ALEIA</h2>
+          <p>A criação do Repositório de Dados Científicos do Instituto Brasileiro de Informação em Ciência e Tecnologia (Ibict), denominado Aleia, foi motivado pelo Compromisso 3, do 4º Plano de Ação Nacional que visa estabelecer mecanismos de governança de dados científicos para o avanço da Ciência Aberta no Brasil.</p>
+          <p>O Aleia tem por objetivo oferecer ferramentas que permitam registrar, reunir, organizar, disseminar, compartilhar e preservar os dados científicos produzidos em pesquisas executadas por colaboradores do Ibict, em laboratórios e projetos da instituição, além dos dados científicos produzidos por discentes do Programa de Pós-Graduação em Ciência da Informação IBICT/UFRJ. Serão também aceitos depósitos de conjuntos de dados científicos de pesquisadores externos ao Ibict, em uma comunidade específica configurada para este fim. O repositório tem por principais metas:</p>
+          <ul>
+            <li> Incentivar a criação de repositórios de dados de pesquisa, servindo como repositório modelo para tal;</li>
+            <li>Orientar na aplicação de boas práticas internacionais à repositórios de dados de pesquisa;</li>
+            <li>Funcionar como ferramenta de disponibilização, promover a transparência e possibilitar o reuso dos dados;</li>
+            <li>Viabilizar a preservação digital de dados de pesquisa, colaborando para evitar a perda e má gestão dos dados, orientando e incentivando os autores na organização e planejamento do ciclo de vida do dado de pesquisa;</li>
+            <li>Possibilitar a aplicação dos princípios FAIR;</li>
+            <li>Promover a conformidade com as atuais demandas da comunidade científica, em especial às de revistas e agências de fomento sobre a disponibilização dos dados de pesquisa;</li>
+            <li>Tornar os dados citáveis e possibilitar o uso de métricas, valorizando e dando visibilidade a outros produtos da pesquisa ao contrário de unicamente seu resultado. </li>
+          </ul>
+          <p>&nbsp;</p>
+        </div>
+        <div aria-labelledby="politica-tab" class="tab-pane fade" id="politica" role="tabpanel">
+          <h2>POLÍTICA DE PRIVACIDADE DO LATTESDATA</h2>
+          <p>O repositório LattesData foi concebido no âmbito do Compromisso 3 do 4º Plano de Ação Nacional em Governo Aberto, que visava estabelecer mecanismos de governança de dados científicos para o avanço da Ciência Aberta no Brasil. Para seu desenvolvimento, em dezembro de 2019, foi firmado um Acordo de Cooperação entre o Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq) e o Instituto Brasileiro de Informação em Ciência e Tecnologia (Ibict).</p>
+          <p>Posteriormente,  foram estabelecidas atribuições e responsabilidades de atuação conjunta de ambas as instituições, visando à colaboração para o desenvolvimento da Ciência Aberta no Brasil. A parceria encarregou-se, entre outros, da definição da arquitetura de informação do repositório, da elaboração de sua política, dos termos de depósitos dos datasets em sua estrutura, a da definição dos conjuntos de metadados descritores dos datasets nele depositados.</p>
+          <p>Com o objetivo de garantir a governança dos dados depositados, um Acordo de Cooperação Internacional foi assinado com a organização DataCite, visando a atribuição de identificadores DOI (Digital Object Identifier) aos datasets no momento de seu depósito. O custo de emissão e atribuição dos DOIs aos dados depositados no LattesData é arcado pelo CNPq, não havendo ônus algum para os pesquisadores depositantes.</p>
+          <p>O repositório tem por principais metas</p>
+          <ul>
+            <li>Estimular o avanço da prática da Ciência Aberta no Brasil, contribuindo para o estabelecimento de acervo de dados de pesquisa em infraestrutura nacional  seguindo os princípios FAIR para dados (Findable - Localizáveis; Accessible - Acessíveis;  Interoperable - Interoperáveis; Reusable - Reutilizáveis);</li>
+            <li>Armazenar os dados de pesquisa de modo a manter sua preservação e acessibilidade no longo prazo;</li>
+            <li> Estimular o reuso de dados de pesquisa, contribuindo assim para redução de custos de novos projetos de pesquisa.</li>
+          </ul>
+          <p>O LattesData contou com a participação de diversos profissionais durante o seu  desenvolvimento, os quais foram imprescindíveis para o seu avanço. Destaca-se a extraordinária contribuição do Professor Doutor Rene Faustino Gabriel Junior, da Universidade Federal do Rio Grande do Sul (UFRGS), que, como pesquisador, não mediu esforços para que o projeto tornasse realidade, rumo ao avanço da Ciência Aberta no Brasil. <br>
+          </p>
+        </div>
+        <div aria-labelledby="faq-tab" class="tab-pane fade" id="faq" role="tabpanel">
+          <h2>FAQ</h2>
+          <p>Nesta seção são divulgadas as perguntas frequentes sobre o Repositório LattesData do Conselho Nacional de Desenvolvimento Científico e Tecnológico - CNPq. </p>
+          <div id="demo-gen-faq" class="panel-group accordion">
+            <div class="bord-no pad-top"> 
+              
+              <!-- Question -->
+              <div class="faq-question"> <a href="#demo-gen-faq1" data-toggle="collapse" data-parent="#demo-gen-faq">O que é a Plataforma LattesData?</a> </div>
+              
+              <!-- Answer -->
+              <div id="demo-gen-faq1" class="collapse">
+                <div class="pad-all">O LattesData tem como objetivo reunir, armazenar e divulgar os conjuntos de dados científicos de pesquisadores beneficiários CNPq. <br>
+                  É resultado do Compromisso 3 do 4º Plano de Ação Nacional que visa estabelecer mecanismos de governança de dados científicos para o avanço da Ciência Aberta no Brasil por meio de um Acordo de Cooperação assinado entre o CNPq e o Instituto Brasileiro de Informação em Ciência e Tecnologia (Ibict).<br>
+                </div>
+              </div>
+            </div>
+            <div class="bord-no pad-top"> 
+              
+              <!-- Question -->
+              <div class="faq-question"> <a href="#demo-gen-faq2" data-toggle="collapse" data-parent="#demo-gen-faq">Como acessar a Plataforma LattesData?</a> </div>
+              
+              <!-- Answer -->
+              <div id="demo-gen-faq2" class="collapse">
+                <div class="pad-all"> Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. </div>
+              </div>
+            </div>
+            <div class="bord-no pad-top"> 
+              
+              <!-- Question -->
+              <div class="faq-question"> <a href="#demo-gen-faq3" data-toggle="collapse" data-parent="#demo-gen-faq">Quem pode acessar a Plataforma LattesData?</a> </div>
+              
+              <!-- Answer -->
+              <div id="demo-gen-faq3" class="collapse">
+                <div class="pad-all"> A Plataforma está disponível para todos os usuários internos e externos da CNPq. Atualmente os depósitos de dados só podem ser realizados por pesquisadores que tiveram as suas pesquisas financiadas pelo CNPq. </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div aria-labelledby="contato-tab" class="tab-pane fade" id="contato" role="tabpanel">
+          <h2>Contato</h2>
+          <p>Dúvidas: lattesdata@cnpq.br.<br>
+            Suporte:<br>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>
+  <div id="dvfooter">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 small">
+          <p>Copyright &#169; 2022, CNPq/Ibict </p>
+        </div>
+        <div class="col-sm-4 text-right">
+          <div class="poweredbylogo"> <span>Powered by</span> <a href="http://dataverse.org/" title="The Dataverse Project" target="_blank" rel="noopener"><img src="/resources/images/dataverse_project_logo.svg" width="118" height="40" alt="The Dataverse Project logo" /></a></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+<div class="custom-footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-2">
+        <h6> Assuntos </h6>
+        <ul class="list-unstyled">
+          <li><a href="https://www.gov.br/ibict/pt-br/assuntos/informacao-cientifica-1" target="_blank">Informação Científica</a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/assuntos/informacao-para-o-governo-1" target="_blank">Informação para o Governo</a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/assuntos/copy_of_informacao-cientifica-1" target="_blank">Informação Tecnológica</a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/assuntos/copy2_of_informacao-cientifica-1">Tecnologias para Informação</a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/assuntos/ensino-e-pesquisa-1">Ensino e Pesquisa</a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/assuntos/informacao-para-a-pesquisa">Informação para a Pesquisa</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2">
+        <h6> Acesso à Informação </h6>
+        <ul class="list-unstyled"><li><a href="https://www.gov.br/ibict/pt-br/acesso-a-informacao/sobre-o-ibict-1">Institucional</a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/acesso-a-informacao/documentos-oficiais">Documentos Oficiais</a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/acesso-a-informacao/editais">Editais</a></li>
+          <li><a href="https://dados.ibict.br/">Dados Abertos</a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/acesso-a-informacao/acoes-e-programas">Ações e Programas</a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/acesso-a-informacao/servico-de-informacao-ao-cidadao-sic">Serviço de Informação ao Cidadão (SIC)</a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/acesso-a-informacao/plano-de-dados-abertos">Plano de Dados Abertos</a></li>
+        </ul>
+      </div>
+      <div class="col-sm-2">
+        <h6> Canais de Atendimento</h6>
+        <ul class="list-unstyled">
+          <li>Contato </li>
+        </ul>
+      </div>
+      <div class="col-sm-2">
+        <h6>Central de Conteúdos</h6>
+        <ul class="list-unstyled">
+          <li><a href="https://www.gov.br/ibict/pt-br/central-de-conteudos/copy_of_redes-sociais">Redes Sociais</a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/central-de-conteudos/publicacoes">Publicações</a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/central-de-conteudos/noticias-ibict">Notícias Ibict</a></li>
+        </ul>
+      </div>
+    <div class="col-sm-2">
+        <h6>Composição</h6>
+        <ul class="list-unstyled">
+          <li><a href="https://www.gov.br/ibict/pt-br/composicao/diretoria">Quem é Quem </a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/composicao/ppgci">PPGCI</a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/composicao/ctc-1">CTC</a></li>
+          <li><a href="https://www.gov.br/ibict/pt-br/composicao/grupos-de-trabalho-1">Grupos de Trabalho</a></li>
+        </ul>
+      </div>
+<div class="col-sm-2">
+        <h6>Repositório ALÉIA</h6>
+        <ul class="list-unstyled">
+          <li>Política do Aleia</li>
+        </ul>
+      </div>        
+    </div>
+    <div class="row">
+      <div class="col-12 text-left">          
+          <a href="https://twitter.com/ibictbr" target="_blank"><i class="fa-brands fa-twitter fa-lg"></i></a>
+          <a href="https://www.youtube.com/channel/UCsYh70E1ktPDU92t8tX31_g" target="_blank"><i class="fa-brands fa-youtube fa-lg"></i></a>
+          <a href="https://www.facebook.com/IBICTbr " target="_blank"><i class="fa-brands fa-facebook fa-lg"></i></a>
+          <a href="https://www.instagram.com/ibict/ " target="_blank"> <i class="fa-brands fa-instagram fa-lg"></i></a>
+        </div>
+    </div>
+  </div>
+</div>
+
+
+</footer>
+</body>
+</html>
