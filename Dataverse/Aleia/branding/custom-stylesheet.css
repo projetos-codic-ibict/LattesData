@@ -1,13 +1,3 @@
-@font-face {
-	font-family: 'BommerSlab-LightItalic';
-    src: url('/dvn/font/BommerSlab-LightItalic.otf');
-
-}
-@font-face {
-	    font-family: 'Warrior-ExtraLight';
-    src: url('/dvn/font/Warrior-ExtraLight.otf');
-
-}
 .navbar-fixed-top {
   top: 0;
     padding: 10px 0;
@@ -23,20 +13,9 @@
   margin-right: 1em;
   margin-top: 0.5em;
 }
-#dataverseHeader {
- /* background: url("/dvn/img/header-bg.png") no-repeat right top !important;
-  margin-top: 10rem;*/
-  /*-webkit-box-shadow: 0px 0px 17px -7px #000000; 
-	box-shadow: 0px 0px 17px -7px #000000;*/
-}
-div#content {
-  /*-webkit-box-shadow: 0px 0px 17px -7px #000000; 
-	box-shadow: 0px 0px 17px -7px #000000;*/
-}
 
 .bg-search {
 	
-	background: url("/dvn/img/bg-search-home.jpg") no-repeat center;
 	background-size: contain;
 	margin-top:5%;
 	text-align: center;
@@ -46,22 +25,27 @@ div#content {
 .bg-search h1 {
 	text-align: center;
 	font-size: 5em;
-    font-family: Warrior-ExtraLight;
     
 }
 
 .bg-search p {
 	
 	text-align: center;
-	margin-top: 9em;
-	font-family: BommerSlab-LightItalic;
+	margin-top: 1.5em;
+	margin-bottom: 3.5em;
 	font-size: 1.5em;
 	line-height: 1.5;
 }
 
-.bg-search img {
-	width: 25%;
+.btn-outline-primary {
+	border-color: #81b4fe;
+	background: none;
+	color: #81b4fe;
 }
+.badge {
+	background-color: #81b4fe;	
+}
+
 
 #login-container{
     
@@ -118,7 +102,7 @@ div#content {
 Estilos footer
 */
 #dvfooter {
-  background: #012F51;
+  background: #81b4fe;
   padding-top: 2rem;
   padding-bottom: 2em;
   margin-top: 4em;
@@ -128,7 +112,7 @@ Estilos footer
   color: #fff;
 }
 .custom-footer {
-  background: #00538f;
+  background: #648bc4;
   padding-top: 2em;
   padding-bottom: 2em;
 /*  margin-top: 5em;*/
@@ -141,8 +125,7 @@ Estilos footer
   font-size: 18px;
   font-weight: bold;
   text-transform: uppercase;
-  padding-bottom: 1.0em;
-    min-height: 3.1em;
+    min-height: 2.0em;
 }
 .custom-footer li {
   padding-bottom: 0.4em;
