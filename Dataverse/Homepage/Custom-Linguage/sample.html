@@ -1,0 +1,45 @@
+
+<p id="intro">O repositório LattesData tem como objetivo reunir, armazenar e divulgar os conjuntos de dados científicos de pesquisadores beneficiários do Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq). Futuramente, será também disponível para depósito de dados de pesquisa oriundos de pesquisadores não financiadas pelo CNPq, mediante acordos celebrados com suas instituições no âmbito do Consórcio Nacional para Ciência Aberta (CoNCienciA). </p>
+<p id="ind_01">Conjunto de DataVerses</p>
+<p id="ind_02">Conjunto de Dados (DataSets)</p>
+<p id="ind_03">Arquivos</p>
+<p id="ind_04">Projetos</p>
+
+
+
+<script>
+/********************************* Identifica o idioma do navegador */
+const language = window.navigator.language;
+
+/********* Printa o objeto language no console - remover em produção*/
+console.log('Language ' + language);
+
+
+/********** Se o idioma for diferente do portugues mostra em inglês */
+if (language != 'pt-BR')
+  {
+    english();
+  }
+
+function english()
+  {
+    document.getElementById("ind_01").innerHTML = "DataVerses";
+    document.getElementById("ind_02").innerHTML = "DataSets";
+    document.getElementById("ind_03").innerHTML = "Files";
+    document.getElementById("ind_04").innerHTML = "Projects";
+    document.getElementById("intro").innerHTML = "El repositorio LattesData tiene como objetivo recopilar, almacenar y difundir conjuntos de datos científicos de investigadores beneficiarios del Consejo Nacional de Desarrollo Científico y Tecnológico (CNPq). En el futuro, también estará disponible para el depósito de datos de investigación de investigadores no financiados por el CNPq, a través de convenios suscritos con sus instituciones en el ámbito del Consorcio Nacional para la Ciencia Abierta (ConCIenciA).";
+
+  }
+
+function portuguese()
+  {
+    document.getElementById("ind_01").innerHTML = "Conjunto de DataVerses";
+    document.getElementById("ind_02").innerHTML = "Conjunto de Dados (DataSets)";
+    document.getElementById("ind_03").innerHTML = "Arquivos";
+    document.getElementById("ind_04").innerHTML = "Projetos";
+    document.getElementById("intro").innerHTML = "O repositório LattesData tem como objetivo reunir, armazenar e divulgar os conjuntos de dados científicos de pesquisadores beneficiários do Conselho Nacional de Desenvolvimento Científico e Tecnológico (CNPq). Futuramente, será também disponível para depósito de dados de pesquisa oriundos de pesquisadores não financiadas pelo CNPq, mediante acordos celebrados com suas instituições no âmbito do Consórcio Nacional para Ciência Aberta (CoNCienciA).";
+  }
+
+</script>
+
+<p onclick="portuguese();" style="cursor: pointer;">POR</p> | <p onclick="english();" style="cursor: pointer;">ENG</p>
