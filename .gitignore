@@ -1,5 +1,6 @@
 .env
 *.log
+PHP/.tmp/*
 PHP/public/.tmp/*
 PHP\writable\session\*
 PHP/writable/*

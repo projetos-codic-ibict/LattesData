@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-helper(['boostrap', 'url', 'graphs', 
+helper(['boostrap', 'url', 'graphs',
         'sisdoc_forms', 'form', 'nbr', 'sessions',
         'database']);
 define("URL", getenv('app.baseURL'));
@@ -68,7 +68,7 @@ class Home extends BaseController
                     default:
                         $sx .= view('header/head');
                         $sx .= $this->navbar();
-                        break;        
+                        break;
                 }
             return $sx;
         }
@@ -76,10 +76,10 @@ class Home extends BaseController
     function dataverse($d1='',$d2='',$d3='',$d4='')
 	{
 		$Dataverse = new \App\Models\Dataverse\Index();
-		$tela = $this->cab();		
+		$tela = $this->cab();
 		$tela .= bs($Dataverse->index($d1,$d2,$d3,$d4));
-		$tela .= $this->cab("footer");	
-        $tela .= $this->footer();	
+		$tela .= $this->cab("footer");
+        $tela .= $this->footer();
 		return $tela;
 	}
 
@@ -89,7 +89,7 @@ class Home extends BaseController
             $sx = '';
 
             $sx .= $PA->index($d1,$d2,$d3,$d4);
-            
+
             $sx .= view('header/footer');
             return($sx);
         }
@@ -99,7 +99,7 @@ class Home extends BaseController
         $sx = '';
         $sx .= view('header/head');
         $sx .= view('header/navbar');
-        
+
         $sx .= view('header/footer');
         return $sx;
     }

@@ -167,6 +167,11 @@ class Index extends Model
 						jq --version<br>
 						</code>';
 				break;
+			case 'shibboleth':
+				$sx .= h('Shibboleth');
+				$Shibboleth = new \App\Models\Dataverse\Shibboleth();
+				$sx .= $Shibboleth->index($d2, $d3, $d4, $d5);
+				break;
 			case 'imagemagick':
 				$sx .= '<code>apt install imagemagick</code>';
 				break;
@@ -318,6 +323,9 @@ class Index extends Model
 
 		$menu['#MANAGEMENT'] = '<h5><b>' . lang('dataverse.Management') . '</b></h5>';
 		$menu[PATH . MODULE . 'dataverse/dataset/remove'] = lang('dataverse.Dataset_remove');
+
+		$menu['#SHIBBOLTH'] = '<h5><b>' . lang('dataverse.Shibboleth') . '</b></h5>';
+		$menu[PATH . MODULE . 'dataverse/shibboleth'] = lang('dataverse.Shibboleth');
 
 		$menu['#INGEST'] = '<h5><b>' . lang('dataverse.Ingest') . '</b></h5>';
 		$menu[PATH . MODULE . 'dataverse/ingest/file'] = lang('dataverse.Ingest_File');
