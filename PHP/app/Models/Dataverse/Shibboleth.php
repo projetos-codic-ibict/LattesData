@@ -64,17 +64,24 @@ class Shibboleth extends Model
 
                 }
 			$sx = bs(bsc($sx,12)).bs($sa.$sb);
+			$sx .= bs(bsc($this->samples(),12));
             return $sx;
         }
 
 	function samples()
 		{
 			$sx = '';
-			$sx .= '<h1>Shibboleth</h1>';
-			$sx .= '<h2>Metadata</h2>';
-			$sx .= '<p>URL: '.base_url(PATH.'shibboleth/metadata').'</p>';
-			$sx .= '<h2>DiscoFeed</h2>';
-			$sx .= '<p>URL: '.base_url(PATH.'shibboleth/discofeed').'</p>';
+			$sx .= '<h4>Samples</h4>';
+			$sx .= '<span onclick="set(\'https://vitrinedadosabertos.rnp.br/Shibboleth.sso/\');">VitrineDadosAbertos</span>';
+			$sx .= '<br><span onclick="set(\'https://vitrinedadosabertos-dev.rnp.br/Shibboleth.sso/\');">VitrineDadosAbertos-DEV</span>';
+			$sx .= '<br><span onclick="set(\'https://idp3.cafeexpresso.rnp.br/idp/shibboleth\');">CafeExpresso IDP3</span>';
+			$sx .= '<br><span onclick="set(\'https://samltest.id/saml/idp\');">SAMLteste</span>';
+
+			$sx .= '<script>';
+			$sx .= ' function set(v) {';
+			$sx .= ' $("#url").val(v);';
+			$sx .= ' }';
+			$sx .= '</script>';
 			return $sx;
 		}
 
