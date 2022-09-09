@@ -162,7 +162,7 @@ class Customize extends Model
 				$sx .= '$PAYARA/bin/asadmin create-jvm-options \'-Ddataverse.lang.directory=/var/www/dataverse/langBundles\'' . cr();
 				$sx .= '$PAYARA/bin/asadmin stop-domain' . cr();
 				$sx .= '$PAYARA/bin/asadmin start-domain' . cr();
-				$sx .= 'curl http://localhost:8080/api/admin/datasetfield/loadpropertyfiles -X POST --upload-file languages.zip -H "Content-Type: application/zip"';
+				$sx .= 'curl http://localhost:8080/api/admin/datasetfield/loadpropertyfiles -X POST --upload-file languages.zip -H "Content-Type: application/zip"'.cr();
 				$sx .= '$PAYARA/bin/asadmin stop-domain' . cr();
 				$sx .= '$PAYARA/bin/asadmin start-domain' . cr();
 				$sx .= cr();
