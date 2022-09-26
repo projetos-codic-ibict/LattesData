@@ -225,6 +225,9 @@ class Customize extends Model
 			case 'css':
 				$sx .= $this->css();
 				break;
+			case 'userguide':
+				$sx .= $this->userguide();
+				break;
 
 			case 'homeFooter':
 				$sx .= 'echo "Alterar no Rodape os dados sobre Copyright &copy"' . cr();
@@ -253,6 +256,8 @@ class Customize extends Model
 				$menu[PATH . MODULE . 'dataverse/customize/sitemap'] = lang('dataverse.customize_sitemap');
 				$menu[PATH . MODULE . 'dataverse/customize/css'] = lang('dataverse.customize_css');
 				$menu[PATH . MODULE . 'dataverse/customize/copyright'] = lang('dataverse.customize_FooterCopyright');
+
+				$menu[PATH . MODULE . 'dataverse/customize/userguide'] = lang('dataverse.user_guide');
 
 				//:NavbarAboutUrl
 				//:NavbarGuidesUrl
@@ -415,6 +420,39 @@ class Customize extends Model
 		$sx .= bs($sx);
 		return $sx;
 	}
+
+	function userguide()
+		{
+		$sx = '';
+		$sx .= '<p>Para personalizar o guida do usuário configure os paremetros.</p>';
+		$sx .= '<pre>';
+		$sx .= 'mkdir /var/www/dataverse/' . cr();
+		$sx .= 'mkdir /var/www/dataverse/branding/' . cr();
+		$sx .= 'mkdir /var/www/dataverse/branding/guide' . cr();
+		$sx .= '</pre>';
+		$sx .= '<p>Crie uma página com o conteúdo em /var/www/dataverse/branding/guide</p><br>';
+		$sx .= '<pre>';
+		$sx .= ':NavbarGuidesUrl<br>';
+		$sx .= 'curl -X PUT -d https://vitrinedadosabertos-dev.rnp.br/dvn/guide http://localhost:8080/api/admin/settings/:NavbarGuidesUrl<br/>'.cr();
+		$sx .= ''.cr();
+		$sx .= ':GuidesBaseUrl<br>';
+		$sx .= 'curl -X PUT -d http://dataverse.example.edu http://localhost:8080/api/admin/settings/:GuidesBaseUrl<br/>' . cr();
+		$sx .= '' . cr();
+		$sx .= ':GuidesVersion<br>';
+		$sx .= 'curl -X PUT -d 1234-new-feature http://localhost:8080/api/admin/settings/:GuidesVersion<br/>' . cr();
+		$sx .= '' . cr();
+		$sx .= ':NavbarSupportUrl<br>';
+		$sx .= 'curl -X PUT -d http://dataverse.example.edu/supportpage.html http://localhost:8080/api/admin/settings/:NavbarSupportUrl<br/>' . cr();
+		$sx .= '' . cr();
+		$sx .= '' . cr();
+		$sx .= '' . cr();
+		$sx .= '</pre>';
+		$sx .= cr();
+		$sx .= 'echo "Remove Custom Page"' . cr();
+		$sx .= 'curl -X PUT -d \'/var/www/dataverse/branding/custom-header.html\' http://localhost:8080/api/admin/settings/:HeaderCustomizationFile' . cr();
+		$PATH = '/var/www/dataverse/branding/';
+		return $sx;
+		}
 
 	function HeaderCustomizationFile()
 	{
