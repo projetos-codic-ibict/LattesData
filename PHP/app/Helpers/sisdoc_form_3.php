@@ -2,16 +2,6 @@
 
 function read_link($url, $read = 'CURL')
 {
-    $cached = false;
-    dircheck('../.tmp/');
-    dircheck('../.tmp/.cache/');
-    $file = '../.tmp/.cache/' . md5($url);
-    if (file_exists($file)) {
-        $cached = true;
-        jslog('Cache: ' . $url);
-        $txt = file_get_contents($file);
-        return $txt;
-    }
     switch ($read) {
         case 'file':
             if (substr($url, 0, 4) == 'http') {
@@ -24,7 +14,6 @@ function read_link($url, $read = 'CURL')
 
             if ($sta != '404') {
                 $contents = file_get_contents($url);
-                file_put_contents($file, $contents);
             } else {
                 $contents = '';
             }
@@ -36,19 +25,8 @@ function read_link($url, $read = 'CURL')
             curl_setopt($curl, CURLOPT_URL, $url);
             curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($curl, CURLOPT_HEADER, false);
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, false);
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
             $data = curl_exec($curl);
-            $erro = curl_errno($curl);
             curl_close($curl);
-            if ($erro == 0) {
-                file_put_contents($file, $data);
-            } else {
-                echo "ERRO CURL: " . $erro;
-                echo '<br>' . $url;
-            }
-
             return ($data);
 
             break;
@@ -57,48 +35,39 @@ function read_link($url, $read = 'CURL')
 }
 
 function menu($menu)
-{
-    $sx = '<ul>';
-    foreach ($menu as $link => $name) {
-        if (substr($link, 0, 1) == '#') {
-            $link = troca($link, '#', '');
-            $link = lang($link);
-            $sx .= '<h4>' . $link . '</h4>';
-        } else {
-            $sx .= '<li><a href="' . $link . '">' . $name . '</a></li>';
-        }
+    {
+        $sx = '<ul>';
+        foreach($menu as $link=>$name)
+            {
+                $sx .= '<li><a href="' . $link . '">' . $name . '</a></li>';
+            }
+        $sx .= '</ul>';
+        return $sx;
     }
-    $sx .= '</ul>';
-    return $sx;
-}
 
 function check_email($email)
-{
-    $emailArray = explode("@", $email);
-    echo h($email);
-    pre($emailArray);
-    if (checkdnsrr(array_pop($emailArray), "MX")) {
-        return true;
-    } else {
-        return false;
+    {
+            $emailArray = explode("@", $email);
+            if (checkdnsrr(array_pop($emailArray), "MX")) {
+                return true;
+            } else {
+                return false;
+            }        
     }
-}
 
-function pre($dt, $force = true)
+function pre($dt,$force=true)
 {
     echo '<pre>';
     print_r($dt);
     echo '</pre>';
-    if ($force) {
-        exit;
-    }
+    if ($force) { exit; }
 }
 
 if (!function_exists("current_url")) {
     function current_url()
     {
         $url = getenv('app.baseURL');
-        return $url;
+        return $url;    
     }
 }
 
@@ -106,7 +75,7 @@ if (!function_exists("site_url")) {
     function site_url()
     {
         $url = getenv('app.baseURL');
-        return $url;
+        return $url;    
     }
 }
 
@@ -122,16 +91,12 @@ function hexdump($string)
 }
 
 function geturl()
-{
-    $path = $_SERVER['REQUEST_URI'];
-    if (strlen($path) == 0) {
-        $path = $_SERVER['PATH_INFO'];
+    {
+        $path = $_SERVER['REQUEST_URI'];
+        if (strlen($path) == 0) { $path = $_SERVER['PATH_INFO']; }
+        if (strlen($path) == 0) { $path = $_SERVER['PHP_SELF']; }
+        return $path;
     }
-    if (strlen($path) == 0) {
-        $path = $_SERVER['PHP_SELF'];
-    }
-    return $path;
-}
 
 function romano($n)
 {

@@ -49,6 +49,7 @@ class Database extends Config
         'failover' => [],
         'port'     => 3306,
     ];
+
     public $schema = [
         'DSN'      => '',
         'hostname' => 'localhost',
@@ -67,7 +68,7 @@ class Database extends Config
         'strictOn' => false,
         'failover' => [],
         'port'     => 3306,
-    ];    
+    ];
 
     /**
      * This database connection is used when

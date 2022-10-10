@@ -83,6 +83,16 @@ class Home extends BaseController
 		return $tela;
 	}
 
+    function guide($d1 = '', $d2 = '', $d3 ='', $d4 ='', $d5 = '')
+    {
+        $Guide = new \App\Models\Guide\Index();
+        $tela = $this->cab();
+        $tela .= bs($Guide->index($d1, $d2, $d3, $d4));
+        $tela .= $this->cab("footer");
+        $tela .= $this->footer();
+        return $tela;
+    }
+
     function xxdataverse($d1='',$d2='',$d3='',$d4='')
         {
             $PA = new \App\Models\Dataverse\PA_Schema();

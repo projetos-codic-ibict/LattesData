@@ -42,15 +42,15 @@ class Checklist extends Model
 
 function index($d1,$d2,$d3)
 		{
-			
+
 			$sx = h('Checklist',1);
 			if (strlen($d1) > 0)
 				{
 					$sx .= h('dataverse.checklist_'.$d1,4);
 				}
-			
+
 			$cmd = '';
-			
+
 			$file = false;
 			switch($d1)
 				{
@@ -62,12 +62,10 @@ function index($d1,$d2,$d3)
                         break;
                 }
 			return $sx;
-		}    
+		}
 
         function checklist()
             {
-
-
                 $item = array();
                 $item['postgresql'] = 'postgresql_install';
                 $item['solr'] = 'solr_install';
@@ -83,8 +81,8 @@ function index($d1,$d2,$d3)
                             } else {
                                 $_SESSION['checklist'][$key] = '';
                             }
-                        
-                    }                
+
+                    }
                 }
 
                 $sx = '';
@@ -125,7 +123,7 @@ function index($d1,$d2,$d3)
                                 $checked = 'checked';
                             }
                     }
-                    
+
                     $sx = '';
                     //$sx .= '<img src="'.URL.'img/icons/unchecked.png" width="30" height="30" border=0>';
                     $sx .= '<input type="checkbox" name="'.$key.'" value="1" '.$checked.'>';
