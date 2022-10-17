@@ -177,9 +177,9 @@ class Customize extends Model
 				$sx = '<pre>' . $sx . '</pre>';
 				break;
 			case 'sitemap':
-				$sx .= 'curl -X POST http://localhost:8080/api/admin/sitemap';
-				$sx .= 'Result in: ' . cr();
-				$sx .= '/usr/local/payara5/glassfish/domains/domain1/docroot/sitemap/sitemap.xml';
+				$sx .= 'curl -X POST http://localhost:8080/api/admin/sitemap<br/>' . cr();
+				$sx .= 'Result in: <br/>' . cr();
+				$sx .= '/usr/local/payara5/glassfish/domains/domain1/docroot/sitemap/sitemap.xml<br/>' . cr();
 				break;
 			case 'googleanalytics':
 				$sx .= h('dataverse.GoogleAnalytics');
