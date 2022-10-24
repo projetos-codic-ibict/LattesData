@@ -404,6 +404,8 @@ class Customize extends Model
 		$sx .= "curl -X PUT -d '/logos/navbar/$logo' http://localhost:8080/api/admin/settings/:LogoCustomizationFile" . cr();
 		$sx .= '</pre>';
 
+		$sx .= '<img src="'.URL. 'img/sample/sample_logo.png'.'" style="width: 544px; height: 100px;">';
+
 		$sx = bs($sx);
 		return $sx;
 	}
