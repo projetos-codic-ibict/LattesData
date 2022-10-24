@@ -62,7 +62,7 @@ return[
         'Gadget'=>'Customização',
         'customize_FooterCopyright'=>'Copiright (Rodape)',
         'HeaderCustomizationFile'=>'Cabeçalho (Header) - Todas as páginas',
-        ''=>'',
+        'StyleCSS'=>'Customização da folha de estilo (CSS)',
         ''=>'',
         ''=>'',
 

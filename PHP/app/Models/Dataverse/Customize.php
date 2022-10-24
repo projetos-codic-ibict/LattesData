@@ -579,30 +579,18 @@ class Customize extends Model
 	function css()
 	{
 		$sx = '';
-		$sx .= h('dataverse.StyleCSS');
-		$sx .= '<pre>curl -X PUT -d \'/var/www/dataverse/branding/custom-stylesheet.css\' http://localhost:8080/api/admin/settings/:StyleCustomizationFile</pre>';
-		$sx .= '<hr>';
-		$sx .= form_open_multipart();
-		$sx .= form_upload('userfile');
-		$sx .= form_submit(array('name' => 'submit', 'value' => lang('dataverse.upload')));
-		$sx .= form_close();
+		$sx .= h(lang('dataverse.StyleCSS'));
+		$sx .= 'Criar a pasta destino do CSS';
+		$sx .= '<tt>mkdir /var/www/dataverse/branding/css</tt>';
+		$sx .= '<br>';
 
-		if (isset($_FILES['userfile']['name'])) {
-			$file = $_FILES['userfile']['tmp_name'];
-			$name = $_FILES['userfile']['name'];
-			$type = $_FILES['userfile']['type'];
-			if ($type == 'text/css') {
-				$file2 = '/var/www/dataverse/branding/custom-stylesheet.css';
-				if (file_exists($file2)) {
-					$sx .= bsmessage('Delete file exists - ' . $file2, 3);
-					unlink($file2);
-				}
-				move_uploaded_file($file, '/var/www/dataverse/branding/custom-stylesheet.css');
-				$sx .= bsmessage('Uploaded - Move:' . $file . ' to /var/www/dataverse/branding/css/custom-stylesheet.css');
-			} else {
-				$sx .= bsmessage('File not CSS', 3);
-			}
-		}
+		$sx .= 'Copie seu arquivo customizado para a pasta';
+		$sx .= '<tt>cp custom-style.css /var/www/dataverse/branding/css/.</tt>';
+		$sx .= '<br>';
+
+		$sx .= 'Informar o local do arquivo CSS';
+		$sx .= '<tt>curl -X PUT -d \'/var/www/dataverse/branding/css/custom-stylesheet.css\' http://localhost:8080/api/admin/settings/:StyleCustomizationFile</tt>';
+		$sx .= '<hr>';
 
 		return $sx;
 	}
