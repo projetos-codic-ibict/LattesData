@@ -396,7 +396,7 @@ class Customize extends Model
 		$sx .= 'Copie o arquivo ' . $logo . ' no diretorio /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
 		$sx .= '<br>';
 		$sx .= '<tt>';
-		$sx .= 'cp ' . $logo . ' /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/.' . cr();
+		$sx .= 'cp /home/dataverse/logo/' . $logo . ' /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/logo.png' . cr();
 		$sx .= '</tt>';
 		$sx .= '<br>';
 		$sx .= 'Para trocar o logi, ative a configuração de logo:<br>';
