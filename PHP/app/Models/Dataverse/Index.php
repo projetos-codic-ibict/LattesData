@@ -143,6 +143,10 @@ class Index extends Model
 		$sx = '';
 		$sx = breadcrumbs();
 		switch ($d1) {
+			case 'faq':
+				$sx .= $this->faq();
+				break;
+
 			case 'groups':
 				$sx .= $this->groups();
 				break;
@@ -294,8 +298,9 @@ class Index extends Model
 		$sx .= '<ul style="list-style:none;">';
 		$sx .= '<li>/var/www/dataverse/</li>';
 		$sx .= '<li>/var/www/dataverse/branding</li>';
-		$sx .= '<li>/var/www/dataverse/langBundles</li>';
-		$sx .= '<li>/var/www/dataverse/langTmp</li>';
+		$sx .= '<li>/var/www/dataverse/branding/css</li>';
+		$sx .= '<li>/var/www/dataverse/branding/js</li>';
+		$sx .= '<li>/var/www/dataverse/branding/img</li>';
 
 		$sx .= '</ul>';
 		return $sx;
@@ -349,6 +354,9 @@ class Index extends Model
 
 		$menu['#INGEST'] = '<h5><b>' . lang('dataverse.Ingest') . '</b></h5>';
 		$menu[PATH . MODULE . 'dataverse/ingest/file'] = lang('dataverse.Ingest_File');
+
+		$menu['#FAQ'] = '';
+		$menu[PATH . MODULE . 'dataverse/faq'] = lang('dataverse.FAQ');
 
 		$sx = menu($menu);
 		return $sx;
@@ -458,7 +466,7 @@ class Index extends Model
 				$menu[PATH . MODULE . 'dataverse/email/system_email'] = lang('dataverse.system_email');
 				$menu[PATH . MODULE . 'dataverse/email/google'] = lang('dataverse.system_email_google');
 				$menu[PATH . MODULE . 'dataverse/email/sendnotification'] = lang('dataverse.system_SendNotification');
-				$menu[PATH . MODULE . 'dataverse/email/faq'] = lang('dataverse.system_faq');
+				$menu[PATH . MODULE . '/dataverse/email/faq'] = lang('dataverse.system_faq');
 
 				$sx .= menu($menu);
 		}
@@ -542,6 +550,13 @@ class Index extends Model
 		}
 		return $url;
 	}
+
+	function faq()
+		{
+				$FAQ = new \App\Models\Dataverse\Faq();
+				$sx = $FAQ->index();
+				return $sx;
+		}
 
 	function server($url = '')
 	{
