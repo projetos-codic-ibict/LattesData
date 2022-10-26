@@ -377,47 +377,36 @@ class Customize extends Model
 		if (get("logo") != '') {
 			$logo = get('logo');
 		}
-		$sx .= h(lang('dataverse.sample_logo'), 2);
-		$sx .= '<img src="' . URL . 'img/samples/dataverse_logo.png"  class="img-fluid">';
-		$sx .= '<span class="small">Imgage height: 50px</span>';
 
-		$sx .= h(lang('dataverse.form_logo'), 2, 'mt-5');
-		$form = '';
-		$form .= form_open();
-		$form .= '<small>' . lang('dataverse.logo_file') . '</small>';
-		$form .= '<div class="input-group">';
-		$form .= form_input(array('name' => 'logo', 'style' => 'font-size: 250%;', 'value' => $logo, 'class' => 'form-control'));
-		$form .= '<div class="input-group-prepend">';
-		$form .= '<span class="input-group-text">ex: logo.png</span>';
-		$form .= form_submit(array('name' => 'submit', 'class' => 'btn btn-outline-primary', 'value' => lang('dataverse.upload_setname')));
-		$form .= '</div>';
-		$form .= '</div>';
-		$form .= '</div>';
-		$form .= form_close();
-		$sx .= bsc($form, 12, 'shadow p-3 bg-body rounded');
 
 		$sx .= h(lang('dataverse.script_logo'), 2, 'mt-5');
-		$sx .= 'Crie o diretório para gravar o arquivo:<br>';
-		$sx .= '<pre>';
-		$sx .= 'mkdir /usr/local/payara5/glassfish/domains/domain1/docroot/logos/' . cr();
-		$sx .= 'mkdir /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/' . cr();
-		$sx .= '</pre><br>';
-		$sx .= 'Acesse a página onde se localiza o arquivo da logo, ex:<br>';
-		$sx .= '<pre>cd /data/LattesData/_Documentation/Icones</pre><br>';
-		$sx .= 'Salve o arquivo ' . $logo . ' no diretorio /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
+		$sx .= 'Crie uma pasta chamada "logo" no diretório de seu usuário' . cr();
+		$sx .= '<tt>mkdir /home/dataverse/logo/</tt></code>'.cr();
+		$sx .= 'Transfira seu logo.png para o diretório /home/dataverse/logo' . cr();
 		$sx .= '<br>';
-		$sx .= '<pre>';
-		$sx .= 'cp ' . $logo . ' /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/.' . cr();
-		$sx .= '</pre>';
-
-		$sx .= 'Ativar configurações de logo:<br>';
+		$sx .= '<br>';
+		$sx .= 'Crie o diretório para gravar o arquivo:<br>';
+		$sx .= '<tt>';
+		$sx .= 'mkdir /usr/local/payara5/glassfish/domains/domain1/docroot/logos/' . cr();
+		$sx .= '<br>';
+		$sx .= 'mkdir /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/' . cr();
+		$sx .= '</tt><br>';
+		$sx .= 'Copie o arquivo logo.png para a pasta do Payara/Dataverse, ex:<br>';
+		$sx .= '<tt>cd /home/dataverse/logo/</tt><br>';
+		$sx .= 'Copie o arquivo ' . $logo . ' no diretorio /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
+		$sx .= '<br>';
+		$sx .= '<tt>';
+		$sx .= 'cp /home/dataverse/logo/' . $logo . ' /usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/logo.png' . cr();
+		$sx .= '</tt>';
+		$sx .= '<br>';
+		$sx .= 'Para trocar o logi, ative a configuração de logo:<br>';
 		$sx .= '<pre>';
 		$sx .= "curl -X PUT -d '/logos/navbar/$logo' http://localhost:8080/api/admin/settings/:LogoCustomizationFile" . cr();
 		$sx .= '</pre>';
 
-		$file = true;
-		$PATH = '/usr/local/payara5/glassfish/domains/domain1/docroot/logos/navbar/';
-		$sx .= bs($sx);
+		$sx .= '<img src="'.URL. 'img/sample/sample_logo.png'.'" style="width: 544px; height: 100px;">';
+
+		$sx = bs($sx);
 		return $sx;
 	}
 
@@ -590,30 +579,18 @@ class Customize extends Model
 	function css()
 	{
 		$sx = '';
-		$sx .= h('dataverse.StyleCSS');
-		$sx .= '<pre>curl -X PUT -d \'/var/www/dataverse/branding/custom-stylesheet.css\' http://localhost:8080/api/admin/settings/:StyleCustomizationFile</pre>';
-		$sx .= '<hr>';
-		$sx .= form_open_multipart();
-		$sx .= form_upload('userfile');
-		$sx .= form_submit(array('name' => 'submit', 'value' => lang('dataverse.upload')));
-		$sx .= form_close();
+		$sx .= h(lang('dataverse.StyleCSS'));
+		$sx .= 'Criar a pasta destino do CSS';
+		$sx .= '<tt>mkdir /var/www/dataverse/branding/css</tt>';
+		$sx .= '<br>';
 
-		if (isset($_FILES['userfile']['name'])) {
-			$file = $_FILES['userfile']['tmp_name'];
-			$name = $_FILES['userfile']['name'];
-			$type = $_FILES['userfile']['type'];
-			if ($type == 'text/css') {
-				$file2 = '/var/www/dataverse/branding/custom-stylesheet.css';
-				if (file_exists($file2)) {
-					$sx .= bsmessage('Delete file exists - ' . $file2, 3);
-					unlink($file2);
-				}
-				move_uploaded_file($file, '/var/www/dataverse/branding/custom-stylesheet.css');
-				$sx .= bsmessage('Uploaded - Move:' . $file . ' to /var/www/dataverse/branding/css/custom-stylesheet.css');
-			} else {
-				$sx .= bsmessage('File not CSS', 3);
-			}
-		}
+		$sx .= 'Copie seu arquivo customizado para a pasta';
+		$sx .= '<tt>cp custom-style.css /var/www/dataverse/branding/css/.</tt>';
+		$sx .= '<br>';
+
+		$sx .= 'Informar o local do arquivo CSS';
+		$sx .= '<tt>curl -X PUT -d \'/var/www/dataverse/branding/css/custom-stylesheet.css\' http://localhost:8080/api/admin/settings/:StyleCustomizationFile</tt>';
+		$sx .= '<hr>';
 
 		return $sx;
 	}

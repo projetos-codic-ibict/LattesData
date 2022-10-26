@@ -92,7 +92,7 @@ class Install extends Model
 
 						$sx .= '<code>mkdir /home/dataverse/install/<br>
 						cd /home/dataverse/install<br>
-						<br>						
+						<br>
 						wget https://github.com/IQSS/dataverse/releases/download/'.$ver.'/dvinstall.zip<br>
 						unzip dvinstall.zip<br>
 						</code>
@@ -113,7 +113,7 @@ class Install extends Model
 						$sx .= '<li><a href="'.PATH.MODULE.'dataverse/jq">JQ</a></li>';
 						$sx .= '<li><a href="'.PATH.MODULE.'dataverse/r">R Server</a></li>';
 						$sx .= '</ul>';
-						
+
 						$sx .= '</li>';
 						$sx .= '</ul>';
 						break;
@@ -121,10 +121,10 @@ class Install extends Model
 						$menu[PATH.MODULE.'dataverse/install/download'] = lang('dataverse.DownloadDataverse');
 						$menu[PATH.MODULE.'dataverse/install/pre'] = lang('dataverse.PrepraringInstall');
 						$menu[PATH.MODULE.'dataverse/install/tools'] = lang('dataverse.DataverseTools');
-						$menu[PATH.MODULE.'dataverse/install/dvnapp'] = lang('dataverse.DataverseDvnapp');						
+						$menu[PATH.MODULE.'dataverse/install/dvnapp'] = lang('dataverse.DataverseDvnapp');
 						$menu[PATH.MODULE.'dataverse/install/access'] = lang('dataverse.DataverseAccess');
 						$menu[PATH.MODULE.'dataverse/install/domain'] = lang('dataverse.DataverseDomain');
-						
+
 						$sx .= menu($menu);
 				}
 			return $sx;
@@ -135,8 +135,9 @@ class Install extends Model
 				$ver = '5.10.1';
 				$sx = '<h1>Dataverse Upgrade</h1>';
 				$sx .= h('GitHub - Dataversee',4);
+				$sx .= '<p>Para atualizar o Dataverse siga a instruções descritas:</p>';
 				$sx .= '<pre><a href="https://github.com/IQSS/dataverse/releases" target="_blank">https://github.com/IQSS/dataverse/releases</a></pre>';
-
+				$sx .= '<p>Resumo dos comandos para atualização:</p>';
 				$cmd = '';
 
 				$cmd .= 'echo "Baixando a última versão atualizada"'.cr();
@@ -162,7 +163,7 @@ class Install extends Model
 				$cmd .= 'echo "Instalando a nova versão"'.cr();
 				$cmd .= '$PAYARA/bin/asadmin deploy dataverse'.$ver.'.war'.cr();
 				$cmd .= './restart'.cr();
-				
+
 				$sx .= '<pre>'.$cmd.'</pre>';
 
 				return $sx;

@@ -55,6 +55,7 @@ function index($d1,$d2,$d3)
 			switch($d1)
 				{
 					case 'copyright':
+                        $sx .= 'Para customizar o texto de copyright, substitui a String abaixo: <br>';
 						$sx .= '<code>curl -X PUT -d ", CNPq/Ibict" http://localhost:8080/api/admin/settings/:FooterCopyright</code>';
 						break;
                     default:

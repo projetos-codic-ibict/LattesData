@@ -143,6 +143,9 @@ class Index extends Model
 		$sx = '';
 		$sx = breadcrumbs();
 		switch ($d1) {
+			case 'groups':
+				$sx .= $this->groups();
+				break;
 			case 'r':
 				$sx .= '<code>
 						sudo apt install r-base
@@ -269,6 +272,22 @@ class Index extends Model
 		}
 		return $sx;
 	}
+
+	function groups()
+		{
+			$sx = '';
+			$sx .= h(lang('dataverse.groups'),1);
+			$link = array();
+			$link['Desenvolvedores'] = 'https://groups.google.com/g/dataverse-dev';
+			$link['Comunidade de usuários'] = 'https://groups.google.com/g/dataverse-community';
+			$link['Comunidade Brasileira'] = 'https://groups.google.com/g/dataverse-brasil';
+			foreach($link as $name => $url)
+				{
+					$sx .= '<a href="'.$url.'" target="_new">'.$name.'</a><br>';
+				}
+			return $sx;
+		}
+
 	function dir_structure()
 	{
 		$sx = '';
@@ -289,21 +308,22 @@ class Index extends Model
 	function menu()
 	{
 
-		$menu['#INSTALL'] = '<h5><b>' . lang('dataverse.DataverseInstall') . '</b></h5>';
+		$menu['#Instalação'] = '<h5><b>' . lang('dataverse.DataverseInstall') . '</b></h5>';
 		$menu[PATH . MODULE . 'dataverse/install'] = lang('dataverse.DataverseInstalling');
 		$menu[PATH . MODULE . 'dataverse/install/upgrade'] = lang('dataverse.DataverseUpgrade');
+		$menu[PATH . MODULE . 'dataverse/groups'] = lang('dataverse.DataverseGropups');
 
-		$menu['#SETTINGS'] = '<h5><b>' . lang('dataverse.Settings') . '</b></h5>';
+		$menu['#Modo Iterativo'] = '<h5><b>' . lang('dataverse.Settings') . '</b></h5>';
 		$menu[PATH . MODULE . 'dataverse/server'] = lang('dataverse.SetServer') . ': <b>' . $this->server() . '</b>';
 		$menu[PATH . MODULE . 'dataverse/token'] = lang('dataverse.SetToken') . ': <b>' . $this->token() . '</b>';
 
-		$menu['#CHECKLIST'] = '<h5><b>' . lang('dataverse.Checklist') . '</b></h5>';
+		$menu['#Checklist para uso'] = '<h5><b>' . lang('dataverse.Checklist') . '</b></h5>';
 		$menu[PATH . MODULE . 'dataverse/checklist'] = lang('dataverse.Checklist');
 
 
 		$menu[PATH . MODULE . 'dataverse/system'] = lang('dataverse.Custom_system');
 
-		$menu['#S'] = '<h5><b>' . lang('dataverse.System') . '</b></h5>';
+		$menu['#'. lang('dataverse.System')] = '#';
 		$menu[PATH . MODULE . 'dataverse/email'] = lang('dataverse.Custom_Email');
 		$menu[PATH . MODULE . 'dataverse/solr'] = lang('dataverse.Solr');
 		$menu[PATH . MODULE . 'dataverse/settings'] = lang('dataverse.Settings');
@@ -312,10 +332,10 @@ class Index extends Model
 		$menu[PATH . MODULE . 'dataverse/doi'] = lang('dataverse.DOI_settings');
 		$menu[PATH . MODULE . 'dataverse/apache'] = lang('dataverse.Apache-Proxy');
 
-		$menu['#P'] = '<h5><b>' . lang('dataverse.Parametrizations') . '</b></h5>';
+		$menu['#'. lang('dataverse.Parametrizations')] = '#';
 		$menu[PATH . MODULE . 'dataverse/embargo'] = lang('dataverse.Embargo');
 
-		$menu['#C'] = '<h5><b>' . lang('dataverse.Gadget') . '</b></h5>';
+		$menu['#'. lang('dataverse.Gadget')] = '#';
 		$menu[PATH . MODULE . 'dataverse/customize'] = lang('dataverse.Customize');
 		$menu[PATH . MODULE . 'dataverse/external_tools'] = lang('dataverse.ExternalTools');
 		$menu[PATH . MODULE . 'dataverse/pa'] = lang('dataverse.PA');

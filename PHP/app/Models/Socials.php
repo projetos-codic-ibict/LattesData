@@ -68,11 +68,11 @@ class Socials extends Model
 						' . $user . '
 						</a>
 						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="' . PATH . MODULE . 'social/perfil' . '">Perfil</a>
+						<a class="dropdown-item" href="' . PATH . MODULE . '/social/perfil' . '">Perfil</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="' . PATH . MODULE . 'social/logout' . '">Logout</a>
+						<a class="dropdown-item" href="' . PATH . MODULE . '/social/logout' . '">Logout</a>
 						</div>
-					</li>				
+					</li>
 				';
 		}
 		return ($sx);
@@ -87,7 +87,7 @@ class Socials extends Model
 		return $value;
 	}
 
-	function putPerfil($nvl = array(), $id)
+	function putPerfil($nvl = array(), $id = '')
 	{
 		$access = array();
 		foreach ($nvl as $key => $value) {
@@ -266,9 +266,9 @@ class Socials extends Model
 	function menu($nivel = 0)
 	{
 		$menu = array();
-		$menu['social/users'] = 'social.users_list';
-		$menu['social/perfis'] = 'social.users_perfis';
-		$menu['social/convert'] = 'social.users_convert';
+		$menu['social/users'] = '/social.users_list';
+		$menu['social/perfis'] = '/social.users_perfis';
+		$menu['social/convert'] = '/social.users_convert';
 		$sx = bs(bsc(bsmenu($menu), 12));
 		return $sx;
 	}
@@ -280,6 +280,10 @@ class Socials extends Model
 		return $sx;
 	}
 
+	function getUser($t='')
+		{
+			return $this->getID($t);
+		}
 	function getID($t = '')
 	{
 		if (isset($_SESSION['id'])) {
@@ -293,14 +297,14 @@ class Socials extends Model
 	{
 		if (isset($_SESSION['id'])) {
 			/************************************************************* Checa Admin */
-			$user = round($_SESSION['email']);
-			if ($user == 'admin') {
+			$user = trim($_SESSION['email']);
+			if (($user == 'admin') or ($user == 'renefgj@gmail.com')) {
 				return 1;
 			}
 
-
 			/********************************************* Check */
 			$tp = explode('#', $t);
+
 			for ($i = 0; $i < count($tp); $i++) {
 				$ta = $this->calcMD5('#' . $tp[$i]);
 				if (isset($_SESSION['access'])) {
@@ -329,8 +333,8 @@ class Socials extends Model
 		if (isset($url[6])) {
 			$id = $url[6];
 		}
-		$this->path = PATH . MODULE . 'social/users';
-		$this->path_back = PATH . MODULE . 'social/users';
+		$this->path = PATH . MODULE . '/social/users';
+		$this->path_back = PATH . MODULE . '/social/users';
 
 		$sx = tableview($this);
 
@@ -381,7 +385,7 @@ class Socials extends Model
 		$name = get("user_name");
 		if (strlen($name) > 0) {
 			$this->setUserDb();
-			$sql = "select * from users2 
+			$sql = "select * from users
 								left join users_perfil_attrib ON pa_user = id_us
 								where (us_nome like '%$name%') or (us_email like '%$name%')";
 			$dt = $this->db->query($sql)->getResult();
@@ -389,7 +393,7 @@ class Socials extends Model
 			for ($r = 0; $r < count($dt); $r++) {
 				$line = (array)$dt[$r];
 				if ($line['id_pa'] == '') {
-					$link = '<a href="' . base_url(PATH . MODULE . 'social/perfis_add/' . $d1 . '/') . '?user=' . $line['id_us'] . '&assign=' . md5($d1 . $line['id_us'] . date("Ymd")) . '">';
+					$link = '<a href="' . base_url(PATH . MODULE . '/social/perfis_add/' . $d1 . '/') . '?user=' . $line['id_us'] . '&assign=' . md5($d1 . $line['id_us'] . date("Ymd")) . '">';
 					$link .= lang('social.add_perfil');
 					$link .= '</a>';
 					$sx .= bsc($line['id_us'], 1);
@@ -425,7 +429,7 @@ class Socials extends Model
 
 		/****************************** Config DataBase */
 		$this->setPerfilDB();
-		$this->path = PATH . MODULE . 'social/perfis';
+		$this->path = PATH . MODULE . '/social/perfis';
 
 		switch ($cmd) {
 			case 'viewid':
@@ -437,7 +441,7 @@ class Socials extends Model
 				break;
 			case 'edit':
 				$this->id = $id;
-				$this->path_back = PATH . MODULE . 'social/perfis';
+				$this->path_back = PATH . MODULE . '/social/perfis';
 				$sx = form($this);
 				break;
 			default:
@@ -478,7 +482,7 @@ class Socials extends Model
 			$this->primaryKey = "id_pe";
 			$this->allowedFields = ['id_us', 'password_old', 'password', 'password_confirm'];
 			$this->typeFields = ['hidden', 'password', 'password', 'password'];
-			$this->path = PATH . MODULE . 'social/perfil';
+			$this->path = PATH . MODULE . '/social/perfil';
 			$this->path_back = '#';
 			$sx .= form($this);
 		}
@@ -490,7 +494,7 @@ class Socials extends Model
 
 	function setUserDb()
 	{
-		$this->table = "users2";
+		$this->table = "users";
 		$this->primaryKey = "id_us";
 		$this->allowedFields =
 			[
@@ -535,7 +539,7 @@ class Socials extends Model
 	function view_perfil_members($id)
 	{
 		$sx = '';
-		$sx .= '<a href="' . PATH . MODULE . 'social/perfis_add/' . $id . '">' . lang('social.perfis.add.user') . '</a>';
+		$sx .= '<a href="' . PATH . MODULE . '/social/perfis_add/' . $id . '">' . lang('social.perfis.add.user') . '</a>';
 		$this->setPerfilDb();
 		$dt = $this
 			->join('users_perfil_attrib', 'pa_perfil = id_pe')
@@ -582,6 +586,10 @@ class Socials extends Model
 				$rsp = $this->signup();
 				return $rsp;
 				break;
+			case 'forgout':
+				$rsp = $this->forgout();
+				return $rsp;
+				break;
 			default:
 				$sx = 'Command not found - ' . $cmd;
 				$sx .= '<span class="singin" onclick="showLogin()">' . lang('social.return') . '</span>';
@@ -608,7 +616,7 @@ class Socials extends Model
 		$sx = '';
 		if ($id > 0) {
 			$dt = $this->Find($id);
-			$sx .= breadcrumbs(array('social.home' => PATH . MODULE, 'social.perfil' => PATH . MODULE . 'social/perfil'));
+			$sx .= breadcrumbs(array('social.home' => PATH . MODULE, '/social.perfil' => PATH . MODULE . '/social/perfil'));
 			$sx .= $this->perfil_show_header($dt);
 			$sx .= $this->my_library($dt);
 			$logs = $this->logs($id);
@@ -650,7 +658,7 @@ class Socials extends Model
 				<div class="card-header pb-0 p-3">
             		<h6 class="mb-1">' . lang('Social.Access') . '</h6>
             		<p class="text-sm">' . lang('Social.Access_info') . '</p>
-          		</div>			
+          		</div>
 			';
 		return $sx;
 	}
@@ -664,16 +672,16 @@ class Socials extends Model
 		if (($id != '') and ($act == 'add')) {
 			$chk2 = md5($id . $_SESSION['id']);
 
-			$sql = "select * from users_group_members 
-							where grm_library = " . LIBRARY . " and grm_group = $gr 
+			$sql = "select * from users_group_members
+							where grm_library = " . LIBRARY . " and grm_group = $gr
 							and grm_user = $id";
 			$db = $this->db->query($sql);
 			$us = $db->getResult();
 
 			if (count($us) == 0) {
-				$sql = "insert users_group_members 
-										(grm_group, grm_user, grm_library) 
-										values 
+				$sql = "insert users_group_members
+										(grm_group, grm_user, grm_library)
+										values
 										($gr, $id, " . LIBRARY . ")";
 				$db = $this->db->query($sql);
 				return '';
@@ -695,9 +703,9 @@ class Socials extends Model
 		$search = get("search");
 		if (($act != '') and ($search != '')) {
 			$sx .= h(lang('social.users_found'), 5);
-			$sql = "select * from users 
+			$sql = "select * from users
 								left join users_group_members ON grm_group = $gr AND grm_user = id_us
-								where us_nome like '%$search%' 
+								where us_nome like '%$search%'
 								order by us_nome";
 			$db = $this->db->query($sql);
 			$us = $db->getResult();
@@ -713,7 +721,7 @@ class Socials extends Model
 				$line = (array)$us[$r];
 
 				$pre = 'id=' . $line['id_us'] . '&act=add&chk=' . md5($line['id_us'] . $_SESSION['id']);
-				$remove = '<a href="' . PATH . MODULE . 'social/group_useredit/' . $gr . '/' . $line['id_us'] . '?' . $pre . '" class="btn-outline-primary ps-2 pe-2 rounded">';
+				$remove = '<a href="' . PATH . MODULE . '/social/group_useredit/' . $gr . '/' . $line['id_us'] . '?' . $pre . '" class="btn-outline-primary ps-2 pe-2 rounded">';
 				$remove .= lang('social.user_add');
 				$remove .= '</a>';
 				$sx .= '<tr>';
@@ -769,7 +777,7 @@ class Socials extends Model
 			$line = (array)$us[$r];
 
 			$pre = 'id=' . $line['id_grm'] . 'act=delete&chk=' . md5($line['id_grm'] . $_SESSION['id']);
-			$remove = '<a href="' . PATH . MODULE . 'social/group_useredit/' . $gr . '/' . $line['id_us'] . '?' . $pre . '" class="btn-outline-danger ps-2 pe-2 rounded">';
+			$remove = '<a href="' . PATH . MODULE . '/social/group_useredit/' . $gr . '/' . $line['id_us'] . '?' . $pre . '" class="btn-outline-danger ps-2 pe-2 rounded">';
 			$remove .= lang('social.remove');
 			$remove .= '</a>';
 			$sx .= '<tr>';
@@ -805,7 +813,7 @@ class Socials extends Model
 			$line = (array)$dt[$r];
 			$gr = $line['gr_name'];
 			if ($gr != $xgr) {
-				$link = '<a href="' . PATH . MODULE . 'social/group_useredit/' . $line['id_gr'] . '" title="' . lang("social.group_user_edit") . '">';
+				$link = '<a href="' . PATH . MODULE . '/social/group_useredit/' . $line['id_gr'] . '" title="' . lang("social.group_user_edit") . '">';
 				$linka = '</a>';
 				$edi = ' ' . $link . bsicone('user+', 32) . $linka;
 				$sx .= h($gr . $edi, 3, 'mt-3');
@@ -813,7 +821,7 @@ class Socials extends Model
 			}
 			$name = $line['us_nome'];
 			if (strlen($name) > 0) {
-				$link = '<a href="' . PATH . MODULE . 'social/perfil/' . $line['id_us'] . '">';
+				$link = '<a href="' . PATH . MODULE . '/social/perfil/' . $line['id_us'] . '">';
 				$linka = '</a>';
 				$sx .= $link . $name . $linka . '. ';
 			}
@@ -869,7 +877,7 @@ class Socials extends Model
 	function log_insert($id)
 	{
 		$ip = ip();
-		$sql = "insert into users_log 
+		$sql = "insert into users_log
 				(ul_user, ul_ip)
 				values
 				($id,'$ip')";
@@ -890,8 +898,8 @@ class Socials extends Model
 						<h6 class="text-uppercase text-body text-xs font-weight-bolder">' . lang('social.logs') . '</h6>
 						<ul>';
 
-		$sql = "select * from users_log 
-					where ul_user = $id 
+		$sql = "select * from users_log
+					where ul_user = $id
 					order by id_ul desc limit 10";
 		$dt = $this->db->query($sql)->getResult();
 
@@ -906,11 +914,11 @@ class Socials extends Model
 				$line = (array)$dt[$r];
 				$hora = $line['ul_access'];
 				$hora = substr($hora, strlen($hora) - 8, 10);
-				$sx .= '	
+				$sx .= '
 						<li class="list-group-item border-0 px-0">
 							' . stodbr(sonumero($line['ul_access'])) . '
 							' . $hora . '
-							(' . $line['ul_ip'] . ')							
+							(' . $line['ul_ip'] . ')
 						</li>';
 			}
 		}
@@ -1006,7 +1014,7 @@ class Socials extends Model
 				$_SESSION['check'] = substr($_SESSION['id'] . $_SESSION['id'], 0, 10);
 
 				$sx .= '<h2>' . lang('social.success') . '<h2>';
-				$sx .= '<meta http-equiv="refresh" content="2;URL=\'' . PATH . MODULE . '\'">';
+				$sx .= '<meta http-equiv="refresh" content="2;URL=\'' . PATH . COLLECTION . '\'">';
 				$this->log_insert($dt[0]['id_us']);
 			} else {
 				$sx .= '<h2>' . lang('ERROR') . '<h2>';
@@ -1019,25 +1027,25 @@ class Socials extends Model
 		return $sx;
 	}
 
-	function signup_xx()
-	{
-		$sx = '';
-		$user = get("signup_email");
-		$pw1 = get("signup_password");
-		$pw2 = get("signup_retype_password");
+	function forgout()
+		{
+			$email = get("email");
+			$dt = $this->where('us_email',$email)->findAll();
 
-		$dt = $this->user_exists($user);
+			if (count($dt) == 0)
+				{
+					$sx = '<h2>'.lang('Socials.email_not_found').'</h2>';
+					$sx .= '<span class="psw" onclick="showForgotPassword()">Voltar</span>';
+					echo $sx;
+					exit;
+				}
+			$sx = '<h2>' . lang('social.email_send_your_account') . '</h2>';
+			$sx .= '<small>'.lang('social.forgout_info').'</small>';
+			$sx .= '<span class="psw" onclick="showLogin()()">'.lang('social.return_login').'</span>';
+			echo $sx;
+			//sendemail();
 
-		if (!isset($dt[0])) {
-			$this->user_add($user, $pw1);
-			$sx .= '<h2>' . lang('social.social_user_add_success') . '<h2>';
-			$sx .= '<span class="singin" onclick="showLogin()">' . lang('social.return') . '</span>';
-		} else {
-			$sx .= '<h2>' . lang('social.user_already') . '<h2>';
-			$sx .= '<span class="singin" onclick="showLogin()">' . lang('social.return') . '</span>';
 		}
-		return $sx;
-	}
 
 	function signup()
 	{
@@ -1112,15 +1120,15 @@ class Socials extends Model
 			$sx .= '            ' . $email . cr();
 			$sx .= '          </a>' . cr();
 			$sx .= '          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">' . cr();
-			$sx .= '            <li><a class="dropdown-item" href="' . (PATH . MODULE . 'social/?cmd=perfil') . '">' . lang('social.perfil') . '</a></li>' . cr();
-			$sx .= '            <li><a class="dropdown-item" href="' . (PATH . MODULE . 'social/?cmd=logout') . '">' . lang('social.logout') . '</a></li>' . cr();
+			$sx .= '            <li><a class="dropdown-item" href="' . (PATH . MODULE . '/social/?cmd=perfil') . '">' . lang('social.perfil') . '</a></li>' . cr();
+			$sx .= '            <li><a class="dropdown-item" href="' . (PATH . MODULE . '/social/?cmd=logout') . '">' . lang('social.logout') . '</a></li>' . cr();
 			$sx .= '          </ul>' . cr();
 			$sx .= '        </li>' . cr();
 			$sx .= '</ul>' . cr();
 		} else {
 			$sx .= '<li class="nav-item d-flex align-items-center">';
 			$sx .= '
-              		<a href="' . (PATH . MODULE . 'social/login') . '" class="nav-link text-body font-weight-bold px-0">
+              		<a href="' . (PATH . MODULE . '/social/login') . '" class="nav-link text-body font-weight-bold px-0">
                 	<i class="fa fa-user me-sm-1"></i>
                 	<span class="d-sm-inline d-none">' . lang('social.social_sign_in') . '</span></a>';
 			$sx .= '</li>';
@@ -1158,13 +1166,13 @@ class Socials extends Model
 		* {
 		  box-sizing: border-box;
 		}
-		
+
 		body {
 		  font-family: Tahoma, Verdana, Segoe, sans-serif;
 		  font-size: 14px;
 		  text-align: center;
 		}
-		
+
 		.wrapper {
 		  width: 250px;
 		  height: 350px;
@@ -1172,7 +1180,7 @@ class Socials extends Model
 		  perspective: 600px;
 		  text-align: left;
 		}
-		
+
 		.rec-prism {
 		  width: 100%;
 		  height: 100%;
@@ -1181,7 +1189,7 @@ class Socials extends Model
 		  transform: translateZ(-100px);
 		  transition: transform 0.5s ease-in;
 		}
-		
+
 		.face {
 		  position: absolute;
 		  width: 250px;
@@ -1315,7 +1323,7 @@ class Socials extends Model
 		  height: 250px;
 		  transform: rotateX(-90deg) translateZ(225px);
 		}
-		
+
 		.nav {
 		  padding: 0;
 		  text-align: center;
@@ -1342,7 +1350,7 @@ class Socials extends Model
 		.nav li:hover:after {
 		  width: 100%;
 		}
-		
+
 		.psw, .signup, .singin {
 		  display: block;
 		  margin: 10px 0;
@@ -1351,11 +1359,11 @@ class Socials extends Model
 		  color: #42509e;
 		  cursor: pointer;
 		}
-		
+
 		small {
 		  font-size: 0.7em;
 		}
-		
+
 		@-webkit-keyframes success {
 		  from {
 			-webkit-transform: translate(-50%, -50%) rotate(0) scale(0);
@@ -1365,13 +1373,13 @@ class Socials extends Model
 		  }
 		}
 		</style>
-		
+
 		<script>
 		  window.console = window.console || function(t) {};
 		  if (document.location.search.match(/type=embed/gi)) {
 			window.parent.postMessage("resize", "*");
 		  }
-		</script>		
+		</script>
 		<ul class="nav center" style="margin: 0% 20%; display: none;">
 		<li onclick="showLogin()">' . lang('social.social_login') . '</li>
 		<li onclick="showSignup()">' . lang('social.social_sign_up') . '</li>
@@ -1379,7 +1387,7 @@ class Socials extends Model
 		<li onclick="showSubscribe()">' . lang('social.social_subscrime') . '</li>
 		<li onclick="showContactUs()">' . lang('social.social_contact_us') . '</li>
 		</ul>
-		
+
 		<div class="wrapper">
 		  <div class="rec-prism">
 		    <!--- BOARD ----------------------------------------------->
@@ -1409,7 +1417,7 @@ class Socials extends Model
 				  </div>
 				  <span class="psw" onclick="showForgotPassword()">' . lang('social.social_forgot_password') . '</span>
 				  <span class="signup" onclick="showSignup()">' . lang('social.social_not_user') . '  ' . lang('social.social_sign_up') . '</span>
-				  <span class="signup" onclick="showContactUs()">' . lang('social.social_questions') . '</span>	
+				  <span class="signup" onclick="showContactUs()">' . lang('social.social_questions') . '</span>
 			  </div>
 			</div>
 			<!-- FORGOT --------------------------------------------->
@@ -1419,20 +1427,20 @@ class Socials extends Model
 				<small>' . lang('social.social_forgot_password_info') . '</small>
 				<form onsubmit="event.preventDefault()">
 				  <div class="field-wrapper">
-					<input type="text" name="email" placeholder="email">
+					<input type="text" name="email" id="email" placeholder="email">
 					<label>e-mail</label>
 				  </div>
 				  <div class="field-wrapper">
-					<button class="btn btn-primary" style="width: 100%;" onclick="action_ajax(\'signup\');">' . lang('social.enter') . '</button>
+					<button class="btn btn-primary" style="width: 100%;" onclick="action_ajax(\'forgout\');">' . lang('social.enter') . '</button>
 				  </div>
-				  <span class="singin" onclick="showLogin()">' . lang('social.social_alread_user') . '  ' . lang('social.social_sign_in') . '</span>				  
+				  <span class="singin" onclick="showLogin()">' . lang('social.social_alread_user') . '  ' . lang('social.social_sign_in') . '</span>
 				</form>
 			  </div>
 			</div>
 			<!-- SIGN UP -------------------------------------------->
 			<div class="face face-right">
 			  <div class="content">
-				<h2>' . lang('social.social_sign_up') . '</h2>				
+				<h2>' . lang('social.social_sign_up') . '</h2>
 				  <div class="field-wrapper">
 					<input type="text" id="signup_name" placeholder="name">
 					<label>' . lang('social.user_name') . '</label>
@@ -1486,7 +1494,7 @@ class Socials extends Model
 			</div>
 		  </div>
 		</div>
-		  
+
 		<script id="rendered-js" >
 		let prism = document.querySelector(".rec-prism");
 
@@ -1496,16 +1504,20 @@ class Socials extends Model
 			while(end < start + ms) {
 				end = new Date().getTime();
 			}
-		}	
+		}
 
 		function ajax(cmd)
 			{
 			var data = new FormData();
 			data.append("cmd", cmd);
+			if (cmd == "forgout")
+				{
+					data.append("email", document.getElementById("email").value);
+				}
 			if (cmd == "signin")
 				{
 					data.append("user", document.getElementById("user_login").value);
-					data.append("pwd", document.getElementById("user_password").value);					
+					data.append("pwd", document.getElementById("user_password").value);
 				}
 			if (cmd == "signup")
 				{
@@ -1514,15 +1526,15 @@ class Socials extends Model
 					data.append("signup_institution", document.getElementById("signup_institution").value);
 				}
 
-            var url = "' . PATH . MODULE . 'social/ajax/"+cmd;
+            var url = "' . PATH . MODULE . '/social/ajax/"+cmd;
             var xhttp = new XMLHttpRequest();
             xhttp.open("POST", url, false);
             xhttp.send(data);
 
             	document.getElementById("board").innerHTML = xhttp.responseText;
 			 	console.log(this.responseText);
-			}	
-		
+			}
+
 		function showSignup() {
 		  prism.style.transform = "translateZ(-100px) rotateY( -90deg)";
 		}
@@ -1532,15 +1544,15 @@ class Socials extends Model
 		function showForgotPassword() {
 		  prism.style.transform = "translateZ(-100px) rotateY( -180deg)";
 		}
-		
+
 		function showSubscribe() {
 		  prism.style.transform = "translateZ(-100px) rotateX( -90deg)";
 		}
-		
+
 		function showContactUs() {
 		  prism.style.transform = "translateZ(-100px) rotateY( 90deg)";
 		}
-		
+
 		function showThankYou() {
 		  prism.style.transform = "translateZ(-100px) rotateX( 90deg)";
 		}
@@ -1550,7 +1562,7 @@ class Socials extends Model
 				prism.style.transform = "translateZ(-100px) rotateX( 90deg)";
 				ajax($cmd);
 			}
-		//# sourceURL=pen.js		
+		//# sourceURL=pen.js
 		';
 		if (strlen($err) > 0) {
 			$sx .= '
