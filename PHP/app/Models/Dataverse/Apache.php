@@ -106,42 +106,63 @@ class Apache extends Model
         $sx = h('dataverse.Apache2', 1);
         $sx .= 'PROXY para apache';
 
-        $sx .= '<code>
+        $sx .= '<pre>
         sudo a2enmod ssl
         sudo a2enmod proxy
         sudo a2enmod proxy_http
         sudo a2enmod proxy_balancer
         sudo a2enmod lbmethod_byrequests
-        </code>';
+        </pre>';
 
-        $code = '
-                    <Location />
-                            ProxyPass http://localhost:8080/
-                            SetEnv force-proxy-request-1.0 1
-                            SetEnv proxy-nokeepalive 1
-                    </Location>
+        $sx .= '
+        <pre>
+        &lt;IfModule mod_ssl.c>
+            &lt;VirtualHost *:443>
+                ServerName <b class="text-danger">vitrinedadosabertos.rnp.br</b>
+                ServerAdmin <b class="text-danger">renefgj@gmail.com</b>
+                DocumentRoot "/var/www/html/"
 
-                    <Location /config>
-                            ProxyPass http://localhost:81
-                            SetEnv force-proxy-request-1.0 1
-                            SetEnv proxy-nokeepalive 1
-                    </Location>';
+                #PROXY
 
-        $code .= cr();
-        $code .= '
-                    <VirtualHost *:81>
-                        ServerAdmin renefgj@gmail.com
-                        ServerName pocdadosabertos.inep.rnp.br
-                        ServerAlias 20.197.236.31
-                        DocumentRoot /data/LattesData/PHP/public
-                        <Directory "/data/LattesData/PHP/public">
-                            Require all granted
-                        </Directory>
-                    </VirtualHost>
-                    ';
-        $code = troca($code, '<', '&lt;');
-        $code = troca($code, chr(13), '<br>');
-        $sx .= '<pre>' . $code . '</pre>';
+                ##################### Branding para o DVN
+                ProxyPass /dvn !
+                Alias "/dvn/" "/var/www/dataverse/branding/"
+
+                &lt;Directory "/var/www/dataverse/branding/">
+                        Options Indexes FollowSymLinks MultiViews
+                        AllowOverride None
+                        Order allow,deny
+                        allow from all
+                        Require all granted
+                &lt;/Directory>
+
+                #################### Proxy para o Dataverse View - veja ....
+                ProxyPass /dataview !
+                Alias "/dataview/" "/var/www/DataView/public/"
+                &lt;Directory "/var/www/DataView/public/">
+                    Options Indexes FollowSymLinks MultiViews
+                    AllowOverride None
+                    Order allow,deny
+                    allow from all
+                    Require all granted
+                &lt;/Directory>
+
+                ##################### Configurações para o Shibboleth #####################
+                ProxyPass /Shibboleth.sso !
+                ProxyPassMatch ^/shibboleth-ds !
+
+                # pass everything else to Payara
+                ProxyPass / ajp://localhost:8009/
+                ProxyPass / http://localhost:8080/
+
+                &lt;Location /shib.xhtml>
+                    AuthType shibboleth
+                    ShibRequestSetting requireSession 1
+                    require valid-user
+                &lt;/Location>
+        &lt;/VirtualHost>
+        </pre>
+        ';
 
         $sx .= "Outra opção é direcionar a porta 80 para a 8080 diretamente pelo iptables";
         $sx .= '<pre>
