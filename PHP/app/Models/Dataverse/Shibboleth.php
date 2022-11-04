@@ -98,13 +98,77 @@ class Shibboleth extends Model
 			return $sx;
 		}
 
+	function shibboleth_config()
+		{
+			$sx = '';
+			$sx .= '<tt>shib-keygen</tt><br>';
+			$sx .= '{
+    "id":"shib",
+    "factoryAlias":"shib",
+    "enabled":true
+}';
+			$sx .= 'curl -X POST -H \'Content-type: application/json\' --upload-file shibAuthProvider.json http://localhost:8080/api/admin/authenticationProviders';
+			$sx .= '<tt>Criar subpastas</tt><br>';
+			$sx .= '<tt></tt>';
+			$sx .= '
+			<pre>
+			{
+    		"id":"shib",
+    		"factoryAlias":"shib",
+    		"enabled":true
+			}
+			</pre>';
+			$sx .= 'Alterar o arquivo';
+			$sx = '
+			<pre>
+			<ApplicationDefaults entityID="https://dataverse.example.edu/sp" REMOTE_USER="eppn" attributePrefix="AJP_">
+			</pre>';
+
+			$sx .= '
+			 <pre>
+			 <MetadataProvider type="XML" validate="true"
+		        url="https://samltest.id/saml/idp"
+		        backingFilePath="/etc/shibboleth/SAMLtest.xml">
+			 </MetadataProvider>
+			 </pre>
+
+			 <pre>
+			        <AttributeExtractor type="XML" validate="true" reloadChanges="false" path="attribute-map.xml"/>
+					<AttributeResolver type="Query" subjectMatch="true"/>
+					<AttributeFilter type="XML" validate="true" path="attribute-policy.xml"/>
+					<CredentialResolver type="File" use="signing"
+						key="sp-key.pem" certificate="cert/sp-cert.pem"/>
+					<CredentialResolver type="File" use="encryption"
+						key="sp-key.pem" certificate="cert/sp-cert.pem"/>
+			</pre>
+
+			 <MetadataProvider type="XML" validate="true"
+        			url="https://samltest.id/saml/idp"
+        			backingFilePath="/etc/shibboleth/cache/SAMLtest.xml">
+			</MetadataProvider>
+
+			';
+		return $sx;
+		}
+
 	function install_keygen()
 	{
 		$url = URL . 'asset/keygen.zip';
 		$sx = '';
 
-		$sx .= '<p>Baixe o script gerador de KEYGEN para o Dataverse ' . anchor($url, 'KEYGEN.sh') . '</p>';
-		$sx .= '<p><tt> wget '.$url. '</tt></p>';
+		$sx .= 'Crie uma pasta no diretório Shibboleth<br>';
+		$sx .= '<tt>mkdir /etc/shibboleth/cert</tt>';
+		$sx .= '<br>';
+		$sx .= '<br>';
+
+		$sx .= '<p>Baixe o script gerador de KEYGEN para o Dataverse ' . anchor($url, 'KEYGEN.sh') . ' na pasta cert</p>';
+		$sx .= '<tt> cd /etc/shibboleth/cert</tt><br>';
+		$sx .= '<tt> wget '.$url. '</tt><br>';
+
+		$sx .= '<br>';
+
+		$sx .= '<p>Descompacte o arquivo keygen.zip</br>';
+		$sx .= '<tt> unzip keygen.zip</tt>' . '</p>';
 
 		return $sx;
 	}
