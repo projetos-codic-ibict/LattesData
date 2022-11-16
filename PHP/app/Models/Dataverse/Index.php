@@ -342,6 +342,7 @@ class Index extends Model
 
 		$menu['#'. lang('dataverse.Gadget')] = '#';
 		$menu[PATH . MODULE . 'dataverse/customize'] = lang('dataverse.Customize');
+		$menu[PATH . MODULE . 'dataverse/guide'] = lang('dataverse.Guide');
 		$menu[PATH . MODULE . 'dataverse/external_tools'] = lang('dataverse.ExternalTools');
 		$menu[PATH . MODULE . 'dataverse/pa'] = lang('dataverse.PA');
 		$menu[PATH . MODULE . 'dataverse/pave'] = lang('dataverse.PA_External');
