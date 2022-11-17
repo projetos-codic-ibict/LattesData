@@ -348,7 +348,7 @@ class Index extends Model
 		$menu[PATH . MODULE . 'dataverse/pave'] = lang('dataverse.PA_External');
 
 		$menu['#MANAGEMENT'] = '<h5><b>' . lang('dataverse.Management') . '</b></h5>';
-		$menu[PATH . MODULE . 'dataverse/dataset/remove'] = lang('dataverse.Dataset_remove');
+		$menu[PATH . MODULE . 'dataverse//customize/userguide'] = lang('dataverse.Dataset_remove');
 
 		$menu['#SHIBBOLTH'] = '<h5><b>' . lang('dataverse.Shibboleth') . '</b></h5>';
 		$menu[PATH . MODULE . 'dataverse/shibboleth'] = lang('dataverse.Shibboleth');
