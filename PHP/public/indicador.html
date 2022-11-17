@@ -1,0 +1,142 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+
+        <div class="col-xs-12 col-md-4 right-column">
+            <div class="investigadores-container">
+                <div id="investigadores" class="col-xs-3"></div>
+                <div class="investigadores-text col-xs-9">Investigadores</div>
+            </div>
+            <div class="proyectos-container">
+                <div id="proyectos_inv" class="col-xs-3"></div>
+                <div class="proyectos-text col-xs-9">Proyectos de investigación</div>
+            </div>
+            <div class="dataverses-container">
+                <div id="headAllTimeAllDatasetsValue" class="col-xs-3"></div>
+                <div class="dataverses-text col-xs-9">Datasets abiertos</div>
+            </div>
+            <div class="archivos-container">
+                <div id="activityAllTimeDepositedFilesValue" class="col-xs-3">...</div>
+                <div class="archivos-text col-xs-9">Archivos</div>
+            </div>
+        </div>
+
+       <div id="dataversesBySubject" class="col-xs-12">
+        XXXXXXXXXXXX
+       </div>
+
+        <script>
+            var baseUrl = "https://lattesdata.cnpq.br/";
+            var metricBaseUrl = baseUrl + "/api/info/metrics/";
+            var simpleCatSearch = baseUrl + "/api/search?q=*&type=dataset&sort=dateSort&order=desc&fq=categoryOfDataverse:";
+            var simpleCatSearchDataverse = baseUrl + "/api/search?q=*&type=dataverse&sort=dateSort&order=desc&fq=dvCategory:";
+            var simpleCatSearchInvestigador = baseUrl + "api/search?q=*&type=dataset&sort=dateSort&order=desc&per_page=1000";
+
+            function proyectosInvestigacion(fqString, resultCount, elm) {
+                $.get(simpleCatSearchDataverse + fqString + "&per_page=" + resultCount, function(jData) {
+                    console.log(jData.data.total_count);
+                    document.getElementById(elm).innerHTML = jData.data.total_count + "";
+
+                });
+            }
+
+            function investigadores(fqString, resultCount, elm) {
+                $.get(simpleCatSearchInvestigador + fqString + "&per_page=" + resultCount, function(jData) {
+                    let authorCount = [];
+                    jData.data.items.forEach(function(item) {
+                        item.authors.forEach(author => {
+                            if (!authorCount.includes(author)) {
+                                authorCount.push(author)
+                            }
+                        });
+
+                    });
+                    document.getElementById(elm).innerHTML = authorCount.length + "";
+
+                });
+            }
+
+    function writeRecentDatasetsInDataverses(fqString, resultCount, elm) {
+        $.get(simpleCatSearch + fqString + "&per_page=" + resultCount, function (jData) {
+            var resultHtml = "";
+            jData.data.items.forEach(function (item) {
+                var options = { year: 'numeric', month: 'short', day: 'numeric' };
+                var date = new Date(item.published_at).toLocaleString('en-US', options);
+                resultHtml += "<div class=\"hmpg-recent-block clearfix\">";
+                // NOTE: REMOVED THUMBNAILS
+                // resultHtml += "<div class=\"col-xs-2 text-center hmpg-recent-thumb\"><a href=\"/dataset.xhtml?persistentId=" + item.global_id + "\">";
+                // resultHtml += "<object data=\"" + thumbBaseURL + item.global_id + "\" type=\"image/png\"/><span class=\"icon-dataset\"></span></object>";
+                // resultHtml += "</a></div>";
+                // NOTE: REMOVED THUMBNAILS... in next line, change grid layout class to `col-xs-9 col-md-10`
+                resultHtml += "<div class=\"col-xs-12 hmpg-recent-metadata\"><p><a href=\"/dataset.xhtml?persistentId=" + item.global_id + "\">" + item.name + "</a></p><p class=\"small text-muted\"><a href=\"/dataverse/" + item.identifier_of_dataverse + "\" class=\"highlightBold\">" + item.name_of_dataverse + "</a> " + date + "</p></div>";
+                resultHtml += "</div>";
+            });
+            document.getElementById(elm).innerHTML = resultHtml;
+        });
+    }
+
+    function querySubjectDataverseDataset(elm) {
+        var dvArray = [];
+        var fullArray = [];
+        $.get(metricBaseUrl + "dataverses/bySubject", function (jData) {
+            jData.data.forEach(function (item) {
+                if (item.subject !== "N/A" && item.subject !== "Other") {
+                    dvArray.push([item.subject, item.count]);
+                }
+            });
+            $.get(metricBaseUrl + "datasets/bySubject?dataLocation=all", function (jData) {
+                var resultHtml = "";
+                jData.data.forEach(function (item) {
+                    if (item.subject !== "N/A" && item.subject !== "Other") {
+                        var dvCount = 0;
+                        for (var dvi = 0; dvi < dvArray.length; dvi++) {
+                            if (item.subject === dvArray[dvi][0]) {
+                                dvCount = dvArray[dvi][1];
+                                break;
+                            }
+                        }
+                        fullArray.push([item.subject, (item.count + dvCount - 1).toLocaleString('en')]); //subtract 1 to remove root dv from counts
+                    }
+                });
+                fullArray.sort();
+                fullArray.forEach(function (subject) {
+                    // NOTE: The alias of the root dataverse will need to be configured in this URL
+                    // resultHtml += "<p class=\"browse-subjects\"><a href=\"/dataverse/ur?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + "</a> <span class=\"text-muted\">" + subject[1] + "</span></p>";
+                    resultHtml += "<a class=\"browse-subjects\" href=\"/dataverse/ur?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + " " + subject[1] + "</a>";
+                });
+                document.getElementById(elm).innerHTML = resultHtml;
+            });
+        });
+    }
+
+    function querySubjectDataset(elm) {
+        var dvArray = [];
+        var fullArray = [];
+        alert(metricBaseUrl + "datasets/bySubject?dataLocation=all");
+        $.get(metricBaseUrl + "datasets/bySubject?dataLocation=all", function (jData) {
+                var resultHtml = "";
+                jData.data.forEach(function (item) {
+                    if (item.subject !== "N/A" && item.subject !== "Other") {
+                        var dvCount = 0;
+                        for (var dvi = 0; dvi < dvArray.length; dvi++) {
+                            if (item.subject === dvArray[dvi][0]) {
+                                dvCount = dvArray[dvi][1];
+                                break;
+                            }
+                        }
+                        fullArray.push([item.subject, (item.count + dvCount ).toLocaleString('en')]); //subtract 1 to remove root dv from counts
+                    }
+                });
+                fullArray.sort();
+                fullArray.forEach(function (subject) {
+                    // NOTE: The alias of the root dataverse will need to be configured in this URL
+                    // resultHtml += "<p class=\"browse-subjects\"><a href=\"/dataverse/ur?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=dataverses%3Adatasets&sort=dateSort&order=desc\">" + subject[0] + "</a> <span class=\"text-muted\">" + subject[1] + "</span></p>";
+                    resultHtml += "<a class=\"browse-subjects\" href=\"/dataverse/ur?q=&fq0=subject_ss%3A%22" + subject[0] + "%22&types=datasets&sort=dateSort&order=desc\"><span>" + subject[0] + " " + subject[1] + "</span></a>";
+                    // console.log(subject[0]+" - "+subject[1]);
+                });
+                document.getElementById(elm).innerHTML = resultHtml;
+            });
+    }
+
+            proyectosInvestigacion("(\"Research+Project\")", 6, "proyectos_inv");
+            investigadores("", 0, "investigadores");
+            querySubjectDataset("dataversesBySubject");
+        </script>
