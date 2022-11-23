@@ -41,6 +41,8 @@
   line-height: 0.6em;
   color: #f8f8f8;
   background-image: linear-gradient(to bottom,#f78747 0,#f78747);
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .navbar-nav > li > a:hover,
