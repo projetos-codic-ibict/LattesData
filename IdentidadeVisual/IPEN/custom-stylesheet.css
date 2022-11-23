@@ -53,4 +53,5 @@
 #navbarFixed ul.navbar-nav li.dropdown span.dropdown-toggle:hover
   {
     color: #fff;
+    background-image: linear-gradient(to bottom,#e77737 0,#e77737);
   }
