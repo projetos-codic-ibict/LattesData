@@ -27,28 +27,24 @@
   color: #fff;
 }
 
-.navbar, .navbar-default {
-  min-height: 20px;
-  background-color: #f78747;
-  color: #fff;
-  line-height: 0.6em;
-  background-image: linear-gradient(to bottom,#f78747 0,#f78747);
-
-}
-
+.navbar,
+.navbar-default,
 .navbar-nav > li > a,
 .navbar-default .navbar-nav>li>a,
 #navbarFixed form.navbar-form-link a.ui-commandlink,
 #navbarFixed ul.navbar-nav li.dropdown span.dropdown-toggle
 {
+  min-height: 20px;
   background-color: #f78747;
   font-weight: bold;
   text-decoration: none;
   line-height: 0.6em;
   color: #f8f8f8;
+  background-image: linear-gradient(to bottom,#f78747 0,#f78747);
 }
 
-.navbar-nav > li > a:hover
+.navbar-nav > li > a:hover,
+.navbar-default a:hover,
   {
     color: #fff;
   }
