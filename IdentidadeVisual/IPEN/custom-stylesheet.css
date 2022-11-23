@@ -45,8 +45,10 @@
   padding-bottom: 5px;
 }
 
+.navbar:hover,
+.navbar-default:hover,
 .navbar-nav > li > a:hover,
-.navbar-default a:hover,
+.navbar-default .navbar-nav>li>a:hover
   {
     color: #fff;
   }
