@@ -43,5 +43,10 @@
   font-weight: bold;
   text-decoration: none;
   line-height: 0.6em;
-  color: #fff;
+  color: #f8f8f8;
 }
+
+.navbar-nav > li > a:hover
+  {
+    color: #fff;
+  }
