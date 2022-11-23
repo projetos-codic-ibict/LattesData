@@ -32,6 +32,8 @@
   background-color: #f78747;
   color: #fff;
   line-height: 0.6em;
+  background-image: linear-gradient(to bottom,#f78747 0,#f78747);
+
 }
 
 .navbar-nav > li > a,
