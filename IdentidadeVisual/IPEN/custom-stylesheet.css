@@ -8,7 +8,7 @@
 }
 
 .headerCustom {
-  z-index: 100;
+  z-index: 10000;
   width: 100%;
   position: fixed;
   top: 0px;
