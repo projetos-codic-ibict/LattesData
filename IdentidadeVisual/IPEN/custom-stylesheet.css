@@ -39,7 +39,7 @@
   font-weight: bold;
   text-decoration: none;
   line-height: 0.6em;
-  color: #f8f8f8;
+  color: #eee;
   background-image: linear-gradient(to bottom,#f78747 0,#f78747);
   padding-top: 5px;
   padding-bottom: 5px;
@@ -48,7 +48,9 @@
 .navbar:hover,
 .navbar-default:hover,
 .navbar-nav > li > a:hover,
-.navbar-default .navbar-nav>li>a:hover
+.navbar-default .navbar-nav>li>a:hover,
+#navbarFixed form.navbar-form-link a.ui-commandlink:hover,
+#navbarFixed ul.navbar-nav li.dropdown span.dropdown-toggle:hover
   {
     color: #fff;
   }
