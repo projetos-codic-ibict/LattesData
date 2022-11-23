@@ -46,7 +46,10 @@
 }
 
 .navbar:hover,
-.navbar-default:hover,
+.navbar-default:hover
+  {
+    color: red;
+  }
 .navbar-nav > li > a:hover,
 .navbar-default .navbar-nav>li>a:hover,
 #navbarFixed form.navbar-form-link a.ui-commandlink:hover,
