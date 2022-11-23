@@ -1,0 +1,214 @@
+
+<link href="../assets/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="../assets/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script><script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+<script src="../assets/js/3.6.1/jquery.min.js"></script>
+
+<script>
+$(function () {
+  var includes = $('[data-include]')
+  $.each(includes, function () {
+    var file = 'views/' + $(this).data('include') + '.html'
+    $(this).load(file)
+  })
+})
+</script>
+
+<!--- HEADER -->
+<div id="header"></div>
+<div data-include="header"></div>
+<!--- BODY -->
+<div class="container">
+  <div class="row">
+    <div class="col-12">
+      <h1>SOBRE O RDC-IPEN</h1>
+      <ul>
+        <li>Sobre dados científicos</li>
+        <li>Sobre repositórios de dados científicos</li>
+        <li>Sobre a instituição IPEN</li>
+        <li>Sobre o Repositório de Dados Científicos do IPEN (RDC)</li>
+        <li>Referências</li>
+      </ul>
+
+      <h2 class="about">Sobre dados científicos</h2>
+      <p>
+        Os dados científicos são todos os materiais gerados e recompilados
+        durante o percurso de um projeto de pesquisa cientifica e servem para
+        validar os resultados obtidos na pesquisa a que se referem.
+      </p>
+      <p>
+        Para terem validade os dados devem ser bem documentados, registrando a
+        sua procedência indicando data local e metodologia de produção, devem
+        incluir metadados para a sua descrição. Em um repositório de dados, um
+        conjunto de dados contidos em arquivos é denominado de dataset (PESET e
+        GONZALES, 2017).
+      </p>
+      <p>Tipos de dados:</p>
+      <p>
+        vídeos, áudios, textos, imagens, modelos matemáticos, algoritmos,
+        scripts, arquivos de log, software de simulação, metodologias e fluxos
+        de trabalho, procedimentos operacionais, padrões e protocolos;
+        fotografias, filmes, sequenciamento de proteínas ou genéticos, respostas
+        de teste, slides, artefatos, amostras, coleção de objetos digitais
+        adquiridos e gerados durante o processo de pesquisa, estatísticas
+        produzidas, planilhas (Excel, etc), cadernos de laboratório, cadernos de
+        campo, diários, questionários, transcrições...
+      </p>
+      <p>
+        Em qualquer um dos casos o conteúdo depositado não deve infringir os
+        direitos autorais ou outros direitos de propriedade intelectual.
+      </p>
+      <p>
+        Pela descrição observa-se que dados científicos são diferentes dos
+        artigos científicos entretanto os dados são essenciais para a elaboração
+        de uma artigo científico.
+      </p>
+
+      <h2 class="about">Sobre repositórios de dados científicos</h2>
+      <p>
+        Repositórios de dados são serviços de informação que por meio de bases
+        de dados estruturadas gerenciam os dados de pesquisas produzidos durante
+        o processo de construção de ciência. Se inserem e desempenham um papel
+        significativo dentro do movimento internacional de Ciência aberta. No
+        pais esse compromisso foi registrado no 4º Plano de Ação Nacional em
+        Governo Aberto (2018) que visa estabelecer mecanismos de governança dos
+        dados científicos para o avanço da Ciência aberta no Brasil.
+      </p>
+      <p>
+        De uma forma geral os Repositórios de dados são iniciativas de
+        instituições acadêmicas (Universidades, Institutos de pesquisas e assim
+        por diante) e quanto ao conteúdo podem ser classificados como:
+        temáticos, institucionais interdisciplinares, nacionais. Os Repositórios
+        de dados científicos promovem:
+      </p>
+      <ul>
+        <li>
+          boas práticas; transparência, compartilhamento, reconhecimento, reuso
+          dos dados;
+        </li>
+        <li>visibilidade da pesquisa, preservação, inovação;</li>
+        <li>
+          promovem o crédito da ciência, o avanço científico, a satisfação para
+          a sociedade.
+        </li>
+      </ul>
+
+      <p>
+        Repositórios de dados operam dentro de princípios adotados
+        internacionalmente e denominados “ princípios FAIR (do Inglês: Findable,
+        Accessible, Interoperable and Reusable) atributos que garantem a
+        premissa fundamental do compartilhamento para reuso dos dados,
+        respeitando porém os direitos autorais e princípios de
+        confidencialidade.
+      </p>
+
+      <h2 class="about">Sobre a instituição IPEN</h2>
+      <p>
+        O IPEN é um dos maiores institutos na sua área de especialidade no país.
+        Desenvolve atividades de pesquisa científica na área nuclear e ciências
+        relacionadas por meio do seu quadro de especialistas na área. Opera dois
+        cursos de pós-graduação especializados, essas atividades geram um volume
+        significativo de produção cientifica, gerenciada e preservada por um
+        Repositório digital institucional desde 2015, entretanto carecia de uma
+        ferramenta institucional para gerenciamento e preservação dos dados
+        científicos gerados no decorrer das pesquisas e das publicações. A
+        criação de um Repositório de dados científicos (RDC) preenche essa
+        lacuna.
+      </p>
+
+      <h2 class="about">
+        Sobre o Repositório de Dados Científicos do IPEN (RDC)
+      </h2>
+      <p>
+        O Repositório de Dados Científicos do IPEN (RDC) foi criado com a missão
+        de promover o compartilhamento responsável de dados científicos, se
+        inserindo no conceito de ciência aberta e transparência da informação.
+        Além disso atende as exigências dos órgãos de fomento à pesquisa,
+        (Fapesp, Capes) e requisitos das editoras cientificas para publicação
+        dos artigos e outros. O RDC IPEN armazena, preserva, disponibiliza e
+        permite o download de dados digitais gerados pela comunidade de pesquisa
+        do IPEN possibilitando o reuso dos mesmos.
+      </p>
+      <p>
+        Os estudos para a instalação do RDC foram iniciados no IPEN em 2021, sob
+        demanda da Direção do IPEN pelas equipes de TI e da Biblioteca e
+        disponibilizado para operação em 2022, é do tipo institucional com
+        governança IPEN, gestão compartilhada entre as equipes de TI/Biblioteca
+        /Pesquisadores, disponível para uso da comunidade cientifica com vínculo
+        acadêmico do IPEN. A plataforma Dataverse foi adotada para operação do
+        RDC. Trata-se de um software livre, destinado ao registro, depósito,
+        preservação, publicação consulta, e permissão de reuso de dados de
+        pesquisa. O Dataverse também promove o compartilhamento, arquivamento e
+        referenciação dos dados de pesquisa, e vem sendo desenvolvido desde
+        2006, especialmente para o gerenciamento de dados de pesquisa científica
+        pelo Instituto Harvard de Ciências Sociais Quantitativas (IQSS), mantido
+        em seu repositório de códigos-fonte aberto em:
+        https://github.com/IQSS/dataverse, para permitir a colaboração de
+        desenvolvedores de todo o mundo. O RDC do IPEN iniciou suas atividades
+        com a versão 5.3 (2022).
+      </p>
+      <p>
+        Para fins de funcionamento o RDC do IPEN se associou à instituição alemã
+        Datacite para fornecimento do DOI, (Digital object identifier)
+        identificador único e permanente atribuído a cada dataset publicado. A
+        aquisição do identificador DOI é integralmente financiado pelo IPEN. O
+        RDC pretende:
+      </p>
+      <ul>
+        <li>
+          tornar-se um facilitador para os pesquisadores do IPEN no sentido de
+          ter a disposição um banco de dados para registrar, armazenar, reunir,
+          compartilhar e gerenciar os dados produzidos durante a elaboração das
+          suas pesquisas cientificas;
+        </li>
+        <li>
+          reproduzir as boas práticas internacionais de governança de dados
+          científicos baseados no princípios FAIR;
+        </li>
+        <li>
+          incentivar os pesquisadores a planejar e organizar o ciclo de vida dos
+          dados científicos;
+        </li>
+        <li>
+          preservar e manter em segurança a longo prazo os dados produzidos
+          pelos pesquisadores;
+        </li>
+        <li>
+          permitir a divulgação, visibilidade e a citação padronizada,
+          assegurando os direitos autorais;
+        </li>
+        <li>
+          permitir o compartilhamento e reuso dos dados incentivando o trabalho
+          de pesquisa colaborativo;
+        </li>
+        <li>operar em consonância com a LGPD- Lei n° 13.709 (BRASIL, 2018);</li>
+        <li>
+          permitir a extração de métricas para estudos de desempenho científico
+          institucional.
+        </li>
+      </ul>
+
+      <h2 class="about">Referências</h2>
+      <p>
+        BRASIL. Controladoria-Geral da União (CGU). 4º Plano de Ação Nacional em
+        Governo Aberto. Brasília, 2018. Disponível em:
+        https://www.gov.br/cgu/pt-br/governo-aberto/a-ogp/planos-deacao/4o-plano-de-acao-brasileiro/4o-plano-de-acao-nacional_portugues.pdf.
+        Acesso em 05 out. 2022.
+      </p>
+      <p>
+        BRASIL. Lei nº 13.709, de 14 de agosto de 2018. Lei Geral de Proteção de
+        Dados Pessoais (LGPD). Brasília: Presidência da República, [2018].
+        Disponível em:
+        http://www.planalto.gov.br/ccivil_03/_ato2015-2018/2018/lei/L13709.htm.
+        Acesso em: 30 set. 2022.
+      </p>
+      <p>
+        PESET, F.; GONZÁLEZ, L. M. Ciencia abierta y gestión de datos de
+        investigación. Gijón, TREA, 2017, 192 p.
+        http://www.trea.es/books/cienciaabierta-y-gestion-de-datos-de-investigacion-rdm.
+      </p>
+    </div>
+    <!-- /COL -->
+  </div>
+  <!-- /ROW -->
+</div>
+<!-- /CONTAINER -->
