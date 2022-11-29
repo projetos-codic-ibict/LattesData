@@ -63,8 +63,9 @@ return[
         'customize_FooterCopyright'=>'Copiright (Rodape)',
         'HeaderCustomizationFile'=>'Cabeçalho (Header) - Todas as páginas',
         'StyleCSS'=>'Customização da folha de estilo (CSS)',
-        ''=>'',
-        ''=>'',
+        'DataverseBackup'=>'Backup Dataverse',
+        'DataverseRestore'=>'Restarurar Dataverse',
+        'ReindexSOLR'=>'Reindexar SOLR',
 
 
 

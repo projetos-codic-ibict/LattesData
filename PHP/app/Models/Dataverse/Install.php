@@ -48,6 +48,15 @@ class Install extends Model
 			$sx .= breadcrumbs();
 			switch($d1)
 				{
+					case 'backup':
+						$sx .= $this->backup();
+						break;
+					case 'reindex':
+						$sx .= $this->reindex();
+						break;
+					case 'restore':
+						$sx .= $this->restore();
+						break;
 					case 'upgrade':
 						$sx .= $this->upgrade();
 						break;
@@ -129,6 +138,119 @@ class Install extends Model
 				}
 			return $sx;
 		}
+		function backup()
+			{
+				$sx = '';
+
+				$sx .= '<h1>Postgres</h1>';
+				$sx .= '
+<p>Criar área para guardar os Backup</p>
+<pre>
+sudo su
+echo "Cria pastas de destino Backup do Postgres"
+export BACKUP=/home/dataverse/payara
+mkdir $BACKUP/backup
+mkdir $BACKUP/backup/postgres
+chown postgres $BACKUP/backup/postgres
+
+su postgres
+cd $BACKUP/backup/postgres
+pg_dump dvndb > dvndb.sql
+exit
+</pre>';
+
+			$sx .= '<h1>Dataverse / Payara</h1>';
+			$sx .= '
+<pre>
+export PAYARA=/usr/local/payara5/glassfish
+echo "Iniciar Backup"
+$PAYARA/bin/asadmin stop-domain
+$PAYARA/bin/asadmin backup-domain --backupdir /home/dataverse/payara domain1
+$PAYARA/bin/asadmin start-domain
+ls $backup -ls
+echo "Backup do Postgres finalizado
+</pre>";
+			';
+
+				return $sx;
+			}
+
+		function restore()
+			{
+				$sx = '';
+				$sx .= '<h1>Dataverse / Payara</h1>';
+				$sx .= 'Remova o diretório domain1';
+				$sx .= '
+				<pre>
+
+echo "#################### REMOVER A INSTALAÇÃO ATUAL DO PAYARA ###"
+export PAYARA=/usr/local/payara5/glassfish
+$PAYARA/bin/asadmin stop-domain
+echo "Romovendo o diretório domain1"
+rm -rf $PAYARA/domains/domain1
+
+echo "#################### DESCOMPACTANDO ARQUIVO DE BACKUP ###"
+export BACKUP=/home/dataverse/payara/domain1
+export FILE=domain1_2022_11_28_v00001.zip
+cd $BACKUP/
+mkdir domain
+cd domain
+echo "Descompactando o backup"
+unzip ../$FILE
+cd ..
+
+echo "#################### MOVENTO ARQUIVO ###"
+export DESTINO=/usr/local/payara5/glassfish/domains/domain1
+mkdir $DESTINO
+mv domain/* $DESTINO
+ls $DESTINO -ls
+
+echo "#################### REMOVENDO BANCO DE DADOS ATUAL ###"
+su postgres
+psql
+drop database dvndb;
+\q
+
+echo "#################### RESTAURANDO BANCO DE DADOS ###"
+su postgres
+psql dvndb < /home/dataverse/payara/dvndb.sql
+exit
+
+su postgres
+psql -d dvndb
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public to dvnapp;
+GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public to dvnapp;
+GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public to dvnapp;
+\q
+
+
+echo "#################### INICIANDO O PAYARA ###"
+$PAYARA/bin/asadmin star-domain
+
+				</pre>';
+
+				$sx .= '<h1>Postgres</h1>';
+
+				$sx .= '<h1>SOLR</h1>';
+
+				return $sx;
+			}
+
+		function reindex()
+			{
+				$sx = '
+<h1>Reindexando o SOLR</h1>
+<pre>
+curl http://localhost:8080/api/admin/index/status
+curl http://localhost:8080/api/admin/index/clear-orphans
+curl http://localhost:8080/api/admin/index/clear
+curl http://localhost:8080/api/admin/index
+curl -X DELETE http://localhost:8080/api/admin/index/timestamps
+curl http://localhost:8080/api/admin/index/continue
+</pre>
+				';
+				return $sx;
+			}
 
 		function upgrade()
 			{

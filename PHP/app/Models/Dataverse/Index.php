@@ -316,6 +316,9 @@ class Index extends Model
 		$menu['#Instalação'] = '<h5><b>' . lang('dataverse.DataverseInstall') . '</b></h5>';
 		$menu[PATH . MODULE . 'dataverse/install'] = lang('dataverse.DataverseInstalling');
 		$menu[PATH . MODULE . 'dataverse/install/upgrade'] = lang('dataverse.DataverseUpgrade');
+		$menu[PATH . MODULE . 'dataverse/install/backup'] = lang('dataverse.DataverseBackup');
+		$menu[PATH . MODULE . 'dataverse/install/restore'] = lang('dataverse.DataverseRestore');
+		$menu[PATH . MODULE . 'dataverse/install/reindex'] = lang('dataverse.ReindexSOLR');
 		$menu[PATH . MODULE . 'dataverse/groups'] = lang('dataverse.DataverseGropups');
 
 		$menu['#Modo Iterativo'] = '<h5><b>' . lang('dataverse.Settings') . '</b></h5>';
