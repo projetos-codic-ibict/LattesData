@@ -23,7 +23,7 @@ function CreateGroup($alias='',$dd=array())
 
         dircheck('.tmp');
         dircheck('.tmp/group');
-        $file = '.tmp/group/group-'.troca($dd['displayName'],'/','-').'.json';        
+        $file = '.tmp/group/group-'.troca($dd['displayName'],'/','-').'.json';
         file_put_contents($file, json_encode($dd, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         $SERVER_URL = getenv("DATAVERSE_URL");
 
@@ -36,12 +36,12 @@ function CreateGroup($alias='',$dd=array())
         $txt = shell_exec($cmd);
         jslog($txt);
         $sx = '<span class="text-success">Usuário criado</span>';
-        return $sx;                
+        return $sx;
 
 
     }
 
-/*********************************************************************************** Create Dataverse */    
+/*********************************************************************************** Create Dataverse */
 function CreateUser($dd)
     {
         $SERVER_URL = getenv("DATAVERSE_URL");
@@ -63,9 +63,9 @@ function CreateUser($dd)
         jslog($txt);
         $sx = '<span class="text-success">Usuário criado</span>';
         return $sx;
-    }        
+    }
 
-/******************************************************************************************* Trata ERRO */    
+/******************************************************************************************* Trata ERRO */
 function dataverseError($rsp)
     {
         $sx = '';
@@ -95,9 +95,9 @@ function dataverseError($rsp)
     "affiliation": "Universidade Federal do Rio Grande do Sul",
     "description": "Vide projeto anexo",
     "dataverseType": "LABORATORY"
-*/        
+*/
 
-/*********************************************************************************** Create Dataverse */    
+/*********************************************************************************** Create Dataverse */
 function CreateDataverse($dd,$PARENT='')
     {
         dircheck('.tmp');
@@ -105,7 +105,7 @@ function CreateDataverse($dd,$PARENT='')
         $file = '.tmp/dataverse/dataverse-'.troca($dd['alias'],'/','-').'.json';
         file_put_contents($file, json_encode($dd, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         $url = getenv("DATAVERSE_URL");
-        
+
         $dd['AUTH'] = true;
         $dd['POST'] = true;
         $dd['FILE'] = $file;
@@ -120,9 +120,9 @@ function CreateDataverse($dd,$PARENT='')
         $rsp = (array)json_decode($rsp);
         $sx = dataverseError($rsp);
         return $sx;
-    } 
+    }
 
-/*********************************************************************************** Create Dataverse */    
+/*********************************************************************************** Create Dataverse */
 function CreateDataset($dd,$PARENT='')
     {
         dircheck('.tmp');
@@ -130,7 +130,7 @@ function CreateDataset($dd,$PARENT='')
         $file = '.tmp/dataset/dataset-'.troca($dd['alias'],'/','-').'.json';
         file_put_contents($file, json_encode($dd, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
         $url = getenv("DATAVERSE_URL");
-        
+
         $dd['AUTH'] = true;
         $dd['POST'] = true;
         $dd['FILE'] = $file;
@@ -160,10 +160,10 @@ function CreateDataset($dd,$PARENT='')
                 case 'OK':
                     $sx = '<span class="color: green">Conjunto de dados '.$dd['alias'].'criado</span>';
                 break;
-                
+
                 case 'ERROR':
-                    $sx = '<pre style="color: red;">'; 
-                    $sx .= $msg['message'];	
+                    $sx = '<pre style="color: red;">';
+                    $sx .= $msg['message'];
                     $sx .= '<br>Dataverse Name: <b>'.$dd['alias'].'</b>';
                     $sx .= '<br><a href="'.'dataverse/'.$PARENT.'" target="_blank">'.$url.'/'.$PARENT.'</a>';
                     $sx .= '</pre>';
@@ -172,7 +172,7 @@ function CreateDataset($dd,$PARENT='')
         return $sx;
     }
 
-    /******************************************************************************************* Execute CURL */    
+    /******************************************************************************************* Execute CURL */
     function DataverseCurlExec($dt)
 	{
 		$rsp = array();
@@ -213,4 +213,4 @@ function CreateDataset($dd,$PARENT='')
 			return $txt;
 		}
 		return $sx;
-	}    
+	}

@@ -22,7 +22,7 @@ class PA_Schema extends Model
     protected $typeFields    = [
         'hidden','string:100*','string:100',
         'string:100','string:100'
-    ];    
+    ];
 
     // Dates
     protected $useTimestamps = false;
@@ -57,7 +57,7 @@ class PA_Schema extends Model
                     case 'edit_field':
                         $PA_Field = new \App\Models\Dataverse\PA_Field();
                         $sx .= $PA_Field->editar($d2,$d3);
-                        break;                        
+                        break;
                     case 'vocabulary':
                         $PA_Vocabulary = new \App\Models\Dataverse\PA_Vocabulary();
                         $sx .= $PA_Vocabulary->index($d2,$d3,$d4);
@@ -69,7 +69,7 @@ class PA_Schema extends Model
                     case 'proprieties':
                         $PA_Proprieties = new \App\Models\Dataverse\PA_Proprieties();
                         $sx .= $PA_Proprieties->index($d2,$d3,$d4);
-                        break;                        
+                        break;
                     case 'change_field':
                         $PA_Field = new \App\Models\Dataverse\PA_Field();
                         echo $PA_Field->change($d2,$d3);
@@ -77,7 +77,7 @@ class PA_Schema extends Model
                         break;
                     case 'api_send_schema':
                         $sx .= $this->API_send($d2,$d3,$d4);
-                        break;                        
+                        break;
                     case 'export':
                         $rst = $this->export($d2,$d3,$d4);
                         $size = strlen($rst);
@@ -97,7 +97,7 @@ class PA_Schema extends Model
                         break;
                     case 'import':
                         $sx .= $this->import($d2,$d3,$d4);
-                        break;                        
+                        break;
                     case 'delete':
                         $this->delete($d2);
                         $sx .= $this->tableview();
@@ -107,10 +107,10 @@ class PA_Schema extends Model
                         break;
                     case 'datafieldDel':
                             $sx .= $this->datafieldDel($d2,$d3,$d4);
-                            break;                        
+                            break;
                     case 'edit':
                         $sx .= $this->edit($d2,$d3,$d4);
-                        break;                        
+                        break;
                     case 'viewid':
                         $sx .= $this->viewid($d2);
                         break;
@@ -162,7 +162,7 @@ class PA_Schema extends Model
             $cmd1 .= 'rm *.tsv -r'.$CR;
             $f2 = $PATH.$filename;
             $f2 = troca($f2,'/PHP/public../','/PHP/');
-            $cmd1 .= 'cp '.$f2.' '.$DIR.$file.$CR;            
+            $cmd1 .= 'cp '.$f2.' '.$DIR.$file.$CR;
             $cmd1 .= $CR.$CR;
             $cmd1 .= 'echo "CARREGANDO A ATUALIZACAO DO SCHEMA"'.$CR;
             $cmd1 .= 'curl http://localhost:8080/api/admin/datasetfield/load -X POST --data-binary @'.$file.' -H "Content-type: text/tab-separated-values"'.$CR;
@@ -171,7 +171,7 @@ class PA_Schema extends Model
             $cmd1 .= 'echo "CARREGANDO SCHEMA"'.$CR;
             $cmd1 .= 'rm schema.xml -r'.$CR;
             $cmd1 .= 'curl "http://localhost:8080/api/admin/index/solr/schema" > schema.xml '.$CR;
-            
+
             $cmd1 .= $CR.$CR;
             $cmd1 .= 'echo "ATUALIZANDO O SCHEMA"'.$CR;
             $cmd1 .= 'cat schema.xml | ./update-fields.sh /usr/local/solr/solr-8.11.1/server/solr/collection1/conf/schema.xml'.$CR;
@@ -184,8 +184,8 @@ class PA_Schema extends Model
             $cmd2 .= 'echo "End"<br>'.$CR;
             $cmd2 .= 'cd /data/LattesData'.$CR;
 
-            $txt1 = shell_exec($cmd1);
-            $txt2 = shell_exec($cmd2);
+            //$txt1 = shell_exec($cmd1);
+            //$txt2 = shell_exec($cmd2);
             $sx = '<code>'.troca($cmd1.$cmd2,chr(10),'<br>').'</code>';
             $sx .= h('Resultado do envio #1 - ');
             $sx .= '<tt>'.$txt1.'</tt>';
@@ -198,7 +198,7 @@ class PA_Schema extends Model
         {
             $PA_Field = new \App\Models\Dataverse\PA_Field();
             $PA_Vocabulary = new \App\Models\Dataverse\PA_Vocabulary();
-            
+
             $sx = '';
             $sx .= h('Import Schema');
             if ((isset($_FILES)) and (count($_FILES) > 0))
@@ -232,14 +232,14 @@ class PA_Schema extends Model
                                                     break;
                                                 case 3:
                                                     $sx .= '<li>'.$PA_Vocabulary->import($d1,$line).'</li>';
-                                                    break;                                                    
+                                                    break;
                                             }
                                 }
                         }
                         fclose($handle);
                     } else {
                         // error opening the file.
-                    }                     
+                    }
                 } else {
                     $sx .= lang('dataverse.upload_file_tsl');
                     $sx .= '<form method="post" enctype="multipart/form-data">';
@@ -293,7 +293,7 @@ class PA_Schema extends Model
                 {
                     $line = $vcs[$r];
                     $vc = $line['m_name'];
-                    $ln3 .= $PA_Vocabulary->export($vc);                    
+                    $ln3 .= $PA_Vocabulary->export($vc);
                 }
             $rst = $ln1.chr(10).$ln2.chr(10).$blnk2.$ln3;
             $rst = substr($rst,0,strlen($rst)-1);
@@ -310,7 +310,7 @@ class PA_Schema extends Model
                 } else {
                     $this->path_back = PATH.MODULE.'dataverse/pa/viewid/'.$d1;
                 }
-            
+
             $sx = h(lang('dataverse.SchemaEd'),1);
             $sx .= form($this);
             $sx = bs(bsc($sx,12));
@@ -334,7 +334,7 @@ class PA_Schema extends Model
             $PA_Field->where('id_m',$d1)->delete();
             $sx = wclose();
             return $sx;
-        }        
+        }
 
     function viewid($id)
         {
@@ -347,9 +347,9 @@ class PA_Schema extends Model
 
             $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/export/'.$id.'">'.lang('dataverse.export').'</a>';
             $sx .= ' | ';
-            $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/api_send_schema/'.$id.'">'.lang('dataverse.api_send').'</a>';            
+            $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/api_send_schema/'.$id.'">'.lang('dataverse.api_send').'</a>';
             $sx .= ' | ';
-            $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/proprieties/'.$id.'">'.lang('dataverse.proprieties').'</a>';            
+            $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/proprieties/'.$id.'">'.lang('dataverse.proprieties').'</a>';
             $sx .= ' | ';
             $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/import/'.$id.'">'.lang('dataverse.import').'</a>';
             $sx .= ' | ';
@@ -357,12 +357,12 @@ class PA_Schema extends Model
             $sx .= ' | ';
             $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/viewid/'.$id.'?reorder=1">'.lang('dataverse.reorder').'</a> ';
             $sx .= '<a href="'.PATH.MODULE.'dataverse/pa/viewid/'.$id.'?reorder=2">'.'+2'.'</a>';
-            
+
             $sx .= '<h2>'.$row['mt_displayName'].'</h2>';
             $sx .= '<p>'.$row['mt_blockURI'].'</p>';
 
             $sx .= $PA_Vocabulary->vocabularies($id);
-            
+
             $sx = bs(bsc($sx),12);
 
             $sx .= $PA_Field->viewid($id);
