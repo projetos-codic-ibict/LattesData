@@ -186,6 +186,8 @@ class PA_Schema extends Model
 
             //$txt1 = shell_exec($cmd1);
             //$txt2 = shell_exec($cmd2);
+            $txt1 = '';
+            $txt2 = '';
             $sx = '<code>'.troca($cmd1.$cmd2,chr(10),'<br>').'</code>';
             $sx .= h('Resultado do envio #1 - ');
             $sx .= '<tt>'.$txt1.'</tt>';
