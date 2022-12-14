@@ -27,13 +27,13 @@ class PA_Field extends Model
     protected $typeFields    = [
         'hidden','sn','sql:id_mt:mt_name:dataverse_tsv_schema','string:100',
         'string:100','string:100','string:100',
-        'op:none&none¨:text&text:email&email:textbox&textbox:date&date:url&url','[1-100]',
+        'op:none&none:text&text:email&email:textbox&textbox:date&date:url&url','[1-100]',
         'op:&none:#VALUE&#VALUE',
         'sn','sn','sn',
         'sn','sn','sn',
         //'string:100','sql:m_name:m_name:dataverse_tsv_metadata','string:100'
         'string:100','string:100','string:100'
-    ];    
+    ];
 
     // Dates
     protected $useTimestamps = false;
@@ -68,7 +68,7 @@ class PA_Field extends Model
             $this->set($dd)->where('id_m',$d2)->update();
 
             $sx = wclose();
-            return $sx;            
+            return $sx;
         }
 
     function editar($id)
@@ -79,20 +79,20 @@ class PA_Field extends Model
             if ($ifr > 0)
                 {
                     $this->path_back = PATH.MODULE.'dataverse/pa/viewid/'.$ifr;
-                } else {                    
+                } else {
                     $this->path_back = PATH.MODULE.'dataverse/pa';
                 }
-            
-            
+
+
             $sx = form($this);
 
             $sx = bs(bsc($sx,12));
             return $sx;
         }
 
-    function bt_new_field($id) 
+    function bt_new_field($id)
         {
-            
+
         }
 
     function viewid($id)
@@ -104,13 +104,13 @@ class PA_Field extends Model
             $red = round(get("reorder"));
             $dt = $this->where('m_schema', $id)->orderBy('m_displayOrder')->findAll();
             for ($r=0;$r < count($dt);$r++)
-            {                
+            {
                 $dd['m_displayOrder'] = $ini;
                 $this->set($dd)->where('id_m',$dt[$r]['id_m'])->update();
                 $ini = $ini + $red;
             }
         }
-        
+
 
         $dt = $this->where('m_schema', $id)->orderBy('m_displayOrder')->findAll();
         $sx = '<table class="table table-sm table-striped">';
@@ -166,7 +166,7 @@ class PA_Field extends Model
                     $sx .= $this->onoff($ln['m_active']);
                     $sx .= '</span>';
                     $sx .= '</td>';
-                }             
+                }
             $sx .= '<td>' . $stl.$ln['m_description'] .$stla. '</td>';
             $sx .= '<td>' . $stl.$ln['m_watermark'] . $stla.'</td>';
             $sx .= '<td  width="10%">' . $ln['m_fieldType'] . '</td>';
@@ -182,12 +182,12 @@ class PA_Field extends Model
                 $sx .= '<td><a href="' . $ln['m_termURI'] . '" class="link-secondary" target="_blank">' . bsicone('url', 16) . '</a></td>';
             } else {
                 $sx .= '<td>-</td>';
-            }            
+            }
             $sx .= '<td><nobr>';
             $sx .= btn_edit(PATH . MODULE . 'dataverse/pa/datafieldEd/' . $ln['id_m']);
             $sx .= btn_trash_popup(PATH . MODULE . 'dataverse/pa/datafieldDel/' . $ln['id_m']);
             $sx .= '</nobr>';
-            $sx .= '</td>';           
+            $sx .= '</td>';
             $sx .= '</tr>';
         }
         $sx .= '</table>';
@@ -218,7 +218,7 @@ class PA_Field extends Model
             return 'TRUE';
         }
         return 'FALSE';
-    }    
+    }
 
     function Export_metadataBlock($id)
         {
@@ -252,7 +252,7 @@ class PA_Field extends Model
                 '', 'SN','SN',
                 'SN', 'SN','SN',
                 'SN', '','',''
-                );    
+                );
 
             $sx = '';
             $sh = '';
@@ -284,11 +284,11 @@ class PA_Field extends Model
                                                 $txt = trim($txt);
                                                 $sl .= $sep.$txt;
                                                 break;
-                                        }                                    
+                                        }
                                 }
                         }
                     $sx .= $sl."\n";
-                }          
+                }
                 $sx = $sh."\n".$sx;
             return $sx;
         }
@@ -305,7 +305,7 @@ class PA_Field extends Model
             print_r($col);
             print_r($d);
             echo '</pre>';
-        }       
+        }
 
         $d['m_schema'] = $id;
         $d['m_name'] = $col[1];
