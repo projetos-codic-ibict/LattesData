@@ -531,7 +531,7 @@ function getDataset($dt, $user=0)
 
 		if (!isset($dt['numeroProcesso']))
 			{
-				$sx = bsmessage('Problema ao processar '.$proto);
+				$sx = bsmessage('Problema ao processar '.substr($proto,4,6).'/'.substr($proto,0,4).'-'.substr($proto,10,1));
 				$sx .= file_get_contents($file);
 				return $sx;
 			}
