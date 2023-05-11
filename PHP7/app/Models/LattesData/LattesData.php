@@ -535,7 +535,7 @@ function getDataset($dt, $user=0)
 				$sx .= file_get_contents($file);
 				return $sx;
 			}
-		pre($dt);
+
 		/************ Processo */
 		$sx = '<span>Processo</span>' . chr(13);
 		$sx .= '<p style="font-size: 150%"><b>' . $dt['numeroProcesso'] . '</b></p>' . chr(13);
