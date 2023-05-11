@@ -93,7 +93,7 @@ class LattesData extends Model
 		$dv['email'] = $email;
 		$dv['password'] = substr(md5($dv['firstName'].$dv['lastName'].'LattesData'),0,10);
 		$sx = bsicone('process') . ' Criando Usuário Dataverse<br>';
-		$sx .= CreateUser($dv);	
+		$sx .= CreateUser($dv);
 
 		$LattesEmail = new \App\Models\LattesData\LattesEmail();
 		$txt = $LattesEmail->email_cadastro($dv);
@@ -175,19 +175,19 @@ class LattesData extends Model
 				$sx .= '<a href="'.$link.'">'.$link.'</a>';
 				$sx .= '</div>';
 				$this->alias = $dd['alias'];
-				$this->status = '100';		
+				$this->status = '100';
 			} else {
 				$this->alias = $dd['alias'];
-				$this->status = '200';		
+				$this->status = '200';
 			}
-		
+
 		return $sx;
 	}
 	function create_dataset($dt,$parent)
 	{
-		$DV = $this->getDataset($dt);	
+		$DV = $this->getDataset($dt);
 		$DV['alias'] = $dt['numeroProcesso'];
-		
+
 		$sx = bsicone('process') . ' Criando Conjunto de Dados<br>';
 		$sx .= CreateDataset($DV,$this->alias);
 		return $sx;
@@ -213,7 +213,7 @@ function getDataset($dt, $user=0)
 
         //$DV['authority'] = getenv('DOI');
         //$DV['identifier'] = troca($dt['numeroProcesso'],'/','');
-        //$DV['identifier'] = substr($DV['identifier'],0,strpos($DV['identifier'],'-'));	
+        //$DV['identifier'] = substr($DV['identifier'],0,strpos($DV['identifier'],'-'));
 
         $DV['datasetVersion']['fileAccessRequest'] = false;
 
@@ -237,7 +237,7 @@ function getDataset($dt, $user=0)
 				$line = $dt['instituicoes'][$z];
 				$aff = $line['nome'];
 			}
-		
+
 
         $auth = array();
         $auth['authorName']['typeName'] = 'authorName';
@@ -292,7 +292,7 @@ function getDataset($dt, $user=0)
 		$date = date("Y-m-d");
         $fields = array('typeName' => 'dsDescriptionDate', 'multiple' => false, 'typeClass' => 'primitive', 'value' => $date);
 		array_push($fld, $fields);
-		
+
 		$key = $dt['palavrasChave'];
 		$key = troca($key,'.',';');
 		$key = troca($key,',',';');
@@ -322,9 +322,9 @@ function getDataset($dt, $user=0)
 		array_push($fld, $fields);
 		//pre($fld);
         /*
-			$abs3['dsDescriptionValue'] = array($abstact);	
+			$abs3['dsDescriptionValue'] = array($abstact);
 			$fields = array('typeName'=>'dsDescription','multiple'=>true,'typeClass'=>'compound','value'=>$abs3);
-			array_push($fld,$fields);					
+			array_push($fld,$fields);
 			*/
 
 
@@ -368,7 +368,7 @@ function getDataset($dt, $user=0)
         $DV['datasetVersion']['metadataBlocks']['citation']['name'] = "citation";
         $DV['datasetVersion']['metadataBlocks']['citation']['fields'] = $fld;
         return $DV;
-    }	
+    }
 
 	function sendemail_user()
 	{
@@ -448,7 +448,7 @@ function getDataset($dt, $user=0)
 		 * nr   | 3 | 0 | 9 | 9 | 8 | 5 | 2 | 0 | 1 | 3 |
 		 * mult | 9 | 8 | 7 | 6 | 5 | 4 | 0 | 0 | 3 | 2 |
 		 * soma |27 | 0 |63 |54 |40 |20 | 0 | 0 | 3 | 6 | => Soma: 213
-		 * 
+		 *
 		 * DV = $soma % 11 => 4
 		 * DV = 11 - $soma - 11 (7)
 		 * Se DV = 10 ou DV == 1 => DV = 0
@@ -529,6 +529,12 @@ function getDataset($dt, $user=0)
 			exit;
 		}
 
+		if (!isset($dt['numeroProcesso']))
+			{
+				$sx = bsmessage('Problema ao processar '.$proto);
+				$sx .= file_get_contents($file);
+			}
+
 		/************ Processo */
 		$sx = '<span>Processo</span>' . chr(13);
 		$sx .= '<p style="font-size: 150%"><b>' . $dt['numeroProcesso'] . '</b></p>' . chr(13);
@@ -598,7 +604,7 @@ function getDataset($dt, $user=0)
 		$sx .= '<br/><br/>' . chr(13);
 
 		return $sx;
-	}	
+	}
 
 	function filename($process = '')
 	{
