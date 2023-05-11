@@ -61,7 +61,7 @@ function CreateUser($dd)
         jslog($cmd);
         $txt = shell_exec($cmd);
         jslog($txt);
-        $sx = '<span class="text-success">Usuário criado</span>';
+        $sx = '<span class="text-success">Usuário criado - '. $dd['userName'].'</span>';
         return $sx;
     }
 
