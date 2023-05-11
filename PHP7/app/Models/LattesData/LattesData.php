@@ -98,9 +98,10 @@ class LattesData extends Model
 		$LattesEmail = new \App\Models\LattesData\LattesEmail();
 		$txt = $LattesEmail->email_cadastro($dv);
 		$ass = '[LattesData] - Cadastro de Usuário';
-		$email = 'renefgj@gmail.com';
+		$email_copia = 'renefgj@gmail.com';
 
 		$sx .= $LattesEmail->enviar($email, $txt, $ass);
+		$sx .= $LattesEmail->enviar($email_copia, $txt, $ass);
 		return $sx;
 	}
 
