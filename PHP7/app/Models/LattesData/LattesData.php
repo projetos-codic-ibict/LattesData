@@ -533,6 +533,7 @@ function getDataset($dt, $user=0)
 			{
 				$sx = bsmessage('Problema ao processar '.$proto);
 				$sx .= file_get_contents($file);
+				return $sx;
 			}
 		pre($dt);
 		/************ Processo */
