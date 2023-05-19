@@ -32,6 +32,19 @@ cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/en_US
 cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/en_US/MimeTypeFacets.properties /var/www/dataverse/langTmp/MimeTypeFacets_us.properties
 cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/en_US/socialscience.properties /var/www/dataverse/langTmp/socialscience_us.properties
 cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/en_US/ValidationMessages.properties /var/www/dataverse/langTmp/ValidationMessages_us.properties
+echo "======================== Copy files =es--es_ES"
+cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/es_ES/astrophysics.properties /var/www/dataverse/langTmp/astrophysics_es.properties
+cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/es_ES/biomedical.properties /var/www/dataverse/langTmp/biomedical_es.properties
+cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/es_ES/BuiltInRoles.properties /var/www/dataverse/langTmp/BuiltInRoles_es.properties
+cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/es_ES/Bundle.properties /var/www/dataverse/langTmp/Bundle_es.properties
+cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/es_ES/citation.properties /var/www/dataverse/langTmp/citation_es.properties
+cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/es_ES/geospatial.properties /var/www/dataverse/langTmp/geospatial_es.properties
+cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/es_ES/journal.properties /var/www/dataverse/langTmp/journal_es.properties
+cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/es_ES/MimeTypeDetectionByFileExtension.properties /var/www/dataverse/langTmp/MimeTypeDetectionByFileExtension_es.properties
+cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/es_ES/MimeTypeDisplay.properties /var/www/dataverse/langTmp/MimeTypeDisplay_es.properties
+cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/es_ES/MimeTypeFacets.properties /var/www/dataverse/langTmp/MimeTypeFacets_es.properties
+cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/es_ES/socialscience.properties /var/www/dataverse/langTmp/socialscience_es.properties
+cp /var/www/dataverse/langTmp/sources/All/dataverse-language-packs-develop/es_ES/ValidationMessages.properties /var/www/dataverse/langTmp/ValidationMessages_es.properties
 echo "======================== Copy files =br--pt_BR"
 cp /var/www/dataverse/langTmp/sources/pt_BR/dataverse-language-packs-develop/pt_BR/astrophysics_br.properties /var/www/dataverse/langTmp/astrophysics_br.properties
 cp /var/www/dataverse/langTmp/sources/pt_BR/dataverse-language-packs-develop/pt_BR/biomedical_br.properties /var/www/dataverse/langTmp/biomedical_br.properties

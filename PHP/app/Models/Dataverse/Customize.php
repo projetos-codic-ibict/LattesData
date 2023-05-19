@@ -66,9 +66,9 @@ class Customize extends Model
 				// Checar o log - BundleUtil
 				$tlang = '';
 				$tlang .= '{"locale":"en","title":"Idioma Padrão"}';
-				$subdir = array('en_US', 'pt_BR', 'es', 'fr', 'de', 'it', 'pt', 'ru', 'zh');
+				$subdir = array('en_US', 'pt_BR', 'es_ES', 'fr', 'de', 'it', 'pt', 'ru', 'zh');
 				$lang_n = array('English', 'Português', 'Espanhol', 'Frances', 'Alemão', 'Italiano', 'Português', 'Russo', 'Chinês');
-				$langs = array('us', 'br');
+				$langs = array('us', 'br','es');
 				//$default_language = 'en';
 				$default_language = 'br';
 				$sx = '';
