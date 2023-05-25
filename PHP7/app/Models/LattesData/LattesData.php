@@ -100,8 +100,9 @@ class LattesData extends Model
 		$ass = '[LattesData] - Cadastro de Usuário';
 		$email_copia = 'renefgj@gmail.com';
 
-		$sx .= $LattesEmail->enviar($email, $txt, $ass);
-		$sx .= $LattesEmail->enviar($email_copia, $txt, $ass);
+		/**************** Enviar e-mail */
+		//$sx .= $LattesEmail->enviar($email, $txt, $ass);
+		//$sx .= $LattesEmail->enviar($email_copia, $txt, $ass);
 		return $sx;
 	}
 
