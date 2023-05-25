@@ -156,8 +156,8 @@ class LattesData extends Model
 	function limpaTitle($n)
 		{
 			$sx = '';
-			$n = ascii($n);
-			//$n = utf8_decode($n);
+			//$n = ascii($n);
+			$n = utf8_decode($n);
 			return $n;
 
 			for($r=0;$r < strlen($n);$r++)
