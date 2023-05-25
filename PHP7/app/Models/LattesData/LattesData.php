@@ -152,17 +152,36 @@ class LattesData extends Model
 
 
 	/*************************************** CRIAR DATAVERSE */
+	function limpaTitle($n)
+		{
+			$sx = '';
+			for($r=0;$r < strlen($n);$r++)
+				{
+					$c = $n[$r];
+					if (ord($c) <= 128)
+						{
+							$sx .= chr($c);
+						}
+				}
+			echo $n.'<br>';
+			echo $sx;
+			exit;
+			return $sx;
+		}
 	function create_dataverse($proc, $parent, $dt)
 	{
 		$procX = substr($proc, 0, 4) . 'CNPq' . substr($proc, 4, strlen($proc));
 		$PROTO = $this->getContent($dt, 'numeroProcesso');
+		$dataverse_title = $this->getContent($dt, 'titulo');
 		$dd['alias'] = $procX;
-		$dd['name'] = $this->getContent($dt, 'titulo') . ' (' . $PROTO . ')';
+		$dd['name'] = $dataverse_title . ' (' . $PROTO . ')';
 		$contact[0]['contactEmail'] = $this->getContent($dt, 'emailContato');
 		$dd['dataverseContacts'] = $contact;
 		$dd['affiliation'] = $this->getContent($dt['instituicoes'], 'nome');
 		$dd['description'] = $this->getContent($dt['projeto'], 'resumo');
 		$dd['dataverseType'] = 'LABORATORY';
+
+		pre($dd);
 
 		$sx = bsicone('process') . ' Criando Comunidade Dataverse';
 		$dt = array();
