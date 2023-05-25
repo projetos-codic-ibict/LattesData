@@ -156,6 +156,8 @@ class LattesData extends Model
 	function limpaTitle($n)
 		{
 			$sx = '';
+			$n = ascii($n);
+
 			for($r=0;$r < strlen($n);$r++)
 				{
 					$c = $n[$r];
@@ -164,7 +166,7 @@ class LattesData extends Model
 							$sx .= $c;
 						}
 				}
-			$sx = ascii($sx);
+
 			return $sx;
 		}
 	function create_dataverse($proc, $parent, $dt)
