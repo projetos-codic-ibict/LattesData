@@ -208,7 +208,7 @@ class LattesData extends Model
 		$DV = $this->getDataset($dt);
 		$DV['alias'] = $dt['numeroProcesso'];
 
-		pre($DV);
+		pre($DV,false);
 
 		$sx = bsicone('process') . ' Criando Conjunto de Dados<br>';
 		$sx .= CreateDataset($DV,$this->alias);
