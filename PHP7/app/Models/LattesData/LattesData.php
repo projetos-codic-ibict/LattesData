@@ -160,7 +160,7 @@ class LattesData extends Model
 					$c = $n[$r];
 					if (ord($c) <= 128)
 						{
-							$sx .= chr($c);
+							$sx .= $c;
 						}
 				}
 			return $sx;
