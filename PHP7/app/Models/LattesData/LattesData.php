@@ -146,6 +146,8 @@ class LattesData extends Model
 		$dd['description'] = $chamada;
 		$dd['dataverseType'] = 'LABORATORY';
 		$sx = bsicone('process') . ' Criando Edital Dataverse';
+
+		pre($dd);
 		$sx .= '<br>' . CreateDataverse($dd, $parent);
 		$this->alias = $dd['alias'];
 		return $sx;
