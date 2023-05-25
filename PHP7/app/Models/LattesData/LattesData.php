@@ -163,6 +163,7 @@ class LattesData extends Model
 							$sx .= $c;
 						}
 				}
+			$sx = ascii($sx);
 			return $sx;
 		}
 	function create_dataverse($proc, $parent, $dt)
