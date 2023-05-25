@@ -186,7 +186,7 @@ class LattesData extends Model
 
 		$sx = bsicone('process') . ' Criando Comunidade Dataverse';
 		$dt = array();
-		pre($dd);
+
 		$rsp = CreateDataverse($dd, $parent);
 		$sx .= '<br>' . $rsp;
 		if (strpos($rsp,'already exists'))
