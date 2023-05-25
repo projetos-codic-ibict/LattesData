@@ -157,7 +157,7 @@ class LattesData extends Model
 		{
 			$sx = '';
 			//$n = ascii($n);
-			$n = utf8_decode($n);
+			$n = utf8_encode($n);
 			return $n;
 
 			for($r=0;$r < strlen($n);$r++)
