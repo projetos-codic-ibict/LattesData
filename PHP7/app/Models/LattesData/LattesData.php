@@ -101,8 +101,8 @@ class LattesData extends Model
 		$email_copia = 'renefgj@gmail.com';
 
 		/**************** Enviar e-mail */
-		//$sx .= $LattesEmail->enviar($email, $txt, $ass);
-		//$sx .= $LattesEmail->enviar($email_copia, $txt, $ass);
+		$sx .= $LattesEmail->enviar($email, $txt, $ass);
+		$sx .= $LattesEmail->enviar($email_copia, $txt, $ass);
 		return $sx;
 	}
 
