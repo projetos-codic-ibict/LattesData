@@ -180,8 +180,6 @@ class LattesData extends Model
 		$dd['description'] = $this->getContent($dt['projeto'], 'resumo');
 		$dd['dataverseType'] = 'LABORATORY';
 
-		pre($dd);
-
 		$sx = bsicone('process') . ' Criando Comunidade Dataverse';
 		$dt = array();
 		$rsp = CreateDataverse($dd, $parent);
@@ -199,6 +197,8 @@ class LattesData extends Model
 				$this->alias = $dd['alias'];
 				$this->status = '200';
 			}
+		echo $sx;
+		pre($dd);
 
 		return $sx;
 	}
