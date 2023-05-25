@@ -163,9 +163,6 @@ class LattesData extends Model
 							$sx .= chr($c);
 						}
 				}
-			echo $n.'<br>';
-			echo $sx;
-			exit;
 			return $sx;
 		}
 	function create_dataverse($proc, $parent, $dt)
@@ -173,6 +170,8 @@ class LattesData extends Model
 		$procX = substr($proc, 0, 4) . 'CNPq' . substr($proc, 4, strlen($proc));
 		$PROTO = $this->getContent($dt, 'numeroProcesso');
 		$dataverse_title = $this->getContent($dt, 'titulo');
+		$dataverse_title = $this->limpaTitle($dataverse_title);
+
 		$dd['alias'] = $procX;
 		$dd['name'] = $dataverse_title . ' (' . $PROTO . ')';
 		$contact[0]['contactEmail'] = $this->getContent($dt, 'emailContato');
