@@ -174,7 +174,6 @@ class LattesData extends Model
 		$procX = substr($proc, 0, 4) . 'CNPq' . substr($proc, 4, strlen($proc));
 		$PROTO = $this->getContent($dt, 'numeroProcesso');
 		$dataverse_title = $this->getContent($dt, 'titulo');
-		$dataverse_title = $this->limpaTitle($dataverse_title);
 
 		$dd['alias'] = $procX;
 		$dd['name'] = $dataverse_title . ' (' . $PROTO . ')';
@@ -183,6 +182,8 @@ class LattesData extends Model
 		$dd['affiliation'] = $this->getContent($dt['instituicoes'], 'nome');
 		$dd['description'] = $this->getContent($dt['projeto'], 'resumo');
 		$dd['dataverseType'] = 'LABORATORY';
+
+		pre($dd);
 
 		$sx = bsicone('process') . ' Criando Comunidade Dataverse';
 		$dt = array();
