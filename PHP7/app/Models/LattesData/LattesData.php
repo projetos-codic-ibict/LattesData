@@ -138,7 +138,7 @@ class LattesData extends Model
 			default:
 				$chamada .= ' - ' . $chamada_nome;
 		}
-		$dd['alias'] = $alias;
+		$dd['alias'] = ascii($alias);
 		$dd['name'] = $chamada;
 		$contact[0]['contactEmail'] = 'lattesdata@cnpq.br';
 		$dd['dataverseContacts'] = $contact;
@@ -147,7 +147,6 @@ class LattesData extends Model
 		$dd['dataverseType'] = 'LABORATORY';
 		$sx = bsicone('process') . ' Criando Edital Dataverse';
 
-		pre($dd);
 		$sx .= '<br>' . CreateDataverse($dd, $parent);
 		$this->alias = $dd['alias'];
 		return $sx;
@@ -209,8 +208,6 @@ class LattesData extends Model
 	{
 		$DV = $this->getDataset($dt);
 		$DV['alias'] = $dt['numeroProcesso'];
-
-		pre($DV,false);
 
 		$sx = bsicone('process') . ' Criando Conjunto de Dados<br>';
 		$sx .= CreateDataset($DV,$this->alias);
