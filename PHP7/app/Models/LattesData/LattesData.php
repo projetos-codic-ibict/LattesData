@@ -183,8 +183,6 @@ class LattesData extends Model
 		$dd['description'] = $this->getContent($dt['projeto'], 'resumo');
 		$dd['dataverseType'] = 'LABORATORY';
 
-		pre($dd);
-
 		$sx = bsicone('process') . ' Criando Comunidade Dataverse';
 		$dt = array();
 
@@ -209,6 +207,8 @@ class LattesData extends Model
 	{
 		$DV = $this->getDataset($dt);
 		$DV['alias'] = $dt['numeroProcesso'];
+
+		pre($DV);
 
 		$sx = bsicone('process') . ' Criando Conjunto de Dados<br>';
 		$sx .= CreateDataset($DV,$this->alias);
