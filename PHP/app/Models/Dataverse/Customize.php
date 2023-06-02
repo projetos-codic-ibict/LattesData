@@ -151,8 +151,26 @@ class Customize extends Model
 						}
 					}
 				}
+
 				$sx .= 'echo "======================== Copy default files ="' . cr();
 				$sx .= $sd;
+
+				$sx .= 'echo "======================== Customizações ="' . cr();
+
+				$custom = ['submit_terms$lg.properties'];
+				$langsC = ['','_br','_es','_en','_us'];
+				foreach($custom as $id=>$line)
+					{
+						$dir = '/var/www/dataverse/langTmp/sources/pt_BR/dataverse-language-packs-develop/pt_BR/';
+						for($q=0;$q < count($langsC);$q++)
+							{
+								$xlang = $langsC[$q];
+								$ori = $dir.troca($line, '$lg',$xlang);
+								$des = $out.troca($line, '$lg',$xlang);
+								$sx .= "cp $ori $des" . cr();
+							}
+					}
+
 				$sx .=  cr();
 				$sx .= 'echo "===>Preparing ZIP FILE"' . cr();
 				$sx .= 'cd /var/www/dataverse/langTmp/' . cr();
