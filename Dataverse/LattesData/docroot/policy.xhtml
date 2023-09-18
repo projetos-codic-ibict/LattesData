@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html
+  xmlns="http://www.w3.org/1999/xhtml"
+  xmlns:h="http://java.sun.com/jsf/html"
+  xmlns:f="http://java.sun.com/jsf/core"
+  xmlns:ui="http://java.sun.com/jsf/facelets"
+  xmlns:p="http://primefaces.org/ui"
+  xmlns:o="http://omnifaces.org/ui"
+  xmlns:jsf="http://xmlns.jcp.org/jsf"
+>
+  <h:head> </h:head>
+
+  <h:body>
+    <ui:composition template="/dataverse_template.xhtml">
+      <ui:param name="pageTitle" value="Policy - Política" />
+      <ui:param name="showDataverseHeader" value="false" />
+      <ui:param name="loginRedirectPage" value="dataverse.xhtml" />
+      <ui:param name="showMessagePanel" value="#{true}" />
+      <ui:define name="body">
+        <div
+          class="row"
+          jsf:rendered="#{!widgetWrapper.widgetView}"
+          style="margin-top: 3em"
+        >
+          <div>HELLO</div>
+
+          <ul class="nav-pills nav">
+            <li class="nav-item">
+              <a href="#poly1" data-toggle="tab" class="nav-link">Histórico</a>
+            </li>
+            <li class="nav-item">
+              <a href="#poly2" data-toggle="tab" class="active nav-link"
+                >Política de download</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#poly3" data-toggle="tab" class="disabled nav-link"
+                >Política Geral</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#poly4" data-toggle="tab" class="disabled nav-link"
+                >Política Geral</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#poly5" data-toggle="tab" class="disabled nav-link"
+                >Política Geral</a
+              >
+            </li>
+            <li class="nav-item">
+              <a href="#poly6" data-toggle="tab" class="disabled nav-link"
+                >Política Geral</a
+              >
+            </li>
+          </ul>
+          <div class="tab-content">
+            <div id="gatos" class="tab-pane container">
+              <p>
+                O Aleia é o repositório oficial do Ibict que custodia, publica,
+                dissemina, preserva e compartilha conjuntos de dados da
+                comunidade científica do Ibict (constituída por seus servidores,
+                pesquisadores visitantes, bolsistas e alunos do programa de
+                pós-graduação). Tem como objetivo promover, apoiar e facilitar a
+                adoção do acesso aberto aos dados de pesquisa, fomentar novas
+                pesquisas e promover uma Ciência Aberta.
+              </p>
+
+              <p>
+                Em 2016, o Instituto Brasileiro de Informação em Ciência e
+                Tecnologia (Ibict) lançou o Manifesto de Acesso Aberto a Dados
+                de Pesquisa Brasileira para Ciência Cidadã que tem por objetivo
+                demonstrar o seu valor estratégico e informacional e estimular e
+                apoiar movimentos e iniciativas para Ciência Aberta no Brasil,
+                traduzidos pelo amplo e irrestrito acesso a fontes primárias de
+                pesquisa utilizadas por pesquisadores e outros segmentos
+                sociais, possibilitando o compartilhamento, reprodutibilidade,
+                verificação, avaliação, reutilização e redistribuição em novos
+                contextos e em pesquisas colaborativas e interdisciplinares. A
+                criação do Aleia foi motivado pelo Compromisso 3, do 4º Plano de
+                Ação Nacional que visa estabelecer mecanismos de governança de
+                dados científicos para o avanço da Ciência Aberta no Brasil.
+              </p>
+
+              <p>
+                Atualmente, o Aleia tem como finalidade tornar acessível e dar
+                visibilidade aos dados de pesquisa elaborados pela comunidade
+                científica Ibict; garantir a reprodutibilidade e reuso dos dados
+                de pesquisa da comunidade científica institucional do Ibict;
+                funcionar como ferramenta para promover a transparência e por
+                consequência a confiança e a solidez das pesquisas
+                desenvolvidas, maximizando o retorno de aplicação de recurso
+                público; viabilizar a preservação digital de dados de pesquisa,
+                colaborando para evitar a perda e má gestão dos dados de
+                pesquisa, orientando e incentivando os autores na organização e
+                planejamento do ciclo de vida do dado de pesquisa.
+              </p>
+
+              <p>
+                O Aleia está em funcionamento para o depósito, compartilhamento
+                e abertura de dados de pesquisa.
+              </p>
+
+              <p>
+                Para tirar dúvidas, obter informações ou iniciar um processo de
+                depósito no Aleia, entre em contato pelo e-mail: aleia@ibict.br
+              </p>
+            </div>
+            <div id="cachorros" class="tab-pane active container">
+              Conteúdo sobre cachorros
+            </div>
+            <div id="penguins" class="tab-pane container">
+              Conteúdo sobre penguins
+            </div>
+          </div>
+        </div>
+      </ui:define>
+    </ui:composition>
+  </h:body>
+</html>
